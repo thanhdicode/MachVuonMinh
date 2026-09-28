@@ -20,6 +20,6 @@ npm run preview
 
 ## Triển khai Vercel
 
-Lần đầu, [import repository GitHub này vào Vercel](https://vercel.com/new), chọn **Production Branch: `main`**. Cấu hình trong `vercel.json` dùng Vite, `npm ci`, `npm run build` và thư mục `dist`. Dự án không cần biến môi trường. Kết nối GitHub một lần trong Vercel; sau đó mỗi lần push `main`, Vercel tự tạo bản Production mới. Các nhánh khác có bản Preview. Không cần GitHub Actions hay deployment token trong repo.
+[Bản Production](https://mach-vuon-minh.vercel.app/) đã liên kết với [GitHub repository](https://github.com/thanhdicode/MachVuonMinh). Mỗi lần `git push origin main`, Vercel tự build và cập nhật bản Production; các nhánh khác có bản Preview. `vercel.json` cố định Vite, `npm ci`, `npm run build` và thư mục `dist`. Dự án không cần biến môi trường, GitHub Actions hay deployment token trong repo.
 
 Thiết kế và nội dung: đọc `00_NORTH_STAR.md` đến `07_MASTER_PROMPT_V2.md` theo thứ tự. Nguồn dữ kiện, giới hạn diễn giải và quyền sử dụng tài sản được ghi ở `.studio/ASSET-REGISTRY.md` và `.studio/qa/refinement/REVIEW.md`. Ảnh QA cục bộ không được đưa lên GitHub để repo gọn; mã nguồn và tài sản chạy web vẫn được commit.
