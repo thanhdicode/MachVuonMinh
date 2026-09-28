@@ -1,0 +1,8 @@
+{
+  "cases": 3,
+  "relationChoices": 9,
+  "sourceDrawers": 3,
+  "mobileNoOverlap": true,
+  "mapKeyboardAndFocus": true,
+  "errors": []
+}

@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:5173",
+  "wheel": [
+    {
+      "expected": 1,
+      "actual": 1,
+      "y": 1058
+    },
+    {
+      "expected": 2,
+      "actual": 2,
+      "y": 2064
+    },
+    {
+      "expected": 3,
+      "actual": 3,
+      "y": 3168
+    },
+    {
+      "expected": 4,
+      "actual": 4,
+      "y": 4237
+    },
+    {
+      "expected": 5,
+      "actual": 5,
+      "y": 5523
+    },
+    {
+      "expected": 6,
+      "actual": 6,
+      "y": 6978
+    },
+    {
+      "expected": 7,
+      "actual": 7,
+      "y": 8051
+    },
+    {
+      "expected": 8,
+      "actual": 8,
+      "y": 8936
+    }
+  ],
+  "checks": [
+    "Native wheel reaches all nine scenes; finale visible at document end"
+  ],
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}

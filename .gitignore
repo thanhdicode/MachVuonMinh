@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.studio/frontendmaxxing/
+.vercel/
+.env
+.env.*
+!.env.example
+.studio/qa/**/*.png
+.studio/qa/**/*.jpg
+.studio/qa/**/*.jpeg
+.studio/qa/**/*.webp
+.studio/qa/**/*.log

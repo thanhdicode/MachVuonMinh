@@ -1,0 +1,61 @@
+{
+  "url": "http://127.0.0.1:4173",
+  "wheel": [
+    {
+      "expected": 1,
+      "actual": 1,
+      "y": 1058
+    },
+    {
+      "expected": 2,
+      "actual": 2,
+      "y": 2064
+    },
+    {
+      "expected": 3,
+      "actual": 3,
+      "y": 3168
+    },
+    {
+      "expected": 4,
+      "actual": 4,
+      "y": 4237
+    },
+    {
+      "expected": 5,
+      "actual": 5,
+      "y": 5523
+    },
+    {
+      "expected": 6,
+      "actual": 6,
+      "y": 6978
+    },
+    {
+      "expected": 7,
+      "actual": 7,
+      "y": 8051
+    },
+    {
+      "expected": 8,
+      "actual": 8,
+      "y": 8936
+    }
+  ],
+  "checks": [
+    "Opening gesture: real pointer drag through eyelet",
+    "Native wheel reaches all nine scenes; finale visible at document end",
+    "Lab mismatch and restructuring",
+    "Both archipelagos; four evidence topics; source dialog Escape and focus return",
+    "Policy token real drag, click install, three socket feedback",
+    "390×844 every scene and 1920×1080 hero/map",
+    "Native touch swipe scrolls mobile; canvas does not trap gestures",
+    "Reduced-motion scene navigation",
+    "WebGL context-loss readable fallback"
+  ],
+  "errors": [],
+  "frameSample": {
+    "medianMs": 5.6,
+    "p95Ms": 5.7
+  }
+}

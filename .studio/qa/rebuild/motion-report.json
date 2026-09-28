@@ -1,0 +1,6 @@
+{
+  "checks": [
+    "Reduced-motion automation: keyboard 0–100 changes actual 3D pose immediately"
+  ],
+  "errors": []
+}

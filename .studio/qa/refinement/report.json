@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "1280×720: resize retains chapter; copy and slider do not overlap",
+    "Drop preview, real drag, no duplicate click, Enter/Space install, remove/reinstall",
+    "390×844: readable result rows; no overlap with token tray; chapter retained",
+    "Mid-journey reload returns to entry; menu can skip entry; native wheel works after reload"
+  ],
+  "errors": []
+}
