@@ -1,0 +1,38 @@
+# Nguồn mô hình và vật liệu / 3D asset credits
+
+## Nhân vật
+
+Farmer — Quaternius, Ultimate Modular Men / Ultimate Modular Characters.
+License: CC0 1.0 (public domain dedication).
+Original pack and license: https://quaternius.com/packs/ultimatemodularcharacters.html
+Distribution: https://github.com/AleDev11/FindTheNeedle-Coop-Mod/blob/main/mods/multiplayer/models/farmer.glb
+Distribution credits: https://github.com/AleDev11/FindTheNeedle-Coop-Mod/blob/main/mods/multiplayer/models/CREDITS.txt
+Changes: smoothed normals, recolored clothing, reshaped farmer hat, retargeted hand pose, added controller/sprayer, reused Walk and Idle_Neutral clips.
+
+## Xe minh họa
+
+Ferrari 458 — vicent091036.
+License: Creative Commons Attribution 4.0 International (CC BY 4.0).
+License text: https://creativecommons.org/licenses/by/4.0/
+Original model: https://sketchfab.com/models/57bf6cc56931426e87494f554df1dab6
+Distribution: https://github.com/mrdoob/three.js/blob/dev/examples/models/gltf/ferrari.glb
+Author credit: https://threejs.org/examples/webgl_materials_car.html
+Distribution license audit: https://github.com/mrdoob/three.js/issues/23089
+Changes: recolored body, glass, tires and interior; changed lighting, scale and placement in a generic manufacturing illustration.
+This model is not a VinFast vehicle and does not reconstruct the cited VinFast production line. No endorsement is implied.
+
+## Vật liệu ruộng
+
+Brown Mud 02 — Poly Haven.
+Asset: https://polyhaven.com/a/brown_mud_02
+License: CC0, https://polyhaven.com/license
+1K diffuse, OpenGL normal and roughness textures; repeated and tinted on original terrain geometry.
+
+## Bộ giải mã
+
+Draco decoder — Google / Draco Authors, Apache License 2.0.
+Source: https://github.com/google/draco
+License: /draco/LICENSE
+Bundled decoder files distributed with three.js.
+
+Drone, rice geometry, machines, red thread and other procedural objects are original project geometry. The drone illustrates an agricultural quadrotor; it is not an identified machine used by HTX Thâm Triều. Geographic and editorial sources are listed in the website's source drawer.

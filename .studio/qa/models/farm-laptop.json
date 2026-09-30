@@ -1,0 +1,80 @@
+{
+  "canvases": 1,
+  "height": 720,
+  "image": false,
+  "regions": [
+    {
+      "bottom": 243.859375,
+      "height": 86.625,
+      "left": 88.546875,
+      "right": 493.34375,
+      "selector": ".farm-copy h2",
+      "top": 157.234375,
+      "width": 404.796875,
+      "x": 88.546875,
+      "y": 157.234375
+    },
+    {
+      "bottom": 299.859375,
+      "height": 42,
+      "left": 88.546875,
+      "right": 418.546875,
+      "selector": ".farm-description",
+      "top": 257.859375,
+      "width": 330,
+      "x": 88.546875,
+      "y": 257.859375
+    },
+    {
+      "bottom": 456.859375,
+      "height": 139,
+      "left": 88.546875,
+      "right": 493.34375,
+      "selector": ".farm-stages",
+      "top": 317.859375,
+      "width": 404.796875,
+      "x": 88.546875,
+      "y": 317.859375
+    },
+    {
+      "bottom": 496.453125,
+      "height": 21.59375,
+      "left": 88.546875,
+      "right": 408.546875,
+      "selector": ".farm-meaning",
+      "top": 474.859375,
+      "width": 320,
+      "x": 88.546875,
+      "y": 474.859375
+    },
+    {
+      "bottom": 619.203125,
+      "height": 48.1875,
+      "left": 88.546875,
+      "right": 392.796875,
+      "selector": ".farm-evidence",
+      "top": 571.015625,
+      "width": 304.25,
+      "x": 88.546875,
+      "y": 571.015625
+    },
+    {
+      "bottom": 676.8125,
+      "height": 44,
+      "left": 88.546875,
+      "right": 1176.453125,
+      "selector": ".case-navigation",
+      "top": 632.8125,
+      "width": 1087.90625,
+      "x": 88.546875,
+      "y": 632.8125
+    }
+  ],
+  "selected": [
+    "false",
+    "true",
+    "false"
+  ],
+  "title": "Từ đeo bình,\nđến điều khiển.",
+  "width": 1280
+}

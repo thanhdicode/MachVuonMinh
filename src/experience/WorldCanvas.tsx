@@ -1,12 +1,13 @@
 import { Component, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Environment, Lightformer, Html } from '@react-three/drei'
+import { Environment, Lightformer } from '@react-three/drei'
 import * as THREE from 'three'
 import { easing } from 'maath'
 import { timeline, useWorld } from './WorldState'
 import { labState } from './model'
 import { brushedMetal, castGrain, createSoilGeometry, bandGeometry, bandDetails, enamel, agedSteel, brass } from './surfaceDetail'
-import { EvidenceObjects, DigitalNode } from './EvidenceObjects'
+import { EvidenceObjects } from './EvidenceObjects'
+import { DataField } from './DataField'
 
 const RED = '#B51F2A', IVORY = '#F3E8D0'
 export const backgrounds = ['#f0e9da', '#d6c5a6', '#191b1c', '#deded3', '#21151a', '#201e1b', '#efe9dc', '#201e1b', '#eee7d8']
@@ -231,28 +232,6 @@ function RobotArm() {
     </group>
     <mesh position={[.7,-.74,-.6]}><boxGeometry args={[5.8,.17,3.8]}/><meshStandardMaterial color="#828d87" metalness={.55} roughness={.35}/></mesh>
     {Array.from({length:12},(_,i)=><mesh key={i} position={[-1.8+i*.45,-.62,.4]} rotation-x={Math.PI/2}><cylinderGeometry args={[.09,.09,2,12]}/><meshStandardMaterial color="#b1b5aa" metalness={.8} roughness={.3}/></mesh>)}
-  </group>
-}
-
-function DataField() {
-  const packets=useRef<THREE.InstancedMesh>(null),body=useRef<THREE.Group>(null)
-  const active=useWorld(s=>s.active)
-  const {size}=useThree(), count=size.width<700?240:900
-  const matrix=useMemo(()=>new THREE.Object3D(),[])
-  const curves=useMemo(()=>Array.from({length:16},(_,j)=>new THREE.CatmullRomCurve3(Array.from({length:40},(_,i)=>{
-    const u=i/39,a=u*Math.PI*2.6+j*.105,r=1.45+Math.sin(u*Math.PI)*.9
-    return new THREE.Vector3(-6+u*13,Math.sin(a)*r,Math.cos(a)*r-1)
-  }))),[])
-  useFrame(({clock})=>{if(timeline.scene!==4||!packets.current)return;const s=useWorld.getState(),t=s.reduced||s.paused?0:clock.elapsedTime;const collapse=1-THREE.MathUtils.smoothstep(timeline.local,.64,.94)*.85
-    for(let i=0;i<count;i++){curves[i%16].getPoint((i/count+t*.04)%1,point);matrix.position.copy(point).multiplyScalar(collapse);matrix.scale.setScalar(i%7===0?.045:.018);matrix.updateMatrix();packets.current.setMatrixAt(i,matrix.matrix)}packets.current.instanceMatrix.needsUpdate=true
-    if(body.current)body.current.scale.setScalar(collapse)
-  })
-  const positions=size.width<700?[[-.65,.7,0],[2.5,.7,0],[-.65,-2,0],[2.5,-2,0]]:[[-2.3,-.3,0],[3,-.3,0],[-4,-2.5,0],[1.7,-2.6,0]]
-  return <group><group position={[.9,size.width<700?-.8:-1.2,0]} scale={[1,.73,1]} rotation={[.12,-.25,-.18]}>
-    <group ref={body}>{curves.map((curve,i)=><mesh key={i}><tubeGeometry args={[curve,100,.009,4,false]}/><meshBasicMaterial color={i%4===0?'#d65e54':'#852a33'} transparent opacity={i%4===0?.8:.45}/></mesh>)}</group>
-    <instancedMesh ref={packets} args={[undefined,undefined,count]} frustumCulled={false}><icosahedronGeometry args={[1,0]}/><meshBasicMaterial color="#f3dfb4"/></instancedMesh>
-    </group>
-    {positions.map((p,i)=><group key={i} position={p as [number,number,number]} scale={size.width<700?.85:1.15}><DigitalNode kind={i}/>{active===4&&<Html center position={[0,-.7,0]} zIndexRange={[5,4]} pointerEvents="none"><div className="node-caption"><strong>{['DỮ LIỆU','AI','HẠ TẦNG','KỸ NĂNG'][i]}</strong><small>{['ĐẦU VÀO','THUẬT TOÁN','KẾT NỐI','CON NGƯỜI'][i]}</small></div></Html>}</group>)}
   </group>
 }
 

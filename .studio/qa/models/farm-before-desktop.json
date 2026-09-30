@@ -1,0 +1,80 @@
+{
+  "canvases": 1,
+  "height": 900,
+  "image": false,
+  "regions": [
+    {
+      "bottom": 332.03125,
+      "height": 118.1875,
+      "left": 99.75,
+      "right": 529.75,
+      "selector": ".farm-copy h2",
+      "top": 213.84375,
+      "width": 430,
+      "x": 99.75,
+      "y": 213.84375
+    },
+    {
+      "bottom": 410.03125,
+      "height": 56,
+      "left": 99.75,
+      "right": 429.75,
+      "selector": ".farm-description",
+      "top": 354.03125,
+      "width": 330,
+      "x": 99.75,
+      "y": 354.03125
+    },
+    {
+      "bottom": 625.03125,
+      "height": 187,
+      "left": 99.75,
+      "right": 529.75,
+      "selector": ".farm-stages",
+      "top": 438.03125,
+      "width": 430,
+      "x": 99.75,
+      "y": 438.03125
+    },
+    {
+      "bottom": 664.625,
+      "height": 21.59375,
+      "left": 99.75,
+      "right": 419.75,
+      "selector": ".farm-meaning",
+      "top": 643.03125,
+      "width": 320,
+      "x": 99.75,
+      "y": 643.03125
+    },
+    {
+      "bottom": 747,
+      "height": 48.1875,
+      "left": 99.75,
+      "right": 404,
+      "selector": ".farm-evidence",
+      "top": 698.8125,
+      "width": 304.25,
+      "x": 99.75,
+      "y": 698.8125
+    },
+    {
+      "bottom": 846,
+      "height": 44,
+      "left": 99.75,
+      "right": 1325.25,
+      "selector": ".case-navigation",
+      "top": 802,
+      "width": 1225.5,
+      "x": 99.75,
+      "y": 802
+    }
+  ],
+  "selected": [
+    "true",
+    "false",
+    "false"
+  ],
+  "title": "Sức người\ntrên từng luống.",
+  "width": 1440
+}

@@ -2,6 +2,8 @@ node_modules/
 dist/
 *.tsbuildinfo
 .studio/frontendmaxxing/
+.studio/assets/
+.studio/asset-preview.html
 .vercel/
 .env
 .env.*

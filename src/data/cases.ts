@@ -27,3 +27,9 @@ export const relationQuestions = [
   {name:'TỔ CHỨC',question:'Ai phối hợp?'},
   {name:'PHÂN PHỐI',question:'Ai hưởng lợi?'},
 ] as const
+
+export const farmStages = [
+  {name:'Trước',action:'Đeo bình · đi từng luống',title:'Sức người\ntrên từng luống.',description:'Mang bình trên lưng, đi dọc ruộng và phun bằng tay.',meaning:'Công cụ cầm tay. Thao tác trực tiếp.'},
+  {name:'Sau',action:'Lập đường bay · giám sát',title:'Từ đeo bình,\nđến điều khiển.',description:'Drone phun theo đường bay. Người vận hành giám sát từ bờ ruộng.',meaning:'Công cụ mới + kỹ năng mới = năng lực mới.'},
+  {name:'Cùng làm',action:'HTX liên kết dịch vụ',title:'Máy mới.\nCách hợp tác mới.',description:'HTX liên kết đơn vị dịch vụ, đưa drone đến với xã viên.',meaning:'Tiếp cận công nghệ qua hợp tác và dịch vụ.'},
+] as const

@@ -39,3 +39,24 @@ Motion audit: wheel must change the camera immediately; native touch must reach 
 Compare mirror chrome, rough cast metal, and satin machined steel. Choose satin steel for the collar/gears; oxblood enamel and restrained brass fasteners for the adaptive bands. Keep dark surfaces warm charcoal and light surfaces ivory, with the red thread providing continuity. This palette is an editorial decision, not a claim that philosophy prescribes specific colors.
 
 Replace the layered rectangular soil slabs with a continuous furrowed cutaway. Use generated vertex pigments and fine surface grain. Replace the low-resolution core with a smooth sphere and analytical deformation normals; the silhouette still records mismatch. Limit reassembly to the object stage so control labels remain readable. Repeated engraving, stones and band details share or instance their geometry.
+
+## Scene 04 — connected production bench
+
+Compare (1) an orbital constellation, (2) an exploded vertical stack, and (3) one connected production bench. Choose the bench: infrastructure physically supports data, computation and a human-operated console. The first option repeats the disconnected icons; the second obscures the links on phones. Satin metal, oxblood enamel, brass fasteners and one continuous red signal fit ART-DIRECTION.md.
+
+Implementation: replace DataField's decorative wave with a single chassis and physically terminated paths; keep existing shared materials and one Canvas. Move scene copy into a compact left column; center the assembly beneath it on mobile. Keep the human operator visually present and describe AI as a tool. Animate a small instanced signal set, freeze on pause/reduced motion. Check 1440x900 and 390x844 screenshots, scrolling into/out of the scene, console errors, existing tests and production build. No new dependencies or external assets.
+
+## Scene 06 agriculture — from backpack to flight plan
+
+Directions: (1) side-by-side manual/drone dioramas, (2) a full-screen rotating drone showroom, (3) one field with three controllable moments. Choose 3: the same field and worker connect BEFORE (backpack sprayer), AFTER (aerial spray + remote supervision), and COORDINATION (HTX links farmers and a service operator). Direction 1 halves the model size; direction 2 explains hardware but not the changed work. Default to AFTER for a dominant, legible drone silhouette. A detailed original agricultural quadrotor uses ivory tank, graphite arms, enamel red shell, visible pump/nozzle/plumbing and curved propeller blades.
+
+Scope: author AgriculturalDrone.tsx and DroneField.tsx, small procedural geometry helpers with geometry/flight tests; connect farmStage state to VietnamEvidence and EvidenceObjects. Remove the flat illustration from this case. Keep the atlas in an accessible dialog, including Hoàng Sa and Trường Sa. Give the controls one explanatory sentence per stage. Preserve the other evidence cases. Use existing Three AnimationMixer for rotors, frame-rate-independent interpolation for staging, instancing for crops and spray; one Canvas and existing DPR caps. Verify stages, map, other cases, pause/reduced motion, wheel transitions, 1440x900 and 390x844, then production build.
+
+Research: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/nong-dan-trieu-co-huong-ung-ap-dung-thiet-bi-bay-khong-nguoi-lai-phun-thuoc-tru-sau-31942.html (20 March 2026) supports 28.4 ha and HTX contracting drone services. No model is identified; no measured before/after baseline for this HTX is supplied. Therefore BEFORE is a general illustration of manual work, not a documented reconstruction, and no speed/yield multiplier is invented. https://ag.dji.com/t25/specs supplies reference proportions and four propellers/tank/two nozzles; https://ag.dji.com/t25 describes planning and remote operation. The original 3D model illustrates the mechanism, not this branded model or the HTX's particular equipment.
+
+
+## Model refinement — people, paddy and factory
+
+Compare: (1) more detail on primitive figures, (2) photo cutouts, (3) lightweight rigged models with authored materials and poses. Choose 3: natural body proportions, recognizable clothing, hands and skeletal movement, with a shared restrained palette. Retain the approved original drone. Use PBR mud, shallow water and varied rice plants for the field. For the factory compare a map-dominant split, a small inset car, and a large production assembly with the atlas available on demand. Choose the assembly: the user must recognize the vehicle and operator before opening geographic context.
+
+The imported car is an illustrative Ferrari model, not a VinFast vehicle; state this beside it and in the source drawer. Keep attribution and licenses in public/ASSET-CREDITS.md. Do not imply the licensed asset is an actual model used in the cited evidence.

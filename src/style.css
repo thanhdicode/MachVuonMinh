@@ -148,7 +148,46 @@ body.drawer-open{overflow:hidden}.eyelet-target{position:absolute;left:54%;top:4
  .map-dialog .archipelago .atlas-detail{font-size:10px}
  .map-dialog p{padding:0 20px}
 }
-.node-caption{font:11px/1.5 'IBM Plex Mono',monospace;text-align:center;color:#f3e8d0;white-space:nowrap;padding:6px 12px;background:#21151acc;border-top:1px solid #ac7b6466;pointer-events:none}
-.node-caption strong{font-weight:400}.node-caption small{display:block;font-size:7px;color:#bdaf9e;margin-top:3px}
-@media(max-width:700px){.node-caption{font-size:10px;padding:5px 8px}.node-caption small{font-size:7px}}
+.copy-4{top:29%;width:32%;max-width:430px}
+.copy-4 h2{font-size:clamp(30px,3.2vw,48px);line-height:1.2;max-width:430px;white-space:pre-line}
+.copy-4>p{font-size:15px;max-width:330px;line-height:1.85}
+.copy-4 .specimen-caption{position:static;margin-top:36px;max-width:300px;line-height:1.8;font-size:9px}
+.node-caption{font:11px/1.5 'IBM Plex Mono',monospace;text-align:center;color:#f3e8d0;white-space:nowrap;padding:7px 10px;background:#21151ae8;border-top:1px solid #ac7b6488;pointer-events:none}
+.node-caption{opacity:clamp(0,calc((.78 - var(--beat,0)) * 20),1)}
+.node-caption strong{font-weight:500}.node-caption small{display:block;font-size:8px;color:#c8baa8;margin-top:4px;letter-spacing:.04em}
+.data-question{justify-content:center;bottom:12%;font-size:14px}
+@media(max-width:700px){.copy-4{top:16%;width:86%;max-width:none}.copy-4 h2{font-size:32px;margin:17px 0}.copy-4>p{font-size:13px;max-width:320px;line-height:1.7}.copy-4 .specimen-caption{display:none}.node-caption{font-size:9px;padding:5px 7px}.node-caption small{font-size:6px}.data-question{bottom:13%;font-size:12px;text-align:center;line-height:1.9}}
 @media(min-width:701px){.role-nodes{bottom:9%;font-size:11px}}
+.farm-copy{position:absolute;left:7%;top:19%;width:32%;max-width:430px}
+.farm-copy>.eyebrow{font-size:9px;color:#8a5142;letter-spacing:.06em}
+.farm-copy h2{font-size:clamp(36px,3.6vw,54px);font-weight:500;line-height:1.14;letter-spacing:-.055em;white-space:pre-line;margin:22px 0}
+.farm-description{font-size:15px;line-height:1.85;max-width:330px;min-height:56px;color:#514b3f}
+.farm-stages{display:flex;flex-direction:column;margin-top:28px;border-top:1px solid #bbaa8d66}
+.farm-stages button{display:flex;align-items:center;gap:13px;text-align:left;min-height:62px;border-bottom:1px solid #bbaa8d66;color:#736c5e;transition:color .2s,background .2s}
+.farm-stages button>span{font:9px 'IBM Plex Mono',monospace}.farm-stages strong{font-size:14px;font-weight:500;min-width:64px}.farm-stages small{font-size:10px}.farm-stages b{margin-left:auto;font-size:17px;font-weight:400}
+.farm-stages button[aria-pressed=true]{color:#b51f2a;background:linear-gradient(90deg,#b51f2a09,transparent)}
+.farm-stages button:focus-visible{outline:2px solid #b51f2a;outline-offset:4px}
+.farm-meaning{font-size:12px;line-height:1.8;color:#7a3b30;max-width:320px;margin-top:18px}
+.farm-evidence{position:absolute;left:7%;bottom:17%;display:flex;gap:18px;align-items:center}
+.farm-evidence>strong{font-size:31px;color:#b51f2a;font-weight:500;letter-spacing:-.04em}.farm-evidence strong small{font-size:11px;letter-spacing:0}
+.farm-evidence>span{font-size:9px;color:#746b5a;line-height:1.8}.farm-evidence button{display:block;font:9px 'IBM Plex Mono',monospace;min-height:32px;border-bottom:1px solid #b8aa90;color:#6f382b}
+.farm-model-note{position:absolute;left:47%;right:7%;bottom:17%;text-align:center;pointer-events:none}
+.farm-model-note>span{font:10px 'IBM Plex Mono',monospace;letter-spacing:.07em}.farm-model-note small{display:block;font-size:8px;color:#877b65;margin-top:8px}
+@media(max-width:1100px) and (min-width:701px){.farm-stages small{display:none}.farm-copy{top:18%}.farm-copy h2{font-size:38px}.farm-description{font-size:13px}.farm-stages{margin-top:16px}.farm-stages button{min-height:50px}.farm-evidence{bottom:16%;gap:10px}.farm-evidence>span{max-width:180px}}
+@media(max-width:700px){
+ .farm-copy{left:7%;top:12%;width:86%;max-width:none}.farm-copy>.eyebrow{font-size:7px}.farm-copy h2{font-size:31px;margin:12px 0;line-height:1.1}.farm-description{font-size:12px;line-height:1.65;max-width:310px;margin:0;min-height:40px}
+ .farm-stages{position:fixed;left:7%;right:7%;top:33%;flex-direction:row;margin:0;gap:12px;border:0}.farm-stages button{flex:1;gap:7px;min-height:44px}.farm-stages strong{font-size:11px;min-width:0}.farm-stages small,.farm-stages b{display:none}.farm-stages button>span{font-size:7px}
+ .farm-meaning{position:fixed;left:7%;right:7%;bottom:23%;margin:0;max-width:none;font-size:11px;text-align:center}
+ .farm-model-note{left:7%;right:7%;bottom:29%}.farm-model-note>span{font-size:8px}.farm-model-note small{font-size:6px;margin-top:5px}
+ .farm-evidence{left:7%;right:7%;bottom:15%;justify-content:center;gap:14px}.farm-evidence>strong{font-size:25px}.farm-evidence strong small{font-size:9px}.farm-evidence>span{font-size:8px}.farm-evidence button{font-size:8px;min-height:25px}
+}
+@media(min-width:701px){.farm-model-note{bottom:12.5%;left:46%;right:6%}.evidence-case-0 .case-source{font-size:8px}.evidence-case-0 .case-navigation{bottom:6%}}
+@media(max-width:700px){.farm-model-note{bottom:27%}.farm-evidence{bottom:16.4%}.evidence-case-0 .case-navigation{bottom:6%;gap:4px}.evidence-case-0 .case-tabs button{min-height:32px;padding:6px 0}.evidence-case-0 .case-source{min-height:28px;padding:4px 0}}
+@media(max-width:700px){.farm-model-note small{display:none}}
+
+.asset-credits{display:block;margin-top:28px;padding-top:16px;border-top:1px solid #b7a68d;font-size:11px;text-decoration:underline;text-underline-offset:4px}
+@media(min-width:701px) and (max-height:800px){.farm-copy{top:17%}.farm-copy h2{font-size:38px;margin:14px 0}.farm-description{font-size:13px;line-height:1.6;min-height:42px}.farm-stages{margin-top:18px}.farm-stages button{min-height:46px}.farm-evidence{bottom:14%}.vietnam-overlay.evidence-case-1 .vietnam-copy h2{font-size:38px}}
+
+.case-map-link{display:block;font:9px 'IBM Plex Mono',monospace;margin-top:10px;min-height:30px;color:#7c4835;border-bottom:1px solid #b8aa90}
+@media(min-width:701px){.evidence-case-1 .vietnam-copy{top:18%;width:34%}.evidence-case-1 .vietnam-copy h2{font-size:46px}.evidence-case-1 .case-fact{top:42%}.evidence-case-1 .case-observation{top:53%;width:29%;font-size:15px}.evidence-case-1 .relation-bridge{top:67%;width:32%}.evidence-case-1 .case-object-caption{left:47%;width:47%;top:76%;font-size:8px}}
+@media(max-width:700px){.evidence-case-1 .case-map-link{position:absolute;right:0;bottom:0;font-size:7px}.evidence-case-1 .case-object-caption{left:7%;width:86%;top:56%}.evidence-case-1 .case-observation{top:59%}}
