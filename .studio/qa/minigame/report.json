@@ -1,0 +1,14 @@
+{
+  "mode": "layout/campaign checks",
+  "checks": [
+    "Production build opens from scene 08",
+    "60 questions / 12 per stage",
+    "49 local PNG sprites load",
+    "Seven viewports: all 60 collision popups/boss questions and feedback fit without scrolling",
+    "Wrong answers counterattack in all five bosses; three correct answers defeat each boss",
+    "Hearts persist on stage advance",
+    "Native gameplay checks included in full mode: collision freezes canvas and score, popup inside arena, continue resumes, pause, first boss animation, Escape, focus, mobile DPR",
+    "No Google Fonts or uncaught exceptions"
+  ],
+  "errors": []
+}

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { useWorld, tick, timeline } from './WorldState'
 import { startTimeline, goToScene } from './WorldTimeline'
 import { sceneCopy } from '../data/copy'
@@ -7,16 +7,19 @@ import { VietnamEvidence } from './VietnamEvidence'
 import { SourceDrawer } from './SourceDrawer'
 import { PolicyChamber } from './PolicyChamber'
 const WorldCanvas = lazy(() => import('./WorldCanvas'))
+const MiniGame = lazy(() => import('../minigame/MiniGame'))
 export function Experience() {
   const state = useWorld(), dragStart = useRef<{x:number;y:number}|null>(null)
   const [drawer,setDrawer]=useState<'menu'|'source'|null>(null), [source,setSource]=useState(0)
+  const [miniGameOpen, setMiniGameOpen] = useState(false)
+  const closeMiniGame = useCallback(() => setMiniGameOpen(false), [])
   const openSource=(index:number)=>{setSource(index);setDrawer('source')}
   useEffect(startTimeline, [])
   useEffect(()=>{const media=window.matchMedia('(prefers-reduced-motion: reduce)');const update=()=>useWorld.getState().set({reduced:media.matches});media.addEventListener('change',update);return()=>media.removeEventListener('change',update)},[])
   useEffect(() => { document.body.classList.toggle('locked', !state.unlocked); return()=>document.body.classList.remove('locked') }, [state.unlocked])
   const unlock = () => { if (!state.unlocked) { state.set({unlocked:true}); tick(420) } }
   return <main className={`experience scene-${state.active} ${state.unlocked?'unlocked':''}`}>
-    <Suspense fallback={<div className="loading-thread">Đang nối mạch…</div>}><WorldCanvas /></Suspense>
+    <Suspense fallback={<div className="loading-thread">Đang nối mạch…</div>}><WorldCanvas suspended={miniGameOpen} /></Suspense>
     <div className="paper-grain" />
     <header className="minimal-nav"><a className="wordmark" href="#" onClick={e=>{e.preventDefault();goToScene(0)}}><span className="brand-symbol">m.</span><span>MẠCH<br/>VƯƠN MÌNH</span></a><div className="nav-end"><span>{String(state.active).padStart(2,'0')} / 08</span><button aria-label="Mở mục lục" className="menu-trigger" onClick={()=>setDrawer('menu')}>☰</button></div></header>
     {state.active===0 && <section className="intro-overlay" aria-label="Kích hoạt sợi đỏ">
@@ -31,7 +34,8 @@ export function Experience() {
     {state.active===5 && <LabControls/>}
     {state.active===6 && <VietnamEvidence openSource={openSource}/>}
     {state.active===7 && <PolicyChamber/>}
-    {state.active===8 && <div className="final-actions">{state.beat===1&&<p>Đổi mới công cụ. Đổi mới quan hệ. Để con người cùng vươn mình.</p>}<div><button onClick={()=>goToScene(5)}>THỬ LẠI LAB <span>↗</span></button><button onClick={()=>openSource(0)}>XEM NGUỒN <span>↗</span></button></div></div>}
+    {state.active===8 && <div className="final-actions">{state.beat===1&&<p>Đổi mới công cụ. Đổi mới quan hệ. Để con người cùng vươn mình.</p>}<button className="final-game-trigger" onClick={()=>setMiniGameOpen(true)}>CHƠI MINIGAME <span aria-hidden="true">↗</span></button><small className="final-game-note">5 GIAI ĐOẠN · 5 BOSS · 60 CÂU HỎI</small><div><button onClick={()=>goToScene(5)}>THỬ LẠI LAB <span>↗</span></button><button onClick={()=>openSource(0)}>XEM NGUỒN <span>↗</span></button></div></div>}
+    {miniGameOpen && <Suspense fallback={<div className="mini-game-loading" role="status">Đang mở hành trình ôn tập…</div>}><MiniGame onClose={closeMiniGame} /></Suspense>}
     {drawer && <SourceDrawer mode={drawer} index={source} onClose={()=>setDrawer(null)} onSource={openSource}/>}
     <footer className="exhibit-footer"><span>MLN111 <i/> LỰC LƯỢNG SẢN XUẤT × QUAN HỆ SẢN XUẤT</span><span>TRẢI NGHIỆM 03—04 PHÚT</span></footer>
     <div className="scroll-space" aria-hidden="true" />

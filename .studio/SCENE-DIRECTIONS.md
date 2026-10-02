@@ -1,5 +1,15 @@
 # Selected directions, before implementation
 
+## 2026-10-02 — fixed-screen runner revision
+
+Compare a floating quiz over the arena, a fixed arena with an adjacent question rail, and a compact vertical arena/question split. Choose the adjacent rail on desktop and vertical split on phones: every game control, question and answer remains in the viewport with no document or panel scrolling. Paper/ink/red frames licensed Kenney sprites, layered scenery and a red energy trail. Remove separate defense/attack turns: a correct boss answer strikes, an incorrect answer triggers counterattack. Challenge comes from readable jump/duck combinations, moving drones, warned spikes and variable-width hurdles; spacing must remain physically solvable at the speed cap.
+
+## 2026-10-02 — ôn tập sau cảnh kết luận
+
+Compare (1) a tenth scroll scene with the game inside the existing camera timeline, (2) a full-screen practice space launched from scene 08, and (3) a separate external game page. Choose 2: the final red action continues the presentation into an audience activity, retains the exhibition at its exact scroll position and offers a clear return. Direction 1 would stretch the cinematic timeline around a long quiz; direction 3 would disconnect the audience from the exhibition.
+
+Reuse the authored 2D runner, five bosses and 60 questions. Adapt its frame to paper, ink and the red thread, using only Be Vietnam Pro and IBM Plex Mono. Keep the game isolated in a lazy-loaded iframe; its Canvas 2D adds no WebGL context. Suspend the exhibition renderer and Lenis while practice is open. In the game, scenery continues while answering, bosses gate progression, and three hearts apply throughout. Verify finale launch, return/focus, repeated mounting, gameplay and 390×844 layout; run existing tests and production build.
+
 The shared idea is an engineering specimen becoming a living social system. Compare every scene against ART-DIRECTION.md: the thread must explain the object, with physical depth and no narrative panels.
 
 | Scene | Alternatives considered | Chosen direction and meaningful motion |
@@ -60,3 +70,7 @@ Research: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-
 Compare: (1) more detail on primitive figures, (2) photo cutouts, (3) lightweight rigged models with authored materials and poses. Choose 3: natural body proportions, recognizable clothing, hands and skeletal movement, with a shared restrained palette. Retain the approved original drone. Use PBR mud, shallow water and varied rice plants for the field. For the factory compare a map-dominant split, a small inset car, and a large production assembly with the atlas available on demand. Choose the assembly: the user must recognize the vehicle and operator before opening geographic context.
 
 The imported car is an illustrative Ferrari model, not a VinFast vehicle; state this beside it and in the source drawer. Keep attribution and licenses in public/ASSET-CREDITS.md. Do not imply the licensed asset is an actual model used in the cited evidence.
+
+## Mini game — collision popup revision
+
+The latest user instruction replaces continuous running during obstacle questions with a frozen scene and a popup inside the arena. Use a centered paper card, oxblood accents and a dimmed backdrop; expand the arena into the available content area while the popup is open so the question, four answers, full explanation and continue action fit without scrolling. Keep the HUD and return control visible. Freeze physics, world animation, distance and speed until explicit continuation. Preserve the simplified animated boss battles and the existing sprites.

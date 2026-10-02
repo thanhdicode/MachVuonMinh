@@ -36,3 +36,12 @@ License: /draco/LICENSE
 Bundled decoder files distributed with three.js.
 
 Drone, rice geometry, machines, red thread and other procedural objects are original project geometry. The drone illustrates an agricultural quadrotor; it is not an identified machine used by HTX Thâm Triều. Geographic and editorial sources are listed in the website's source drawer.
+
+## Sprite mini game Hành trình sản xuất
+
+Kenney: **Platformer Characters 1**, **Robot Pack**, **New Platformer Pack**, CC0 (Creative Commons Zero).
+
+- Creator: https://kenney.nl/assets/platformer-characters ; https://kenney.nl/assets/robot-pack ; https://kenney.nl/assets/new-platformer-pack
+- GitHub distribution: https://github.com/series-ai/jam-ready-assets, revision `782e3a09566b4bb3d98fe2ed07f5a8545e6fcfd4`.
+- 49 PNG sprites are packaged locally in `/minigame/sprites/`, with the three original `LICENSE-*.txt` notices and upstream paths in `/minigame/sprites/SOURCE.json`.
+- Animation selects supplied poses; sprites are scaled/mirrored and combined with the project's original scenery, chapter palettes and red thread.

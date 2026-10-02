@@ -6,6 +6,10 @@ import { stops, timeline, useWorld } from './WorldState'
 gsap.registerPlugin(ScrollTrigger)
 gsap.ticker.lagSmoothing(0)
 let lenis: Lenis | undefined
+export function setTimelineSuspended(suspended: boolean) {
+  if (suspended) { lenis?.stop(); timeline.velocity = 0 }
+  else if (useWorld.getState().unlocked) lenis?.start()
+}
 export function goToScene(index: number) {
   if (!Number.isInteger(index) || index < 0 || index >= stops.length - 1) return
   if(index>0&&!useWorld.getState().unlocked)useWorld.getState().set({unlocked:true})

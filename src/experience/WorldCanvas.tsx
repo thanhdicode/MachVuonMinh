@@ -324,14 +324,14 @@ class CanvasBoundary extends Component<{ children: ReactNode; fallback: ReactNod
   static getDerivedStateFromError() { return { failed: true } }
   render() { return this.state.failed ? this.props.fallback : this.props.children }
 }
-export default function WorldCanvas() {
+export default function WorldCanvas({ suspended = false }: { suspended?: boolean }) {
   const [lost, setLost] = useState(false)
   const [hidden,setHidden]=useState(document.hidden)
   useEffect(()=>{const change=()=>setHidden(document.hidden);document.addEventListener('visibilitychange',change);return()=>document.removeEventListener('visibilitychange',change)},[])
   const reduced = useWorld(s => s.reduced), paused = useWorld(s => s.paused)
   useEffect(() => { const move = (e: PointerEvent) => { timeline.pointer = [e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2] }; window.addEventListener('pointermove',move); return()=>window.removeEventListener('pointermove',move) },[])
   const fallback = <div className="world-fallback" aria-label="Sơ đồ sợi đỏ thay cho không gian 3D"><svg viewBox="0 0 1000 700"><path d="M-100 650C300 650 800 50 800 350S100 650 400 200S1100 500 1200 0" fill="none" stroke="#B51F2A" strokeWidth="8"/><circle cx="620" cy="330" r="170" fill="none" stroke="#817c6c" strokeWidth="28"/></svg><span>Chế độ đồ họa nhẹ</span></div>
-  return <div className="world-canvas" aria-hidden="true"><CanvasBoundary fallback={fallback}>{lost ? fallback : <Canvas dpr={[1, innerWidth < 700 ? 1 : 1.5]} camera={{ position:[0,.25,12], fov:42, near:.1, far:45 }} gl={{ antialias:true, powerPreference:'high-performance' }} frameloop={hidden?'never':reduced || paused ? 'demand' : 'always'} fallback={fallback}><ContextWatch onLost={()=>setLost(true)}/><World /></Canvas>}</CanvasBoundary></div>
+  return <div className="world-canvas" aria-hidden="true"><CanvasBoundary fallback={fallback}>{lost ? fallback : <Canvas dpr={[1, innerWidth < 700 ? 1 : 1.5]} camera={{ position:[0,.25,12], fov:42, near:.1, far:45 }} gl={{ antialias:true, powerPreference:'high-performance' }} frameloop={hidden || suspended?'never':reduced || paused ? 'demand' : 'always'} fallback={fallback}><ContextWatch onLost={()=>setLost(true)}/><World /></Canvas>}</CanvasBoundary></div>
 }
 
 
