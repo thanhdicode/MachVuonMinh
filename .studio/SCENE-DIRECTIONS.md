@@ -74,3 +74,7 @@ The imported car is an illustrative Ferrari model, not a VinFast vehicle; state 
 ## Mini game — collision popup revision
 
 The latest user instruction replaces continuous running during obstacle questions with a frozen scene and a popup inside the arena. Use a centered paper card, oxblood accents and a dimmed backdrop; expand the arena into the available content area while the popup is open so the question, four answers, full explanation and continue action fit without scrolling. Keep the HUD and return control visible. Freeze physics, world animation, distance and speed until explicit continuation. Preserve the simplified animated boss battles and the existing sprites.
+
+## Mini game — movement and battle effects
+
+Compare (1) full-screen flashes and dense neon particles, (2) a restrained trail of dust, wind and red portal light, (3) illustrated comic panels over the action. Choose 2: effects show takeoff/landing, speed, attack impact and stage unlock while keeping the arena and question text readable. Use a bounded Canvas 2D particle pool, paper/brass/red fragments, a short projectile with an impact ring and damage number, and a moving red gate that swaps the scene and character at its midpoint. Physics and distance stop throughout the gate passage; hazards start after arrival. Correct/wrong answer feedback and heart loss use brief DOM animations while collision physics remains frozen. Victory adds a single confetti burst. Respect reduced motion, suspend canvas effects on pause/collision, and retain the existing single WebGL context.

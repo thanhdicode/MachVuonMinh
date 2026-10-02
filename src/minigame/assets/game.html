@@ -29,6 +29,9 @@
             <canvas id="gameCanvas" width="1000" height="430" aria-label="Nhân vật vượt chướng ngại qua năm giai đoạn"></canvas>
             <div class="arena-label"><span>CHẠY THEO MẠCH ĐỎ</span><strong id="hazardHint">CANH NHỊP · NHẢY · CÚI</strong></div>
             <div class="stage-toast" id="stageToast" aria-live="polite"></div>
+            <div class="stage-transition hidden" id="transitionBanner" aria-live="polite"><span>CỔNG GIAI ĐOẠN</span><strong id="transitionTitle"></strong></div>
+            <div class="impact-border" id="impactBorder" aria-hidden="true"></div>
+            <div class="heart-loss" id="heartLoss" aria-hidden="true"><span>♥</span><span>♥</span><b>−1 ♥</b></div>
             <div class="boss-hud hidden" id="bossHud">
               <div><span class="boss-kicker">BOSS CUỐI GIAI ĐOẠN</span><strong id="bossName"></strong></div>
               <div class="boss-health"><span id="bossHealthText">3 / 3 HP</span><div id="bossHealthBar" role="progressbar" aria-label="Máu boss" aria-valuemin="0" aria-valuemax="3" aria-valuenow="3"><i></i><i></i><i></i></div></div>
@@ -45,6 +48,7 @@
             </div>
 
             <div class="overlay hidden" id="endOverlay">
+              <div class="celebration" id="celebration" aria-hidden="true"></div>
               <div class="overlay-card end-card">
                 <div class="overlay-stamp" id="endStamp">HÀNH TRÌNH KẾT THÚC</div>
                 <h2 id="endTitle"></h2>
@@ -98,23 +102,6 @@
             <div class="touch-controls"><button id="duckButton" type="button">↓ CÚI</button><button id="jumpButton" type="button">↑ NHẢY</button></div>
             <span class="footer-note" id="footerNote">TRẢ LỜI ĐÚNG = GIỮ TIM · SAI = MẤT 1 TIM</span>
           </div>
-        <aside class="field-guide">
-          <span class="section-kicker">HÀNH TRÌNH LỰC LƯỢNG SẢN XUẤT</span>
-          <h2>Vượt giới hạn.<br/> Mở chặng mới.</h2>
-          <p>Tốc độ tăng liên tục. Mỗi chặng có một cửa ải kiến thức với boss 3 HP. Bạn có 3 trái tim cho cả hành trình.</p>
-          <div class="guide-controls"><span><b>↑</b> Giữ để nhảy xa; thả để nhảy thấp</span><span><b>↓</b> Cúi né drone; hạ nhanh khi trên không</span><span><b>?</b> Va chạm: đúng giữ tim, sai mất tim</span></div>
-          <section class="journey" aria-labelledby="journey-title">
-          <div class="section-heading"><h3 id="journey-title">5 GIAI ĐOẠN · 5 BOSS</h3></div>
-          <div class="timeline" id="timeline">
-            <div class="timeline-item active" data-stage="0"><div class="timeline-node">01</div><span>NÔNG NGHIỆP</span><strong>Sức người & súc vật</strong></div>
-            <div class="timeline-item" data-stage="1"><div class="timeline-node">02</div><span>CƠ GIỚI HÓA</span><strong>Động cơ & máy móc</strong></div>
-            <div class="timeline-item" data-stage="2"><div class="timeline-node">03</div><span>TỰ ĐỘNG HÓA</span><strong>Dây chuyền & vi xử lý</strong></div>
-            <div class="timeline-item" data-stage="3"><div class="timeline-node">04</div><span>KINH TẾ SỐ</span><strong>AI & dữ liệu</strong></div>
-            <div class="timeline-item" data-stage="4"><div class="timeline-node">05</div><span>KỶ NGUYÊN VƯƠN MÌNH</span><strong>Công nghệ & thể chế</strong></div>
-          </div>
-          </section>
-          <small class="source-note">Sprite: Kenney · CC0. Các chặng minh họa LLSX, không phải năm phương thức sản xuất.</small>
-        </aside>
         </section>
       </main>
     </div>

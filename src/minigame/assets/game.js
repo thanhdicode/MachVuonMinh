@@ -61,7 +61,7 @@
     ]
   ];
 
-  questions.forEach((list,i)=>list.push(...window.GAME_EXTRA_QUESTIONS[i]));
+  questions.forEach((list,i)=>list.push(...window.GAME_EXTRA_QUESTIONS[i],...window.GAME_DOCUMENT_QUESTIONS[i]));
   const bosses = [
     {name:'Golem Rơm',move:'Bão rơm',intro:'Người gác cánh đồng đang chặn đường. Vận dụng kiến thức về sản xuất thủ công để vượt qua.',lesson:'Từ sức người và sức kéo động vật, sự cải tiến công cụ mở đường cho cơ giới hóa.'},
     {name:'Cỗ Máy Hơi Nước',move:'Luồng hơi áp suất',intro:'Cỗ máy khổng lồ đã thức giấc. Làm chủ kiến thức về cơ giới hóa để mở cánh cửa tự động hóa.',lesson:'Máy móc cơ khí và sản xuất tập trung tạo bước nhảy từ tiểu nông sang đại công nghiệp.'},
@@ -79,6 +79,65 @@
   };
   let W=1000, scale=1, dpr=1;
   const groundY=333;
+  const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const FX_LIMIT=window.innerWidth<700?64:120;
+  const effects={particles:[],landingAt:-1000,shake:null,transition:null,dustIn:0,win:false};
+  // Cosmetic randomness is separate from obstacle and question generation.
+  let fxSeed=7391;
+  function fxRandom(){fxSeed=(Math.imul(fxSeed,1664525)+1013904223)>>>0;return fxSeed/4294967296}
+  function animateElement(element,name){element.classList.remove(name);void element.offsetWidth;element.classList.add(name)}
+  function resetEffects(){
+    effects.particles=[];effects.landingAt=-1000;effects.shake=null;effects.transition=null;effects.dustIn=0;effects.win=false;
+    hide('transitionBanner');$('celebration').replaceChildren();
+    wrap.classList.remove('fx-collision');
+    ['impactBorder','heartLoss','hearts','bossVictory'].forEach(id=>$(id).classList.remove('fx-hit','fx-break','fx-win'));
+  }
+  function burst(x,y,count,color,kind='spark'){
+    if(motionPreference.matches)return;
+    const limit=Math.min(count,FX_LIMIT-effects.particles.length);
+    for(let i=0;i<limit;i++){
+      const angle=kind==='dust'?Math.PI+fxRandom()*Math.PI:fxRandom()*Math.PI*2;
+      const speed=kind==='dust'?35+fxRandom()*100:70+fxRandom()*190;
+      const life=kind==='dust'?.35+fxRandom()*.3:.55+fxRandom()*.6;
+      effects.particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life,maxLife:life,size:kind==='dust'?3+fxRandom()*5:2+fxRandom()*4,color,kind,angle});
+    }
+  }
+  function loseHeart(){
+    animateElement($('heartLoss'),'fx-break');animateElement($('hearts'),'fx-hit');
+    animateElement($('impactBorder'),'fx-hit');
+  }
+  function celebrate(){
+    const host=$('celebration');host.replaceChildren();
+    if(motionPreference.matches)return;
+    const colors=['#b51f2a','#b78a46','#55734b','#fffaf0'];
+    for(let i=0;i<(window.innerWidth<700?28:44);i++){
+      const piece=document.createElement('i');piece.style.left=`${fxRandom()*100}%`;
+      piece.style.background=colors[i%colors.length];piece.style.setProperty('--drift',`${(fxRandom()-.5)*150}px`);
+      piece.style.setProperty('--spin',`${(fxRandom()-.5)*1000}deg`);piece.style.animationDelay=`${fxRandom()*.5}s`;
+      piece.style.animationDuration=`${2.1+fxRandom()*1.2}s`;piece.addEventListener('animationend',()=>piece.remove(),{once:true});host.append(piece);
+    }
+  }
+  function visualStage(){return effects.transition&&state.clock-effects.transition.started<675?effects.transition.from:state.stage}
+  function updateEffects(dt){
+    if(motionPreference.matches)effects.particles=[];
+    if(effects.transition&&state.mode==='transition'&&(motionPreference.matches||state.clock-effects.transition.started>=1350)){
+      effects.transition=null;hide('transitionBanner');state.mode='running';state.immunity=1;state.spawnIn=1.7;
+      state.lastTime=performance.now();state.toastUntil=state.lastTime+1800;updateHud();
+    }
+    if(runnerActive()&&state.player.y===0&&!state.player.duck){
+      effects.dustIn-=dt;
+      if(effects.dustIn<=0){burst(playerBox().x+18,groundY,2,palettes[state.stage].soil,'dust');effects.dustIn=.12}
+    }
+    if(state.effect&&!state.effect.impacted&&state.clock-state.effect.started>=440){
+      state.effect.impacted=true;
+      const hit=state.effect.kind==='hit',x=hit?playerBox().x+25:bossX();
+      burst(x,groundY-55,hit?18:26,hit?'#b51f2a':'#e7b955');
+      if(!hit&&state.boss?.hp===0)burst(x,groundY-80,44,palettes[state.stage].accent,'fragment');
+      effects.shake={started:state.clock,strength:hit?5:3};
+    }
+    for(const p of effects.particles){p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=(p.kind==='dust'?90:240)*dt;p.angle+=dt*4}
+    effects.particles=effects.particles.filter(p=>p.life>0);
+  }
 
   function resize(){
     const rect=wrap.getBoundingClientRect();
@@ -111,7 +170,7 @@
     return {...original,a:order.map(i=>original.a[i]),correct:order.indexOf(original.correct)};
   }
   function runnerActive(){return state.mode==='running'}
-  function sceneActive(){return runnerActive()||bossModes.includes(state.mode)}
+  function sceneActive(){return runnerActive()||state.mode==='transition'||bossModes.includes(state.mode)}
   function canPause(){return sceneActive()}
   function bossActive(){return bossModes.includes(state.mode)||(state.mode==='paused'&&bossModes.includes(state.resumeMode))}
   function buttonLabel(id,text){$(id).firstChild.textContent=text+' '}
@@ -122,10 +181,6 @@
     $('speed').textContent=`${(state.speed/BASE_SPEED).toFixed(1)}×`;
     $('hearts').textContent='♥ '.repeat(state.hearts)+'♡ '.repeat(3-state.hearts);
     $('hearts').setAttribute('aria-label',`Còn ${state.hearts} trái tim`);
-    document.querySelectorAll('.timeline-item').forEach((item,i)=>{
-      item.classList.toggle('active',i===state.stage&&!state.cleared[i]);
-      item.classList.toggle('completed',state.cleared[i]);
-    });
     const length=STAGE_LENGTHS[state.stage],start=STAGE_ENDS[state.stage]-length;
     const progress=Math.min(length,Math.max(0,state.score-start));
     $('stageProgressFill').style.width=`${progress/length*100}%`;
@@ -136,7 +191,7 @@
     $('pauseButton').setAttribute('aria-label',state.mode==='paused'?'Tiếp tục':'Tạm dừng');
     $('jumpButton').disabled=!runnerActive()&&state.mode!=='ready';
     $('duckButton').disabled=!runnerActive();
-    $('footerNote').textContent=state.mode==='quiz'?'ĐÃ DỪNG CHẠY · TRẢ LỜI ĐỂ TIẾP TỤC':bossActive()?'ĐÚNG: BOSS −1 HP · SAI: BỊ PHẢN CÔNG −1 ♥':'GIỮ NHẢY XA · THẢ NHẢY THẤP · ↓ HẠ NHANH / CÚI';
+    $('footerNote').textContent=state.mode==='quiz'?'ĐÃ DỪNG CHẠY · TRẢ LỜI ĐỂ TIẾP TỤC':state.mode==='transition'?'ĐANG QUA CỔNG · CHUẨN BỊ CHẶNG MỚI':bossActive()?'ĐÚNG: BOSS −1 HP · SAI: BỊ PHẢN CÔNG −1 ♥':'GIỮ NHẢY XA · THẢ NHẢY THẤP · ↓ HẠ NHANH / CÚI';
     wrap.closest('.game-panel').dataset.mode=state.mode;
     if(state.boss){
       $('bossName').textContent=bosses[state.stage].name;
@@ -151,6 +206,7 @@
     state.player={y:0,vy:0,duck:false};state.obstacles=[];state.spawnIn=1.5;
     state.questionDecks=questions.map(shuffle);state.lastQuestions=[null,null,null,null,null];state.activeQuestion=null;state.answered=false;
     state.toastUntil=0;state.flash=0;state.boss=null;state.cleared=[false,false,false,false,false];state.resumeMode=null;state.effect=null;state.quizContext='collision';
+    resetEffects();
     $('bossPanel').inert=false;$('quizOverlay').inert=false;wrap.classList.remove('boss-arena');
     ['quizOverlay','endOverlay','pauseOverlay','bossPanel','bossHud'].forEach(hide);
     show('startOverlay');updateHud();draw();
@@ -160,6 +216,7 @@
     if(state.mode==='ready'){start();return}
     if(!runnerActive()||state.player.y<0)return;
     state.player.duck=false;state.player.vy=-JUMP_SPEED;state.player.y=-1;
+    burst(playerBox().x+25,groundY,10,palettes[state.stage].soil,'dust');
   }
   function duck(active){if(runnerActive()){state.player.duck=active;if(active&&state.player.y<0)state.player.vy=Math.max(state.player.vy,600)}}
   function pause(){
@@ -206,6 +263,8 @@
   function overlaps(a,b){return a.x+8<b.x+b.w&&a.x+a.w-8>b.x&&a.y+6<b.y+b.h&&a.y+a.h-4>b.y}
   function collision(){
     state.mode='quiz';
+    animateElement($('impactBorder'),'fx-hit');
+    animateElement(wrap,'fx-collision');
     $('quizStage').textContent=`GIAI ĐOẠN ${String(state.stage+1).padStart(2,'0')} / 05`;
     renderQuestion('collision');
     $('quizFeedback').textContent='Đã dừng chạy. Trả lời đúng để giữ trái tim!';
@@ -217,6 +276,8 @@
   function renderQuestion(context){
     state.quizContext=context;state.activeQuestion=nextQuestion();state.answered=false;
     const isBoss=context!=='collision';
+    const card=isBoss?$('bossQuestionArea'):$('quizOverlay').querySelector('.quiz-card');
+    card.classList.toggle('long-question',state.activeQuestion.q.length>100||state.activeQuestion.a.some(answer=>answer.length>60));
     $(isBoss?'bossQuestion':'quizQuestion').textContent=state.activeQuestion.q;
     const answers=$(isBoss?'bossAnswers':'answers');answers.innerHTML='';
     state.activeQuestion.a.forEach((answer,i)=>{
@@ -231,17 +292,20 @@
     state.answered=true;
     const q=state.activeQuestion,correct=index===q.correct;
     const isBoss=state.quizContext!=='collision';
-    if(!correct){state.hearts=Math.max(0,state.hearts-1);state.flash=1;}
+    if(!correct){state.hearts=Math.max(0,state.hearts-1);state.flash=1;loseHeart();}
     [...$(isBoss?'bossAnswers':'answers').children].forEach((button,i)=>{
       button.disabled=true;
-      if(i===q.correct)button.classList.add('correct');
-      if(i===index&&!correct)button.classList.add('wrong');
+      if(i===q.correct)button.classList.add('correct','fx-correct');
+      if(i===index&&!correct)button.classList.add('wrong','fx-wrong');
     });
     if(isBoss){
       state.mode='boss-feedback';
       const kind=correct?'strike':'hit';
       state.effect={kind,started:state.clock};
-      if(correct)state.boss.hp=Math.max(0,state.boss.hp-1);
+      if(correct){
+        state.boss.hp=Math.max(0,state.boss.hp-1);
+        if(state.boss.hp===0)state.boss.defeatAt=state.clock+440;
+      }
       const message=correct?'Đánh trúng! Boss mất 1 HP. ':'Boss phản công! Bạn mất 1 trái tim. ';
       $('bossFeedback').textContent=message+q.explain;
       $('bossFeedback').classList.toggle('feedback-success',correct);
@@ -291,6 +355,7 @@
     if(state.boss.hp===0){
       state.cleared[state.stage]=true;state.mode='boss-victory';
       hide('bossQuestionArea');show('bossVictory');
+      animateElement($('bossVictory'),'fx-win');
       $('bossVictoryTitle').textContent=`Đã vượt qua ${stageNames[state.stage]}!`;
       $('bossVictoryText').textContent=bosses[state.stage].lesson;
       buttonLabel('nextStageButton',state.stage===4?'HOÀN THÀNH HÀNH TRÌNH':`SANG GIAI ĐOẠN ${String(state.stage+2).padStart(2,'0')}`);
@@ -301,20 +366,26 @@
   function advanceStage(){
     if(state.mode!=='boss-victory'||!state.cleared[state.stage])return;
     if(state.stage===4){end(true);return;}
+    const from=state.stage;
     state.stage++;state.boss=null;state.effect=null;state.player={y:0,vy:0,duck:false};
-    state.obstacles=[];state.spawnIn=1.7;state.mode='running';state.lastTime=performance.now();state.toastUntil=state.lastTime+2400;
+    effects.particles=[];effects.shake=null;effects.transition={from,started:state.clock};
+    state.obstacles=[];state.spawnIn=1.7;state.mode='transition';state.lastTime=performance.now();state.toastUntil=0;
     hide('bossPanel');hide('bossHud');wrap.classList.remove('boss-arena');
     $('stageToast').textContent=`Giai đoạn ${state.stage+1}: ${stageNames[state.stage]}`;
+    $('transitionTitle').textContent=`${String(state.stage+1).padStart(2,'0')} · ${stageNames[state.stage]}`;show('transitionBanner');
+    if(motionPreference.matches){effects.transition=null;hide('transitionBanner');state.mode='running';state.immunity=1}
     updateHud();$('pauseButton').focus({preventScroll:true});
   }
   function end(win){
     state.mode='ended';state.obstacles=[];
+    effects.transition=null;effects.particles=[];effects.shake=null;effects.win=win;hide('transitionBanner');
     hide('bossPanel');hide('bossHud');hide('quizOverlay');wrap.classList.remove('boss-arena');
     $('endStamp').textContent=win?'ĐÃ ĐÁNH BẠI CẢ 5 BOSS':'HẾT TRÁI TIM';
     $('endTitle').textContent=win?'Bạn đã đến kỷ nguyên vươn mình!':'Hành trình tạm dừng tại đây.';
     $('endText').textContent=win?'Lực lượng sản xuất phát triển qua từng bước nhảy. Quan hệ sản xuất phù hợp sẽ mở đường cho bước tiến tiếp theo.':'Ôn lại nội dung và thử sức thêm một lần nữa nhé!';
     $('endScore').textContent=padded(state.score);
     show('endOverlay');updateHud();$('restartButton').focus({preventScroll:true});
+    if(win)celebrate();
   }
   function update(dt,now){
     state.runTime+=dt;state.immunity=Math.max(0,state.immunity-dt);
@@ -323,8 +394,12 @@
     const stageEnd=STAGE_ENDS[state.stage];
     state.world=Math.min(stageEnd*60,state.world+delta);state.score=state.world/60;
     if(state.score>=stageEnd&&state.mode==='running'){startBoss();return;}
+    const airborne=state.player.y<0;
     state.player.vy+=GRAVITY*dt;state.player.y+=state.player.vy*dt;
-    if(state.player.y>0){state.player.y=0;state.player.vy=0;}
+    if(state.player.y>0){
+      state.player.y=0;state.player.vy=0;
+      if(airborne){effects.landingAt=state.clock;burst(playerBox().x+25,groundY,16,palettes[state.stage].soil,'dust')}
+    }
     state.spawnIn-=dt;
     if(state.spawnIn<=0)spawnObstacle();
     for(const o of state.obstacles)o.x-=delta*W/1000;
@@ -340,12 +415,13 @@
     state.lastTime=now;
     if(sceneActive()){
       state.clock+=dt*1000;
-      state.sceneWorld+=state.speed*dt*(bossActive()?.35:1);
+      state.sceneWorld+=state.speed*dt*(state.mode==='transition'?.45:bossActive()?.35:1);
     }
     if(runnerActive()){
       if(dt>0)update(dt,now);
     }
     if(sceneActive()&&state.flash>0)state.flash=Math.max(0,state.flash-dt*2);
+    if(sceneActive())updateEffects(dt);
     draw();requestAnimationFrame(frame);
   }
 
@@ -355,7 +431,7 @@
   function ellipse(x,y,rx,ry,color){fill(color);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill()}
   function round(x,y,w,h,r,color){fill(color);ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
   function background(){
-    const p=palettes[state.stage];
+    const stage=visualStage(),p=palettes[stage];
     ctx.save();ctx.setTransform(1,0,0,1,0,0);fill(p.sky);ctx.fillRect(0,0,canvas.width,canvas.height);ctx.restore();
     const sky=ctx.createLinearGradient(0,0,0,430);sky.addColorStop(0,p.sky);sky.addColorStop(1,'#f7efdd');rect(0,0,W,430,sky);
     ellipse(W*.8,85,43,43,p.sun);ellipse(W*.8,85,61,61,p.sun+'22');
@@ -363,7 +439,7 @@
     ctx.save();ctx.globalAlpha=.4;
     for(let i=-1;i<4;i++)sprite('background_clouds',i*600-(off*.2%600),-20,600,400);
     ctx.restore();
-    if(state.stage===0){
+    if(stage===0){
       const background='background_color_trees';
       sceneryCtx.clearRect(0,0,sceneryLayer.width,430);
       if(sprites[background])for(let i=-1;i<=Math.ceil(W/560);i++){
@@ -388,19 +464,19 @@
           const shade=layer?p.mid:p.back;
           round(x,groundY-h,interval-25,h,4,shade);
           rect(x+8,groundY-h+8,interval-41,5,p.ground+'55');
-          if(state.stage<=2){rect(x+15,groundY-h-30,15,30,shade);ellipse(x+22,groundY-h-40,16,6,'#fffaf077')}
-          for(let col=0;col<4;col++)for(let row=0;row<Math.floor(h/23)-1;row++)round(x+14+col*27,groundY-h+24+row*22,13,8,2,state.stage>=3?'#c4eef8':'#f5dfad');
-          if(state.stage>=3){line(x+50,groundY-h,x+50,groundY-h-25,p.ground,3);ellipse(x+50,groundY-h-26,4,4,'#b51f2a')}
+          if(stage<=2){rect(x+15,groundY-h-30,15,30,shade);ellipse(x+22,groundY-h-40,16,6,'#fffaf077')}
+          for(let col=0;col<4;col++)for(let row=0;row<Math.floor(h/23)-1;row++)round(x+14+col*27,groundY-h+24+row*22,13,8,2,stage>=3?'#c4eef8':'#f5dfad');
+          if(stage>=3){line(x+50,groundY-h,x+50,groundY-h-25,p.ground,3);ellipse(x+50,groundY-h-26,4,4,'#b51f2a')}
         }
       }
     }
-    const tile=state.stage===0?'terrain_grass_block':'terrain_stone_block';
+    const tile=stage===0?'terrain_grass_block':'terrain_stone_block';
     const tileSize=64,groundOff=state.sceneWorld%tileSize;
     rect(0,groundY,W,97,p.soil);
     for(let x=-tileSize;x<W+tileSize;x+=tileSize){sprite(tile+'_top',x-groundOff,groundY,tileSize,tileSize);sprite(tile+'_center',x-groundOff,groundY+tileSize,tileSize,tileSize)}
     line(0,groundY+5,W,groundY+5,'#b51f2a',3);
-    if(state.stage===0)for(let x=0;x<W+220;x+=220){const xx=x-state.sceneWorld*.8%220;sprite('bush',xx,groundY-35,58,35);sprite('grass',xx+105,groundY-21,28,21)}
-    if(state.stage>=3){ctx.save();ctx.globalAlpha=.15;for(let y=groundY+20;y<430;y+=22)line(0,y,W,y,'#b51f2a',1);ctx.restore()}
+    if(stage===0)for(let x=0;x<W+220;x+=220){const xx=x-state.sceneWorld*.8%220;sprite('bush',xx,groundY-35,58,35);sprite('grass',xx+105,groundY-21,28,21)}
+    if(stage>=3){ctx.save();ctx.globalAlpha=.15;for(let y=groundY+20;y<430;y+=22)line(0,y,W,y,'#b51f2a',1);ctx.restore()}
   }
 
   function sprite(key,x,y,w,h,flip=false){
@@ -409,21 +485,25 @@
   }
   function character(){
     const b=playerBox(),foot=groundY+state.player.y,ducked=state.player.duck&&state.player.y>=0;
-    const moving=runnerActive(),step=Math.floor(state.sceneWorld/28)%2+1;
-    const hit=state.effect?.kind==='hit'&&state.clock-state.effect.started<900;
-    const person=state.stage===0?'adventurer':'female';
+    const stage=visualStage(),moving=runnerActive()||state.mode==='transition',step=Math.floor(state.sceneWorld/28)%2+1;
+    const hit=state.effect?.kind==='hit'&&state.clock-state.effect.started>=440&&state.clock-state.effect.started<900;
+    const person=stage===0?'adventurer':'female';
     const pose=hit?'hurt':ducked?'duck':state.player.y<0?'jump':moving?'walk'+step:'idle';
     ellipse(b.x+25,groundY+4,32,6,'#172a3240');
+    ctx.save();
+    const landing=Math.max(0,1-(state.clock-effects.landingAt)/180);
+    if(landing>0&&!motionPreference.matches){ctx.translate(b.x+25,foot);ctx.scale(1+landing*.1,1-landing*.13);ctx.translate(-b.x-25,-foot)}
     if(state.immunity>0&&Math.floor(state.clock/100)%2===0)ctx.globalAlpha=.5;
-    if(state.stage<2){
+    if(stage<2){
       const key=person+'_'+pose,image=sprites[key];
       if(image){const h=ducked?46:88,w=h*image.width/image.height;sprite(key,b.x+25-w/2,foot-h,w,h)}
     }else{
-      const color=['','','green','blue','red'][state.stage];
+      const color=['','','green','blue','red'][stage];
       const key='robot_'+color+'_'+(hit?'Hurt':state.player.y<0?'Jump':'Drive'+step);
       const image=sprites[key];if(image){const h=ducked?40:74,w=h*image.width/image.height;sprite(key,b.x+25-w/2,foot-h,w,h)}
     }
     ctx.globalAlpha=1;
+    ctx.restore();
     // Red thread continues as the runner's energy trail.
     for(let i=1;i<=4;i++)ellipse(b.x-i*14,foot-17,3-i*.45,2,'#b51f2a'+['','99','66','44','22'][i]);
   }
@@ -450,19 +530,22 @@
   function bossX(){return W*.78}
   function drawBoss(){
     const x=bossX(),effect=state.effect,t=effect?(state.clock-effect.started)/900:1;
-    const shake=effect?.kind==='strike'&&t<1?Math.sin(t*65)*9*(1-t):0;
+    const impact=effect?.kind==='strike'&&t>.49&&t<1;
+    const shake=impact&&!motionPreference.matches?Math.sin(t*65)*9*(1-t):0;
     const size=state.stage===0?148:165;
     ellipse(x,groundY+7,86,11,'#172a3240');
     ctx.save();ctx.translate(shake,Math.sin(state.clock/340)*4);
-    if(state.boss.hp===0)ctx.globalAlpha=.3;
+    const dissolve=state.boss.hp===0?Math.max(0,Math.min(1,(state.clock-state.boss.defeatAt)/750)):0;
+    ctx.globalAlpha=1-dissolve;
     const glow=ctx.createRadialGradient(x,groundY-80,10,x,groundY-80,140);
     glow.addColorStop(0,palettes[state.stage].accent+'66');glow.addColorStop(1,palettes[state.stage].accent+'00');
     ellipse(x,groundY-80,140,140,glow);
     const step=Math.floor(state.clock/180)%2+1;
     const key=state.stage===0?'block_idle':'robot_'+['','yellow','green','blue','red'][state.stage]+'_Drive'+step;
+    if(impact&&t<.7&&!motionPreference.matches)ctx.filter='brightness(1.8)';
     sprite(key,x-size/2,groundY-size,size,size,state.stage>0);
     ctx.restore();
-    if(state.boss.hp===0)for(let i=0;i<9;i++){const a=i*.7+state.clock/700;ellipse(x+Math.cos(a)*90,groundY-85+Math.sin(a)*90,3,3,'#b51f2a')}
+    if(state.boss.hp===0&&dissolve<1&&!motionPreference.matches)for(let i=0;i<9;i++){const a=i*.7+state.clock/700;ellipse(x+Math.cos(a)*(60+dissolve*60),groundY-85+Math.sin(a)*(60+dissolve*60),3,3,'#b51f2a')}
   }
 
   function drawBattleEffect(){
@@ -473,23 +556,67 @@
       ellipse(px,groundY-34,pulse,pulse,'#78e4d344');ellipse(px,groundY-34,7,7,'#78e4d3');
     }
     const effect=state.effect;if(!effect)return;
-    const t=Math.min(1,(state.clock-effect.started)/900);if(t>=1)return;
+    const age=state.clock-effect.started,t=Math.min(1,age/950);if(t>=1)return;
     const fromBoss=effect.kind==='hit';
-    const x=fromBoss?bx+(px-bx)*t:px+(bx-px)*t;
-    const y=groundY-35;
-    const color=fromBoss?'#ed7959':'#78e4d3';
-    line(x+(fromBoss?30:-30),y,x,y,color+'77',7);ellipse(x,y,10,10,color);ellipse(x,y,17,17,color+'33');
-    if(t>.4){
+    const travel=Math.min(1,age/440),target=fromBoss?px:bx;
+    const x=fromBoss?bx+(px-bx)*travel:px+(bx-px)*travel;
+    const y=groundY-55,color=fromBoss?'#b51f2a':'#e7b955';
+    if(age<440){
+      line(x+(fromBoss?45:-45),y,x,y,color+'88',6);ellipse(x,y,15,15,color+'33');ellipse(x,y,8,8,color);ellipse(x,y,3,3,'#fffaf0');
+    }else{
+      const spread=(age-440)/510;
+      if(!motionPreference.matches){ctx.save();ctx.globalAlpha=1-spread;ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(target,y,12+spread*50,12+spread*50,0,0,Math.PI*2);ctx.stroke();ctx.restore()}
       const text={hit:'−1 ♥',strike:'−1 HP'}[effect.kind];
       fill(effect.kind==='hit'?'#a93b2e':'#235a4a');ctx.font='800 17px Be Vietnam Pro, Arial, sans-serif';ctx.textAlign='center';
-      ctx.fillText(text,fromBoss?px:bx,groundY-168-(t-.4)*22);ctx.textAlign='start';
+      ctx.fillText(text,target,groundY-135-spread*22);ctx.textAlign='start';
     }
   }
+  function drawSpeed(){
+    if(motionPreference.matches||!(['running','quiz'].includes(state.mode)||(state.mode==='paused'&&state.resumeMode==='running')))return;
+    const intensity=Math.max(0,Math.min(1,(state.speed-BASE_SPEED)/(MAX_SPEED-BASE_SPEED)));
+    const b=playerBox(),y=groundY+state.player.y-25,length=Math.min(W*.25,60+intensity*100);
+    const trail=ctx.createLinearGradient(b.x-length,y,b.x+12,y);trail.addColorStop(0,'#b51f2a00');trail.addColorStop(1,`rgba(181,31,42,${.1+intensity*.28})`);
+    round(b.x-length,y-4,length,8,4,trail);
+    ctx.save();ctx.globalAlpha=intensity*.25;
+    for(let i=0;i<12;i++){
+      const x=((i*137-state.clock*(.2+intensity*.5))%W+W)%W,wy=75+(i*47)%235;
+      line(x,wy,x+20+intensity*55,wy,i%3?'#fffaf0':'#b51f2a',i%2?1:2);
+    }
+    ctx.restore();
+  }
+  function drawParticles(){
+    ctx.save();
+    for(const p of effects.particles){
+      ctx.globalAlpha=Math.max(0,p.life/p.maxLife)*(p.kind==='dust'?.55:1);
+      if(p.kind==='dust')ellipse(p.x,p.y,p.size,p.size*.6,p.color);
+      else if(p.kind==='fragment'){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);rect(-p.size/2,-p.size/2,p.size,p.size*1.5,p.color);ctx.restore()}
+      else line(p.x,p.y,p.x-p.vx*.04,p.y-p.vy*.04,p.color,2);
+    }
+    ctx.restore();
+  }
+  function drawPortal(){
+    if(!effects.transition)return;
+    const p=Math.max(0,Math.min(1,(state.clock-effects.transition.started)/1350));
+    const x=playerBox().x+25+(.5-p)*Math.min(W*.9,650),y=groundY-95;
+    ctx.save();
+    const glow=ctx.createRadialGradient(x,y,8,x,y,145);glow.addColorStop(0,'#fffaf0cc');glow.addColorStop(.3,'#f2b87766');glow.addColorStop(1,'#b51f2a00');ellipse(x,y,145,160,glow);
+    for(let i=0;i<3;i++){
+      ctx.strokeStyle=['#b51f2a','#f2b877','#fffaf0'][i];ctx.lineWidth=5-i;
+      ctx.beginPath();ctx.ellipse(x,y,32+i*8,92+i*8,0,0,Math.PI*2);ctx.stroke();
+    }
+    for(let i=0;i<14;i++){const a=i*Math.PI/7+state.clock/380;ellipse(x+Math.cos(a)*44,y+Math.sin(a)*103,2.5,2.5,i%2?'#b51f2a':'#fffaf0')}
+    const wash=Math.max(0,1-Math.abs(p-.5)*6);rect(0,0,W,430,`rgba(255,250,240,${wash*.68})`);
+    ctx.restore();
+  }
   function draw(){
-    ctx.clearRect(0,0,W,430);background();
+    ctx.clearRect(0,0,W,430);ctx.save();
+    const shakeAge=effects.shake?state.clock-effects.shake.started:500;
+    if(shakeAge<220&&!motionPreference.matches){const amount=effects.shake.strength*(1-shakeAge/220);ctx.translate(Math.sin(shakeAge*.1)*amount,Math.cos(shakeAge*.13)*amount*.4)}
+    background();drawSpeed();
     for(const o of state.obstacles)obstacle(o);
     character();
     if(state.boss){drawBoss();drawBattleEffect();}
+    drawParticles();drawPortal();ctx.restore();
     if(state.toastUntil>performance.now()&&state.mode==='running'){
       const text=`GIAI ĐOẠN ${String(state.stage+1).padStart(2,'0')}  /  ${stageNames[state.stage].toUpperCase()}`;
       ctx.font='700 14px Be Vietnam Pro, Arial, sans-serif';const tw=ctx.measureText(text).width;

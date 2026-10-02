@@ -1,0 +1,46 @@
+{
+  "viewports": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "jump": {
+        "particles": 10,
+        "airborne": true
+      },
+      "gate": {
+        "mode": "transition",
+        "score": 13.277200000000004,
+        "obstacles": 0
+      },
+      "freeze": "passed",
+      "impact": "passed",
+      "confettiCleanup": "passed"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "jump": {
+        "particles": 10,
+        "airborne": true
+      },
+      "gate": {
+        "mode": "transition",
+        "score": 11.253066666666694,
+        "obstacles": 0
+      },
+      "freeze": "passed",
+      "impact": "passed",
+      "confettiCleanup": "passed"
+    }
+  ],
+  "reducedMotion": {
+    "particles": 0,
+    "confetti": 0,
+    "mode": "running",
+    "stage": 1
+  }
+}

@@ -16,7 +16,8 @@
       },
       "next": 1,
       "mode": "running",
-      "nextHearts": 2
+      "nextHearts": 2,
+      "transitionMode": "transition"
     },
     {
       "stage": 1,
@@ -34,7 +35,8 @@
       },
       "next": 2,
       "mode": "running",
-      "nextHearts": 2
+      "nextHearts": 2,
+      "transitionMode": "transition"
     },
     {
       "stage": 2,
@@ -52,7 +54,8 @@
       },
       "next": 3,
       "mode": "running",
-      "nextHearts": 2
+      "nextHearts": 2,
+      "transitionMode": "transition"
     },
     {
       "stage": 3,
@@ -70,7 +73,8 @@
       },
       "next": 4,
       "mode": "running",
-      "nextHearts": 2
+      "nextHearts": 2,
+      "transitionMode": "transition"
     },
     {
       "stage": 4,
@@ -88,7 +92,8 @@
       },
       "next": 4,
       "mode": "ended",
-      "nextHearts": 2
+      "nextHearts": 2,
+      "transitionMode": "ended"
     }
   ],
   "ended": "ended",
