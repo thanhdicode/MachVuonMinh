@@ -1,0 +1,48 @@
+{
+  "source": "bo cau hoi.docx",
+  "sha256": "d80deb1b08933cc910775283b6f7f101649fd13fdb3cd22c906628f38132d8fc",
+  "counts": [
+    6,
+    3,
+    4,
+    3,
+    1
+  ],
+  "total": 17,
+  "answerKeys": [
+    [
+      "B",
+      "B",
+      "A",
+      "C",
+      "B",
+      "D"
+    ],
+    [
+      "C",
+      "C",
+      "C"
+    ],
+    [
+      "C",
+      "A",
+      "D",
+      "A"
+    ],
+    [
+      "A",
+      "B",
+      "D"
+    ],
+    [
+      "A"
+    ]
+  ],
+  "copyCorrections": [
+    {
+      "id": "docx-s5-q1",
+      "from": "động đất",
+      "to": "năng động"
+    }
+  ]
+}

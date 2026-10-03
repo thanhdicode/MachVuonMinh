@@ -1,0 +1,214 @@
+{
+  "repository": "https://github.com/series-ai/jam-ready-assets",
+  "revision": "782e3a09566b4bb3d98fe2ed07f5a8545e6fcfd4",
+  "files": {
+    "adventurer_idle": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Adventurer/Poses/adventurer_idle.png",
+      "file": "adventurer_idle.png"
+    },
+    "adventurer_walk1": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Adventurer/Poses/adventurer_walk1.png",
+      "file": "adventurer_walk1.png"
+    },
+    "adventurer_walk2": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Adventurer/Poses/adventurer_walk2.png",
+      "file": "adventurer_walk2.png"
+    },
+    "adventurer_jump": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Adventurer/Poses/adventurer_jump.png",
+      "file": "adventurer_jump.png"
+    },
+    "adventurer_duck": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Adventurer/Poses/adventurer_duck.png",
+      "file": "adventurer_duck.png"
+    },
+    "adventurer_hurt": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Adventurer/Poses/adventurer_hurt.png",
+      "file": "adventurer_hurt.png"
+    },
+    "female_idle": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Female/Poses/female_idle.png",
+      "file": "female_idle.png"
+    },
+    "female_walk1": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Female/Poses/female_walk1.png",
+      "file": "female_walk1.png"
+    },
+    "female_walk2": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Female/Poses/female_walk2.png",
+      "file": "female_walk2.png"
+    },
+    "female_jump": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Female/Poses/female_jump.png",
+      "file": "female_jump.png"
+    },
+    "female_duck": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Female/Poses/female_duck.png",
+      "file": "female_duck.png"
+    },
+    "female_hurt": {
+      "path": "kenney-platformer-characters-1/2D/platformer/PNG/Female/Poses/female_hurt.png",
+      "file": "female_hurt.png"
+    },
+    "robot_yellow_Drive1": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_yellowDrive1.png",
+      "file": "robot_yellow_Drive1.png"
+    },
+    "robot_yellow_Drive2": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_yellowDrive2.png",
+      "file": "robot_yellow_Drive2.png"
+    },
+    "robot_yellow_Jump": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_yellowJump.png",
+      "file": "robot_yellow_Jump.png"
+    },
+    "robot_yellow_Hurt": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_yellowHurt.png",
+      "file": "robot_yellow_Hurt.png"
+    },
+    "robot_green_Drive1": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_greenDrive1.png",
+      "file": "robot_green_Drive1.png"
+    },
+    "robot_green_Drive2": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_greenDrive2.png",
+      "file": "robot_green_Drive2.png"
+    },
+    "robot_green_Jump": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_greenJump.png",
+      "file": "robot_green_Jump.png"
+    },
+    "robot_green_Hurt": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_greenHurt.png",
+      "file": "robot_green_Hurt.png"
+    },
+    "robot_blue_Drive1": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_blueDrive1.png",
+      "file": "robot_blue_Drive1.png"
+    },
+    "robot_blue_Drive2": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_blueDrive2.png",
+      "file": "robot_blue_Drive2.png"
+    },
+    "robot_blue_Jump": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_blueJump.png",
+      "file": "robot_blue_Jump.png"
+    },
+    "robot_blue_Hurt": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_blueHurt.png",
+      "file": "robot_blue_Hurt.png"
+    },
+    "robot_red_Drive1": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_redDrive1.png",
+      "file": "robot_red_Drive1.png"
+    },
+    "robot_red_Drive2": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_redDrive2.png",
+      "file": "robot_red_Drive2.png"
+    },
+    "robot_red_Jump": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_redJump.png",
+      "file": "robot_red_Jump.png"
+    },
+    "robot_red_Hurt": {
+      "path": "kenney-robot-pack/2D/space-scifi/PNG/Side view/robot_redHurt.png",
+      "file": "robot_red_Hurt.png"
+    },
+    "block_idle": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/block_idle.png",
+      "file": "block_idle.png"
+    },
+    "block_fall": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/block_fall.png",
+      "file": "block_fall.png"
+    },
+    "fly_a": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/fly_a.png",
+      "file": "fly_a.png"
+    },
+    "fly_b": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/fly_b.png",
+      "file": "fly_b.png"
+    },
+    "saw_a": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/saw_a.png",
+      "file": "saw_a.png"
+    },
+    "saw_b": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/saw_b.png",
+      "file": "saw_b.png"
+    },
+    "slime_spike_walk_a": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/slime_spike_walk_a.png",
+      "file": "slime_spike_walk_a.png"
+    },
+    "slime_spike_walk_b": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Enemies/Default/slime_spike_walk_b.png",
+      "file": "slime_spike_walk_b.png"
+    },
+    "block_planks": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/block_planks.png",
+      "file": "block_planks.png"
+    },
+    "block_strong_danger": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/block_strong_danger.png",
+      "file": "block_strong_danger.png"
+    },
+    "spikes": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/spikes.png",
+      "file": "spikes.png"
+    },
+    "rock": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/rock.png",
+      "file": "rock.png"
+    },
+    "bush": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/bush.png",
+      "file": "bush.png"
+    },
+    "grass": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/grass.png",
+      "file": "grass.png"
+    },
+    "terrain_grass_block_top": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/terrain_grass_block_top.png",
+      "file": "terrain_grass_block_top.png"
+    },
+    "terrain_grass_block_center": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/terrain_grass_block_center.png",
+      "file": "terrain_grass_block_center.png"
+    },
+    "terrain_stone_block_top": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/terrain_stone_block_top.png",
+      "file": "terrain_stone_block_top.png"
+    },
+    "terrain_stone_block_center": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Tiles/Default/terrain_stone_block_center.png",
+      "file": "terrain_stone_block_center.png"
+    },
+    "background_clouds": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Backgrounds/Double/background_clouds.png",
+      "file": "background_clouds.png"
+    },
+    "background_color_hills": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Backgrounds/Double/background_color_hills.png",
+      "file": "background_color_hills.png"
+    },
+    "background_color_trees": {
+      "path": "kenney-new-platformer-pack/2D/platformer/Sprites/Backgrounds/Double/background_color_trees.png",
+      "file": "background_color_trees.png"
+    },
+    "license_characters": {
+      "path": "kenney-platformer-characters-1/2D/platformer/License.txt",
+      "file": "LICENSE-characters.txt"
+    },
+    "license_robots": {
+      "path": "kenney-robot-pack/2D/space-scifi/License.txt",
+      "file": "LICENSE-robots.txt"
+    },
+    "license_platformer": {
+      "path": "kenney-new-platformer-pack/2D/platformer/License.txt",
+      "file": "LICENSE-platformer.txt"
+    }
+  }
+}

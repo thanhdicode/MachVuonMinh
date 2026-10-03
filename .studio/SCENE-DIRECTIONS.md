@@ -20,6 +20,16 @@ Compare (1) a continuous cut-paper museum atlas, (2) a technical engraving scrol
 
 One pinned DOM/SVG/GSAP track sits after the plough and before the machine. Eight eras share a continuous red path; its local motifs change from furrow to rail, power, conveyor, logistics and data. Desktop gets an optional exact-point lens; mobile and reduced motion get a vertical/static atlas. Existing later chapters keep their scene indices and content. Verify real wheel input, keyboard stepping, responsive resize, image zoom, source drawer and the five requested 1440×900 frames.
 
+## 2026-10-02 — fixed-screen runner revision
+
+Compare a floating quiz over the arena, a fixed arena with an adjacent question rail, and a compact vertical arena/question split. Choose the adjacent rail on desktop and vertical split on phones: every game control, question and answer remains in the viewport with no document or panel scrolling. Paper/ink/red frames licensed Kenney sprites, layered scenery and a red energy trail. Remove separate defense/attack turns: a correct boss answer strikes, an incorrect answer triggers counterattack. Challenge comes from readable jump/duck combinations, moving drones, warned spikes and variable-width hurdles; spacing must remain physically solvable at the speed cap.
+
+## 2026-10-02 — ôn tập sau cảnh kết luận
+
+Compare (1) a tenth scroll scene with the game inside the existing camera timeline, (2) a full-screen practice space launched from scene 08, and (3) a separate external game page. Choose 2: the final red action continues the presentation into an audience activity, retains the exhibition at its exact scroll position and offers a clear return. Direction 1 would stretch the cinematic timeline around a long quiz; direction 3 would disconnect the audience from the exhibition.
+
+Reuse the authored 2D runner, five bosses and 60 questions. Adapt its frame to paper, ink and the red thread, using only Be Vietnam Pro and IBM Plex Mono. Keep the game isolated in a lazy-loaded iframe; its Canvas 2D adds no WebGL context. Suspend the exhibition renderer and Lenis while practice is open. In the game, scenery continues while answering, bosses gate progression, and three hearts apply throughout. Verify finale launch, return/focus, repeated mounting, gameplay and 390×844 layout; run existing tests and production build.
+
 The shared idea is an engineering specimen becoming a living social system. Compare every scene against ART-DIRECTION.md: the thread must explain the object, with physical depth and no narrative panels.
 
 | Scene | Alternatives considered | Chosen direction and meaningful motion |
@@ -84,3 +94,11 @@ The imported car is an illustrative Ferrari model, not a VinFast vehicle; state 
 ## History mural correction — 2026-10-03
 
 The user's replacement brief settles the visual direction. Compare: (1) separate archive/map compositions, (2) a tiled museum-card wall, (3) one continuous sepia mural with transparent cutouts and disciplined annotation zones. Choose 3 against ART-DIRECTION: it preserves the red thread as a straight progress rail, gives each historical object a precise orthogonal leader and keeps the mural readable across viewport sizes. Directions 1 and 2 conflict with the new brief. Four generated background segments are composited into one file; no visible tiles, map watermark or circle doodles. Wide text uses a 12-column grid; compact screens use an unboxed gradient curator dock and mobile alternates vertical annotations. Existing original foreground images stay. Final digital imagery dims toward a zooming industrial detail and the existing hall, with only the supplied bridge sentence. No later chapter redesign. Forty viewport captures, interaction checks and human-confirmed audio are recorded in `.studio/qa/history-mural/REVIEW.md`.
+
+## Mini game — collision popup revision
+
+The latest user instruction replaces continuous running during obstacle questions with a frozen scene and a popup inside the arena. Use a centered paper card, oxblood accents and a dimmed backdrop; expand the arena into the available content area while the popup is open so the question, four answers, full explanation and continue action fit without scrolling. Keep the HUD and return control visible. Freeze physics, world animation, distance and speed until explicit continuation. Preserve the simplified animated boss battles and the existing sprites.
+
+## Mini game — movement and battle effects
+
+Compare (1) full-screen flashes and dense neon particles, (2) a restrained trail of dust, wind and red portal light, (3) illustrated comic panels over the action. Choose 2: effects show takeoff/landing, speed, attack impact and stage unlock while keeping the arena and question text readable. Use a bounded Canvas 2D particle pool, paper/brass/red fragments, a short projectile with an impact ring and damage number, and a moving red gate that swaps the scene and character at its midpoint. Physics and distance stop throughout the gate passage; hazards start after arrival. Correct/wrong answer feedback and heart loss use brief DOM animations while collision physics remains frozen. Victory adds a single confetti burst. Respect reduced motion, suspend canvas effects on pause/collision, and retain the existing single WebGL context.

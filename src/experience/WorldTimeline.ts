@@ -8,6 +8,10 @@ import { machineState, journeyProgress, journeyPosition, type JourneyRange } fro
 gsap.registerPlugin(ScrollTrigger)
 gsap.ticker.lagSmoothing(0)
 let lenis: Lenis | undefined
+export function setTimelineSuspended(suspended:boolean) {
+  if(suspended){lenis?.stop();timeline.velocity=0}
+  else if(useWorld.getState().unlocked)lenis?.start()
+}
 function journeyRange(): JourneyRange {
   const atlas = document.querySelector<HTMLElement>('.history-insertion')
   const machine = document.querySelector<HTMLElement>('.machine-insertion')

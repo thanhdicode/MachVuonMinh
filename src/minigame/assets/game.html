@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f3e9" />
+    <title>Hành trình lực lượng sản xuất | Mini game</title>
+    <!-- GAME_STYLES -->
+  </head>
+  <body>
+    <div class="app-shell">
+      <main>
+        <section class="game-panel" data-mode="ready" aria-label="Trò chơi vượt chướng ngại">
+          <div class="game-toolbar">
+            <div class="stage-identity">
+              <span class="stage-num" id="stageNumber">01 / 05</span>
+              <span class="stage-name" id="stageName">Nông nghiệp truyền thống</span>
+            </div>
+            <div class="game-stats">
+              <div class="stat"><span>QUÃNG ĐƯỜNG</span><strong id="score">0000</strong></div>
+              <div class="stat"><span>TỐC ĐỘ</span><strong id="speed">1.0×</strong></div>
+              <div class="stat lives-stat"><span>TRÁI TIM</span><strong id="hearts" aria-label="Còn 3 trái tim">♥ ♥ ♥</strong></div>
+              <button class="icon-button" id="pauseButton" type="button" aria-label="Tạm dừng" title="Tạm dừng" disabled>Ⅱ</button>
+            </div>
+          </div>
+          <div class="stage-progress-row"><span id="stageProgressLabel">ĐƯỜNG ĐẾN BOSS</span><div class="stage-progress-track"><div id="stageProgressFill"></div></div><span id="stageProgressText">0 / 180</span></div>
+
+          <div class="canvas-wrap" id="canvasWrap">
+            <canvas id="gameCanvas" width="1000" height="430" aria-label="Nhân vật vượt chướng ngại qua năm giai đoạn"></canvas>
+            <div class="arena-label"><span>CHẠY THEO MẠCH ĐỎ</span><strong id="hazardHint">CANH NHỊP · NHẢY · CÚI</strong></div>
+            <div class="stage-toast" id="stageToast" aria-live="polite"></div>
+            <div class="stage-transition hidden" id="transitionBanner" aria-live="polite"><span>CỔNG GIAI ĐOẠN</span><strong id="transitionTitle"></strong></div>
+            <div class="impact-border" id="impactBorder" aria-hidden="true"></div>
+            <div class="heart-loss" id="heartLoss" aria-hidden="true"><span>♥</span><span>♥</span><b>−1 ♥</b></div>
+            <div class="boss-hud hidden" id="bossHud">
+              <div><span class="boss-kicker">BOSS CUỐI GIAI ĐOẠN</span><strong id="bossName"></strong></div>
+              <div class="boss-health"><span id="bossHealthText">3 / 3 HP</span><div id="bossHealthBar" role="progressbar" aria-label="Máu boss" aria-valuemin="0" aria-valuemax="3" aria-valuenow="3"><i></i><i></i><i></i></div></div>
+            </div>
+
+            <div class="overlay" id="startOverlay">
+              <div class="overlay-card start-card">
+                <div class="overlay-stamp">SẴN SÀNG CHƯA?</div>
+                <h2>Mỗi bước chạy là<br />một bước phát triển.</h2>
+                <p>Vượt tổ hợp vật cản bằng nhảy và cúi. Gặp boss: trả lời đúng để đánh, sai sẽ bị phản công. Hạ boss mới đi tiếp!</p>
+                <button class="primary-button" id="startButton" type="button">BẮT ĐẦU HÀNH TRÌNH <span aria-hidden="true">↗</span></button>
+                <div class="overlay-hint">GIỮ SPACE / ↑: NHẢY XA · ↓: CÚI / HẠ NHANH · P: TẠM DỪNG</div>
+              </div>
+            </div>
+
+            <div class="overlay hidden" id="endOverlay">
+              <div class="celebration" id="celebration" aria-hidden="true"></div>
+              <div class="overlay-card end-card">
+                <div class="overlay-stamp" id="endStamp">HÀNH TRÌNH KẾT THÚC</div>
+                <h2 id="endTitle"></h2>
+                <p id="endText"></p>
+                <div class="end-score"><span>QUÃNG ĐƯỜNG</span><strong id="endScore">0000</strong></div>
+                <button class="primary-button" id="restartButton" type="button">CHƠI LẠI <span aria-hidden="true">↗</span></button>
+              </div>
+            </div>
+
+            <div class="overlay hidden" id="pauseOverlay">
+              <div class="overlay-card pause-card">
+                <div class="overlay-stamp">TẠM DỪNG</div>
+                <h2>Nghỉ một nhịp.</h2>
+                <p>Hành trình vẫn đang chờ bạn.</p>
+                <button class="primary-button" id="resumeButton" type="button">TIẾP TỤC <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+          <section class="overlay collision-quiz hidden" id="quizOverlay" role="dialog" aria-modal="true" aria-labelledby="quizQuestion">
+            <div class="quiz-card">
+              <div class="quiz-top"><span id="quizStage">GIAI ĐOẠN 01</span><span class="quiz-heart">♥ GIỮ LẠI TRÁI TIM</span></div>
+              <h2 id="quizQuestion"></h2>
+              <div class="answers" id="answers"></div>
+              <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+              <button class="primary-button hidden" id="continueButton" type="button">TIẾP TỤC CHẠY <span aria-hidden="true">→</span></button>
+            </div>
+          </section>
+          </div>
+
+          <section class="boss-panel hidden" id="bossPanel" aria-label="Đấu boss bằng câu hỏi">
+            <div class="boss-brief" id="bossBrief">
+              <div><span class="boss-kicker">CỬA ẢI KIẾN THỨC</span><h2 id="bossIntroTitle"></h2><p id="bossIntroText"></p><div class="boss-rules"><span>↗ Đúng: boss −1 HP</span><span>♥ Sai: bị phản công −1 tim</span></div></div>
+              <button class="primary-button" id="fightButton" type="button">ĐỐI ĐẦU BOSS <span aria-hidden="true">⚔</span></button>
+            </div>
+            <div class="boss-question hidden" id="bossQuestionArea">
+              <div class="battle-question-top"><span class="battle-phase" id="battlePhase">NÉ ĐÒN</span><span id="battleHealth">BOSS · 3 / 3 HP</span></div>
+              <p class="battle-move" id="battleMove"></p>
+              <h2 id="bossQuestion"></h2>
+              <div class="answers" id="bossAnswers"></div>
+              <p class="quiz-feedback" id="bossFeedback" aria-live="polite"></p>
+              <button class="primary-button hidden" id="bossContinueButton" type="button">CÂU TIẾP THEO <span aria-hidden="true">→</span></button>
+            </div>
+            <div class="boss-victory hidden" id="bossVictory">
+              <div class="victory-medal" aria-hidden="true">✦</div>
+              <div><span class="boss-kicker">BOSS ĐÃ BỊ ĐÁNH BẠI</span><h2 id="bossVictoryTitle"></h2><p id="bossVictoryText"></p></div>
+              <button class="primary-button" id="nextStageButton" type="button">GIAI ĐOẠN TIẾP THEO <span aria-hidden="true">↗</span></button>
+            </div>
+          </section>
+
+          <div class="game-footer">
+            <div class="controls-note"><span class="key">SPACE</span><span class="key">↑</span> Nhảy <span class="separator">/</span> <span class="key">↓</span> Cúi <span class="separator">/</span> <span class="key">P</span> Tạm dừng</div>
+            <div class="touch-controls"><button id="duckButton" type="button">↓ CÚI</button><button id="jumpButton" type="button">↑ NHẢY</button></div>
+            <span class="footer-note" id="footerNote">TRẢ LỜI ĐÚNG = GIỮ TIM · SAI = MẤT 1 TIM</span>
+          </div>
+        </section>
+      </main>
+    </div>
+    <!-- GAME_SCRIPTS -->
+  </body>
+</html>

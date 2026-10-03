@@ -44,3 +44,12 @@ Tám ambience được tổng hợp nguyên bản tại chỗ, không dùng samp
 ## Nền panorama History Atlas
 
 Panorama và chi tiết bánh đà được tạo riêng cho dự án bằng imagegen, từ bốn minh họa ghép mềm thành một ảnh nền liên tục. Đây là hình tái dựng minh họa, không phải ảnh tư liệu lịch sử. Không dùng pixel từ các ảnh bảo tàng/infographic tham khảo. Bản desktop: `/history/atlas-panorama-8192.avif` và `/history/atlas-panorama-4096.webp`; bản dọc: `/history/atlas-panorama-mobile-1024x8192.webp`; chi tiết chuyển cảnh: `/history/atlas-machine-anchor.webp`. Các cutout lịch sử và ảnh xưởng máy giữ nguồn tạo đã ghi trong dự án. Âm nền là tổng hợp nguyên bản; không có sample, lời hát hoặc bản nhạc bên ngoài.
+
+## Sprite mini game Hành trình sản xuất
+
+Kenney: **Platformer Characters 1**, **Robot Pack**, **New Platformer Pack**, CC0 (Creative Commons Zero).
+
+- Creator: https://kenney.nl/assets/platformer-characters ; https://kenney.nl/assets/robot-pack ; https://kenney.nl/assets/new-platformer-pack
+- GitHub distribution: https://github.com/series-ai/jam-ready-assets, revision `782e3a09566b4bb3d98fe2ed07f5a8545e6fcfd4`.
+- 49 PNG sprites are packaged locally in `/minigame/sprites/`, with the three original `LICENSE-*.txt` notices and upstream paths in `/minigame/sprites/SOURCE.json`.
+- Animation selects supplied poses; sprites are scaled/mirrored and combined with the project's original scenery, chapter palettes and red thread.

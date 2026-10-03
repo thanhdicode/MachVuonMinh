@@ -1,0 +1,101 @@
+{
+  "report": [
+    {
+      "stage": 0,
+      "wrong": {
+        "hearts": 2,
+        "hp": 3,
+        "effect": "hit"
+      },
+      "win": {
+        "mode": "boss-victory",
+        "hp": 0,
+        "hearts": 2,
+        "stage": 0,
+        "cleared": true
+      },
+      "next": 1,
+      "mode": "running",
+      "nextHearts": 2,
+      "transitionMode": "transition"
+    },
+    {
+      "stage": 1,
+      "wrong": {
+        "hearts": 2,
+        "hp": 3,
+        "effect": "hit"
+      },
+      "win": {
+        "mode": "boss-victory",
+        "hp": 0,
+        "hearts": 2,
+        "stage": 1,
+        "cleared": true
+      },
+      "next": 2,
+      "mode": "running",
+      "nextHearts": 2,
+      "transitionMode": "transition"
+    },
+    {
+      "stage": 2,
+      "wrong": {
+        "hearts": 2,
+        "hp": 3,
+        "effect": "hit"
+      },
+      "win": {
+        "mode": "boss-victory",
+        "hp": 0,
+        "hearts": 2,
+        "stage": 2,
+        "cleared": true
+      },
+      "next": 3,
+      "mode": "running",
+      "nextHearts": 2,
+      "transitionMode": "transition"
+    },
+    {
+      "stage": 3,
+      "wrong": {
+        "hearts": 2,
+        "hp": 3,
+        "effect": "hit"
+      },
+      "win": {
+        "mode": "boss-victory",
+        "hp": 0,
+        "hearts": 2,
+        "stage": 3,
+        "cleared": true
+      },
+      "next": 4,
+      "mode": "running",
+      "nextHearts": 2,
+      "transitionMode": "transition"
+    },
+    {
+      "stage": 4,
+      "wrong": {
+        "hearts": 2,
+        "hp": 3,
+        "effect": "hit"
+      },
+      "win": {
+        "mode": "boss-victory",
+        "hp": 0,
+        "hearts": 2,
+        "stage": 4,
+        "cleared": true
+      },
+      "next": 4,
+      "mode": "ended",
+      "nextHearts": 2,
+      "transitionMode": "ended"
+    }
+  ],
+  "ended": "ended",
+  "endStamp": "ĐÃ ĐÁNH BẠI CẢ 5 BOSS"
+}

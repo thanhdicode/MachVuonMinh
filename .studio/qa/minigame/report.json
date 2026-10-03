@@ -1,0 +1,16 @@
+{
+  "mode": "layout/campaign/effects checks",
+  "checks": [
+    "Production build opens from scene 08",
+    "77 questions / chapter counts 18, 15, 16, 15, 13; 17 from bo cau hoi.docx",
+    "49 local PNG sprites load",
+    "Seven viewports: all 77 collision popups/boss questions and feedback fit without scrolling",
+    "Wrong answers counterattack in all five bosses; three correct answers defeat each boss",
+    "Hearts persist on stage advance",
+    "Desktop/mobile: takeoff and landing dust, frozen particles during collision, heart/answer feedback, boss impact sparks, portal arrival, bounded particles, win confetti cleanup",
+    "Reduced motion skips optional particles, confetti and portal animation",
+    "Native gameplay checks included in full mode: collision freezes canvas and score, popup inside arena, continue resumes, pause, first boss animation, paused portal, Escape, focus, mobile DPR",
+    "No Google Fonts or uncaught exceptions"
+  ],
+  "errors": []
+}

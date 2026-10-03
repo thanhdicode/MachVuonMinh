@@ -36,6 +36,22 @@ Original outputs and complete prompts: `.studio/history/originals/`, `.studio/hi
 
 The faint geographic backdrop reuses this project's existing sourced Natural Earth vector and existing Hoàng Sa/Trường Sa locator data. No generated geography or third-party historical photographs were imported. Historical citation records live in `src/data/historySources.ts` and appear only in the source drawer.
 
+## 2026-10-02 — final practice mini game
+
+### Fixed-screen sprite revision
+
+49 PNG assets replace the earlier procedural runner characters, obstacles and bosses. Download source: https://github.com/series-ai/jam-ready-assets at commit `782e3a09566b4bb3d98fe2ed07f5a8545e6fcfd4`. Only the three Kenney packs listed below are used; the repository's other packs/licenses are not imported. Original pack CC0 notices ship with the files. GitHub LFS PNG downloads are verified against each pointer's SHA-256. Assets total 116,920 bytes; no runtime requests to GitHub. Fonts and the existing one-WebGL-context limit remain unchanged.
+
+| Pack | Creator license evidence | Use | Local license |
+| --- | --- | --- | --- |
+| Platformer Characters 1 | https://kenney.nl/assets/platformer-characters — CC0; original License.txt verified | Two human characters, six poses each | public/minigame/sprites/LICENSE-characters.txt |
+| Robot Pack | https://kenney.nl/assets/robot-pack — CC0; original License.txt verified | Green/blue/red runners, four color boss variants, drive/jump/hurt poses | public/minigame/sprites/LICENSE-robots.txt |
+| New Platformer Pack | https://kenney.nl/assets/new-platformer-pack — CC0; original License.txt verified | Living block boss, flying enemies, saws, spikes, crates, terrain, clouds and forest/hill backgrounds | public/minigame/sprites/LICENSE-platformer.txt |
+
+Full upstream paths and pinned revision: `public/minigame/sprites/SOURCE.json`. Sprite index: `src/minigame/assets/sprites.json`. Original license notices are retained; rendering scales, mirrors and composites sprites with the authored red thread and chapter palette. These are illustrative game characters, not representations of specific individuals or equipment.
+
+The first integration used procedural Canvas 2D characters. The sprite revision above supersedes those drawings. UI uses the project's installed Be Vietnam Pro and IBM Plex Mono Fontsource packages (SIL Open Font License), bundled locally. The 60 questions adapt the supplied MLN111 course material; the five chapters illustrate changes in productive forces, not five modes of production. Runtime assets are fully contained in this repository.
+
 The experience combines original procedural geometry with the licensed character, car and terrain assets recorded below.
 
 | Source | Intended use | Rights check |

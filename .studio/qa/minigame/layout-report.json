@@ -1,0 +1,86 @@
+[
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "width": 1440,
+    "height": 828,
+    "scrollHeight": 828,
+    "clientHeight": 828,
+    "scrollY": 0,
+    "failures": []
+  },
+  {
+    "viewport": [
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 648,
+    "scrollHeight": 648,
+    "clientHeight": 648,
+    "scrollY": 0,
+    "failures": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "width": 390,
+    "height": 784,
+    "scrollHeight": 784,
+    "clientHeight": 784,
+    "scrollY": 0,
+    "failures": []
+  },
+  {
+    "viewport": [
+      375,
+      667
+    ],
+    "width": 375,
+    "height": 607,
+    "scrollHeight": 607,
+    "clientHeight": 607,
+    "scrollY": 0,
+    "failures": []
+  },
+  {
+    "viewport": [
+      320,
+      568
+    ],
+    "width": 320,
+    "height": 508,
+    "scrollHeight": 508,
+    "clientHeight": 508,
+    "scrollY": 0,
+    "failures": []
+  },
+  {
+    "viewport": [
+      844,
+      390
+    ],
+    "width": 844,
+    "height": 341,
+    "scrollHeight": 341,
+    "clientHeight": 341,
+    "scrollY": 0,
+    "failures": []
+  },
+  {
+    "viewport": [
+      640,
+      360
+    ],
+    "width": 640,
+    "height": 311,
+    "scrollHeight": 311,
+    "clientHeight": 311,
+    "scrollY": 0,
+    "failures": []
+  }
+]
