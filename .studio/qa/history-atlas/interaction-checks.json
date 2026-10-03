@@ -1,0 +1,51 @@
+{
+  "sourceFocus": {
+    "focus": "Đối chiếu tư liệu 1975–1985",
+    "open": false
+  },
+  "exit": {
+    "archiveOpacity": "0",
+    "copy": "Bức tranh trên cho thấy năng lực sản xuất đã thay đổi thế nào. Bây giờ hãy nhìn kỹ bước ngoặt đầu tiên: khi máy móc mở rộng sức người, điều gì phải thay đổi theo?",
+    "era": "8",
+    "figureOpacity": "0",
+    "left": 57.6650390625,
+    "mapOpacity": "0",
+    "opacity": 1,
+    "right": 835.2587890625,
+    "visible": "visible"
+  },
+  "continuation": {
+    "atlasTop": -160,
+    "machineTop": 740,
+    "nav": "01 / H☰"
+  },
+  "mobileZoom": {
+    "width": 390,
+    "height": 844,
+    "loaded": 2048,
+    "escape": true,
+    "focusReturned": true
+  },
+  "resize": [
+    {
+      "width": 899,
+      "layout": "vertical",
+      "pinned": false
+    },
+    {
+      "width": 900,
+      "layout": "horizontal",
+      "pinned": true
+    }
+  ],
+  "reducedMotion": {
+    "layout": "vertical",
+    "pinned": false,
+    "restored": true
+  },
+  "handoff": {
+    "atlasTop": -1010,
+    "machineTop": -110,
+    "nav": "02 / 08☰"
+  }
+}

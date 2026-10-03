@@ -1,0 +1,30 @@
+[
+  {
+    "beat": 0,
+    "display": "block",
+    "heading": "MỘT CỖ MÁY.",
+    "overflow": 0,
+    "pin": false
+  },
+  {
+    "beat": 1,
+    "display": "block",
+    "heading": "NĂNG LƯỢNG KHÔNG CÒN DỪNG Ở MỘT MÁY.",
+    "overflow": 0,
+    "pin": false
+  },
+  {
+    "beat": 2,
+    "display": "block",
+    "heading": "MỘT CÔNG VIỆC THÀNH NHIỀU CÔNG ĐOẠN.",
+    "overflow": 0,
+    "pin": false
+  },
+  {
+    "beat": 3,
+    "display": "block",
+    "heading": "TỔ CHỨC SẢN XUẤT PHẢI ĐỔI THEO.",
+    "overflow": 0,
+    "pin": false
+  }
+]

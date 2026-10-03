@@ -1,0 +1,86 @@
+[
+  {
+    "size": {
+      "width": 1920,
+      "height": 1080
+    },
+    "beat": 8,
+    "canvasCount": 1,
+    "caption": "KHI TRUYỀN ĐỘNG CƠ KHÍ TRỞ THÀNH TÍN HIỆU...",
+    "captionBox": {
+      "bottom": 939.796875,
+      "height": 113.390625,
+      "left": 1469.75,
+      "right": 1809.75,
+      "top": 826.40625,
+      "width": 340,
+      "x": 1469.75,
+      "y": 826.40625
+    },
+    "font": 28,
+    "oldHumans": 0,
+    "overflow": 0,
+    "p": 0.9802,
+    "pin": true,
+    "pinVh": 280,
+    "stageZ": "6",
+    "underlay": "none",
+    "words": 15
+  },
+  {
+    "size": {
+      "width": 1366,
+      "height": 768
+    },
+    "beat": 8,
+    "canvasCount": 1,
+    "caption": "KHI TRUYỀN ĐỘNG CƠ KHÍ TRỞ THÀNH TÍN HIỆU...",
+    "captionBox": {
+      "bottom": 668.28125,
+      "height": 62.09375,
+      "left": 943.453125,
+      "right": 1283.453125,
+      "top": 606.1875,
+      "width": 340,
+      "x": 943.453125,
+      "y": 606.1875
+    },
+    "font": 23,
+    "oldHumans": 0,
+    "overflow": 0,
+    "p": 0.98,
+    "pin": true,
+    "pinVh": 280.078125,
+    "stageZ": "6",
+    "underlay": "none",
+    "words": 15
+  },
+  {
+    "size": {
+      "width": 1024,
+      "height": 768
+    },
+    "beat": 8,
+    "canvasCount": 1,
+    "caption": "KHI TRUYỀN ĐỘNG CƠ KHÍ TRỞ THÀNH TÍN HIỆU...",
+    "captionBox": {
+      "bottom": 660.59375,
+      "height": 56.6875,
+      "left": 678.640625,
+      "right": 968.640625,
+      "top": 603.90625,
+      "width": 290,
+      "x": 678.640625,
+      "y": 603.90625
+    },
+    "font": 21,
+    "oldHumans": 0,
+    "overflow": 0,
+    "p": 0.98,
+    "pin": true,
+    "pinVh": 280.078125,
+    "stageZ": "6",
+    "underlay": "none",
+    "words": 15
+  }
+]

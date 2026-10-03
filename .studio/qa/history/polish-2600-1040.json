@@ -1,0 +1,160 @@
+{
+  "size": {
+    "width": 2600,
+    "height": 1040
+  },
+  "checks": [
+    {
+      "era": 0,
+      "geometry": {
+        "artBottom": 838.59375,
+        "artLeft": 432.6210045662101,
+        "artRight": 1543.37899543379,
+        "artTop": 214.59375,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 130,
+        "metricRight": 344,
+        "metricTop": 872.59375,
+        "textBottom": 487.3125,
+        "textLeft": 130,
+        "textRight": 344,
+        "textTop": 249.1875
+      }
+    },
+    {
+      "era": 1,
+      "geometry": {
+        "artBottom": 838.5978546142578,
+        "artLeft": 459.2797656214643,
+        "artRight": 1516.148701175411,
+        "artTop": 214.5978546142578,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 129.7142333984375,
+        "metricRight": 343.7142333984375,
+        "metricTop": 835.71875,
+        "textBottom": 487.3125,
+        "textLeft": 129.7142333984375,
+        "textRight": 343.7142333984375,
+        "textTop": 249.1875
+      }
+    },
+    {
+      "era": 2,
+      "geometry": {
+        "artBottom": 838.6007537841797,
+        "artLeft": 441.4411785806316,
+        "artRight": 1535.5461261068683,
+        "artTop": 214.6007537841797,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 130.49365234375,
+        "metricRight": 344.49365234375,
+        "metricTop": 851.03125,
+        "textBottom": 497.1875,
+        "textLeft": 130.49365234375,
+        "textRight": 344.49365234375,
+        "textTop": 249.1875
+      }
+    },
+    {
+      "era": 3,
+      "geometry": {
+        "artBottom": 838.5965576171875,
+        "artLeft": 484.5597017339544,
+        "artRight": 1491.8309232660456,
+        "artTop": 214.5965576171875,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 130.1953125,
+        "metricRight": 344.1953125,
+        "metricTop": 872.59375,
+        "textBottom": 487.3125,
+        "textLeft": 130.1953125,
+        "textRight": 344.1953125,
+        "textTop": 249.1875
+      }
+    },
+    {
+      "era": 4,
+      "geometry": {
+        "artBottom": 838.5950469970703,
+        "artLeft": 469.6080433238636,
+        "artRight": 1506.2103160511365,
+        "artTop": 214.5950469970703,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 129.9091796875,
+        "metricRight": 343.9091796875,
+        "metricTop": 738.4375,
+        "textBottom": 487.3125,
+        "textLeft": 129.9091796875,
+        "textRight": 343.9091796875,
+        "textTop": 249.1875
+      }
+    },
+    {
+      "era": 5,
+      "geometry": {
+        "artBottom": 838.5992431640625,
+        "artLeft": 401.92223631244974,
+        "artRight": 1573.2994433750505,
+        "artTop": 214.59924316406244,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 129.61083984375,
+        "metricRight": 343.61083984375,
+        "metricTop": 835.71875,
+        "textBottom": 487.3125,
+        "textLeft": 129.61083984375,
+        "textRight": 343.61083984375,
+        "textTop": 249.1875
+      }
+    },
+    {
+      "era": 6,
+      "geometry": {
+        "artBottom": 838.5992431640625,
+        "artLeft": 524.1616173664122,
+        "artRight": 1452.6196326335878,
+        "artTop": 214.5992431640625,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 130.390625,
+        "metricRight": 344.390625,
+        "metricTop": 801.21875,
+        "textBottom": 487.3125,
+        "textLeft": 130.390625,
+        "textRight": 344.390625,
+        "textTop": 249.1875
+      }
+    },
+    {
+      "era": 7,
+      "geometry": {
+        "artBottom": 838.5952453613281,
+        "artLeft": 476.3457264090989,
+        "artRight": 1499.863257965901,
+        "artTop": 214.59524536132812,
+        "footerTop": 981.15625,
+        "headingBottom": 204.21875,
+        "metricBottom": 961.59375,
+        "metricLeft": 130.1044921875,
+        "metricRight": 344.1044921875,
+        "metricTop": 775.765625,
+        "textBottom": 487.3125,
+        "textLeft": 130.1044921875,
+        "textRight": 344.1044921875,
+        "textTop": 249.1875
+      }
+    }
+  ]
+}

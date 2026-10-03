@@ -1,0 +1,23 @@
+{
+  "initial": {
+    "bodies": 8,
+    "buttons": 8,
+    "dialogs": 0,
+    "lens": "none",
+    "overflow": 0,
+    "pinned": false,
+    "stages": 8
+  },
+  "overlay": {
+    "height": 844,
+    "source": "/images/history/a-village-zoom.webp",
+    "width": 390
+  },
+  "staticAtlas": {
+    "layout": "vertical",
+    "pinned": false,
+    "pressed": "false"
+  },
+  "focusReturns": true,
+  "resizeRequiresOptIn": true
+}

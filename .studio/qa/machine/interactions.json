@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-03",
+  "reverse": {
+    "from": 0.77,
+    "to": 0.54,
+    "workersAfter": 0,
+    "systemAfter": 0
+  },
+  "pause": {
+    "p": 0.77,
+    "beat": 4,
+    "workers": 1,
+    "unpausedThroughMenu": true
+  },
+  "audio": {
+    "activatedThroughMenu": true,
+    "analogHumTransferBytes": 384344,
+    "consoleErrorsDuringToggle": 0,
+    "disabledAfterCheck": true
+  },
+  "resize": {
+    "desktop": {
+      "from": "1440x900",
+      "to": "1366x768",
+      "expected": 0.54,
+      "observed": 0.5399
+    },
+    "mobile": {
+      "from": "390x844",
+      "to": "430x844",
+      "staticBeat": 2,
+      "expectedTop": 125,
+      "observedTop": 125.15625
+    }
+  },
+  "preferences": {
+    "cycles": 3,
+    "atlasEndingEra": 8,
+    "trackX": -8367
+  },
+  "handoffs": {
+    "atlas": "continuous warm paper/red line",
+    "automation": "one shared canvas, existing arm visible during unpin, Scene03 copy visible on arrival"
+  },
+  "settledFramesIdentical": true
+}

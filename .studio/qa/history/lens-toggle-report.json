@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "Passive hover never zooms",
+    "Click enables the circular lens",
+    "Text remains outside magnification",
+    "Escape and a second click disable the lens"
+  ]
+}

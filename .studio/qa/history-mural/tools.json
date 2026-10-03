@@ -1,0 +1,22 @@
+{
+  "passiveLoupeOff": true,
+  "clickLoupe": true,
+  "escape": true,
+  "lens": {
+    "h": 189.99996948242188,
+    "src": "/images/history/a-village-zoom.webp",
+    "w": 189.99993896484375,
+    "x": 1051.780792236328,
+    "y": 437.20936584472656
+  },
+  "sourceFocus": true,
+  "mobileZoom": {
+    "height": 844,
+    "loaded": 2048,
+    "open": true,
+    "width": 390
+  },
+  "mobileFocus": true,
+  "reducedMotionNoPin": true,
+  "resize899to900": true
+}

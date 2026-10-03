@@ -1,0 +1,10 @@
+{
+  "passiveHover": false,
+  "manualActivation": true,
+  "rotation": 12.000032704412648,
+  "lazyLoads": 1,
+  "bodyExcluded": true,
+  "escapeAndSecondClick": true,
+  "dockReturn": 8.602325267042627,
+  "focusReturns": true
+}

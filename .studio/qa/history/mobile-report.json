@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "390×844: eight vertical eras, continuous vertical SVG, no desktop pin/lens/browser overflow",
+    "Tap zoom opens a bounded 2.2× image; native dialog closes and restores focus",
+    "Real vertical scrolling reaches later eras and loads their responsive images",
+    "1440×900 reduced motion renders a static atlas without pin or parallax",
+    "Returning from reduced motion refreshes the original world and history state at the same scroll position"
+  ],
+  "errors": [],
+  "touchNote": "UI tap tested; raw Input.dispatchTouchEvent is unsupported by the in-app browser. Real-device long press remains a manual check."
+}

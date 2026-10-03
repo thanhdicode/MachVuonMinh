@@ -1,0 +1,178 @@
+{
+  "size": {
+    "width": 1440,
+    "height": 900
+  },
+  "frames": [
+    {
+      "background": "rgb(209, 195, 168)",
+      "beat": 0,
+      "body": {
+        "bottom": 282.59375,
+        "height": 21.59375,
+        "left": 85.5,
+        "right": 289.5,
+        "top": 261,
+        "width": 204,
+        "x": 85.5,
+        "y": 261
+      },
+      "canvasCount": 1,
+      "caption": "TỪ CÔNG CỤ RIÊNG LẺ…",
+      "captionOverlapsWorld": false,
+      "headingLines": 0,
+      "overflow": 0,
+      "p": 0.06,
+      "pageWidth": 1425,
+      "pinned": true,
+      "scene": "experience scene-2 unlocked  machine-active",
+      "system": 0,
+      "workers": 0
+    },
+    {
+      "background": "rgb(150, 141, 124)",
+      "beat": 1,
+      "body": {
+        "bottom": 412.875,
+        "height": 54.375,
+        "left": 85.5,
+        "right": 374.5,
+        "top": 358.5,
+        "width": 289,
+        "x": 85.5,
+        "y": 358.5
+      },
+      "canvasCount": 1,
+      "caption": "MỘT CHIẾC MÁY CÓ THỂ THAY SỨC NGƯỜI.Nhưng một chiếc máy chưa tạo thành một nền sản xuất mới.",
+      "captionOverlapsWorld": false,
+      "heading": {
+        "bottom": 336.5,
+        "height": 75.5,
+        "left": 85.5,
+        "right": 484.5,
+        "top": 261,
+        "width": 399,
+        "x": 85.5,
+        "y": 261
+      },
+      "headingLines": 1.999470338983051,
+      "overflow": 0,
+      "p": 0.22,
+      "pageWidth": 1425,
+      "pinned": true,
+      "scene": "experience scene-2 unlocked  machine-active",
+      "system": 0,
+      "workers": 0
+    },
+    {
+      "background": "rgb(50, 50, 45)",
+      "beat": 2,
+      "canvasCount": 1,
+      "caption": "KHI MÁY MÓC NỐI LẠI, QUY MÔ SẢN XUẤT ĐỔI HẲN.",
+      "captionOverlapsWorld": false,
+      "heading": {
+        "bottom": 406.265625,
+        "height": 145.265625,
+        "left": 85.5,
+        "right": 484.5,
+        "top": 261,
+        "width": 399,
+        "x": 85.5,
+        "y": 261
+      },
+      "headingLines": 2.999670123401725,
+      "overflow": 0,
+      "p": 0.54,
+      "pageWidth": 1425,
+      "pinned": true,
+      "scene": "experience scene-2 unlocked  machine-active",
+      "system": 0,
+      "workers": 0
+    },
+    {
+      "background": "rgb(25, 26, 23)",
+      "beat": 4,
+      "canvasCount": 1,
+      "caption": "NHƯNG NĂNG LỰC ẤY CHỈ HOẠT ĐỘNG KHI CON NGƯỜI PHỐI HỢP ĐƯỢC VỚI NHAU.",
+      "captionOverlapsWorld": false,
+      "heading": {
+        "bottom": 503.109375,
+        "height": 242.109375,
+        "left": 85.5,
+        "right": 484.5,
+        "top": 261,
+        "width": 399,
+        "x": 85.5,
+        "y": 261
+      },
+      "headingLines": 4.999450205669541,
+      "overflow": 0,
+      "p": 0.77,
+      "pageWidth": 1425,
+      "pinned": true,
+      "scene": "experience scene-2 unlocked  machine-active",
+      "system": 0,
+      "workers": 1
+    },
+    {
+      "background": "rgb(21, 22, 20)",
+      "beat": 5,
+      "body": {
+        "bottom": 539.84375,
+        "height": 76.78125,
+        "left": 85.5,
+        "right": 357.5,
+        "top": 463.0625,
+        "width": 272,
+        "x": 85.5,
+        "y": 463.0625
+      },
+      "canvasCount": 1,
+      "caption": "MÁY MÓC MỞ RỘNG QUY MÔ.\nCÁCH TỔ CHỨC SẢN XUẤT PHẢI ĐỔI THEO.Khi LLSX thay đổi về công cụ, quy mô và mức độ liên kết, QHSX không thể đứng yên.",
+      "captionOverlapsWorld": false,
+      "heading": {
+        "bottom": 441.0625,
+        "height": 180.0625,
+        "left": 85.5,
+        "right": 484.5,
+        "top": 261,
+        "width": 399,
+        "x": 85.5,
+        "y": 261
+      },
+      "headingLines": 3.99882963792062,
+      "overflow": 0,
+      "p": 0.94,
+      "pageWidth": 1425,
+      "pinned": true,
+      "scene": "experience scene-2 unlocked  machine-active",
+      "system": 1,
+      "workers": 0.25
+    },
+    {
+      "background": "rgb(21, 22, 20)",
+      "beat": 6,
+      "body": {
+        "bottom": 304.1875,
+        "height": 43.1875,
+        "left": 85.5,
+        "right": 289.5,
+        "top": 261,
+        "width": 204,
+        "x": 85.5,
+        "y": 261
+      },
+      "canvasCount": 1,
+      "caption": "TỪ CƠ GIỚI HÓA → TỰ ĐỘNG HÓA",
+      "captionOverlapsWorld": false,
+      "headingLines": 0,
+      "overflow": 0,
+      "p": 0.99,
+      "pageWidth": 1425,
+      "pinned": true,
+      "scene": "experience scene-2 unlocked  machine-active",
+      "system": 0.25,
+      "workers": 0.25
+    }
+  ]
+}

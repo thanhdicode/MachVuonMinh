@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-03",
+  "commit": "2ebd049eafef1a7211e00d45b1805e4d27c89790",
+  "url": "https://mach-vuon-minh.vercel.app/",
+  "deploymentId": 6825664880,
+  "vercelStatus": "success",
+  "entry": "/assets/index-CiOjArIH.js",
+  "miniGameChunk": "MiniGame-BeDsmuAq.js",
+  "worldCanvasChunk": "WorldCanvas-DFR92NJe.js",
+  "css": "index-QKMf0UVj.css",
+  "assetsHead": "200; matching lengths for panorama desktop/mobile, hall, audio eras 02/06 and runner sprite",
+  "browserSmoke": "menu → scene 08 → open → start → pause → iframe Escape; focus, scroll, body lock and dialog restored; no console errors"
+}

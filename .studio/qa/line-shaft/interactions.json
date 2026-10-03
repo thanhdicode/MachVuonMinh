@@ -1,0 +1,36 @@
+{
+  "reverse": {
+    "from": 0.73,
+    "to": 0.4,
+    "beat": 3
+  },
+  "pause": {
+    "p": 0.7301,
+    "beat": 5
+  },
+  "audio": {
+    "menuOnAndOff": true,
+    "appConsoleErrors": 0
+  },
+  "settledFramesIdentical": true,
+  "desktopResize": {
+    "overflow": 0,
+    "p": 0.6099
+  },
+  "automationArrival": {
+    "canvasCount": 1,
+    "control": true,
+    "heading": "Từ thao tác\nsang tri thức.",
+    "scene": "experience scene-3 unlocked  "
+  },
+  "mobileResize": {
+    "frameTop": 125.03125,
+    "nearestFrame": "2",
+    "overflow": 0
+  },
+  "pausedScrub": {
+    "from": 0.4,
+    "to": 0.2,
+    "changed": true
+  }
+}

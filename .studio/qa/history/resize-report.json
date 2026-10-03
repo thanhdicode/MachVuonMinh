@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "Resize 1440×900 → 1280×720 → 390×844 → 1440×900 preserves era 1975–1985",
+    "Native vertical wheel enters the atlas from the original plough scene",
+    "Native vertical wheel unpins the atlas and enters the original machine scene"
+  ],
+  "errors": []
+}

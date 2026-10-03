@@ -1,0 +1,34 @@
+[
+  {
+    "beat": 0,
+    "canvas": "hidden",
+    "heading": "MỘT CHIẾC MÁY CÓ THỂ THAY SỨC NGƯỜI.",
+    "overflow": 0,
+    "pinned": false,
+    "staticDisplay": "block"
+  },
+  {
+    "beat": 1,
+    "canvas": "hidden",
+    "heading": "KHI MÁY MÓC NỐI LẠI, QUY MÔ SẢN XUẤT ĐỔI HẲN.",
+    "overflow": 0,
+    "pinned": false,
+    "staticDisplay": "block"
+  },
+  {
+    "beat": 2,
+    "canvas": "hidden",
+    "heading": "NHƯNG NĂNG LỰC ẤY CHỈ HOẠT ĐỘNG KHI CON NGƯỜI PHỐI HỢP ĐƯỢC VỚI NHAU.",
+    "overflow": 0,
+    "pinned": false,
+    "staticDisplay": "block"
+  },
+  {
+    "beat": 3,
+    "canvas": "hidden",
+    "heading": "MÁY MÓC MỞ RỘNG QUY MÔ.\nCÁCH TỔ CHỨC SẢN XUẤT PHẢI ĐỔI THEO.",
+    "overflow": 0,
+    "pinned": false,
+    "staticDisplay": "block"
+  }
+]

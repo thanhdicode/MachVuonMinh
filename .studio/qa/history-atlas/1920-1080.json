@@ -1,0 +1,338 @@
+[
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 263.65625,
+      "height": 115.46875,
+      "left": 825.59375,
+      "right": 1063.59375,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "0",
+    "facts": {
+      "bottom": 1022.1875,
+      "height": 82,
+      "left": 76.796875,
+      "right": 1674.796875,
+      "top": 940.1875,
+      "width": 1598
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.796875,
+      "right": 671.984375,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  },
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 240.5625,
+      "height": 92.375,
+      "left": 825.5843505859375,
+      "right": 1063.5843505859375,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "1",
+    "facts": {
+      "bottom": 1029.78125,
+      "height": 89.59375,
+      "left": 76.7874755859375,
+      "right": 1674.7874755859375,
+      "top": 940.1875,
+      "width": 1598
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.7874755859375,
+      "right": 671.9749755859375,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  },
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 263.65625,
+      "height": 115.46875,
+      "left": 825.590576171875,
+      "right": 1063.590576171875,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "2",
+    "facts": {
+      "bottom": 984.1875,
+      "height": 44,
+      "left": 76.793701171875,
+      "right": 1674.793701171875,
+      "top": 940.1875,
+      "width": 1598
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.793701171875,
+      "right": 671.981201171875,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  },
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 240.5625,
+      "height": 92.375,
+      "left": 825.58154296875,
+      "right": 1063.58154296875,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "3",
+    "facts": {
+      "bottom": 984.1875,
+      "height": 44,
+      "left": 76.78466796875,
+      "right": 1674.78466796875,
+      "top": 940.1875,
+      "width": 1598
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.78466796875,
+      "right": 671.97216796875,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  },
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 263.65625,
+      "height": 115.46875,
+      "left": 825.58740234375,
+      "right": 1063.58740234375,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "4",
+    "facts": {
+      "bottom": 1029.78125,
+      "height": 89.59375,
+      "left": 76.79052734375,
+      "right": 1674.79052734375,
+      "top": 940.1875,
+      "width": 1598
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.79052734375,
+      "right": 671.97802734375,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  },
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 263.65625,
+      "height": 115.46875,
+      "left": 825.59375,
+      "right": 1063.59375,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "5",
+    "facts": {
+      "bottom": 1029.78125,
+      "height": 89.59375,
+      "left": 76.796875,
+      "right": 1674.79638671875,
+      "top": 940.1875,
+      "width": 1597.99951171875
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.796875,
+      "right": 671.984375,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  },
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 240.5625,
+      "height": 92.375,
+      "left": 825.583984375,
+      "right": 1063.583984375,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "6",
+    "facts": {
+      "bottom": 1029.78125,
+      "height": 89.59375,
+      "left": 76.787109375,
+      "right": 1674.787109375,
+      "top": 940.1875,
+      "width": 1598
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.787109375,
+      "right": 671.974609375,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  },
+  {
+    "activeOpacity": 1,
+    "artHeight": 640,
+    "bodyCount": 1,
+    "caption": {
+      "bottom": 263.65625,
+      "height": 115.46875,
+      "left": 825.5908203125,
+      "right": 1063.5908203125,
+      "top": 148.1875,
+      "width": 238
+    },
+    "collageZ": 3,
+    "collisions": 0,
+    "curator": false,
+    "era": "7",
+    "facts": {
+      "bottom": 1029.78125,
+      "height": 89.59375,
+      "left": 76.7939453125,
+      "right": 1674.7939453125,
+      "top": 940.1875,
+      "width": 1598
+    },
+    "filter": "saturate(1) contrast(1)",
+    "headline": {
+      "bottom": 248.46875,
+      "height": 38.390625,
+      "left": 76.7939453125,
+      "right": 671.9814453125,
+      "top": 210.078125,
+      "width": 595.1875
+    },
+    "images": 1440,
+    "layout": "horizontal",
+    "loupeCollision": false,
+    "overflow": 0,
+    "threadWidth": "3px",
+    "threadZ": 1,
+    "titleLines": 0.999755859375,
+    "worldWidth": 6.8
+  }
+]

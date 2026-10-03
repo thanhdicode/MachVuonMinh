@@ -1,0 +1,513 @@
+{
+  "size": {
+    "width": 1366,
+    "height": 768
+  },
+  "checks": [
+    {
+      "artHeight": 399.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 54.625,
+        "right": 1212.65625,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1213.984375,
+        "right": 1323.984375,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "0",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 682.46875,
+        "height": 79,
+        "left": 54.625,
+        "right": 1212.65625,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1351,
+        "top": 709.15625,
+        "width": 1351
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": "0.32",
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1351,
+      "previousOpacity": null,
+      "scrollWidth": 1351,
+      "source": "/images/history/a-village-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 54.625,
+        "right": 734.625,
+        "top": 189.109375,
+        "width": 680
+      },
+      "connector": {
+        "red": 7131,
+        "columns": 12
+      }
+    },
+    {
+      "artHeight": 399.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 54.40576171875,
+        "right": 1212.43701171875,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1228.6875,
+        "right": 1338.6875,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "1",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 675.875,
+        "height": 72.40625,
+        "left": 54.40576171875,
+        "right": 1212.43701171875,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1351,
+        "top": 709.15625,
+        "width": 1351
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": "0.32",
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1351,
+      "previousOpacity": "0.62",
+      "scrollWidth": 1351,
+      "source": "/images/history/b-rail-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 54.40576171875,
+        "right": 734.40576171875,
+        "top": 189.109375,
+        "width": 680
+      }
+    },
+    {
+      "artHeight": 379.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 54.1865234375,
+        "right": 1212.2177734375,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1228.6875,
+        "right": 1338.6875,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "2",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 644.46875,
+        "height": 41,
+        "left": 54.1865234375,
+        "right": 1212.2177734375,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1351,
+        "top": 709.15625,
+        "width": 1351
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": "0.32",
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1351,
+      "previousOpacity": "0.62",
+      "scrollWidth": 1351,
+      "source": "/images/history/c-workshop-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 54.1865234375,
+        "right": 734.1865234375,
+        "top": 189.109375,
+        "width": 680
+      }
+    },
+    {
+      "artHeight": 399.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 55.06201171875,
+        "right": 1213.09326171875,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1228.6875,
+        "right": 1338.6875,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "3",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 665.46875,
+        "height": 62,
+        "left": 55.06201171875,
+        "right": 1213.09326171875,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1351,
+        "top": 709.15625,
+        "width": 1351
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": "0.32",
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1351,
+      "previousOpacity": "0.62",
+      "scrollWidth": 1351,
+      "source": "/images/history/d-industry-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 55.06201171875,
+        "right": 735.06201171875,
+        "top": 189.109375,
+        "width": 680
+      }
+    },
+    {
+      "artHeight": 399.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 54.8427734375,
+        "right": 1212.8740234375,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1228.6875,
+        "right": 1338.6875,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "4",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 675.875,
+        "height": 72.40625,
+        "left": 54.8427734375,
+        "right": 1212.8740234375,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1351,
+        "top": 709.15625,
+        "width": 1351
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": "0.32",
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1351,
+      "previousOpacity": "0.62",
+      "scrollWidth": 1351,
+      "source": "/images/history/e-reconstruction-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 54.8427734375,
+        "right": 734.8427734375,
+        "top": 189.109375,
+        "width": 680
+      },
+      "connector": {
+        "red": 7718,
+        "columns": 12
+      }
+    },
+    {
+      "artHeight": 379.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 54.63916015625,
+        "right": 1212.67041015625,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1228.6875,
+        "right": 1338.6875,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "5",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 675.875,
+        "height": 72.40625,
+        "left": 54.63916015625,
+        "right": 1212.67041015625,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1366,
+        "top": 709.15625,
+        "width": 1366
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": "0.32",
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1366,
+      "previousOpacity": "0.62",
+      "scrollWidth": 1366,
+      "source": "/images/history/f-reform-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 54.63916015625,
+        "right": 734.63916015625,
+        "top": 189.109375,
+        "width": 680
+      },
+      "connector": {
+        "red": 20053,
+        "columns": 12
+      }
+    },
+    {
+      "artHeight": 399.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 54.4267578125,
+        "right": 1212.4580078125,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1228.6875,
+        "right": 1338.6875,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "6",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 675.875,
+        "height": 72.40625,
+        "left": 54.4267578125,
+        "right": 1212.4580078125,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1366,
+        "top": 709.15625,
+        "width": 1366
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": "0.32",
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1366,
+      "previousOpacity": "0.62",
+      "scrollWidth": 1366,
+      "source": "/images/history/g-electricity-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 54.4267578125,
+        "right": 734.4267578125,
+        "top": 189.109375,
+        "width": 680
+      }
+    },
+    {
+      "artHeight": 399.359375,
+      "body": {
+        "bottom": 583.46875,
+        "height": 18,
+        "left": 54.22314453125,
+        "right": 1212.25439453125,
+        "top": 565.46875,
+        "width": 1158.03125
+      },
+      "bodyImageCollision": false,
+      "bodyLines": 1,
+      "containerName": "history-era",
+      "containerType": "inline-size",
+      "dock": {
+        "bottom": 688.109375,
+        "height": 78,
+        "left": 1228.6875,
+        "right": 1338.6875,
+        "top": 610.109375,
+        "width": 110
+      },
+      "dockCopyCollision": false,
+      "era": "7",
+      "factImageCollision": false,
+      "facts": {
+        "bottom": 675.875,
+        "height": 72.40625,
+        "left": 54.22314453125,
+        "right": 1212.25439453125,
+        "top": 603.46875,
+        "width": 1158.03125
+      },
+      "footer": {
+        "bottom": 768,
+        "height": 58.84375,
+        "left": 0,
+        "right": 1366,
+        "top": 709.15625,
+        "width": 1366
+      },
+      "inspectable": "true",
+      "lens": "0",
+      "motion": "standard",
+      "nextOpacity": null,
+      "opacity": "1",
+      "otherBodies": 0,
+      "pageWidth": 1366,
+      "previousOpacity": "0.62",
+      "scrollWidth": 1366,
+      "source": "/images/history/h-data-zoom.webp",
+      "title": {
+        "bottom": 219.59375,
+        "height": 30.484375,
+        "left": 54.22314453125,
+        "right": 734.22314453125,
+        "top": 189.109375,
+        "width": 680
+      },
+      "connector": {
+        "red": 7364,
+        "columns": 12
+      }
+    }
+  ],
+  "errors": [],
+  "extensionErrors": [
+    {
+      "level": "error",
+      "message": "TypeError: Cannot read properties of undefined (reading 'M_ID')\n    at Y (chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js:1:761)\n    at E (chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js:1:1442)",
+      "timestamp": "2026-10-02T19:47:17.530Z",
+      "url": "chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"
+    }
+  ]
+}

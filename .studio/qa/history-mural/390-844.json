@@ -1,0 +1,82 @@
+[
+  {
+    "bodies": 1,
+    "era": "0",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  },
+  {
+    "bodies": 1,
+    "era": "1",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  },
+  {
+    "bodies": 1,
+    "era": "2",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  },
+  {
+    "bodies": 1,
+    "era": "3",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  },
+  {
+    "bodies": 1,
+    "era": "4",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  },
+  {
+    "bodies": 1,
+    "era": "5",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  },
+  {
+    "bodies": 1,
+    "era": "6",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  },
+  {
+    "bodies": 1,
+    "era": "7",
+    "layout": "vertical",
+    "loaded": 8192,
+    "overflow": -15,
+    "pano": "http://127.0.0.1:5175/history/atlas-panorama-mobile-1024x8192.webp",
+    "pinned": false,
+    "width": 315
+  }
+]

@@ -1,0 +1,378 @@
+[
+  {
+    "anchor": [
+      669.4,
+      347.9
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 391.7105899419729,
+      "right": 1185.226910058027,
+      "top": 192.109375
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 268.828125,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.234375
+      },
+      {
+        "bottom": 391.828125,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 286.828125
+      },
+      {
+        "bottom": 704.578125,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "0",
+    "heading": "NHỊP SẢN XUẤT CỦA LÀNG",
+    "layout": "horizontal",
+    "leader": "M669.4413019825918 347.903125V404.71875H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, 0, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 1.9997529644268777
+  },
+  {
+    "anchor": [
+      647.4,
+      414.7
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 421.1658145680147,
+      "right": 1175.2980526194854,
+      "top": 192.109375
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 268.85406494140625,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.2603302001953
+      },
+      {
+        "bottom": 370.85406494140625,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 286.85406494140625
+      },
+      {
+        "bottom": 736.765625,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "1",
+    "heading": "ĐƯỜNG SẮT, MỎ, CẢNG",
+    "layout": "horizontal",
+    "leader": "M647.4054859834558 414.71875V383.74468994140625H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, -747.971, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 1.9997523613126853
+  },
+  {
+    "anchor": [
+      699.9,
+      450.4
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 387.3162430245536,
+      "right": 1168.7408858816964,
+      "top": 192.109375
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 268.828125,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.234375
+      },
+      {
+        "bottom": 391.828125,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 286.828125
+      },
+      {
+        "bottom": 704.578125,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "2",
+    "heading": "SẢN XUẤT TRONG KHÁNG CHIẾN",
+    "layout": "horizontal",
+    "leader": "M699.8861001674107 450.35375V404.71875H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, -1484.99, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 1.9997529644268777
+  },
+  {
+    "anchor": [
+      856.4,
+      441.4
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 438.90780222039473,
+      "right": 1158.6410259046052,
+      "top": 192.109375
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 268.828125,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.234375
+      },
+      {
+        "bottom": 370.828125,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 286.828125
+      },
+      {
+        "bottom": 704.578125,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "3",
+    "heading": "ĐẶT NỀN MÓNG CÔNG NGHIỆP",
+    "layout": "horizontal",
+    "leader": "M856.3530719572368 441.44500000000005V383.71875H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, -2221.99, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 1.9997529644268777
+  },
+  {
+    "anchor": [
+      726.8,
+      445.9
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 408.3292399382333,
+      "right": 1148.8489827180167,
+      "top": 192.109375
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 268.828125,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.234375
+      },
+      {
+        "bottom": 391.828125,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 286.828125
+      },
+      {
+        "bottom": 736.765625,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "4",
+    "heading": "TÁI THIẾT VÀ MỞ RỘNG",
+    "layout": "horizontal",
+    "leader": "M726.7527293335402 445.89937499999996V404.71875H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, -2958.99, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 1.9997529644268777
+  },
+  {
+    "anchor": [
+      972.3,
+      321.2
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 369.4919602997449,
+      "right": 1206.732649075255,
+      "top": 192.109375
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 243.53125,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.234375
+      },
+      {
+        "bottom": 366.53125,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 261.53125
+      },
+      {
+        "bottom": 736.765625,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "5",
+    "heading": "ĐỔI MỚI",
+    "layout": "horizontal",
+    "leader": "M972.3052562181122 321.176875V379.421875H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, -3696.98, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 0.9998764822134388
+  },
+  {
+    "anchor": [
+      721.5,
+      321.2
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 436.52567933410745,
+      "right": 1099.2848675408925,
+      "top": 192.109375
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 243.5328369140625,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.2359619140625
+      },
+      {
+        "bottom": 345.5328369140625,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 261.5328369140625
+      },
+      {
+        "bottom": 736.765625,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "6",
+    "heading": "ĐIỆN ĐẾN MỌI NƠI",
+    "layout": "horizontal",
+    "leader": "M721.499923231775 321.176875V358.5311279296875H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, -4433.99, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 0.9998764822134388
+  },
+  {
+    "anchor": [
+      895.4,
+      361.3
+    ],
+    "art": {
+      "bottom": 637.546875,
+      "left": 412.7927441928477,
+      "right": 1144.0724901821525,
+      "top": 192.10937500000009
+    },
+    "bodyCount": 1,
+    "boxes": [
+      {
+        "bottom": 243.53125,
+        "left": 40.953125,
+        "right": 260.953125,
+        "top": 218.234375
+      },
+      {
+        "bottom": 366.53125,
+        "left": 40.953125,
+        "right": 264.953125,
+        "top": 261.53125
+      },
+      {
+        "bottom": 736.765625,
+        "left": 40.953125,
+        "right": 873.046875,
+        "top": 660.578125
+      }
+    ],
+    "collisions": 0,
+    "era": "7",
+    "heading": "TỪ ĐIỆN ĐẾN DỮ LIỆU",
+    "layout": "horizontal",
+    "leader": "M895.4373765457888 361.26625V379.421875H26.953125",
+    "loaded": 4096,
+    "masterRoot": "matrix(1, 0, 0, 1, -5170.99, 0)",
+    "oldMaps": 0,
+    "overflow": -15,
+    "panorama": 1,
+    "railHeight": 2,
+    "rewind": false,
+    "source": "http://127.0.0.1:5175/history/atlas-panorama-4096.webp",
+    "titleLines": 0.9998764822134388
+  }
+]

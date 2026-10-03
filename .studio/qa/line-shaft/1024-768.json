@@ -1,0 +1,200 @@
+{
+  "size": {
+    "width": 1024,
+    "height": 768
+  },
+  "frames": [
+    {
+      "beat": 0,
+      "canvasCount": 1,
+      "caption": "",
+      "captionBox": {
+        "bottom": 161.375,
+        "height": 0,
+        "left": 50.4375,
+        "right": 340.4375,
+        "top": 161.375,
+        "width": 290,
+        "x": 50.4375,
+        "y": 161.375
+      },
+      "font": 0,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.02,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 6
+    },
+    {
+      "beat": 2,
+      "canvasCount": 1,
+      "caption": "MỘT CỖ MÁY.",
+      "captionBox": {
+        "bottom": 189.71875,
+        "height": 28.34375,
+        "left": 50.4375,
+        "right": 270.4375,
+        "top": 161.375,
+        "width": 220,
+        "x": 50.4375,
+        "y": 161.375
+      },
+      "font": 21,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.1999,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 9
+    },
+    {
+      "beat": 3,
+      "canvasCount": 1,
+      "caption": "NĂNG LƯỢNG KHÔNG CÒN DỪNG Ở MỘT MÁY.",
+      "captionBox": {
+        "bottom": 218.0625,
+        "height": 56.6875,
+        "left": 50.4375,
+        "right": 340.4375,
+        "top": 161.375,
+        "width": 290,
+        "x": 50.4375,
+        "y": 161.375
+      },
+      "font": 21,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.3501,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 17
+    },
+    {
+      "beat": 4,
+      "canvasCount": 1,
+      "caption": "MỘT MÁY THÀNH NHIỀU MÁY.",
+      "captionBox": {
+        "bottom": 660.59375,
+        "height": 56.6875,
+        "left": 678.640625,
+        "right": 968.640625,
+        "top": 603.90625,
+        "width": 290,
+        "x": 678.640625,
+        "y": 603.90625
+      },
+      "font": 21,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.6099,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 11
+    },
+    {
+      "beat": 5,
+      "canvasCount": 1,
+      "caption": "MỘT CÔNG VIỆC THÀNH NHIỀU CÔNG ĐOẠN.",
+      "captionBox": {
+        "bottom": 660.59375,
+        "height": 56.6875,
+        "left": 678.640625,
+        "right": 968.640625,
+        "top": 603.90625,
+        "width": 290,
+        "x": 678.640625,
+        "y": 603.90625
+      },
+      "font": 21,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.7299,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 20
+    },
+    {
+      "beat": 6,
+      "canvasCount": 1,
+      "caption": "MÁY MÓC MỞ RỘNG QUY MÔ.",
+      "captionBox": {
+        "bottom": 660.59375,
+        "height": 56.6875,
+        "left": 678.640625,
+        "right": 968.640625,
+        "top": 603.90625,
+        "width": 290,
+        "x": 678.640625,
+        "y": 603.90625
+      },
+      "font": 21,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.8201,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 12
+    },
+    {
+      "beat": 7,
+      "canvasCount": 1,
+      "caption": "TỔ CHỨC SẢN XUẤT PHẢI ĐỔI THEO.",
+      "captionBox": {
+        "bottom": 660.59375,
+        "height": 56.6875,
+        "left": 678.640625,
+        "right": 968.640625,
+        "top": 603.90625,
+        "width": 290,
+        "x": 678.640625,
+        "y": 603.90625
+      },
+      "font": 21,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.92,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 13
+    },
+    {
+      "beat": 8,
+      "canvasCount": 1,
+      "caption": "KHI TRUYỀN ĐỘNG CƠ KHÍ TRỞ THÀNH TÍN HIỆU...",
+      "captionBox": {
+        "bottom": 660.59375,
+        "height": 56.6875,
+        "left": 678.640625,
+        "right": 968.640625,
+        "top": 603.90625,
+        "width": 290,
+        "x": 678.640625,
+        "y": 603.90625
+      },
+      "font": 21,
+      "oldHumans": 0,
+      "overflow": 0,
+      "p": 0.98,
+      "pin": true,
+      "pinVh": 280.078125,
+      "stageZ": "6",
+      "underlay": "none",
+      "words": 15
+    }
+  ]
+}

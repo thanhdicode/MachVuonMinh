@@ -1,0 +1,132 @@
+{
+  "initial": {
+    "context": "uninitialized",
+    "enabled": "false",
+    "peak": 0,
+    "rms": 0
+  },
+  "activation": [
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.0805,
+      "rms": 0.04565
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.00481,
+      "rms": 0.00203
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.00481,
+      "rms": 0.00203
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.00239,
+      "rms": 0.00162
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.00327,
+      "rms": 0.00204
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.0041,
+      "rms": 0.00268
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.0041,
+      "rms": 0.00268
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "0",
+      "peak": 0.00494,
+      "rms": 0.00306
+    }
+  ],
+  "running": {
+    "context": "running",
+    "enabled": "true",
+    "era": "0",
+    "peak": 0.00717,
+    "rms": 0.0058
+  },
+  "eras": [
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "1",
+      "peak": 0.0072,
+      "rms": 0.00432
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "2",
+      "peak": 0.01587,
+      "rms": 0.01019
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "3",
+      "peak": 0.01774,
+      "rms": 0.01077
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "4",
+      "peak": 0.0126,
+      "rms": 0.00738
+    },
+    {
+      "context": "running",
+      "enabled": "true",
+      "era": "5",
+      "peak": 0.00716,
+      "rms": 0.00508
+    }
+  ],
+  "muted": {
+    "context": "running",
+    "enabled": "false",
+    "era": "5",
+    "peak": 0,
+    "rms": 0
+  },
+  "resumed": {
+    "context": "running",
+    "enabled": "true",
+    "era": "5",
+    "peak": 0.02465,
+    "rms": 0.014
+  },
+  "contextId": "fbc9ce48-cc55-415b-af5d-25720e9312be",
+  "physicalListening": {
+    "date": "2026-10-03",
+    "status": "passed",
+    "initialFeedback": "Unclear rustling before cleaner revision",
+    "latestReply": "Nghe rõ, đổi nền và tắt/bật đúng",
+    "checked": "Activation cue, era 02/06 changes, mute and re-enable; initial silence verified by browser."
+  }
+}

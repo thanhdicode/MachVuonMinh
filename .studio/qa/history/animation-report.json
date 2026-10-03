@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "Motif paused outside the atlas",
+    "Onscreen era motif runs after entering history"
+  ],
+  "errors": []
+}

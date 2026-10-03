@@ -1,0 +1,38 @@
+{
+  "checks": [
+    "1440×900: pinned 560vw atlas, no horizontal browser overflow, one existing canvas",
+    "Actual vertical wheel drives horizontal motion; Left/Right step eras",
+    "Passive hover stays unzoomed; clicking the mini button enables the 190px circular lens",
+    "Sources stay in the existing secondary drawer; Escape closes it",
+    "Eight eras traversed; final bridge returns to the original machine chapter",
+    "Five captured frames contain the red connector across at least ten viewport columns"
+  ],
+  "connectorFrames": [
+    {
+      "name": "01-start",
+      "pixels": 3811,
+      "columns": 12
+    },
+    {
+      "name": "02-colonial-rail",
+      "pixels": 4106,
+      "columns": 12
+    },
+    {
+      "name": "03-reconstruction",
+      "pixels": 4454,
+      "columns": 12
+    },
+    {
+      "name": "04-doi-moi",
+      "pixels": 4251,
+      "columns": 12
+    },
+    {
+      "name": "05-digital",
+      "pixels": 4358,
+      "columns": 12
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 470.8125,
+      "left": 30,
+      "right": 268,
+      "top": 351.828125
+    },
+    "bodyVisible": true,
+    "era": "0",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  },
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 303.6875,
+      "left": 30,
+      "right": 268,
+      "top": 208.5
+    },
+    "bodyVisible": true,
+    "era": "1",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  },
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 355.453125,
+      "left": 30,
+      "right": 268,
+      "top": 236.46875
+    },
+    "bodyVisible": true,
+    "era": "2",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  },
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 331.921875,
+      "left": 30,
+      "right": 268,
+      "top": 236.734375
+    },
+    "bodyVisible": true,
+    "era": "3",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  },
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 327.09375,
+      "left": 30,
+      "right": 268,
+      "top": 208.109375
+    },
+    "bodyVisible": true,
+    "era": "4",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  },
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 327.265625,
+      "left": 30,
+      "right": 268,
+      "top": 208.28125
+    },
+    "bodyVisible": true,
+    "era": "5",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  },
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 303.640625,
+      "left": 30,
+      "right": 268,
+      "top": 208.453125
+    },
+    "bodyVisible": true,
+    "era": "6",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  },
+  {
+    "bodies": 1,
+    "body": {
+      "bottom": 327.8125,
+      "left": 30,
+      "right": 268,
+      "top": 208.828125
+    },
+    "bodyVisible": true,
+    "era": "7",
+    "image": 390,
+    "layout": "vertical",
+    "overflow": 0,
+    "pinned": false,
+    "threadWidth": "2px",
+    "world": 315
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "size": {
+      "width": 1920,
+      "height": 1080
+    },
+    "boxes": [
+      {
+        "bottom": 448.5625,
+        "left": 76.1875,
+        "right": 876.1875,
+        "top": 311.6875
+      },
+      {
+        "bottom": 630.515625,
+        "left": 76.1875,
+        "right": 427.1875,
+        "top": 468.5625
+      },
+      {
+        "bottom": 851.515625,
+        "left": 76.1875,
+        "right": 252.828125,
+        "top": 790.515625
+      }
+    ],
+    "era": "8",
+    "imageOpacity": 0,
+    "paper": "rgb(240, 229, 205)",
+    "visible": "visible"
+  },
+  {
+    "size": {
+      "width": 1440,
+      "height": 900
+    },
+    "boxes": [
+      {
+        "bottom": 382,
+        "left": 57,
+        "right": 834.59375,
+        "top": 266.5
+      },
+      {
+        "bottom": 544.578125,
+        "left": 57,
+        "right": 365.875,
+        "top": 402
+      },
+      {
+        "bottom": 765.578125,
+        "left": 57,
+        "right": 233.640625,
+        "top": 704.578125
+      }
+    ],
+    "era": "8",
+    "imageOpacity": 0,
+    "paper": "rgb(240, 229, 205)",
+    "visible": "visible"
+  },
+  {
+    "size": {
+      "width": 1366,
+      "height": 768
+    },
+    "boxes": [
+      {
+        "bottom": 318.546875,
+        "left": 54.03125,
+        "right": 791.65625,
+        "top": 233.609375
+      },
+      {
+        "bottom": 464.484375,
+        "left": 54.03125,
+        "right": 327.03125,
+        "top": 338.546875
+      },
+      {
+        "bottom": 660.484375,
+        "left": 54.03125,
+        "right": 230.671875,
+        "top": 599.484375
+      }
+    ],
+    "era": "8",
+    "imageOpacity": 0,
+    "paper": "rgb(240, 229, 205)",
+    "visible": "visible"
+  },
+  {
+    "size": {
+      "width": 1024,
+      "height": 768
+    },
+    "boxes": [
+      {
+        "bottom": 318.546875,
+        "left": 40.359375,
+        "right": 593.3125,
+        "top": 233.609375
+      },
+      {
+        "bottom": 464.484375,
+        "left": 40.359375,
+        "right": 313.359375,
+        "top": 338.546875
+      },
+      {
+        "bottom": 660.484375,
+        "left": 40.359375,
+        "right": 217,
+        "top": 599.484375
+      }
+    ],
+    "era": "8",
+    "imageOpacity": 0,
+    "paper": "rgb(240, 229, 205)",
+    "visible": "visible"
+  }
+]

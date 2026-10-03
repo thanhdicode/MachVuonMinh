@@ -1,0 +1,421 @@
+You are Astra 6. Act only as the implementation engineer.
+
+I am the creative director and architecture lead. Do not invent a different concept.
+Do not redesign the existing website globally.
+
+TASK:
+Insert ONE new “History Bridge” experience immediately after the current plough scene (“Công cụ giới hạn năng lực”) and before the existing “Máy móc mở rộng quy mô” scene.
+
+The new experience is titled:
+
+BẢN ĐỒ LỊCH SỬ
+LỰC LƯỢNG SẢN XUẤT VIỆT NAM
+
+Its purpose is to give users a visual historical overview of how productive capacity in Vietnam changed before the later chapters analytically zoom into machines, automation, data and QHSX.
+
+DO NOT BUILD A NORMAL TIMELINE.
+
+The visual reference is a continuous architecture-history collage:
+- wide editorial collage
+- overlapping period objects
+- year/copy annotations above and below
+- faint geographic backdrop
+- one continuous line connecting all eras
+- archival visual strip underneath
+- magazine/museum composition
+- no cards
+
+ENGINE:
+Use DOM + SVG + GSAP.
+Do NOT use Three.js in this History Bridge.
+
+Use:
+- GSAP
+- ScrollTrigger
+- DrawSVGPlugin if available
+- MorphSVGPlugin if useful
+- existing Lenis only if already stable
+
+SCROLL:
+The section is 100vh and pinned.
+
+Vertical wheel input must drive horizontal movement of a track approximately 500–650vw wide.
+
+Implement:
+
+distance = track.scrollWidth - viewportWidth
+
+Animate x from 0 to -distance using ScrollTrigger:
+start “top top”
+pin true
+scrub approx 0.8
+anticipatePin 1
+invalidateOnRefresh true
+
+Use containerAnimation or normalized progress to trigger each era.
+
+NO horizontal browser scrollbar.
+
+PARALLAX:
+background map: 0.12x
+bottom archive strip: 0.3x
+main collage: 1x
+red path: 1.05x
+labels: 0.92x
+
+RED THREAD:
+The existing conceptual Red Thread enters from the plough scene.
+
+Inside this section it MUST become a THIN SVG path, 3–5px, never a large Three.js tube.
+
+The same path changes visual meaning:
+soil furrow
+→ railway line
+→ workshop/power line
+→ industrial production line
+→ electrical grid
+→ export/logistics path
+→ data line.
+
+Use one node per historical era.
+
+Animate path reveal with DrawSVG or stroke-dashoffset tied to timeline progress.
+
+MAGNIFIER:
+Create a premium desktop magnifying lens.
+
+Do not use Three.js.
+
+Lens:
+180–200px circle
+2.2x zoom
+1px brass/ink outline
+subtle shadow
+4 tiny crosshair ticks
+GSAP quickTo pointer-follow lag ~150ms
+
+It only activates while pointer is over historical images.
+Never activate over text.
+
+The lens must show a high-resolution copy of the same image with the exact point under the pointer centered in the lens.
+
+Mobile:
+no pointer lens.
+Tap/long-press opens zoom overlay.
+
+SECTION COMPOSITION:
+Backdrop:
+faint Vietnam silhouette/map texture <= 8% opacity.
+
+Middle:
+one continuous collage occupying 55–65% viewport height.
+
+Period images MUST overlap neighboring periods.
+Never put them into rectangular cards.
+
+Use irregular SVG/paper masks.
+Use paper edge / print texture.
+Do not overuse shadow.
+
+Typography:
+Be Vietnam Pro
+IBM Plex Mono only for years/meta.
+
+No third global font.
+
+VISIBLE COPY MUST NOT DISPLAY CITATION URLS OR SOURCE NAMES.
+Sources belong only in hidden historySources.ts / existing Source Drawer.
+
+PERIOD A:
+TRƯỚC 1858
+Title: NHỊP SẢN XUẤT CỦA LÀNG
+
+Copy:
+“Sản xuất đi bằng nhịp mùa vụ và bàn tay. Làng nghề tích lũy kỹ năng, nhưng năng lực vẫn phụ thuộc lớn vào sức người, sức kéo và tự nhiên.”
+
+Tag:
+Công cụ thủ công · kỹ năng kinh nghiệm · quy mô nhỏ
+
+Do not invent a statistic.
+
+Visual:
+wet rice field
+traditional plough
+water wheel
+hand loom
+pottery/bamboo craft
+
+No modern machine.
+No electric pole.
+
+PERIOD B:
+1899–1936
+Title: ĐƯỜNG SẮT, MỎ, CẢNG
+
+Copy:
+“Cơ giới và hạ tầng hiện đại xuất hiện rõ hơn, nhưng chủ yếu nằm trong cấu trúc kinh tế thuộc địa và phục vụ khai thác, vận chuyển nguyên liệu.”
+
+Metric:
+1.726 km
+
+Caption:
+“Tuyến Hà Nội – Sài Gòn hoàn thành toàn tuyến năm 1936.”
+
+Visual:
+steam locomotive
+metre-gauge rail
+coal mine
+industrial bridge
+early freight port
+
+No modern diesel train.
+No modern container crane.
+Do not romanticize colonial rule.
+
+PERIOD C:
+1945–1954
+Title: SẢN XUẤT TRONG KHÁNG CHIẾN
+
+Copy:
+“Máy móc, xưởng dệt, giấy, in và cơ khí được tháo dỡ, di chuyển và tổ chức lại. Năng lực sản xuất tồn tại trong những điều kiện phân tán và thiếu thốn.”
+
+Micro-fact:
+“Nhiều mỏ than khi ấy vẫn khai thác chủ yếu bằng phương pháp thủ công.”
+
+Visual:
+small lathe workshop
+forge
+printing/paper shop
+textile workshop
+manual mining tools
+
+Do not make a battle scene.
+
+PERIOD D:
+1955–1975
+Title: ĐẶT NỀN MÓNG CÔNG NGHIỆP
+
+Copy:
+“Từ khôi phục cơ sở cũ đến xây dựng cơ khí, điện, hóa chất và vật liệu — quy mô sản xuất và mức chuyên môn hóa tăng rõ rệt.”
+
+Tag:
+Máy động lực · điện · cơ khí · kỹ thuật viên
+
+Visual:
+machine hall
+electric motor
+pump
+power pylon
+engineer/technician
+
+PERIOD E:
+1975–1985
+Title: TÁI THIẾT VÀ MỞ RỘNG
+
+Copy:
+“Sau thống nhất, mạng lưới công nghiệp được tổ chức lại trên phạm vi cả nước. Năng lực vật chất tăng, nhưng quản lý và hiệu quả trở thành bài toán lớn.”
+
+Metric:
+1.913 xí nghiệp
+
+Caption:
+“Năm 1976: 1.279 ở miền Bắc + 634 ở miền Nam trong khu vực quốc doanh và công tư hợp doanh.”
+
+Secondary:
+“1981–1985: sản lượng công nghiệp tăng bình quân 9,5%/năm.”
+
+Bridge:
+Cơ sở vật chất tăng ↔ cách quản lý cần thay đổi
+
+PERIOD F:
+1986–2006
+Title: ĐỔI MỚI MỞ KHÔNG GIAN SẢN XUẤT
+
+Copy:
+“Không chỉ máy móc thay đổi. Cách quản lý, quyền kinh doanh và thị trường cũng thay đổi — tạo không gian rộng hơn để nguồn lực vận động.”
+
+Metric:
+32,4 tỷ USD
+
+Caption:
+“Xuất khẩu năm 2005 — gần 40 lần năm 1986.”
+
+Visual:
+textile/light manufacturing
+early industrial zone
+shipping cargo
+electric grid
+small private enterprise
+export production
+
+No smartphone.
+No modern skyscraper hero.
+
+PERIOD G:
+1993–2019
+Title: ĐIỆN ĐẾN MỌI NƠI
+
+Copy:
+“Điện từ một điều kiện khan hiếm trở thành hạ tầng gần như phổ quát — mở rộng khả năng dùng máy móc, học tập, sản xuất và kết nối.”
+
+Metric:
+14% → gần 100%
+
+Caption:
+“Tỷ lệ hộ gia đình có điện: 1993 → 2019.”
+
+Visual:
+rural grid
+transformer
+electric irrigation pump
+small workshop motor
+
+PERIOD H:
+1997–2026
+Title: TỪ ĐIỆN ĐẾN DỮ LIỆU
+
+Copy:
+“Internet nối con người, doanh nghiệp và máy móc vào cùng một không gian. Đến đây, dữ liệu và AI bắt đầu trở thành đầu vào trực tiếp của sản xuất.”
+
+Metric:
+84%
+
+Caption:
+“Dân số sử dụng Internet năm 2024.”
+
+Secondary:
+“Việt Nam kết nối Internet toàn cầu từ 1997.”
+
+Final bridge:
+“Khi LLSX không còn chỉ là máy móc, câu hỏi về sở hữu, tổ chức và phân phối cũng phải thay đổi.”
+
+Visual:
+fiber optic
+telecom infrastructure
+server rack
+semiconductor package/wafer
+engineer workstation
+industrial data network
+
+Do NOT use humanoid AI robots.
+
+SOURCE DATA:
+Store but do not visibly render:
+- MOIT history 1945–1954
+- MOIT history 1955–1975
+- MOIT history 1975–1985
+- MOIT history 1986–2006
+- World Bank Vietnam electricity access
+- World Bank/ITU Internet usage
+- MIC Vietnam Internet history
+- Resolution 57
+- railway historical reference for the 1,726 km / 1936 fact
+
+IMAGE GENERATION:
+Generate 8 main historical editorial reconstructions.
+Do not generate fake documentary photographs.
+
+Shared style:
+archival editorial cut-paper collage,
+historically grounded Vietnamese productive life,
+warm handmade paper,
+charcoal/graphite,
+oxide brown,
+muted red,
+museum exhibition quality,
+no baked-in text,
+no logo,
+no political portrait,
+no anachronistic technology,
+usable isolated silhouettes,
+large negative-space edges,
+2048px+ long side.
+
+Also create one low-contrast monochrome panoramic strip per period for the lower background.
+
+MOTION:
+As each era approaches center:
+image y 24 → 0
+opacity .55 → 1
+scale .96 → 1
+year changes to red
+metric fades up
+node pulses once
+
+After passing:
+desaturate image to ~75%
+do not disappear entirely.
+
+Micro-animation:
+A: furrow advances
+B: locomotive wheel rotates very slightly
+C: lathe slowly turns
+D: current pulse crosses wire
+E: conveyor marker advances
+F: factory-to-port line activates
+G: electricity nodes light outward
+H: data packet moves into chip
+
+Pause micro-animation when era is offscreen.
+
+TRANSITION TO NEXT CHAPTER:
+At the end, display:
+
+“Đây là bản đồ lịch sử. Bây giờ hãy quay lại bước ngoặt đầu tiên: điều gì thay đổi khi máy móc bắt đầu mở rộng năng lực của con người?”
+
+Slow horizontal motion.
+
+Let the Red Thread leave the final collage and morph into the outline/belt geometry of the next machine scene.
+
+Unpin.
+
+Continue into “Máy móc mở rộng quy mô.”
+
+MOBILE:
+Do not emulate the 600vw desktop track.
+
+Stack eras vertically.
+Red Thread becomes vertical SVG connector.
+Images remain large.
+Tap image for zoom.
+No cursor lens.
+
+ACCESSIBILITY:
+All facts remain DOM text.
+Images get real alt text.
+Lens is optional enhancement.
+Keyboard arrows step periods on desktop.
+Reduced motion removes pin/parallax and renders static atlas.
+
+PERFORMANCE:
+No Three.js in this section.
+AVIF/WebP.
+Responsive srcset.
+Lazy-load farther periods.
+Preload current + next two only.
+No image > ~450KB unless high-res lens copy is lazy.
+Disable offscreen micro-animation.
+
+VISUAL QA:
+Capture 1440×900 screenshots at:
+- start
+- colonial rail period
+- 1975–1985 period
+- Doi Moi
+- digital ending
+
+Reject implementation if:
+- it looks like cards
+- it resembles a SaaS timeline
+- more than 40% of viewport is useless blank area
+- collage does not dominate composition
+- period images do not overlap
+- red path is not clearly continuous
+- lens feels like ecommerce zoom
+- sources are visible in main copy
+- images contain obvious anachronisms
+- text blocks exceed ~34 words
+- transition into machine chapter feels unrelated
+
+STOP after building and QA’ing THIS History Bridge.
+Do not redesign later chapters in the same pass.
