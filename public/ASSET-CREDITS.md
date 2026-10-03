@@ -53,3 +53,9 @@ Kenney: **Platformer Characters 1**, **Robot Pack**, **New Platformer Pack**, CC
 - GitHub distribution: https://github.com/series-ai/jam-ready-assets, revision `782e3a09566b4bb3d98fe2ed07f5a8545e6fcfd4`.
 - 49 PNG sprites are packaged locally in `/minigame/sprites/`, with the three original `LICENSE-*.txt` notices and upstream paths in `/minigame/sprites/SOURCE.json`.
 - Animation selects supplied poses; sprites are scaled/mirrored and combined with the project's original scenery, chapter palettes and red thread.
+
+## Cú Mạch — bộ ảnh cho hướng dẫn
+
+Bảy tư thế Cú Mạch đeo kính và khăn đỏ được tạo riêng cho dự án bằng công cụ imagegen ngày03/10/2026, từ concept và ảnh cú gốc do dự án tạo. Không dùng pixel từ Pinterest, ảnh bảo tàng tham khảo hoặc stock bên ngoài. Đây là minh họa tạo bằng AI, không phải ảnh tư liệu hay nhân vật của bên thứ ba.
+
+Các ảnh nền trong được mã hóa WebP, giữ bản PNG gốc và prompt trong hồ sơ dự án. Bộ ảnh gồm chào/nghỉ, chỉ trái, chỉ phải, xem kỹ, mời thử, xác nhận, tạm biệt và bản nhỏ cho nút gọi hướng dẫn. Danh sách file và checksum: [Cú Mạch assets](/guide/owl-assets.json). Bộ ảnh đang được chuẩn bị cho tính năng hướng dẫn; việc cung cấp ảnh không có nghĩa tour đã được tích hợp vào website.

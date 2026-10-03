@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "date": "2026-10-03",
+  "identity": "Cu Mach / concept direction 01",
+  "generation": "Built-in imagegen; original project artwork; no external stock pixels",
+  "encoding": "Sharp: contain resize only, transparent WebP q82 alpha100; originals unchanged",
+  "totalBytes": 149732,
+  "assets": [
+    {
+      "id": "neutral",
+      "file": "owl-neutral.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 19950,
+      "sha256": "c18d31d383a950e7f12812a23f4591170d891e8610f04c040030f475a0d06f84",
+      "source": ".studio/guide-assets/originals/neutral.png",
+      "sourceSha256": "8df404c88736c008912932157d3e9824b9c87c33080c52ca51c33e2b4d37a632",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    },
+    {
+      "id": "point-left",
+      "file": "owl-point-left.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 20474,
+      "sha256": "13b48bf79f241c206f6c6de743276837befa6ad30dc025229f05d57c0205b072",
+      "source": ".studio/guide-assets/originals/point-left.png",
+      "sourceSha256": "7d392be6ad712b10ba2ac0b2946823a078274c5cdd5e00cdd90e50013fda1a5c",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    },
+    {
+      "id": "point-right",
+      "file": "owl-point-right.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 21850,
+      "sha256": "5ea9a2426274348cbadabe3e33f5e8ed64c887230dfe6b9104c7112deec3e3a8",
+      "source": ".studio/guide-assets/originals/point-right.png",
+      "sourceSha256": "0f8efe42e8bdeabac4d6bfaf2b14710fae7a96b87e8dee0cfa19f9bc138c482f",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    },
+    {
+      "id": "inspect",
+      "file": "owl-inspect.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 20422,
+      "sha256": "31aaaefd1d5ed7c33c77b3bad1e2edf9c8903ec7b0e270b54ed53321d13dde10",
+      "source": ".studio/guide-assets/originals/inspect.png",
+      "sourceSha256": "002eaabf0433a587027524ca1f9a45829e34ba8dbad8e69ff4b01a31e70e4acd",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    },
+    {
+      "id": "practice",
+      "file": "owl-practice.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 21276,
+      "sha256": "9d65f0657274f43b71d826e7a1ed79873e80ac8bfc8f939afd084027c44eb824",
+      "source": ".studio/guide-assets/originals/practice.png",
+      "sourceSha256": "f62bf946937f1b53d624f117a9c3fea748c7b0810eef48a553af2ef6bd741b18",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    },
+    {
+      "id": "confirm",
+      "file": "owl-confirm.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 21212,
+      "sha256": "57b7745abff5eeb3c7738d251ae16af0899a4a411a24ff8c5bb5ccf37da90936",
+      "source": ".studio/guide-assets/originals/confirm.png",
+      "sourceSha256": "63f2ed7b033b57f8ebd02ee5125b3192341f95103840d5821c047db3940d23d9",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    },
+    {
+      "id": "bye",
+      "file": "owl-bye.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 20744,
+      "sha256": "0f2a506392e82fc1dd77ba5b35d93e7ab99fc991f296a6b338e1c5d73a0fbcec",
+      "source": ".studio/guide-assets/originals/bye.png",
+      "sourceSha256": "a240aa7a66f4042426362bb95923813ff3e0411eb09a7f254d9c8d2f209973c2",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    },
+    {
+      "id": "dock",
+      "file": "owl-dock.webp",
+      "width": 80,
+      "height": 80,
+      "bytes": 3804,
+      "sha256": "26f2758202f6200c10380cba39747addd64ea29f06216e1ed68ca7172b334d35",
+      "source": ".studio/guide-assets/originals/neutral.png",
+      "sourceSha256": "8df404c88736c008912932157d3e9824b9c87c33080c52ca51c33e2b4d37a632",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199
+    }
+  ]
+}

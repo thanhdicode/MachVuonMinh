@@ -1,0 +1,887 @@
+{
+  "version": 2,
+  "language": "vi",
+  "scope": "Planning content, not imported into the current app",
+  "voice": {
+    "name": "Cú Mạch",
+    "pronouns": "mình / bạn",
+    "rules": [
+      "Mỗi bước: chỉ thao tác → nêu chỗ quan sát → cho người dùng tự tiếp tục.",
+      "Gọi đúng nhãn trên màn hình; giải thích thuật ngữ trước khi viết tắt.",
+      "Lời dẫn hiện bằng chữ; không tự phát giọng nói hoặc bật âm thanh.",
+      "Không dùng proxy, lease, callback, iframe, driver, state trong lời nói với người dùng.",
+      "Không khen hoàn thành nếu người dùng bỏ qua; không tự trả lời câu hỏi game."
+    ]
+  },
+  "buttons": {
+    "next": "Tiếp tục",
+    "back": "Quay lại",
+    "practiceDone": "Đã thử, tiếp tục",
+    "skipStep": "Bỏ qua bước này",
+    "skipModule": "Bỏ qua phần này",
+    "skipGuide": "Bỏ qua hướng dẫn",
+    "pause": "Tạm dừng hướng dẫn",
+    "resume": "Tiếp tục hướng dẫn",
+    "replay": "Xem lại từ đầu"
+  },
+  "systemCopy": {
+    "preparing": "Mình đang mở phần này cho bạn. Bạn vẫn có thể bỏ qua hướng dẫn.",
+    "skipped": "Bạn cứ tự khám phá nhé. Khi cần, bấm hình cú để gọi mình lại.",
+    "paused": "Mình dừng ở đây nhé. Bấm Tiếp tục hướng dẫn khi bạn muốn xem tiếp.",
+    "missingTarget": "Mình chưa tìm thấy phần này trên màn hình. Bạn có thể thử lại, bỏ qua bước này hoặc đọc hướng dẫn bằng chữ.",
+    "assetFailed": "Hình cú chưa tải được, nhưng bạn vẫn có thể đọc và dùng hướng dẫn bình thường.",
+    "gameFailed": "Phần hướng dẫn cách chơi chưa mở được. Bạn có thể thử lại hoặc đóng hướng dẫn để chơi.",
+    "practice": "Bạn thử thao tác nhé. Khi đã quan sát xong, bấm Đã thử, tiếp tục.",
+    "skippedModule": "Mình đã bỏ qua phần này. Bạn có thể xem lại từ hình cú bất cứ lúc nào.",
+    "complete": "Bạn đã xem xong phần này. Muốn thử lại công cụ nào, hãy gọi mình từ hình cú.",
+    "partial": "Mình đã đi hết các phần bạn chọn. Những bước bạn bỏ qua vẫn có thể mở lại từ hình cú."
+  },
+  "motionTokens": {
+    "welcome": {
+      "durationMs": 260,
+      "translateY": 10,
+      "opacity": [
+        0,
+        1
+      ],
+      "ease": "power2.out",
+      "repeat": 0
+    },
+    "read": {
+      "durationMs": 200,
+      "translateY": 6,
+      "opacity": [
+        0,
+        1
+      ],
+      "ease": "power2.out",
+      "repeat": 0
+    },
+    "point": {
+      "durationMs": 220,
+      "translateY": 0,
+      "opacity": [
+        0,
+        1
+      ],
+      "ease": "power2.out",
+      "repeat": 0
+    },
+    "inspect": {
+      "durationMs": 240,
+      "translateY": 2,
+      "opacity": [
+        0,
+        1
+      ],
+      "ease": "power2.out",
+      "repeat": 0
+    },
+    "practice": {
+      "durationMs": 180,
+      "translateY": 0,
+      "opacity": [
+        0,
+        1
+      ],
+      "ease": "power2.out",
+      "repeat": 0
+    },
+    "confirm": {
+      "durationMs": 180,
+      "translateY": 0,
+      "rotationDeg": 3,
+      "opacity": [
+        0,
+        1
+      ],
+      "ease": "power2.out",
+      "repeat": 0,
+      "trigger": "verified-action-only"
+    },
+    "exit": {
+      "durationMs": 160,
+      "translateY": 0,
+      "opacity": [
+        1,
+        0
+      ],
+      "ease": "power1.out",
+      "repeat": 0
+    },
+    "none": {
+      "durationMs": 0,
+      "repeat": 0
+    }
+  },
+  "steps": [
+    {
+      "id": "I01",
+      "title": "Chào bạn",
+      "say": "Chào bạn, mình là Cú Mạch. Mình sẽ chỉ bạn cách mở triển lãm, tìm từng phần và thử các công cụ. Bạn muốn mình dẫn đường hay tự khám phá?",
+      "action": "Chọn Dẫn tôi khám phá, Hướng dẫn nhanh hoặc Tự khám phá.",
+      "observe": "Lựa chọn của bạn quyết định cách bắt đầu.",
+      "completion": "Chọn một lựa chọn; không tự bắt đầu sau timer.",
+      "pose": "neutral",
+      "motion": "welcome"
+    },
+    {
+      "id": "I02",
+      "title": "Mở triển lãm",
+      "say": "Kéo đầu sợi đỏ qua vòng kim loại để mở triển lãm. Bạn cũng có thể chạm vào đầu sợi đỏ hoặc nhấn Enter. Khi mở xong, mình chỉ bạn cách đi tiếp.",
+      "action": "Kéo, chạm hoặc nhấn Enter.",
+      "observe": "Màn mở đầu chuyển sang triển lãm.",
+      "completion": "Intro thực sự unlocked; không hoàn thành ở pointerdown.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "I03",
+      "title": "Đi tiếp",
+      "say": "Cuộn xuống để xem phần tiếp theo. Dùng chuột, vuốt màn hình hoặc bấm mũi tên đang được chỉ sáng. Bạn cứ đi theo tốc độ mình thấy thoải mái nhé.",
+      "action": "Cuộn, vuốt hoặc bấm mũi tên.",
+      "observe": "Cảnh mới và tên phần xuất hiện.",
+      "completion": "Scene 01 sẵn sàng hoặc người dùng Tiếp tục.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "I04",
+      "title": "Tìm một phần",
+      "say": "Bấm nút ba gạch để mở Mục lục. Bạn có thể chọn thẳng phần muốn xem, không cần cuộn lại từ đầu.",
+      "action": "Bấm Mục lục.",
+      "observe": "Danh sách phần mở ra.",
+      "completion": "Menu mở; cue nằm trong bảng.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "I05",
+      "title": "Âm thanh và chuyển động",
+      "say": "Trong bảng này, bạn có thể bật hoặc tắt âm thanh, và tạm dừng chuyển động. Chọn cách xem phù hợp với bạn; mình sẽ giữ lựa chọn đó.",
+      "action": "Tùy ý bấm âm thanh hoặc tạm dừng chuyển động.",
+      "observe": "Nhãn nút phản ánh lựa chọn.",
+      "completion": "Tiếp tục được cả khi không đổi thiết lập.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "I06",
+      "title": "Gọi mình lại",
+      "say": "Bấm hình cú khi cần mình hướng dẫn lại. Bạn có thể tiếp tục bước đang xem, mở hướng dẫn của phần hiện tại hoặc xem lại từ đầu.",
+      "action": "Bấm hình cú để mở menu hướng dẫn.",
+      "observe": "Các lựa chọn tiếp tục và xem lại.",
+      "completion": "Đọc hoặc mở dock rồi Tiếp tục.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "H01",
+      "title": "Đi qua lịch sử",
+      "say": "Cuộn để đi qua bức tranh lịch sử này. Trên điện thoại, vuốt xuống qua các mốc. Nhìn tên thời kỳ bên cạnh hình để biết bạn đang ở đâu.",
+      "action": "Cuộn hoặc vuốt.",
+      "observe": "Tên thời kỳ đổi cùng vị trí đang xem.",
+      "completion": "Tiếp tục.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "H02",
+      "title": "Chọn một mốc",
+      "say": "Bấm mốc 1899–1936 để xem đường sắt, mỏ và cảng. Khi hình dừng lại, đọc tên thời kỳ và chú thích. Các mốc khác cũng mở theo cách này.",
+      "action": "Bấm nhãn 1899–1936.",
+      "observe": "Hình và chú thích đúng mốc 02.",
+      "completion": "Mốc 02 active, caption khớp.",
+      "pose": "point-right",
+      "motion": "point",
+      "variants": [
+        {
+          "when": "history-static",
+          "say": "Vuốt xuống đến mốc 1899–1936 để xem đường sắt, mỏ và cảng. Đọc tên thời kỳ và chú thích cạnh hình nhé.",
+          "action": "Vuốt/cuộn đến section era 1.",
+          "pose": "neutral",
+          "motion": "read"
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "title": "Mốc trước và sau",
+      "say": "Bấm mũi tên sang phải một lần để xem mốc sau. Mũi tên trái đưa bạn quay lại. Ở mốc đầu hoặc cuối, nút không dùng được sẽ mờ đi.",
+      "action": "Bấm mũi tên phải; có thể thử quay lại.",
+      "observe": "Mốc đang xem và chú thích thay đổi.",
+      "completion": "Era thay đổi rồi settle.",
+      "pose": "point-right",
+      "motion": "point",
+      "variants": [
+        {
+          "when": "history-static",
+          "say": "Vuốt xuống để xem mốc tiếp theo; vuốt lên để quay lại. Đọc năm và tên thời kỳ cạnh hình để biết bạn đang ở đâu.",
+          "action": "Vuốt/cuộn tới era kế tiếp.",
+          "pose": "neutral",
+          "motion": "read"
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "title": "Đọc chú thích",
+      "say": "Đọc tên thời kỳ và chú thích ở đây. Hình giúp bạn hình dung lịch sử; đây là minh họa tái dựng. Muốn kiểm tra dữ kiện, bấm Đối chiếu tư liệu.",
+      "action": "Đọc chú thích.",
+      "observe": "Phân biệt minh họa với dữ kiện có nguồn.",
+      "completion": "Tiếp tục; không kiểm tra kiến thức.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "H05",
+      "title": "Nghe âm nền",
+      "say": "Bấm nút Âm thanh tắt nếu bạn muốn nghe âm nền của thời kỳ đang xem. Khi nút hiện Âm thanh bật, bấm lại để tắt. Không tiện nghe thì cứ bỏ qua bước này nhé.",
+      "action": "Tùy ý bật rồi tắt âm thanh.",
+      "observe": "Trạng thái âm thanh và âm nền nếu thiết bị cho phép.",
+      "completion": "Tiếp tục không cần loa; xác nhận dựa trên trạng thái audio thật.",
+      "pose": "point-right",
+      "motion": "point",
+      "variants": [
+        {
+          "when": "audio-on",
+          "say": "Âm thanh đang bật. Bấm nút Âm thanh bật để tắt; bấm lại để nghe. Bạn tự chọn cách xem phù hợp nhé."
+        }
+      ]
+    },
+    {
+      "id": "H06",
+      "title": "Xem hình rõ hơn",
+      "say": "Bấm Soi chi tiết rồi rê kính lúp lên vùng hình bạn muốn xem. Bấm lại hoặc nhấn Esc để tắt kính lúp.",
+      "action": "Bật kính lúp hoặc mở ảnh chi tiết.",
+      "observe": "Chi tiết vùng hình được phóng.",
+      "completion": "Đóng kính lúp hoặc dialog trước bước tiếp.",
+      "pose": "inspect",
+      "motion": "inspect",
+      "variants": [
+        {
+          "when": "history-static",
+          "say": "Bấm Soi chi tiết để mở hình lớn hơn. Xem xong, bấm nút × có tên Đóng ảnh phóng lớn, hoặc nhấn Esc để trở lại.",
+          "action": "Mở ảnh zoom rồi đóng dialog.",
+          "pose": "inspect",
+          "motion": "inspect"
+        }
+      ]
+    },
+    {
+      "id": "H07",
+      "title": "Kiểm tra tư liệu",
+      "say": "Bấm Đối chiếu tư liệu để xem nguồn và mốc thời gian của phần này. Muốn đọc tài liệu đầy đủ, bấm Đọc nguồn gốc. Bấm nút × để đóng bảng và quay lại.",
+      "action": "Mở Tư liệu; đọc nguồn; đóng bảng.",
+      "observe": "Tên nguồn, thời gian và liên kết.",
+      "completion": "Bảng đóng; không tự mở tab ngoài.",
+      "pose": "inspect",
+      "motion": "inspect"
+    },
+    {
+      "id": "H08",
+      "title": "Vào xưởng máy",
+      "say": "Bấm dòng Cơ giới hóa — khi một chiếc máy trở thành cả một hệ thống để vào xưởng. Bạn sẽ thấy lực được truyền đến nhiều máy qua trục và dây đai.",
+      "action": "Bấm CTA bánh đà.",
+      "observe": "Xưởng máy xuất hiện.",
+      "completion": "Scene 02 sẵn sàng.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "T01",
+      "title": "Quan sát công cụ",
+      "say": "Ở phần Công cụ, cuộn chậm và nhìn sức người, sức kéo cùng đường cày. Sợi đỏ nối các cảnh, giúp bạn theo dõi cách công cụ thay đổi.",
+      "action": "Cuộn chậm qua phần Công cụ.",
+      "observe": "Các phương thức lao động trong cảnh.",
+      "completion": "Tiếp tục; bước này trước Atlas trong full route.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "T02",
+      "title": "Theo đường truyền động",
+      "say": "Cuộn chậm qua xưởng, nhìn từ nguồn lực đến trục rồi dây đai nối các máy. Bạn chỉ cần quan sát, không cần bấm vào bánh răng.",
+      "action": "Cuộn; trên bản tĩnh đọc hình và chú thích.",
+      "observe": "Chuỗi truyền động trong cảnh hoặc hình tĩnh.",
+      "completion": "Bấm Tiếp tục.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "T03",
+      "title": "Thử tự động hóa",
+      "say": "Kéo thanh Mức tự động hóa sang phải, rồi nhìn các vai trò phía trên thay đổi. Bạn cũng có thể chọn thanh bằng Tab và dùng phím mũi tên.",
+      "action": "Kéo range hoặc dùng phím khi input focus.",
+      "observe": "Các vai trò phía trên thay đổi.",
+      "completion": "Range commit; giữ bước đến Đã thử, tiếp tục.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "T04",
+      "title": "Đọc vai trò con người",
+      "say": "Nhìn các nhãn vai trò sau khi bạn đổi thanh. Máy tự động hơn, nhưng con người vẫn có việc giám sát, thiết kế và cải tiến. Thanh này giúp bạn so sánh cách thể hiện đó.",
+      "action": "Đọc nhãn vai trò.",
+      "observe": "Vai trò thay đổi; không suy diễn con người biến mất.",
+      "completion": "Tiếp tục.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "T05",
+      "title": "Đi đến phần thử nghiệm",
+      "say": "Quan sát các nhãn dữ liệu, AI, hạ tầng và kỹ năng. Chúng cùng góp vào năng lực sản xuất. Cuộn tiếp để thử thay đổi từng yếu tố trong phần mô phỏng.",
+      "action": "Quan sát rồi cuộn tiếp.",
+      "observe": "Các nhãn và phần Lab tiếp theo.",
+      "completion": "Tiếp tục đến scene 05.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "L01",
+      "title": "Hai nhóm thanh",
+      "say": "Lực lượng sản xuất (LLSX) gồm người lao động và tư liệu sản xuất. Quan hệ sản xuất (QHSX) gồm sở hữu, tổ chức–quản lý và phân phối. Đây là mô phỏng khái niệm, không phải số liệu kinh tế.",
+      "action": "Nhìn hai nhóm thanh và hình ở giữa.",
+      "observe": "Lõi biểu đạt năng lực; cấu trúc đỏ biểu đạt quan hệ.",
+      "completion": "Tiếp tục; snapshot trước thực hành.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "L02",
+      "title": "Thử Công nghệ",
+      "say": "Kéo thanh Công nghệ sang phải hoặc trái, rồi nhìn lõi và trạng thái bên dưới thay đổi. Thanh này giúp bạn thử mức năng lực của công cụ trong mô phỏng.",
+      "action": "Kéo Công nghệ.",
+      "observe": "Lõi và trạng thái.",
+      "completion": "Range commit hoặc Bỏ qua bước này.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L03",
+      "title": "Thử Dữ liệu",
+      "say": "Kéo thanh Dữ liệu rồi nhìn lõi và trạng thái bên dưới. Thanh này biểu diễn vai trò của dữ liệu trong sản xuất hiện đại để bạn so sánh.",
+      "action": "Kéo Dữ liệu.",
+      "observe": "Lõi và trạng thái; không gán dữ liệu vào định nghĩa cổ điển.",
+      "completion": "Range commit hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L04",
+      "title": "Thử Kỹ năng",
+      "say": "Kéo thanh Kỹ năng rồi nhìn lõi và trạng thái bên dưới. Công cụ mới cần người biết vận hành; thanh này giúp bạn thử thay đổi năng lực của người lao động.",
+      "action": "Kéo Kỹ năng.",
+      "observe": "Lõi và trạng thái.",
+      "completion": "Range commit hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L05",
+      "title": "Thử Hạ tầng",
+      "say": "Kéo thanh Hạ tầng rồi nhìn lõi và trạng thái. Hạ tầng gồm những nền tảng như điện và đường truyền, giúp công cụ và người lao động làm việc.",
+      "action": "Kéo Hạ tầng.",
+      "observe": "Lõi và trạng thái.",
+      "completion": "Range commit hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L06",
+      "title": "Thử Tự động hóa",
+      "say": "Kéo thanh Tự động hóa rồi nhìn lõi và trạng thái. Ở đây bạn đang thử năng lực của hệ thống; thanh ở phần trước dùng để trình bày sự thay đổi vai trò.",
+      "action": "Kéo Tự động hóa trong Lab.",
+      "observe": "Lõi và trạng thái; phân biệt hai thanh.",
+      "completion": "Range commit hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L07",
+      "title": "Đọc nhóm quan hệ",
+      "say": "Nhìn ba thanh Sở hữu, Tổ chức–quản lý và Phân phối. Chúng giúp bạn thử ba mặt của quan hệ sản xuất. Số lớn hơn ở đây không có nghĩa là luôn tốt hơn.",
+      "action": "Đọc ba nhãn.",
+      "observe": "Ba mặt đầy đủ; không thang đánh giá đạo đức.",
+      "completion": "Tiếp tục.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "L08",
+      "title": "Thử Sở hữu",
+      "say": "Kéo thanh Sở hữu rồi nhìn cấu trúc đỏ và trạng thái. Khi đọc tình huống thật, câu hỏi ở mặt này là: ai nắm công cụ và tư liệu để sản xuất?",
+      "action": "Kéo Sở hữu.",
+      "observe": "Cấu trúc đỏ và trạng thái.",
+      "completion": "Range commit hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L09",
+      "title": "Thử Tổ chức–quản lý",
+      "say": "Kéo thanh Tổ chức–quản lý rồi nhìn cấu trúc đỏ và trạng thái. Mặt này nói về cách phân công công việc, phối hợp và quản lý sản xuất.",
+      "action": "Kéo Tổ chức–quản lý.",
+      "observe": "Cấu trúc đỏ và trạng thái.",
+      "completion": "Range commit hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L10",
+      "title": "Thử Phân phối",
+      "say": "Kéo thanh Phân phối rồi nhìn cấu trúc đỏ và trạng thái. Mặt này đặt câu hỏi: thành quả lao động được chia như thế nào?",
+      "action": "Kéo Phân phối.",
+      "observe": "Cấu trúc đỏ và trạng thái.",
+      "completion": "Range commit hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "L11",
+      "title": "Đọc kết quả đang thấy",
+      "say": "Đọc dòng Phù hợp, Căng thẳng hoặc Mâu thuẫn ở đây, rồi đọc câu giải thích bên dưới. Đây là phản hồi của mô phỏng theo các thanh bạn vừa đặt.",
+      "action": "Đọc nhãn trạng thái và giải thích.",
+      "observe": "Trạng thái hiện tại, không nhận xét từng frame.",
+      "completion": "Tiếp tục.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "L12",
+      "title": "Thử Cân bằng",
+      "say": "Bấm Cân bằng để đưa các thanh về cùng mức. Nhìn trạng thái và hình ở giữa; dùng cách đặt này làm điểm đầu để so sánh với hai ví dụ tiếp theo.",
+      "action": "Bấm CÂN BẰNG.",
+      "observe": "Mức 50 của hai nhóm và trạng thái.",
+      "completion": "Preset apply đúng; không tự đổi.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "L13",
+      "title": "Thử LLSX vượt trước",
+      "say": "Bấm LLSX vượt trước rồi đọc trạng thái. Ví dụ này giúp bạn thấy năng lực sản xuất thay đổi nhanh hơn mức thích ứng của quan hệ sản xuất.",
+      "action": "Bấm LLSX VƯỢT TRƯỚC.",
+      "observe": "Preset và giải thích hiện tại.",
+      "completion": "Preset apply đúng.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "L14",
+      "title": "Thử QHSX cứng",
+      "say": "Bấm QHSX cứng rồi so sánh với ví dụ vừa rồi. Đọc giải thích bên dưới để xem mô phỏng thể hiện sự chưa tương ứng giữa hai nhóm thế nào.",
+      "action": "Bấm QHSX CỨNG.",
+      "observe": "So sánh trạng thái và hình; không chấm đáp án chính trị.",
+      "completion": "Preset apply đúng.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "L15",
+      "title": "Thử Tái cấu trúc",
+      "say": "Bấm Tái cấu trúc, chờ quá trình kết thúc rồi đọc trạng thái mới. Khi rời phần thử, bạn có thể giữ các thanh vừa đặt hoặc trở về thiết lập trước đó.",
+      "action": "Bấm TÁI CẤU TRÚC; chọn giữ hoặc khôi phục.",
+      "observe": "Trạng thái sau reconfigure.",
+      "completion": "Reconfigure thật kết thúc; lựa chọn giữ/rollback rõ.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "V01",
+      "title": "Chọn tình huống",
+      "say": "Bấm Cánh đồng, Nhà máy hoặc Kinh tế số để xem từng tình huống. Mỗi phần có dữ kiện và nguồn riêng. Mình bắt đầu cùng bạn ở Cánh đồng nhé.",
+      "action": "Chọn Cánh đồng.",
+      "observe": "Nội dung Cánh đồng.",
+      "completion": "Case 0 sẵn sàng.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V02",
+      "title": "Xem cách làm trước",
+      "say": "Bấm Trước để xem người lao động đeo bình và đi từng luống. Nhìn thao tác trong cảnh; đây là cách làm thủ công được minh họa.",
+      "action": "Bấm Trước.",
+      "observe": "FarmStage 0.",
+      "completion": "Case 0 và stage 0 active.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V03",
+      "title": "Xem cách làm sau",
+      "say": "Bấm Sau rồi nhìn cách lập đường bay và giám sát drone. Công cụ đổi thì kỹ năng vận hành cũng cần đổi. Bạn có thể bấm Trước để so sánh lại.",
+      "action": "Bấm Sau.",
+      "observe": "FarmStage 1 và nội dung đúng.",
+      "completion": "Stage 1 active.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V04",
+      "title": "Xem cách cùng làm",
+      "say": "Bấm Cùng làm để xem xã viên, hợp tác xã và đơn vị drone phối hợp. Nhìn các vai trò trong cảnh để thấy ai làm phần việc nào.",
+      "action": "Bấm Cùng làm.",
+      "observe": "FarmStage 2; giải nghĩa HTX trước viết tắt.",
+      "completion": "Stage 2 active.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V05",
+      "title": "Sang Nhà máy",
+      "say": "Bấm Nhà máy để xem tình huống sản xuất này. Đọc dữ kiện rồi thử ba câu hỏi: ai sở hữu, ai phối hợp và ai hưởng lợi?",
+      "action": "Bấm Nhà máy.",
+      "observe": "Case 1 và ba câu hỏi.",
+      "completion": "Case 1 sẵn sàng.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V06",
+      "title": "Hỏi Ai sở hữu?",
+      "say": "Bấm Ai sở hữu? rồi đọc phần trả lời mới xuất hiện. Câu hỏi này giúp bạn xem quyền sở hữu tư liệu và công nghệ trong tình huống.",
+      "action": "Bấm Ai sở hữu?.",
+      "observe": "Lens 0 và response.",
+      "completion": "Response visible.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V07",
+      "title": "Hỏi Ai phối hợp?",
+      "say": "Bấm Ai phối hợp? rồi đọc phần trả lời. Bạn đang xem cách tổ chức công việc và quản lý sản xuất trong tình huống này.",
+      "action": "Bấm Ai phối hợp?.",
+      "observe": "Lens 1 và response.",
+      "completion": "Response visible.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V08",
+      "title": "Hỏi Ai hưởng lợi?",
+      "say": "Bấm Ai hưởng lợi? rồi đọc phần trả lời. Câu hỏi này giúp bạn xem thành quả được chia và lợi ích đến với ai.",
+      "action": "Bấm Ai hưởng lợi?.",
+      "observe": "Lens 2 và response.",
+      "completion": "Response visible.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V09",
+      "title": "Thử Kinh tế số",
+      "say": "Bấm Kinh tế số rồi thử lại ba câu hỏi vừa học. Đọc câu trả lời của tình huống mới; cùng câu hỏi có thể giúp bạn thấy những điểm khác nhau.",
+      "action": "Bấm Kinh tế số; tùy ý thử lại lens.",
+      "observe": "Case 2 và response đúng.",
+      "completion": "Case 2 ready; không buộc cả ba lần click.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "V10",
+      "title": "Đọc dữ kiện có nguồn",
+      "say": "Bấm Dữ kiện & nguồn gốc. Trong bảng, xem con số thuộc năm nào và do cơ quan nào công bố. Đóng bảng khi bạn muốn quay lại tình huống.",
+      "action": "Mở source đúng case; đọc; đóng.",
+      "observe": "Năm, cơ quan, nguồn.",
+      "completion": "Dialog đóng; focus về trigger.",
+      "pose": "inspect",
+      "motion": "inspect"
+    },
+    {
+      "id": "V11",
+      "title": "Phóng bản đồ",
+      "say": "Bấm Phóng to bản đồ để nhìn vị trí và ký hiệu rõ hơn, rồi đọc chú thích. Ký hiệu quần đảo không thể hiện ranh giới biển. Bấm Đóng để quay lại.",
+      "action": "Mở bản đồ; đọc legend; đóng.",
+      "observe": "Vị trí và legend.",
+      "completion": "Dialog đóng; dùng đúng case có map.",
+      "pose": "inspect",
+      "motion": "inspect",
+      "variants": [
+        {
+          "when": "case-farm",
+          "say": "Bấm Quảng Trị / Xem bản đồ để nhìn vị trí và ký hiệu rõ hơn. Đọc chú thích rồi bấm Đóng để quay lại.",
+          "action": "Mở map từ Cánh đồng rồi đóng."
+        }
+      ]
+    },
+    {
+      "id": "P01",
+      "title": "Chọn ba đòn bẩy",
+      "say": "Bạn có ba vòng trống và bảy lựa chọn. Kéo một lựa chọn vào vòng, hoặc chạm vào nó để gắn vào vòng trống. Mình sẽ chỉ bạn cách đọc từng lựa chọn.",
+      "action": "Đọc; có thể thử gắn một.",
+      "observe": "Ba socket và bảy token.",
+      "completion": "Practice hoặc Tiếp tục; snapshot trước thử.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "P02",
+      "title": "Kỹ năng số",
+      "say": "Chọn Kỹ năng số nếu bạn muốn thử hỗ trợ người lao động vận hành và làm chủ công nghệ. Bạn có thể gắn để xem kết quả hoặc bấm Tiếp tục để xem lựa chọn khác.",
+      "action": "Đọc; tùy ý gắn Kỹ năng số.",
+      "observe": "Tên token và phản hồi khi gắn.",
+      "completion": "Đọc/Next không tự gắn.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "P03",
+      "title": "Quyền dữ liệu",
+      "say": "Chọn Quyền dữ liệu để thử góc nhìn về ai được tiếp cận và sử dụng dữ liệu. Bạn có thể gắn để so sánh, hoặc xem lựa chọn tiếp theo.",
+      "action": "Đọc; tùy ý gắn Quyền dữ liệu.",
+      "observe": "Tên token; không khẳng định pháp lý mới.",
+      "completion": "Đọc/Next.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "P04",
+      "title": "Quản trị dữ liệu",
+      "say": "Chọn Quản trị dữ liệu để thử cách tổ chức, phối hợp và quản lý dữ liệu. Gắn cùng các lựa chọn khác rồi đọc kết quả để so sánh.",
+      "action": "Đọc; tùy ý gắn Quản trị dữ liệu.",
+      "observe": "Tên token và tổ hợp.",
+      "completion": "Đọc/Next.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "P05",
+      "title": "Thử nghiệm có kiểm soát",
+      "say": "Sandbox là cách thử nghiệm trong phạm vi có kiểm soát. Bạn có thể chọn token này để xem nó kết hợp với hai lựa chọn khác ra sao.",
+      "action": "Đọc token Sandbox; tùy ý gắn.",
+      "observe": "Tổ hợp; không nói chính sách cụ thể chưa có nguồn.",
+      "completion": "Đọc/Next.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "P06",
+      "title": "Đãi ngộ sáng tạo",
+      "say": "Chọn Đãi ngộ sáng tạo để thử cách ghi nhận và chia sẻ thành quả đổi mới. Đọc kết quả của cả tổ hợp; một lựa chọn không bảo đảm mọi vấn đề được giải quyết.",
+      "action": "Đọc; tùy ý gắn Đãi ngộ sáng tạo.",
+      "observe": "Tổ hợp và trade-off sau đủ 3.",
+      "completion": "Đọc/Next.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "P07",
+      "title": "Hạ tầng số",
+      "say": "Chọn Hạ tầng số để thử nền tảng hỗ trợ các công cụ mới hoạt động. Nếu đã đủ ba vòng, tháo một lựa chọn trước khi gắn lựa chọn mới bằng cách chạm.",
+      "action": "Đọc; tùy ý gắn Hạ tầng số.",
+      "observe": "Không tự thay token khi click đầy slots.",
+      "completion": "Đọc/Next.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "P08",
+      "title": "Cùng tham gia",
+      "say": "Tiếp cận bao trùm nói về cơ hội cùng tham gia và hưởng lợi. Bạn có thể chọn token này rồi đọc điểm mạnh, phần còn thiếu và điều phải đánh đổi.",
+      "action": "Đọc; tùy ý gắn Tiếp cận bao trùm.",
+      "observe": "Ba loại kết quả; không chấm đạo đức.",
+      "completion": "Đọc/Next.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "P09",
+      "title": "Gắn và tháo lựa chọn",
+      "say": "Chọn đủ ba đòn bẩy để mở kết quả. Chạm vào vòng đã gắn để tháo. Bạn cũng có thể kéo lựa chọn mới vào vòng để thay.",
+      "action": "Gắn đủ 3; thử remove/replace.",
+      "observe": "Kết quả xuất hiện chỉ khi đủ 3.",
+      "completion": "Slots đủ 3 hoặc skip; pointercancel không cài nhầm.",
+      "pose": "practice",
+      "motion": "practice",
+      "variants": [
+        {
+          "when": "keyboard",
+          "say": "Dùng Tab đến vòng đã gắn rồi nhấn Enter để tháo. Sau đó Tab đến lựa chọn mới và nhấn Enter để gắn. Khi đủ ba vòng, kết quả sẽ xuất hiện.",
+          "action": "Tab/Enter remove rồi install token."
+        }
+      ]
+    },
+    {
+      "id": "P10",
+      "title": "Đọc cả ba dòng",
+      "say": "Đọc lần lượt Mạnh ở, Còn thiếu và Đánh đổi. Một tổ hợp có thể giúp ở mặt này và để lại vấn đề ở mặt khác. Hãy đọc đủ ba dòng trước khi so sánh.",
+      "action": "Đọc result.",
+      "observe": "Strength/missing/tradeoff đúng slots.",
+      "completion": "Result mounted; Tiếp tục.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "P11",
+      "title": "Thử tổ hợp khác",
+      "say": "Tháo một lựa chọn rồi gắn lựa chọn khác, hoặc kéo để thay. Đọc lại cả ba dòng và so sánh. Bạn có thể giữ tổ hợp vừa thử hoặc khôi phục tổ hợp trước hướng dẫn.",
+      "action": "Thay ít nhất một token hoặc skip; giữ/khôi phục.",
+      "observe": "Kết quả mới.",
+      "completion": "User chọn keep/rollback; không tự chấm.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "F01",
+      "title": "Nhìn lại câu chuyện",
+      "say": "Đọc câu kết ở đây: khi năng lực sản xuất tiếp tục đổi, quan hệ sản xuất cũng cần được xem xét và điều chỉnh cho phù hợp. Bạn có thể quay lại các phần để thử thêm.",
+      "action": "Đọc câu kết.",
+      "observe": "Câu kết và vòng chuyển động hiện có.",
+      "completion": "Tiếp tục.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "F02",
+      "title": "Quay lại phần thử",
+      "say": "Bấm Thử lại Lab nếu bạn muốn đổi các thanh một lần nữa. Nếu chỉ muốn xem tiếp hướng dẫn, bấm Tiếp tục. Bạn luôn có thể gọi mình từ hình cú.",
+      "action": "Tùy ý mở Lab hoặc Tiếp tục.",
+      "observe": "CTA thật và đường quay lại.",
+      "completion": "Không tự rời finale khi Next.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "F03",
+      "title": "Đọc nguồn sau khi xem",
+      "say": "Bấm Xem nguồn để đọc cơ sở lý luận và tư liệu của triển lãm. Bạn có thể kiểm tra sau khi trải nghiệm; đóng bảng để quay lại đây.",
+      "action": "Tùy ý mở nguồn; đóng.",
+      "observe": "SourceDrawer.",
+      "completion": "Không ép mở nguồn; handoff sạch.",
+      "pose": "inspect",
+      "motion": "inspect"
+    },
+    {
+      "id": "F04",
+      "title": "Mở phần ôn tập",
+      "say": "Bấm Chơi minigame để ôn tập qua năm giai đoạn, năm boss và 77 câu hỏi. Mình sẽ chỉ cách chơi trước khi bạn chạy. Chưa muốn chơi thì bỏ qua phần này nhé.",
+      "action": "Mở game hoặc bỏ qua phần game.",
+      "observe": "Game dialog hoặc kết thúc tuyến chính.",
+      "completion": "Không tự bắt đầu campaign.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "G01",
+      "title": "Sẵn sàng chơi",
+      "say": "Mình sẽ chỉ bạn cách điều khiển trước. Khi hướng dẫn xong, bấm Bắt đầu hành trình để chơi. Bạn cũng có thể bỏ qua hướng dẫn và bắt đầu ngay.",
+      "action": "Đọc; chọn hướng dẫn hay Skip.",
+      "observe": "Màn sẵn sàng.",
+      "completion": "Không auto Start.",
+      "pose": "neutral",
+      "motion": "welcome"
+    },
+    {
+      "id": "G02",
+      "title": "Tập nhảy",
+      "say": "Giữ Space hoặc phím ↑ để nhảy xa; thả sớm để nhảy thấp. Trên điện thoại, giữ nút Nhảy. Bạn thử ở đây nhé; phần tập không tính điểm và không mất tim.",
+      "action": "Thử jump trong sandboxplayer.",
+      "observe": "Độ cao/độ dài tương ứng giữ/thả.",
+      "completion": "Tập thật hoặc skip; không đổi campaign.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "G03",
+      "title": "Tập cúi",
+      "say": "Giữ phím ↓ hoặc nút Cúi trên điện thoại để cúi. Khi đang trên không, thao tác này giúp hạ nhanh. Bạn thử rồi thả ra để đứng lại nhé.",
+      "action": "Thử duck giữ/thả.",
+      "observe": "Player practice cúi/đứng.",
+      "completion": "Input complete hoặc skip.",
+      "pose": "practice",
+      "motion": "practice"
+    },
+    {
+      "id": "G04",
+      "title": "Dừng và chơi tiếp",
+      "say": "Bấm P hoặc nút Tạm dừng để nghỉ. Bấm Tiếp tục khi muốn chạy lại. Trong lúc mình hướng dẫn, game cũng dừng để bạn có thời gian đọc.",
+      "action": "Đọc; tùy ý thử pause.",
+      "observe": "Nhãn pause/resume đúng.",
+      "completion": "Guidepause không ghi đè gamepause.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "G05",
+      "title": "Đọc đường chạy",
+      "say": "Nhìn Quãng đường và Tốc độ để biết lượt chạy đang tiến đến đâu. Thanh Đường đến boss cho biết bạn còn cách cuối giai đoạn bao xa.",
+      "action": "Đọc HUD.",
+      "observe": "Các chỉ số game thật.",
+      "completion": "Tiếp tục; không tick campaign trong guide.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "G06",
+      "title": "Giữ trái tim",
+      "say": "Bạn bắt đầu với ba trái tim. Khi vấp vật cản, game dừng và mở câu hỏi. Trả lời đúng giúp bạn giữ tim; hướng dẫn này không làm bạn mất tim.",
+      "action": "Đọc HUD hearts.",
+      "observe": "Ba tim hoặc lives hiện tại khi replay.",
+      "completion": "Không tự gây collision.",
+      "pose": "neutral",
+      "motion": "read"
+    },
+    {
+      "id": "G07",
+      "title": "Trả lời câu hỏi",
+      "say": "Chọn một trong bốn đáp án, đọc giải thích rồi bấm Tiếp tục chạy. Trả lời đúng giúp giữ tim. Hình hướng dẫn là tình huống minh họa, không đổi lượt chơi của bạn.",
+      "action": "Xem preview; khi quiz thật tự chọn đáp án.",
+      "observe": "Feedback và continue button.",
+      "completion": "Preview ghi rõ; không chọn đáp án hộ.",
+      "pose": "point-right",
+      "motion": "point",
+      "variants": [
+        {
+          "when": "quiz-no-hearts",
+          "say": "Lượt này đã hết tim. Đọc giải thích rồi bấm Xem kết quả. Hướng dẫn vẫn có thể đóng hoặc xem lại, không thay đáp án và lượt chơi của bạn."
+        }
+      ]
+    },
+    {
+      "id": "G08",
+      "title": "Đối mặt boss",
+      "say": "Khi gặp boss, chọn đáp án đúng để tấn công; trả lời sai thì bị phản công. Nhìn thanh máu và đọc phản hồi sau mỗi câu trước khi chọn tiếp.",
+      "action": "Xem preview hoặc đọc cue panel boss thật.",
+      "observe": "HP và feedback.",
+      "completion": "Không teleport, không autoanswer.",
+      "pose": "point-right",
+      "motion": "point"
+    },
+    {
+      "id": "G09",
+      "title": "Sang chặng hoặc chơi lại",
+      "say": "Hạ boss rồi bấm nút sang giai đoạn tiếp theo. Nếu hết tim, bấm Chơi lại để bắt đầu lượt mới. Chỉ bấm Chơi lại khi bạn muốn bỏ lượt hiện tại nhé.",
+      "action": "Đọc preview; tự bấm control thật khi xuất hiện.",
+      "observe": "Stage transition hoặc ready mới.",
+      "completion": "Không restart ngầm.",
+      "pose": "point-right",
+      "motion": "point",
+      "variants": [
+        {
+          "when": "boss-final",
+          "say": "Bạn đã hạ boss cuối. Bấm Hoàn thành hành trình để xem kết quả. Nếu muốn thử một lượt mới, chọn Chơi lại.",
+          "action": "User bấm HOÀN THÀNH HÀNH TRÌNH khi control thật visible."
+        }
+      ]
+    },
+    {
+      "id": "G10",
+      "title": "Gọi cú trong game",
+      "say": "Bấm hình cú trong game khi cần xem lại cách chơi. Bỏ qua hướng dẫn để trở lại lượt hiện tại. Nút Quay lại bài thuyết trình đưa bạn về phần kết của triển lãm.",
+      "action": "Đóng guide hoặc mở replay; tùy ý về bài.",
+      "observe": "Game mode/focus đúng; score/hearts giữ.",
+      "completion": "Childguide teardown; Esc guide trước game.",
+      "pose": "neutral",
+      "motion": "read"
+    }
+  ],
+  "contextRules": [
+    "Chọn biến thể theo control thực sự visible và context thật, không chỉ theo width.",
+    "history-static khi rail labels/arrow group không visible (mobile hoặc bản tĩnh/reduced).",
+    "Các nút chỉ có icon được gọi bằng hình dạng và accessible name; không đòi label không tồn tại.",
+    "Trạng thái âm thanh bật, case bản đồ, keyboard modality và boss cuối được resolve trước render; không đọc copy cũ sau context đổi.",
+    "Point-right là gợi ý, renderer đổi sang point-left khi target nằm phía trái; ảnh không bị lật bằng CSS để tránh lật nét scarf/kính.",
+    "Các bước đọc dùng Tiếp tục; thực hành dùng Đã thử, tiếp tục; không tạo nút Đã xem."
+  ]
+}

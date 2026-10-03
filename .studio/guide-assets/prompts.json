@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-03",
+  "tool": "Built-in image_gen.imagegen",
+  "transparent_background": true,
+  "identity": "Original Cú Mạch, direction01; no external image references",
+  "originals": [
+    {
+      "id": "neutral",
+      "nativeOutput": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a0fe3f-94cf-7ec2-b4c0-f8002c5f5b34\\exec-9c7f0226-1934-4be4-9021-271b0f9e064a.png",
+      "workspaceOriginal": ".studio/guide-assets/originals/neutral.png",
+      "prompt": "Use case: identity-preserve.\nAsset type: production transparent mascot cutout for a Vietnamese interactive museum onboarding.\nInput image is an original concept sheet. Use ONLY owl design 01 in its upper-left section as the identity reference; ignore designs 02 and 03, lower-sheet labels and all typography.\nCreate ONE full-body Cú Mạch owl in a neutral welcoming guide pose, facing the viewer with a slight three-quarter turn, wings resting comfortably, alert kind eyes. Keep the exact recognizable design: warm brown feathered owl, ivory face and chest, round thin brass spectacles, deep red scarf, dark small beak, neat talons. Modern refined woodcut/editorial illustration, tasteful print strokes, restrained grain, clean outer silhouette that reads at 64px, warm mature expression without looking like a toy. Palette ivory #F3E8D0, ink #171512, scarf #B51F2A, brass #B48B43, warm brown.\nComposition: one single character centered, entire owl and scarf inside frame with generous 10% transparent padding, consistent front-facing full-body silhouette, no typography, no letters, no label, no floor, no scenery, no drop shadow, no badges, no circles, no tools. True alpha-transparent background, not a checkerboard illustration. This asset will accompany human written instructions; do not render any speech text. Preserve character anatomy, glasses shape and scarf color.",
+      "reference": ".studio/guide-concept-2026-10-03.png"
+    },
+    {
+      "id": "point-left",
+      "nativeOutput": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a0fe3f-94cf-7ec2-b4c0-f8002c5f5b34\\exec-3b80120d-abb9-46d8-9b2f-5feeb4cc332c.png",
+      "workspaceOriginal": ".studio/guide-assets/originals/point-left.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent production owl guide pose. Reference is the original Cú Mạch neutral mascot. Keep exactly the same brown/ivory owl identity, thin round brass glasses, deep red scarf, dark beak, proportions, detailed yet clean woodcut print style and warm mature character. ONE full-body character only, entire owl/talons/scarf within frame, 10% alpha-transparent padding, no scenery, no text, no letters, no speech bubbles, no icons or badges, no floor or shadow. Actual alpha-transparent background. Keep the torso upright and glasses/eyes clearly readable at small scale. Change only the requested pose; do not redesign.\nRaise the wing on the viewer's LEFT and point clearly toward the LEFT edge of the screen, with the owl's gaze toward that indicated direction. Opposite wing rests. The extended wing remains entirely inside the frame. Calm explanatory expression.",
+      "reference": ".studio/guide-assets/originals/neutral.png"
+    },
+    {
+      "id": "point-right",
+      "nativeOutput": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a0fe3f-94cf-7ec2-b4c0-f8002c5f5b34\\exec-9ed6774d-8c06-4541-bbf4-3c73f66246a4.png",
+      "workspaceOriginal": ".studio/guide-assets/originals/point-right.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent production owl guide pose. Reference is the original Cú Mạch neutral mascot. Keep exactly the same brown/ivory owl identity, thin round brass glasses, deep red scarf, dark beak, proportions, detailed yet clean woodcut print style and warm mature character. ONE full-body character only, entire owl/talons/scarf within frame, 10% alpha-transparent padding, no scenery, no text, no letters, no speech bubbles, no icons or badges, no floor or shadow. Actual alpha-transparent background. Keep the torso upright and glasses/eyes clearly readable at small scale. Change only the requested pose; do not redesign.\nRaise the wing on the viewer's RIGHT and point clearly toward the RIGHT edge of the screen, with the owl's gaze toward that indicated direction. Opposite wing rests. The extended wing remains entirely inside the frame. Calm explanatory expression.",
+      "reference": ".studio/guide-assets/originals/neutral.png"
+    },
+    {
+      "id": "inspect",
+      "nativeOutput": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a0fe3f-94cf-7ec2-b4c0-f8002c5f5b34\\exec-95c8b215-d4de-4c88-8b7f-6e37a5c95e52.png",
+      "workspaceOriginal": ".studio/guide-assets/originals/inspect.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent production owl guide pose. The reference is original Cú Mạch. Keep the same warm brown/ivory full-body owl, delicate round brass spectacles, deep red scarf, dark beak, recognizable face, body proportions and refined woodcut editorial print style. One character only. Entire owl and talons/scarf within frame, 10% transparent padding, no floor, shadow, labels, text, circles, badges or background. Genuine alpha transparency. Clean outer silhouette and clearly readable glasses at 64px. No accessory except expressly requested; change only pose, not identity.\nThe owl gently touches the outer rim of its brass spectacles with one wing, as a thoughtful curator inviting the viewer to look closely. Both eyes open, attentive warm gaze. Opposite wing rests; do not add books or magnifying glass.",
+      "reference": ".studio/guide-assets/originals/neutral.png"
+    },
+    {
+      "id": "practice",
+      "nativeOutput": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a0fe3f-94cf-7ec2-b4c0-f8002c5f5b34\\exec-c747e485-891e-4629-9a36-73272f330f04.png",
+      "workspaceOriginal": ".studio/guide-assets/originals/practice.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent production owl guide pose. The reference is original Cú Mạch. Keep the same warm brown/ivory full-body owl, delicate round brass spectacles, deep red scarf, dark beak, recognizable face, body proportions and refined woodcut editorial print style. One character only. Entire owl and talons/scarf within frame, 10% transparent padding, no floor, shadow, labels, text, circles, badges or background. Genuine alpha transparency. Clean outer silhouette and clearly readable glasses at 64px. No accessory except expressly requested; change only pose, not identity.\nThe owl calmly holds one wing forward and slightly downward with a gently open wingtip, inviting the viewer to try a control. Kind encouraging eyes, watching the viewer, no literal finger or human hand. This is a soft invitation pose distinct from pointing, no exaggerated action.",
+      "reference": ".studio/guide-assets/originals/neutral.png"
+    },
+    {
+      "id": "confirm",
+      "nativeOutput": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a0fe3f-94cf-7ec2-b4c0-f8002c5f5b34\\exec-79f75a56-07a3-45f1-a45c-c95dc0b6b6eb.png",
+      "workspaceOriginal": ".studio/guide-assets/originals/confirm.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent production owl guide pose. Same original Cú Mạch owl as reference: warm brown feathers, ivory face/chest, thin round brass spectacles, deep red scarf, dark beak, natural talons, warm mature refined woodcut editorial print style. ONE full-body character only with consistent proportions and face, fully within frame, 10% alpha padding. No letters/text/labels/icons/confetti/floor/shadow/background. Actual transparent background. Change only the pose, preserve character identity and clear glasses.\nSubtle encouraging confirmation pose: the owl's eyes gently curve in a content smile behind the same brass glasses, a slight small head nod, wings calmly relaxed with one wing lightly open. No ecstatic cheering, no accessories, no marks around the head. Warm understated satisfaction.",
+      "reference": ".studio/guide-assets/originals/neutral.png"
+    },
+    {
+      "id": "bye",
+      "nativeOutput": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a0fe3f-94cf-7ec2-b4c0-f8002c5f5b34\\exec-b2d51fc2-8905-4479-9edb-b7640c716da5.png",
+      "workspaceOriginal": ".studio/guide-assets/originals/bye.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent production owl guide pose. Same original Cú Mạch owl as reference: warm brown feathers, ivory face/chest, thin round brass spectacles, deep red scarf, dark beak, natural talons, warm mature refined woodcut editorial print style. ONE full-body character only with consistent proportions and face, fully within frame, 10% alpha padding. No letters/text/labels/icons/confetti/floor/shadow/background. Actual transparent background. Change only the pose, preserve character identity and clear glasses.\nA gentle goodbye pose: the owl looks kindly at the viewer with both eyes open and raises one wing in a small friendly farewell wave near shoulder level, distinct from a fully extended pointing wing. Body remains upright. No icons or extra objects.",
+      "reference": ".studio/guide-assets/originals/neutral.png"
+    }
+  ]
+}
