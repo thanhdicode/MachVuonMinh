@@ -1,0 +1,2236 @@
+{
+ "tag": "lab-1440x900",
+ "reloaded": false,
+ "moduleId": "lab",
+ "width": 1440,
+ "height": 900,
+ "touch": false,
+ "reduced": false,
+ "zoom": 1,
+ "textOnly": 1,
+ "viewport": {
+  "w": 1440,
+  "h": 900,
+  "dpr": 1
+ },
+ "baseDocW": 1440,
+ "errors": [],
+ "summary": {
+  "steps": 15,
+  "withIssues": 0,
+  "failures": 0
+ },
+ "results": [
+  {
+   "n": 0,
+   "id": "L01",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Hai nhóm thanh",
+   "counter": "LAB · 01 / 15",
+   "owl": "neutral",
+   "next": "Tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 468,
+    "y": 198,
+    "w": 504,
+    "h": 504
+   },
+   "targetInfo": {
+    "tag": "div",
+    "guide": "lab-core",
+    "cls": "guide-proxy",
+    "shown": true
+   },
+   "popBox": {
+    "x": 66,
+    "y": 261,
+    "w": 380,
+    "h": 378
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 66,
+     "y": 261,
+     "w": 380,
+     "h": 378
+    },
+    "overflowY": "auto",
+    "maxHeight": "876px",
+    "position": "fixed",
+    "scrollH": 374,
+    "clientH": 374,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua phần này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 83,
+      "y": 280,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 83,
+      "y": 280,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "input[Công nghệ] 101,381 210x18",
+    "input[Dữ liệu] 101,436 210x18",
+    "input[Kỹ năng] 101,491 210x18",
+    "input[Hạ tầng] 101,546 210x18",
+    "input[Tự động hóa] 101,601 210x18"
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 1,
+   "id": "L02",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Công nghệ",
+   "counter": "LAB · 02 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 224
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 224
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 220,
+    "clientH": 220,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 101,
+     "y": 358,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 2,
+   "id": "L03",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Dữ liệu",
+   "counter": "LAB · 03 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 204
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 204
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 200,
+    "clientH": 200,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 101,
+     "y": 413,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 3,
+   "id": "L04",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Kỹ năng",
+   "counter": "LAB · 04 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 224
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 224
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 220,
+    "clientH": 220,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 101,
+     "y": 468,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 4,
+   "id": "L05",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Hạ tầng",
+   "counter": "LAB · 05 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 204
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 204
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 200,
+    "clientH": 200,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 101,
+     "y": 523,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 5,
+   "id": "L06",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Tự động hóa",
+   "counter": "LAB · 06 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 224
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 224
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 220,
+    "clientH": 220,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 101,
+     "y": 578,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 6,
+   "id": "L07",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Đọc nhóm quan hệ",
+   "counter": "LAB · 07 / 15",
+   "owl": "neutral",
+   "next": "Tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 1129,
+    "y": 279,
+    "w": 210,
+    "h": 298
+   },
+   "targetInfo": {
+    "tag": "div",
+    "guide": "lab-relations",
+    "cls": "lab-controls",
+    "shown": true
+   },
+   "popBox": {
+    "x": 1044,
+    "y": 599,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 1044,
+     "y": 599,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "876px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 1061,
+      "y": 618,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 1061,
+      "y": 618,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 7,
+   "id": "L08",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Sở hữu",
+   "counter": "LAB · 08 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 204
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 204
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 200,
+    "clientH": 200,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 1129,
+     "y": 358,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 8,
+   "id": "L09",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Tổ chức–quản lý",
+   "counter": "LAB · 09 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 204
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 204
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 200,
+    "clientH": 200,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 1129,
+     "y": 413,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 9,
+   "id": "L10",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Phân phối",
+   "counter": "LAB · 10 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 204
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 204
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 200,
+    "clientH": 200,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 1129,
+     "y": 468,
+     "w": 210,
+     "h": 45,
+     "tag": "label"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": true,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 10,
+   "id": "L11",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Đọc kết quả đang thấy",
+   "counter": "LAB · 11 / 15",
+   "owl": "neutral",
+   "next": "Tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 374,
+    "y": 712,
+    "w": 691,
+    "h": 49
+   },
+   "targetInfo": {
+    "tag": "div",
+    "guide": "lab-status",
+    "cls": "lab-status",
+    "shown": true
+   },
+   "popBox": {
+    "x": 530,
+    "y": 399,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 530,
+     "y": 399,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "876px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 547,
+      "y": 418,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 547,
+      "y": 418,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 11,
+   "id": "L12",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Thử Cân bằng",
+   "counter": "LAB · 12 / 15",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 566,
+    "y": 779,
+    "w": 43,
+    "h": 30
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "lab-preset-fit",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 397,
+    "y": 466,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 397,
+     "y": 466,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "876px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 414,
+      "y": 485,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 414,
+      "y": 485,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 12,
+   "id": "L13",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Thử LLSX vượt trước",
+   "counter": "LAB · 13 / 15",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 629,
+    "y": 779,
+    "w": 81,
+    "h": 30
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "lab-preset-ahead",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 479,
+    "y": 466,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 479,
+     "y": 466,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "876px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 496,
+      "y": 485,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 496,
+      "y": 485,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 13,
+   "id": "L14",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Thử QHSX cứng",
+   "counter": "LAB · 14 / 15",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 730,
+    "y": 779,
+    "w": 49,
+    "h": 30
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "lab-preset-rigid",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 564,
+    "y": 466,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 564,
+     "y": 466,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "876px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 581,
+      "y": 485,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 581,
+      "y": 485,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 14,
+   "id": "L15",
+   "presenter": "cue",
+   "kind": "practice",
+   "host": "page",
+   "anchor": "top-right",
+   "title": "Thử Tái cấu trúc",
+   "counter": "LAB · 15 / 15",
+   "owl": "practice",
+   "next": "Đã thử, tiếp tục",
+   "scrollY": 18105,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 797,
+    "y": 76,
+    "w": 600,
+    "h": 224
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 797,
+     "y": 76,
+     "w": 600,
+     "h": 224
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 220,
+    "clientH": 220,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      12
+     ],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đã thử, tiếp tục",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua bước này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua phần này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 810,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "targets": [
+    {
+     "x": 799,
+     "y": 779,
+     "w": 76,
+     "h": 30,
+     "tag": "button"
+    }
+   ],
+   "vp": {
+    "w": 1440,
+    "h": 900
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked"
+  },
+  {
+   "n": 14,
+   "id": "L15:keep-or-restore",
+   "presenter": "cue",
+   "kind": "keep-or-restore",
+   "skipVisible": true,
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 997,
+     "y": 76,
+     "w": 400,
+     "h": 246
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 242,
+    "clientH": 242,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [],
+     "counter": [],
+     "buttons": [
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Khôi phục thiết lập trước hư",
+      "w": 295,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Giữ các thiết lập vừa thử",
+      "w": 218,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 1010,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 1010,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "issues": []
+  },
+  {
+   "n": 15,
+   "id": "END",
+   "presenter": "cue",
+   "kind": "module-complete",
+   "text": "Bạn đã xem xong phần này. Muốn thử lại công cụ nào, hãy gọi mình từ hình cú.Đã đọc: Phòng biện chứng",
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 43,
+     "y": 670,
+     "w": 400,
+     "h": 174
+    },
+    "overflowY": "auto",
+    "maxHeight": "780px",
+    "position": "fixed",
+    "scrollH": 170,
+    "clientH": 170,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      13
+     ],
+     "counter": [],
+     "buttons": [
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Tiếp tục khám phá",
+      "w": 157,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Để sau",
+      "w": 56,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 56,
+      "y": 685,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 56,
+      "y": 685,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "leftovers": 0,
+   "body": "",
+   "issues": []
+  }
+ ]
+}

@@ -2,17 +2,20 @@ import { useEffect, useRef, useState } from 'react'
 import { evidence } from '../data/evidence'
 import { vietnamCases, relationQuestions, farmStages } from '../data/cases'
 import { useWorld } from './WorldState'
+import { acquireScrollLease } from './WorldTimeline'
+import { useGuideControls } from '../onboarding/guideControls'
 import atlas from '../data/vietnam-map.json'
 const locate = (lon:number,lat:number) => [45+(lon-102)*34.6,35+(24-lat)*36]
 const cities = [['Hà Nội',105.85,21.03],['Đà Nẵng',108.20,16.05],['TP. Hồ Chí Minh',106.70,10.78]] as const
 export function VietnamEvidence({openSource}:{openSource:(index:number)=>void}) {
   const [mapOpen,setMapOpen]=useState(false)
   const mapDialog=useRef<HTMLDialogElement>(null)
-  useEffect(()=>{if(mapOpen){mapDialog.current?.showModal();document.body.classList.add('drawer-open')}return()=>document.body.classList.remove('drawer-open')},[mapOpen])
+  useEffect(()=>{let release=()=>{};if(mapOpen){mapDialog.current?.showModal();document.body.classList.add('drawer-open');release=acquireScrollLease('dialog')}return()=>{release();document.body.classList.remove('drawer-open')}},[mapOpen])
   const active=useWorld(s=>s.evidenceCase),lens=useWorld(s=>s.evidenceLens),stage=useWorld(s=>s.farmStage),set=useWorld(s=>s.set)
   const story=vietnamCases[active],item=evidence[story.sourceIndex]
+  useGuideControls('vietnam',{openMap:()=>setMapOpen(true),closeMap:()=>mapDialog.current?.close(),mapOpen:()=>mapOpen,sourceIndex:()=>story.sourceIndex})
   const select=(index:number)=>set({evidenceCase:index,evidenceLens:0})
-  const map=<svg viewBox="0 0 640 700" role="img" aria-label="Việt Nam, quần đảo Hoàng Sa và quần đảo Trường Sa">
+  const map=<svg viewBox="0 0 640 700" data-guide="case-map" role="img" aria-label="Việt Nam, quần đảo Hoàng Sa và quần đảo Trường Sa">
       <title >Việt Nam, quần đảo Hoàng Sa và quần đảo Trường Sa</title><desc >Đường bờ biển từ Natural Earth. Ký hiệu ngoài khơi định vị hai quần đảo, không biểu diễn ranh giới biển.</desc>
       <defs><pattern id="atlas-grid" width="69.2" height="72" x="45" y="35" patternUnits="userSpaceOnUse"><path d="M69.2 0H0V72" fill="none" stroke="#9a9586" strokeWidth=".5" opacity=".3"/></pattern><pattern id="atlas-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><path d="M0 0V5" stroke="#b5a78d" strokeWidth=".7" opacity=".3"/></pattern><clipPath id="atlas-crop"><rect x="15" y="15" width="610" height="625"/></clipPath></defs>
       <g clipPath="url(#atlas-crop)"><rect width="640" height="660" fill="url(#atlas-grid)"/>
@@ -42,21 +45,21 @@ export function VietnamEvidence({openSource}:{openSource:(index:number)=>void}) 
         <h2 id="farm-title">{farmStages[stage].title}</h2>
         <p className="farm-description" aria-live="polite">{farmStages[stage].description}</p>
         <div className="farm-stages" role="group" aria-label="So sánh trước và sau khi ứng dụng drone">
-          {farmStages.map((s,i)=><button key={s.name} aria-pressed={stage===i} aria-controls="farm-meaning" onClick={()=>set({farmStage:i})}><span>0{i+1}</span><strong>{s.name}</strong><small>{s.action}</small><b aria-hidden="true">↗</b></button>)}
+          {farmStages.map((s,i)=><button key={s.name} data-guide={['farm-before','farm-after','farm-cooperation'][i]} aria-pressed={stage===i} aria-controls="farm-meaning" onClick={()=>set({farmStage:i})}><span>0{i+1}</span><strong>{s.name}</strong><small>{s.action}</small><b aria-hidden="true">↗</b></button>)}
         </div>
         <p className="farm-meaning" id="farm-meaning" aria-live="polite">{farmStages[stage].meaning}</p>
       </div>
-      <div className="farm-evidence"><strong>28,4 <small>ha lúa</small></strong><span>HTX Thâm Triều · Đông Xuân 2025–2026<button onClick={()=>setMapOpen(true)}>Quảng Trị / Xem bản đồ ↗</button></span></div>
+      <div className="farm-evidence"><strong>28,4 <small>ha lúa</small></strong><span>HTX Thâm Triều · Đông Xuân 2025–2026<button data-guide="case-map-trigger" onClick={()=>setMapOpen(true)}>Quảng Trị / Xem bản đồ ↗</button></span></div>
       <div className="farm-model-note"><span>{stage===0?'01 / PHUN THỦ CÔNG':stage===1?'02 / PHUN BẰNG DRONE':'03 / XÃ VIÊN ↔ HTX ↔ ĐƠN VỊ DRONE'}</span><small>Mô phỏng cơ chế · không tái dựng máy cụ thể tại HTX</small></div>
     </>:<>
-    <div className="vietnam-copy"><span className="eyebrow">06 / VIỆT NAM · TỪ CÔNG CỤ ĐẾN QUAN HỆ</span><h2>{story.title}</h2><span className="case-place">{story.place}</span>{active===1&&<button className="case-map-link" onClick={()=>setMapOpen(true)}>Hải Phòng / Xem bản đồ ↗</button>}</div>
+    <div className="vietnam-copy"><span className="eyebrow">06 / VIỆT NAM · TỪ CÔNG CỤ ĐẾN QUAN HỆ</span><h2>{story.title}</h2><span className="case-place">{story.place}</span>{active===1&&<button className="case-map-link" data-guide="case-map-trigger" onClick={()=>setMapOpen(true)}>Hải Phòng / Xem bản đồ ↗</button>}</div>
     <div className="case-fact" aria-live="polite"><strong>{story.fact}</strong><span>{story.unit}<small>{story.context}</small></span></div>
     <p className="case-object-caption">{active===1?'MINH HỌA DÂY CHUYỀN · XE MẪU KHÔNG PHẢI VINFAST':'13,17 PHẦN GIÁ TRỊ SỐ / 100 PHẦN GDP'}</p>
     <p className="case-observation">{story.observation}</p>
-    <div className="relation-bridge"><span className="eyebrow">QUAN HỆ CẦN THÍCH ỨNG</span><div role="group" aria-label="Ba mặt của quan hệ sản xuất">{relationQuestions.map((q,i)=><button key={q.name} aria-controls="relation-response" aria-pressed={lens===i} onClick={()=>set({evidenceLens:i})}><small>{q.name}</small>{q.question}</button>)}</div><p id="relation-response" aria-live="polite"><span>Gợi mở</span> {story.responses[lens]}</p></div>
+    <div className="relation-bridge"><span className="eyebrow">QUAN HỆ CẦN THÍCH ỨNG</span><div role="group" aria-label="Ba mặt của quan hệ sản xuất">{relationQuestions.map((q,i)=><button key={q.name} data-guide={['relation-ownership','relation-organization','relation-distribution'][i]} aria-controls="relation-response" aria-pressed={lens===i} onClick={()=>set({evidenceLens:i})}><small>{q.name}</small>{q.question}</button>)}</div><p id="relation-response" aria-live="polite"><span>Gợi mở</span> {story.responses[lens]}</p></div>
     </>}
-    <div className="case-navigation"><div className="case-tabs" aria-label="Chọn tình huống">{vietnamCases.map((c,i)=><button key={c.name} aria-label={`0${i+1} ${c.name}`} aria-pressed={active===i} onClick={()=>select(i)}><span>0{i+1}</span>{c.name}</button>)}</div><button className="case-source" onClick={()=>openSource(story.sourceIndex)}>[{item.code}] Dữ kiện & nguồn gốc ↗</button></div>
-    {active===2&&<figure className="vietnam-map">{!mapOpen&&map}<figcaption>Đường bờ: Natural Earth · Ký hiệu định vị quần đảo.</figcaption><button className="map-expand" onClick={()=>setMapOpen(true)}>Phóng to bản đồ ↗</button></figure>}
+    <div className="case-navigation"><div className="case-tabs" data-guide="vietnam-cases" aria-label="Chọn tình huống">{vietnamCases.map((c,i)=><button key={c.name} data-guide={['case-farm-tab','case-factory','case-digital'][i]} aria-label={`0${i+1} ${c.name}`} aria-pressed={active===i} onClick={()=>select(i)}><span>0{i+1}</span>{c.name}</button>)}</div><button className="case-source" data-guide="case-source-trigger" onClick={()=>openSource(story.sourceIndex)}>[{item.code}] Dữ kiện & nguồn gốc ↗</button></div>
+    {active===2&&<figure className="vietnam-map">{!mapOpen&&map}<figcaption>Đường bờ: Natural Earth · Ký hiệu định vị quần đảo.</figcaption><button className="map-expand" data-guide="case-map-trigger" onClick={()=>setMapOpen(true)}>Phóng to bản đồ ↗</button></figure>}
     {mapOpen&&<dialog className="map-dialog" ref={mapDialog} data-lenis-prevent onClose={()=>setMapOpen(false)} onClick={e=>{if(e.target===e.currentTarget)mapDialog.current?.close()}}><button className="map-close" aria-label="Đóng bản đồ" onClick={()=>mapDialog.current?.close()}>ĐÓNG ×</button>{map}<p>Đường bờ: Natural Earth · Ký hiệu định vị quần đảo, không biểu diễn ranh giới biển.</p></dialog>}
   </section>
 }

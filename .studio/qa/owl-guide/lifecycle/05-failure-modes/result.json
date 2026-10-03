@@ -1,0 +1,35 @@
+{
+ "name": "05-failure-modes",
+ "at": "2026-10-03T14:05:12.371Z",
+ "passed": 3,
+ "failed": 0,
+ "results": [
+  {
+   "id": "5.F1.slow-load",
+   "label": "slow chunk: the guide waits with the preparing cue (Bỏ qua hướng dẫn visible), the intro/page stays usable",
+   "ok": true,
+   "evidence": {
+    "cue": "preparing",
+    "requests": 1
+   }
+  },
+  {
+   "id": "5.F2.late-chunk-never-revives",
+   "label": "Skip during the slow load, then the chunk arrives: no popover, no overlay, no cue, still skipped, lock released",
+   "ok": true,
+   "evidence": {
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped",
+    "cue": null,
+    "body": ""
+   }
+  },
+  {
+   "id": "5.F3.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  }
+ ]
+}

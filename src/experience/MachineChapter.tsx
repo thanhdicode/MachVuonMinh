@@ -49,7 +49,7 @@ export function MachineChapter(){
     return ()=>{window.removeEventListener('scroll',readStatic);window.removeEventListener('resize',readStatic);media.revert()}
   },[])
   return <section ref={root} className={`machine-insertion ${reduced?'machine-reduced':''}`} aria-label="02 / BƯỚC NGOẶT CƠ GIỚI">
-    <div className="machine-stage" ref={stageRef} data-progress="0" data-beat="0">
+    <div className="machine-stage" ref={stageRef} data-guide="machine-system" data-progress="0" data-beat="0">
       <div className="hall-room-underlay" aria-hidden="true"/>
       <div className="hall-paper" aria-hidden="true"><img src="/images/history/e-reconstruction-archive.webp" alt=""/><svg className="hall-entry-circle" viewBox="0 0 1600 900"><circle cx="800" cy="450" r="296"/><circle cx="800" cy="450" r="44"/><path d="M0 730C320 730 460 750 505 450A296 296 0 1 1 800 746"/><path d="M490 450H1110M800 140V760" className="hall-engraving"/></svg></div>
       <div className="hall-vignette" aria-hidden="true"/>
@@ -59,7 +59,7 @@ export function MachineChapter(){
       <div className="hall-technical-labels" aria-hidden="true"><span>TRỤC CHÍNH</span><span>DÂY TRUYỀN</span></div>
       <div className="hall-cadence" aria-hidden="true">PHÂN CÔNG <i/> PHỐI HỢP <i/> NHỊP SẢN XUẤT</div>
     </div>
-    <div className="machine-static-story"><span className="machine-code">02 / BƯỚC NGOẶT CƠ GIỚI</span>{[0,1,2,3].map(i=><section className={`machine-static-beat static-beat-${i}`} data-static-beat={i} key={i}><StaticHall beat={i}/><span className="hall-static-index">{['01 / NGUỒN LỰC','02 / TRỤC CHÍNH','03 / CÔNG ĐOẠN','04 / TỔ CHỨC'][i]}</span><h2>{[captions[2],captions[3],captions[5],captions[7]][i]}</h2>{i===2&&<p>PHÂN CÔNG · PHỐI HỢP · NHỊP SẢN XUẤT</p>}{i===3&&<><p>{captions[6]}</p><p>{explanation}</p></>}</section>)}<p className="machine-static-exit">{captions[8]}</p></div>
+    <div className="machine-static-story" data-guide="machine-system"><span className="machine-code">02 / BƯỚC NGOẶT CƠ GIỚI</span>{[0,1,2,3].map(i=><section className={`machine-static-beat static-beat-${i}`} data-static-beat={i} key={i}><StaticHall beat={i}/><span className="hall-static-index">{['01 / NGUỒN LỰC','02 / TRỤC CHÍNH','03 / CÔNG ĐOẠN','04 / TỔ CHỨC'][i]}</span><h2>{[captions[2],captions[3],captions[5],captions[7]][i]}</h2>{i===2&&<p>PHÂN CÔNG · PHỐI HỢP · NHỊP SẢN XUẤT</p>}{i===3&&<><p>{captions[6]}</p><p>{explanation}</p></>}</section>)}<p className="machine-static-exit">{captions[8]}</p></div>
     <ol className="machine-transcript">{captions.filter(Boolean).map(t=><li key={t}>{t}</li>)}<li>{explanation}</li><li>Một động cơ quay bánh đà và trục truyền động chung trên cao. Dây đai da dẫn lực xuống máy tiện, máy khoan và máy bào. Người vận hành ở từng vị trí và người bảo trì cùng giữ nhịp công việc; phôi thô đi qua nhiều công đoạn thành sản phẩm.</li></ol>
   </section>
 }

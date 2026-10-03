@@ -1,0 +1,4 @@
+{
+  "I01": "lifecycle/01-first-visit: lời chào lần đầu hiện đúng một lần, không tự chạy theo timer, ba lựa chọn + Bỏ qua hướng dẫn (23/23 kiểm tra đạt); ảnh welcome.png",
+  "I02": "lifecycle/01-first-visit: thực hành sợi đỏ trong tuyến nhanh (ảnh quick-I02.png); hoàn tất bằng bàn phím, kéo bằng con trỏ xem pointer-thread.json nếu có"
+}

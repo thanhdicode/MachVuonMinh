@@ -1,0 +1,579 @@
+{
+ "name": "03-returning-users",
+ "at": "2026-10-03T13:22:00.506Z",
+ "passed": 57,
+ "failed": 0,
+ "results": [
+  {
+   "id": "3.1.start",
+   "label": "completed (all 70 steps): no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "completed"
+   }
+  },
+  {
+   "id": "3.1.resume-entry",
+   "label": "no resume entry (nothing resumable)",
+   "ok": true,
+   "evidence": {
+    "resume": null
+   }
+  },
+  {
+   "id": "3.1.marks",
+   "label": "module marks come from the sanitised/migrated progress",
+   "ok": true,
+   "evidence": [
+    "✓ đã xem",
+    "✓ đã xem",
+    "✓ đã xem",
+    "✓ đã xem",
+    "✓ đã xem",
+    "✓ đã xem",
+    "✓ đã xem",
+    "✓ đã xem"
+   ]
+  },
+  {
+   "id": "3.1.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.2.start",
+   "label": "dismissed: no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "dismissed"
+   }
+  },
+  {
+   "id": "3.2.resume-entry",
+   "label": "no resume entry (nothing resumable)",
+   "ok": true,
+   "evidence": {
+    "resume": null
+   }
+  },
+  {
+   "id": "3.2.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.3.start",
+   "label": "skipped (skip-guide at L05): no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "3.3.resume-entry",
+   "label": "\"Tiếp tục bước dang dở\" offers exactly L05 (Thử Hạ tầng)",
+   "ok": true,
+   "evidence": {
+    "resume": {
+     "text": "Tiếp tục bước dang dở",
+     "small": "Thử Hạ tầng"
+    }
+   }
+  },
+  {
+   "id": "3.3.resumes-exact-id",
+   "label": "resume re-prepares exactly L05 and re-resolves its target",
+   "ok": true,
+   "evidence": {
+    "step": "L05",
+    "title": "Thử Hạ tầng",
+    "cue": "practice",
+    "popovers": 0
+   }
+  },
+  {
+   "id": "3.3.resume-no-completion",
+   "label": "resuming does not complete anything",
+   "ok": true,
+   "evidence": {
+    "before": [
+     "I01",
+     "I02",
+     "L01",
+     "L02",
+     "L03"
+    ],
+    "after": [
+     "I01",
+     "I02",
+     "L01",
+     "L02",
+     "L03"
+    ]
+   }
+  },
+  {
+   "id": "3.3.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.4.start",
+   "label": "in-progress at V05 (close): no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "in-progress"
+   }
+  },
+  {
+   "id": "3.4.resume-entry",
+   "label": "\"Tiếp tục bước dang dở\" offers exactly V05 (Sang Nhà máy)",
+   "ok": true,
+   "evidence": {
+    "resume": {
+     "text": "Tiếp tục bước dang dở",
+     "small": "Sang Nhà máy"
+    }
+   }
+  },
+  {
+   "id": "3.4.resumes-exact-id",
+   "label": "resume re-prepares exactly V05 and re-resolves its target",
+   "ok": true,
+   "evidence": {
+    "step": "V05",
+    "title": "Sang Nhà máy",
+    "cue": null,
+    "popovers": 1
+   }
+  },
+  {
+   "id": "3.4.resume-no-completion",
+   "label": "resuming does not complete anything",
+   "ok": true,
+   "evidence": {
+    "before": [
+     "I01",
+     "V01",
+     "V02",
+     "V03",
+     "V04"
+    ],
+    "after": [
+     "I01",
+     "V01",
+     "V02",
+     "V03",
+     "V04"
+    ]
+   }
+  },
+  {
+   "id": "3.4.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.5.start",
+   "label": "v1 legacy dismissed with completed modules: no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "none"
+   }
+  },
+  {
+   "id": "3.5.resume-entry",
+   "label": "no resume entry (nothing resumable)",
+   "ok": true,
+   "evidence": {
+    "resume": null
+   }
+  },
+  {
+   "id": "3.5.marks",
+   "label": "module marks come from the sanitised/migrated progress",
+   "ok": true,
+   "evidence": [
+    "✓ đã xem",
+    "✓ đã xem",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "id": "3.5.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.6.start",
+   "label": "v1 legacy in-progress at L05: no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "none"
+   }
+  },
+  {
+   "id": "3.6.resume-entry",
+   "label": "\"Tiếp tục bước dang dở\" offers exactly L05 (Thử Hạ tầng)",
+   "ok": true,
+   "evidence": {
+    "resume": {
+     "text": "Tiếp tục bước dang dở",
+     "small": "Thử Hạ tầng"
+    }
+   }
+  },
+  {
+   "id": "3.6.resumes-exact-id",
+   "label": "resume re-prepares exactly L05 and re-resolves its target",
+   "ok": true,
+   "evidence": {
+    "step": "L05",
+    "title": "Thử Hạ tầng",
+    "cue": "practice",
+    "popovers": 0
+   }
+  },
+  {
+   "id": "3.6.resume-no-completion",
+   "label": "resuming does not complete anything",
+   "ok": true,
+   "evidence": {
+    "after": [
+     "I01",
+     "I02",
+     "I03",
+     "I04",
+     "I05",
+     "I06"
+    ]
+   }
+  },
+  {
+   "id": "3.6.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.7.start",
+   "label": "malformed JSON: the welcome greets (nothing usable stored); one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 1,
+    "roots": 1,
+    "dock": 0,
+    "status": "none"
+   }
+  },
+  {
+   "id": "3.7.overwrite",
+   "label": "a corrupted value is replaced by valid v2 data on the next write",
+   "ok": true,
+   "evidence": {
+    "saved": "dismissed"
+   }
+  },
+  {
+   "id": "3.7.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.8.start",
+   "label": "wrong shape (array): the welcome greets (nothing usable stored); one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 1,
+    "roots": 1,
+    "dock": 0,
+    "status": "none"
+   }
+  },
+  {
+   "id": "3.8.overwrite",
+   "label": "a corrupted value is replaced by valid v2 data on the next write",
+   "ok": true,
+   "evidence": {
+    "saved": "dismissed"
+   }
+  },
+  {
+   "id": "3.8.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.9.start",
+   "label": "malformed v2 but valid legacy v1: no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "none"
+   }
+  },
+  {
+   "id": "3.9.resume-entry",
+   "label": "no resume entry (nothing resumable)",
+   "ok": true,
+   "evidence": {
+    "resume": null
+   }
+  },
+  {
+   "id": "3.9.marks",
+   "label": "module marks come from the sanitised/migrated progress",
+   "ok": true,
+   "evidence": [
+    "✓ đã xem",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "id": "3.9.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.10.start",
+   "label": "stale ids (unknown step/module ids, junk types): no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "in-progress"
+   }
+  },
+  {
+   "id": "3.10.resume-entry",
+   "label": "no resume entry (nothing resumable)",
+   "ok": true,
+   "evidence": {
+    "resume": null
+   }
+  },
+  {
+   "id": "3.10.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.11.start",
+   "label": "stale step id inside a valid module: no welcome for a returning user; one guide root, owl present",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "roots": 1,
+    "dock": 1,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "3.11.resume-entry",
+   "label": "no resume entry (nothing resumable)",
+   "ok": true,
+   "evidence": {
+    "resume": null
+   }
+  },
+  {
+   "id": "3.11.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.12.welcome",
+   "label": "localStorage getter throws SecurityError: the app and the guide load, the welcome greets in-session",
+   "ok": true,
+   "evidence": {
+    "welcome": 1,
+    "roots": 1
+   }
+  },
+  {
+   "id": "3.12.runs-in-session",
+   "label": "the tour runs and advances in-session (I02 → I03 popover) without storage",
+   "ok": true,
+   "evidence": {
+    "title": "Đi tiếp",
+    "popovers": 1
+   }
+  },
+  {
+   "id": "3.12.resume-in-session",
+   "label": "closing with × keeps the step resumable in this session (in-memory progress)",
+   "ok": true,
+   "evidence": {
+    "resume": {
+     "text": "Tiếp tục bước dang dở",
+     "small": "Đi tiếp"
+    }
+   }
+  },
+  {
+   "id": "3.12.resumed",
+   "label": "in-session resume re-opens I03",
+   "ok": true,
+   "evidence": {
+    "title": "Đi tiếp"
+   }
+  },
+  {
+   "id": "3.12.calls",
+   "label": "guide touched storage (getter-blocked variant: not counted)",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "3.12.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.13.welcome",
+   "label": "getItem/setItem throw (quota / privacy mode): the app and the guide load, the welcome greets in-session",
+   "ok": true,
+   "evidence": {
+    "welcome": 1,
+    "roots": 1
+   }
+  },
+  {
+   "id": "3.13.runs-in-session",
+   "label": "the tour runs and advances in-session (I02 → I03 popover) without storage",
+   "ok": true,
+   "evidence": {
+    "title": "Đi tiếp",
+    "popovers": 1
+   }
+  },
+  {
+   "id": "3.13.resume-in-session",
+   "label": "closing with × keeps the step resumable in this session (in-memory progress)",
+   "ok": true,
+   "evidence": {
+    "resume": {
+     "text": "Tiếp tục bước dang dở",
+     "small": "Đi tiếp"
+    }
+   }
+  },
+  {
+   "id": "3.13.resumed",
+   "label": "in-session resume re-opens I03",
+   "ok": true,
+   "evidence": {
+    "title": "Đi tiếp"
+   }
+  },
+  {
+   "id": "3.13.calls",
+   "label": "guide touched storage 14 times (all swallowed)",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "3.13.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "3.14.at-L05",
+   "label": "the walk is at L05 (practice cue on the infrastructure slider)",
+   "ok": true,
+   "evidence": {
+    "step": "L05",
+    "cue": "practice",
+    "scene": "experience scene-5 unlocked  "
+   }
+  },
+  {
+   "id": "3.14.no-auto-resume",
+   "label": "after the refresh nothing resumes by itself (no welcome / popover / cue / lock)",
+   "ok": true,
+   "evidence": {
+    "stepId": "L05",
+    "status": "in-progress",
+    "lastExit": "close",
+    "body": "locked"
+   }
+  },
+  {
+   "id": "3.14.resume-entry",
+   "label": "the owl menu offers \"Tiếp tục bước dang dở\" naming L05",
+   "ok": true,
+   "evidence": {
+    "resume": {
+     "text": "Tiếp tục bước dang dở",
+     "small": "Thử Hạ tầng"
+    }
+   }
+  },
+  {
+   "id": "3.14.resumes-L05",
+   "label": "resume lands on exactly L05 with its slider target visible in the viewport",
+   "ok": true,
+   "evidence": {
+    "step": "L05",
+    "title": "Thử Hạ tầng",
+    "target": {
+     "visible": true,
+     "inViewport": true,
+     "w": 210,
+     "h": 45
+    },
+    "scrollY": 18105
+   }
+  },
+  {
+   "id": "3.14.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  }
+ ]
+}

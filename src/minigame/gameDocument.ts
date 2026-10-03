@@ -1,6 +1,8 @@
 import template from './assets/game.html?raw'
 import gameStyle from './assets/game.css?inline'
+import guideStyle from '../onboarding/guideGame.css?inline'
 import gameScript from './assets/game.js?raw'
+import guideScript from '../onboarding/game-guide.js?minraw'
 import questions from './assets/questions.js?raw'
 import documentQuestions from './assets/document-questions.js?raw'
 import sprites from './assets/sprites.json'
@@ -12,11 +14,25 @@ import beVietnameseMedium from '@fontsource/be-vietnam-pro/vietnamese-500.css?in
 import beVietnameseBold from '@fontsource/be-vietnam-pro/vietnamese-700.css?inline'
 import monoLatin from '@fontsource/ibm-plex-mono/latin-400.css?inline'
 import monoVietnamese from '@fontsource/ibm-plex-mono/vietnamese-400.css?inline'
+import { scriptSafeJson } from '../onboarding/gameGuideProtocol'
+import type { GameChildConfig } from '../onboarding/gameGuideProtocol'
 
 const fonts = [beLatinRegular, beLatinMedium, beLatinBold, beVietnameseRegular, beVietnameseMedium, beVietnameseBold, monoLatin, monoVietnamese].join('\n')
 const script = (source: string) => `<script>${source.replace(/<\/script/gi, '<\\/script')}</script>`
+const spriteUrls = Object.fromEntries(Object.entries(sprites).map(([key, file]) => [key, `${import.meta.env.BASE_URL}minigame/sprites/${file}`]))
 
-// Vite resolves all fonts and scripts locally; the iframe needs no CDN or separate deployment.
-export const gameDocument = template
-  .replace('<!-- GAME_STYLES -->', `<style>${fonts}\n${gameStyle}</style>`)
-  .replace('<!-- GAME_SCRIPTS -->', script(`window.GAME_SPRITES=${JSON.stringify(Object.fromEntries(Object.entries(sprites).map(([key,file])=>[key,`${import.meta.env.BASE_URL}minigame/sprites/${file}`])))};`) + script(questions) + script(documentQuestions) + script(gameScript))
+// One srcdoc per open: the nonce, the expected origin and the catalog steps are baked in, so nothing is fetched or guessed.
+// Vite resolves all fonts and scripts locally; the iframe needs no CDN. Driver.js itself is loaded lazily from the vendored copy.
+export function buildGameDocument(config: GameChildConfig): string {
+  const guided = config.guide !== null
+  return template
+    .replace('<!-- GAME_STYLES -->', `<style>${fonts}\n${gameStyle}${guided ? `\n${guideStyle}` : ''}</style>`)
+    .replace('<!-- GAME_SCRIPTS -->', () => [
+      script(`window.GAME_SPRITES=${JSON.stringify(spriteUrls)};`),
+      script(questions),
+      script(documentQuestions),
+      script(`window.MACH_GAME_CONFIG=${scriptSafeJson(config)};`),
+      script(gameScript),
+      guided ? script(guideScript) : '',
+    ].join(''))
+}

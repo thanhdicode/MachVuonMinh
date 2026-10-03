@@ -1,0 +1,155 @@
+/* Driver popover theme. Scoped to .mach-guide; the outer .driver-popover is positioned by Driver and never animated.
+   Same layout contract as guide.css: the description scrolls, footer + extras stay pinned, the card scrolls only as a last resort. */
+.driver-popover.mach-guide {
+  --guide-paper: #f3e8d0;
+  --guide-ink: #171512;
+  --guide-red: #b51f2a;
+  --guide-brass: #b48b43;
+  --guide-max: calc(100dvh - 24px);
+  --guide-pinned: 10.5em;
+  display: grid !important;
+  grid-template-columns: 96px minmax(0, 1fr);
+  grid-template-areas: 'owl title' 'owl desc' 'footer footer' 'extras extras';
+  align-content: start;
+  column-gap: 14px;
+  width: min(23.75em, calc(100vw - 32px));
+  max-width: none;
+  min-width: 0;
+  max-height: var(--guide-max);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: 16px 16px 12px;
+  border: 1px solid var(--guide-ink);
+  border-top: 3px solid var(--guide-red);
+  border-radius: 2px;
+  background: var(--guide-paper);
+  color: var(--guide-ink);
+  font: 400 16px/1.45 'Be Vietnam Pro', sans-serif;
+  box-shadow: 0 18px 40px rgb(23 21 18 / 28%);
+}
+.mach-guide .mach-guide__owl { grid-area: owl; align-self: start; width: 96px; height: 96px; }
+.mach-guide .driver-popover-title {
+  grid-area: title;
+  margin: 0 28px 6px 0;
+  font: 700 17px/1.3 'Be Vietnam Pro', sans-serif;
+  letter-spacing: -0.01em;
+  color: var(--guide-ink);
+  overflow-wrap: break-word;
+}
+.mach-guide .driver-popover-description {
+  grid-area: desc;
+  min-height: 0;
+  max-height: max(3.6em, calc(var(--guide-max) - var(--guide-pinned)));
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  font: 400 15px/1.5 'Be Vietnam Pro', sans-serif;
+  color: var(--guide-ink);
+  overflow-wrap: break-word;
+}
+.mach-guide .driver-popover-footer {
+  grid-area: footer;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(23 21 18 / 18%);
+  gap: 8px 10px;
+}
+.mach-guide .driver-popover-progress-text {
+  font: 500 12px/1.2 'IBM Plex Mono', monospace;
+  letter-spacing: 0.06em;
+  color: var(--guide-red);
+}
+.mach-guide .driver-popover-footer-btn,
+.mach-guide .mach-guide__btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--guide-ink);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--guide-ink);
+  font: 500 12px/1.2 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  text-align: center;
+}
+.mach-guide .driver-popover-footer-btn:hover,
+.mach-guide .mach-guide__btn:hover { background: rgb(23 21 18 / 8%); }
+.mach-guide .driver-popover-next-btn,
+.mach-guide .mach-guide__btn--primary {
+  border-color: var(--guide-red);
+  background: var(--guide-red);
+  color: #fff;
+}
+.mach-guide .driver-popover-next-btn:hover,
+.mach-guide .mach-guide__btn--primary:hover { background: #8f1620; }
+.mach-guide .driver-popover-footer-btn:focus-visible,
+.mach-guide .mach-guide__btn:focus-visible,
+.mach-guide .driver-popover-close-btn:focus-visible { outline: 2px solid var(--guide-brass); outline-offset: 2px; }
+.mach-guide .driver-popover-close-btn {
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  color: var(--guide-ink);
+  opacity: 0.7;
+  font-size: 20px;
+  line-height: 36px;
+}
+.mach-guide .driver-popover-close-btn:hover { opacity: 1; color: var(--guide-red); }
+.mach-guide .driver-popover-arrow { display: none; }
+.mach-guide .mach-guide__extras {
+  grid-area: extras;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  min-height: 40px;
+  margin-top: 10px;
+}
+.mach-guide .mach-guide__btn--quiet { min-height: 36px; padding: 0 4px; border-color: transparent; text-decoration: underline; text-underline-offset: 3px; }
+.mach-guide .mach-guide__btn--skip { border-style: dashed; margin-left: auto; }
+
+@media (max-width: 700px), (pointer: coarse) {
+  .mach-guide .driver-popover-description { font-size: 16px; }
+  .mach-guide .driver-popover-title { font-size: 17px; }
+  .mach-guide .driver-popover-footer-btn,
+  .mach-guide .mach-guide__btn { min-height: 44px; min-width: 44px; }
+  .mach-guide .driver-popover-close-btn { width: 44px; height: 44px; top: 4px; right: 4px; line-height: 44px; }
+}
+
+@media (max-width: 700px) {
+  .driver-popover.mach-guide {
+    --guide-max: min(66dvh, calc(100dvh - 24px));
+    --guide-pinned: 13em;
+    grid-template-columns: 56px minmax(0, 1fr);
+    grid-template-areas: 'owl title' 'desc desc' 'footer footer' 'extras extras';
+    column-gap: 10px;
+    padding: 12px 12px calc(10px + env(safe-area-inset-bottom));
+  }
+  .driver-popover.mach-guide[data-sheet] {
+    left: 12px !important;
+    right: 12px !important;
+    width: auto;
+    top: auto !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+  .driver-popover.mach-guide[data-sheet='top'] { top: 64px !important; bottom: auto !important; --guide-max: min(66dvh, calc(100dvh - 76px)); }
+  .mach-guide .mach-guide__owl { width: 56px; height: 56px; }
+  .mach-guide .driver-popover-title { align-self: center; margin: 0 44px 0 0; }
+  .mach-guide .driver-popover-description { margin-top: 8px; }
+  .mach-guide .driver-popover-footer-btn,
+  .mach-guide .mach-guide__btn { padding: 0 10px; letter-spacing: 0.02em; }
+  .mach-guide .mach-guide__btn--quiet { padding: 0 2px; }
+}
+
+@media (max-height: 520px) {
+  .driver-popover.mach-guide { --guide-max: calc(100dvh - 16px); }
+  .driver-popover.mach-guide[data-sheet='top'] { top: 56px !important; --guide-max: calc(100dvh - 68px); }
+}

@@ -1,0 +1,1284 @@
+{
+ "tag": "vietnam-1366x768",
+ "reloaded": false,
+ "moduleId": "vietnam",
+ "width": 1366,
+ "height": 768,
+ "touch": false,
+ "reduced": false,
+ "zoom": 1,
+ "textOnly": 1,
+ "viewport": {
+  "w": 1366,
+  "h": 768,
+  "dpr": 1
+ },
+ "baseDocW": 1366,
+ "errors": [],
+ "summary": {
+  "steps": 11,
+  "withIssues": 0,
+  "failures": 0
+ },
+ "results": [
+  {
+   "n": 0,
+   "id": "V01",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Chọn tình huống",
+   "counter": "VIỆT NAM · 01 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 96,
+    "y": 678,
+    "w": 245,
+    "h": 44
+   },
+   "targetInfo": {
+    "tag": "div",
+    "guide": "vietnam-cases",
+    "cls": "case-tabs",
+    "shown": true
+   },
+   "popBox": {
+    "x": 28,
+    "y": 323,
+    "w": 380,
+    "h": 333
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 28,
+     "y": 323,
+     "w": 380,
+     "h": 333
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 329,
+    "clientH": 329,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 45,
+      "y": 342,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 45,
+      "y": 342,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[farm-before] 96,327 430x46",
+    "button[farm-after] 96,373 430x46",
+    "button[farm-cooperation] 96,419 430x46",
+    "button[case-map-trigger] 219,628 142x32"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 1,
+   "id": "V02",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Xem cách làm trước",
+   "counter": "VIỆT NAM · 02 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 96,
+    "y": 327,
+    "w": 430,
+    "h": 46
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "farm-before",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 121,
+    "y": 395,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 121,
+     "y": 395,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 138,
+      "y": 414,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 138,
+      "y": 414,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[farm-after] 96,373 430x46",
+    "button[farm-cooperation] 96,419 430x46",
+    "button[case-map-trigger] 219,628 142x32",
+    "button[case-farm-tab] 96,678 71x44",
+    "button[case-factory] 191,678 61x44",
+    "button[case-digital] 276,678 65x44"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 2,
+   "id": "V03",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Xem cách làm sau",
+   "counter": "VIỆT NAM · 03 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 96,
+    "y": 373,
+    "w": 430,
+    "h": 46
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "farm-after",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 121,
+    "y": 60,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 121,
+     "y": 60,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 138,
+      "y": 79,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 138,
+      "y": 79,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "a[wordmark] 44,31 125x38",
+    "button[farm-before] 96,327 430x46"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 3,
+   "id": "V04",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Xem cách cùng làm",
+   "counter": "VIỆT NAM · 04 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 96,
+    "y": 419,
+    "w": 430,
+    "h": 46
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "farm-cooperation",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 121,
+    "y": 129,
+    "w": 380,
+    "h": 268
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 121,
+     "y": 129,
+     "w": 380,
+     "h": 268
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 264,
+    "clientH": 264,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 138,
+      "y": 148,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 138,
+      "y": 148,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[farm-before] 96,327 430x46",
+    "button[farm-after] 96,373 430x46"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 4,
+   "id": "V05",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Sang Nhà máy",
+   "counter": "VIỆT NAM · 05 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 191,
+    "y": 678,
+    "w": 61,
+    "h": 44
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "case-factory",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 31,
+    "y": 388,
+    "w": 380,
+    "h": 268
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 31,
+     "y": 388,
+     "w": 380,
+     "h": 268
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 264,
+    "clientH": 264,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 48,
+      "y": 407,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 48,
+      "y": 407,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[farm-after] 96,373 430x46",
+    "button[farm-cooperation] 96,419 430x46",
+    "button[case-map-trigger] 219,628 142x32"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 5,
+   "id": "V06",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Hỏi Ai sở hữu?",
+   "counter": "VIỆT NAM · 06 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 96,
+    "y": 543,
+    "w": 132,
+    "h": 47
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "relation-ownership",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 0,
+    "y": 230,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 0,
+     "y": 230,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 17,
+      "y": 249,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 17,
+      "y": 249,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[case-map-trigger] 96,294 142x30"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 6,
+   "id": "V07",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Hỏi Ai phối hợp?",
+   "counter": "VIỆT NAM · 07 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 248,
+    "y": 543,
+    "w": 132,
+    "h": 47
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "relation-organization",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 124,
+    "y": 253,
+    "w": 380,
+    "h": 268
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 124,
+     "y": 253,
+     "w": 380,
+     "h": 268
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 264,
+    "clientH": 264,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 141,
+      "y": 272,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 141,
+      "y": 272,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[case-map-trigger] 96,294 142x30"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 7,
+   "id": "V08",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Hỏi Ai hưởng lợi?",
+   "counter": "VIỆT NAM · 08 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 400,
+    "y": 543,
+    "w": 132,
+    "h": 47
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "relation-distribution",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 277,
+    "y": 253,
+    "w": 380,
+    "h": 268
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 277,
+     "y": 253,
+     "w": 380,
+     "h": 268
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 264,
+    "clientH": 264,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 294,
+      "y": 272,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 294,
+      "y": 272,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": [],
+   "signaledAfterAction": false,
+   "afterBody": "guide-scroll-locked driver-active driver-fade"
+  },
+  {
+   "n": 8,
+   "id": "V09",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Thử Kinh tế số",
+   "counter": "VIỆT NAM · 09 / 11",
+   "owl": "point-right",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 276,
+    "y": 670,
+    "w": 65,
+    "h": 44
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "case-digital",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 118,
+    "y": 358,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 118,
+     "y": 358,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [],
+     "body": [],
+     "hint": [],
+     "counter": [],
+     "buttons": []
+    },
+    "buttons": [],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 135,
+      "y": 377,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 135,
+      "y": 377,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": [
+     "animate-fade-in"
+    ]
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[relation-ownership] 96,543 132x47",
+    "button[relation-organization] 248,543 132x47",
+    "button[relation-distribution] 400,543 132x47"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 9,
+   "id": "V10",
+   "presenter": "cue",
+   "kind": "modal",
+   "host": "dialog",
+   "anchor": "top-right",
+   "title": "Đọc dữ kiện có nguồn",
+   "counter": "VIỆT NAM · 10 / 11",
+   "owl": "inspect",
+   "next": "Tiếp tục",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 830,
+    "y": 534,
+    "w": 492,
+    "h": 222
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 830,
+     "y": 534,
+     "w": 492,
+     "h": 222
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "sticky",
+    "scrollH": 218,
+    "clientH": 218,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Quay lại",
+      "w": 87,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 87,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 843,
+      "y": 549,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 843,
+      "y": 549,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[case-source-trigger] 1135,670 135x44",
+    "button[] 830,626 38x38",
+    "button[] 878,626 38x38",
+    "button[] 926,626 38x38",
+    "button[] 974,626 38x38",
+    "button[] 1022,626 38x38"
+   ],
+   "targets": [
+    {
+     "x": 830,
+     "y": 86,
+     "w": 492,
+     "h": 156,
+     "tag": "dl"
+    }
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": []
+  },
+  {
+   "n": 10,
+   "id": "V11",
+   "presenter": "cue",
+   "kind": "modal",
+   "host": "dialog",
+   "anchor": "top-right",
+   "title": "Phóng bản đồ",
+   "counter": "VIỆT NAM · 11 / 11",
+   "owl": "inspect",
+   "next": "Xong phần này",
+   "scrollY": 17784,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 453,
+    "y": 100,
+    "w": 460,
+    "h": 630
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 453,
+     "y": 100,
+     "w": 460,
+     "h": 630
+    },
+    "overflowY": "auto",
+    "maxHeight": "740px",
+    "position": "absolute",
+    "scrollH": 626,
+    "clientH": 626,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Quay lại",
+      "w": 87,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Xong phần này",
+      "w": 126,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua phần này",
+      "w": 125,
+      "h": 32,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 32,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 466,
+      "y": 115,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 466,
+      "y": 117,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[relation-distribution] 400,543 132x47"
+   ],
+   "targets": [
+    {
+     "x": 344,
+     "y": 72,
+     "w": 678,
+     "h": 610,
+     "tag": "svg"
+    }
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 267720,
+   "issues": []
+  },
+  {
+   "n": 11,
+   "id": "END",
+   "presenter": "cue",
+   "kind": "module-complete",
+   "text": "Bạn đã xem xong phần này. Muốn thử lại công cụ nào, hãy gọi mình từ hình cú.Đã đọc: Việt Nam và bằng chứng",
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 925,
+     "y": 76,
+     "w": 400,
+     "h": 174
+    },
+    "overflowY": "auto",
+    "maxHeight": "648px",
+    "position": "fixed",
+    "scrollH": 170,
+    "clientH": 170,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      13
+     ],
+     "counter": [],
+     "buttons": [
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Tiếp tục khám phá",
+      "w": 157,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Để sau",
+      "w": 56,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 938,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 938,
+      "y": 91,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "leftovers": 0,
+   "body": "",
+   "issues": []
+  }
+ ]
+}

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { installToken, policyResult, tokens } from './model'
 import { tick, useWorld } from './WorldState'
+const tokenGuide=['policy-skills','policy-data-rights','policy-data-governance','policy-sandbox','policy-reward','policy-infrastructure','policy-inclusion']
 
 export function PolicyChamber() {
   const slots=useWorld(s=>s.slots),set=useWorld(s=>s.set)
@@ -21,10 +22,10 @@ export function PolicyChamber() {
   }
   return <section className={`policy-overlay ${dragging!==null?'is-dragging':''} ${complete?'is-complete':''}`} aria-label="Buồng chính sách">
     <div className="policy-title"><span className="eyebrow">07 / BUỒNG CHÍNH SÁCH</span><h2>Ba đòn bẩy.<br/>Một hệ thống.</h2><p>Chọn ba đòn bẩy.<br/>Không có một đáp án duy nhất.</p></div>
-    <p className="policy-instruction">CHỌN 3 ĐÒN BẨY<br/>VÀ GẮN VÀO HỆ THỐNG<small>Kéo vào vòng · Hoặc chạm để gắn<br/>Chạm vị trí đã gắn để tháo</small></p>
-    <div className="policy-sockets">{slots.map((token,i)=><button className={`policy-socket socket-${i} ${token!==null?'filled':''} ${dropSlot===i?'receiving':''}`} key={i} data-slot={i} aria-label={`Vị trí ${i+1}${token!==null?': '+tokens[token]+'. Nhấn để tháo.':': trống'}`} onClick={()=>{if(token!==null){set({slots:slots.map((v,j)=>j===i?null:v)});setMessage(`Đã tháo ${tokens[token]}.`)}}}><span>{dropSlot===i?'+':token!==null?'↗':String(i+1).padStart(2,'0')}</span><small>{dropSlot===i?'THẢ ĐỂ GẮN':token!==null?tokens[token]:'GẮN ĐÒN BẨY'}</small></button>)}</div>
-    {complete&&<div className="policy-result" aria-live="polite"><p><span>MẠNH Ở</span>{result.strength}.</p><p><span>CÒN THIẾU</span>{result.missing}</p><p><span>ĐÁNH ĐỔI</span>{result.tradeoff}</p></div>}
-    <div className="policy-tokens">{tokens.map((name,i)=><button key={name} className={`lever-token ${slots.includes(i)?'installed':''}`} aria-pressed={slots.includes(i)}
+    <p className="policy-instruction" data-guide="policy-instruction">CHỌN 3 ĐÒN BẨY<br/>VÀ GẮN VÀO HỆ THỐNG<small>Kéo vào vòng · Hoặc chạm để gắn<br/>Chạm vị trí đã gắn để tháo</small></p>
+    <div className="policy-sockets"><div className="guide-proxy guide-proxy--sockets" data-guide="policy-sockets policy-retry" aria-hidden="true"/>{slots.map((token,i)=><button className={`policy-socket socket-${i} ${token!==null?'filled':''} ${dropSlot===i?'receiving':''}`} key={i} data-slot={i} aria-label={`Vị trí ${i+1}${token!==null?': '+tokens[token]+'. Nhấn để tháo.':': trống'}`} onClick={()=>{if(token!==null){set({slots:slots.map((v,j)=>j===i?null:v)});setMessage(`Đã tháo ${tokens[token]}.`)}}}><span>{dropSlot===i?'+':token!==null?'↗':String(i+1).padStart(2,'0')}</span><small>{dropSlot===i?'THẢ ĐỂ GẮN':token!==null?tokens[token]:'GẮN ĐÒN BẨY'}</small></button>)}</div>
+    {complete&&<div className="policy-result" data-guide="policy-result" aria-live="polite"><p><span>MẠNH Ở</span>{result.strength}.</p><p><span>CÒN THIẾU</span>{result.missing}</p><p><span>ĐÁNH ĐỔI</span>{result.tradeoff}</p></div>}
+    <div className="policy-tokens">{tokens.map((name,i)=><button key={name} data-guide={tokenGuide[i]} className={`lever-token ${slots.includes(i)?'installed':''}`} aria-pressed={slots.includes(i)}
       onClick={e=>{if(suppressClick.current&&e.detail!==0){suppressClick.current=false;return}suppressClick.current=false;quickInstall(i)}}
       onPointerDown={e=>{if(e.button!==0)return;start.current={x:e.clientX,y:e.clientY};suppressClick.current=false;activeDrag.current=i;setDragging(i);e.currentTarget.setPointerCapture(e.pointerId)}}
       onPointerMove={e=>{if(activeDrag.current!==i)return;if(ghost.current)ghost.current.style.transform=`translate(${e.clientX+12}px,${e.clientY-25}px)`;setDropSlot(hitSlot(e.clientX,e.clientY))}}

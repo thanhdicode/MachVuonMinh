@@ -4,7 +4,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { historyEras, historyBridgeLine, historyImage } from '../data/history'
 import { lensGeometry, historyStep, historyProgressForTravel } from './historyGeometry'
-import { goToScene, scrollToPosition } from './WorldTimeline'
+import { acquireScrollLease, goToScene, scrollToPosition } from './WorldTimeline'
+import { useGuideControls } from '../onboarding/guideControls'
 import { useWorld } from './WorldState'
 import { useHistoryAudio } from './useHistoryAudio'
 import './history.css'
@@ -150,6 +151,7 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
   }
   const cancelPress=()=>{if(press.current)clearTimeout(press.current.timer);press.current=null}
   const openInspection=(target:HTMLElement,index:number)=>{zoomTrigger.current=target;setZoomed(index);if(lens.current)lens.current.style.opacity='0'}
+  useGuideControls('history',{openZoom:(index)=>openInspection(inspectButton.current??root.current as HTMLElement,index),closeZoom:()=>setZoomed(null),zoomOpen:()=>zoomed!==null})
   const toggleInspection=(target:HTMLButtonElement)=>{
     if (reduced || !matchMedia(horizontalMedia).matches || !matchMedia('(hover:hover) and (pointer:fine)').matches) openInspection(target,Math.min(7,active))
     else setInspecting(value=>!value)
@@ -164,36 +166,37 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
     const dialog=zoom.current
     if (zoomed===null || !dialog) return
     dialog.showModal();document.body.classList.add('drawer-open')
-    return ()=>{dialog.close();document.body.classList.remove('drawer-open');zoomTrigger.current?.focus({preventScroll:true})}
+    const release=acquireScrollLease('dialog')
+    return ()=>{dialog.close();release();document.body.classList.remove('drawer-open');zoomTrigger.current?.focus({preventScroll:true})}
   },[zoomed])
 
   return <div className="history-insertion">
     <section ref={root} data-active-era={active} data-era={active} className={`history-bridge ${reduced?'history-static':''} ${paused?'history-paused':''} ${inspecting?'history-inspecting':''}`} aria-labelledby="history-title" tabIndex={0}>
-      <div className="history-heading"><span className="eyebrow">01 / MỘT QUÃNG NHÌN LẠI</span><h2 id="history-title">BẢN ĐỒ LỊCH SỬ <span>LỰC LƯỢNG SẢN XUẤT VIỆT NAM</span></h2></div>
+      <div className="history-heading" data-guide="history-overview"><span className="eyebrow">01 / MỘT QUÃNG NHÌN LẠI</span><h2 id="history-title">BẢN ĐỒ LỊCH SỬ <span>LỰC LƯỢNG SẢN XUẤT VIỆT NAM</span></h2></div>
       <div ref={track} className="atlas-world">
         <picture className="atlas-panorama"><source media="(max-width:899px), (prefers-reduced-motion:reduce)" srcSet="/history/atlas-panorama-mobile-1024x8192.webp"/><source media="(max-width:1400px)" srcSet="/history/atlas-panorama-4096.webp"/><img src="/history/atlas-panorama-8192.avif" alt="" aria-hidden="true" decoding="async"/></picture>
         <div className="history-track">
           {historyEras.map((era,i)=><article key={era.id} className={`era-stage ${i===active?'history-current':''}`} data-label-era={i} data-status={i===active?'active':'neighbor'} style={{'--era':i} as CSSProperties}>
             <span className="history-era-sentinel" aria-hidden="true"/>
-            <div className="history-mobile-copy"><span className="history-year">{era.year}</span><h3>{era.title}</h3><div className="history-body"><p>{era.body[0]}</p></div></div>
+            <div className="history-mobile-copy" data-guide="history-era-nav history-next-prev history-caption"><span className="history-year">{era.year}</span><h3>{era.title}</h3><div className="history-body"><p>{era.body[0]}</p></div></div>
             <figure className="history-figure" style={{'--foreground-offset':`${foregroundOffsets[i]}vw`} as CSSProperties}><button className="history-image" data-inspectable="true" data-loupe-src={historyImage(era.id,'zoom')} aria-label={`Phóng ảnh: ${era.title}`} onPointerDown={e=>startPress(e,i)} onPointerUp={cancelPress} onPointerCancel={cancelPress} onPointerMove={magnify} onPointerLeave={()=>{cancelPress();if(lens.current)lens.current.style.opacity='0'}} onClick={e=>openInspection(e.currentTarget,i)}>
               <img src={loaded.includes(i)?historyImage(era.id,1440):undefined} srcSet={loaded.includes(i)?`${historyImage(era.id,768)} 768w, ${historyImage(era.id,1440)} 1440w`:undefined} sizes="(max-width:899px) 100vw, 90vw" alt={era.alt} decoding="async" onLoad={updateLeader}/>
             </button></figure>
             {i<7&&<div className="history-continuity-fragment" aria-hidden="true"><img src={loaded.includes(i+1)?historyImage(historyEras[i+1].id,768):undefined} alt="" style={{objectPosition:fragmentPositions[i]}}/></div>}
-            <div className="history-mobile-facts">{era.metric&&<strong className="history-metric">{era.metric}</strong>}<p>{era.caption||era.tag}</p>{era.secondary&&<p>{era.secondary}</p>}<button className="history-source" onClick={()=>openSource(i)} aria-label={`Đối chiếu tư liệu ${era.year}`}>ĐỐI CHIẾU TƯ LIỆU ↗</button><button className="history-mobile-inspect" aria-label={`Soi chi tiết ${era.year}`} aria-pressed={zoomed===i} onClick={e=>openInspection(e.currentTarget,i)}><LoupeIcon/> SOI CHI TIẾT</button></div>
+            <div className="history-mobile-facts">{era.metric&&<strong className="history-metric">{era.metric}</strong>}<p>{era.caption||era.tag}</p>{era.secondary&&<p>{era.secondary}</p>}<button className="history-source" onClick={()=>openSource(i)} aria-label={`Đối chiếu tư liệu ${era.year}`}>ĐỐI CHIẾU TƯ LIỆU ↗</button><button className="history-mobile-inspect" data-guide="history-inspect" aria-label={`Soi chi tiết ${era.year}`} aria-pressed={zoomed===i} onClick={e=>openInspection(e.currentTarget,i)}><LoupeIcon/> SOI CHI TIẾT</button></div>
           </article>)}
         </div>
-        <div className="history-progress-rail" aria-label="Mốc lịch sử"><div className="history-rail-line"/>{historyEras.map((era,i)=><button key={era.id} data-rail-era={i} className={i===active?'history-current':''} aria-label={`Đến thời kỳ ${era.year}`} aria-current={i===active?'step':undefined} onClick={()=>stepEra(i)} style={{left:`${48+i*step}vw`,'--rail-era':i} as CSSProperties}><i/><span>{era.year}</span></button>)}</div>
+        <div className="history-progress-rail" data-guide="history-era-nav" aria-label="Mốc lịch sử"><div className="history-rail-line"/>{historyEras.map((era,i)=><button key={era.id} data-rail-era={i} className={i===active?'history-current':''} aria-label={`Đến thời kỳ ${era.year}`} aria-current={i===active?'step':undefined} onClick={()=>stepEra(i)} style={{left:`${48+i*step}vw`,'--rail-era':i} as CSSProperties}><i/><span>{era.year}</span></button>)}</div>
       </div>
-      <div className="history-curator" key={active}><div className="history-title-block"><span className="history-year"><small>{String(active+1).padStart(2,'0')} / </small>{historyEras[active].year}</span><h3>{historyEras[active].title}</h3></div><div className="history-body"><p>{historyEras[active].body[0]}</p></div></div>
+      <div className="history-curator" data-guide="history-caption" key={active}><div className="history-title-block"><span className="history-year"><small>{String(active+1).padStart(2,'0')} / </small>{historyEras[active].year}</span><h3>{historyEras[active].title}</h3></div><div className="history-body"><p>{historyEras[active].body[0]}</p></div></div>
       <svg className="history-leader" aria-hidden="true"><path pathLength="1"/><rect width="4" height="4"/></svg>
       <div className="history-fact-rail" key={`facts-${active}`}><div>{historyEras[active].metric&&<strong className="history-metric">{historyEras[active].metric}</strong>}<button className="history-source" onClick={()=>openSource(active)} aria-label={`Đối chiếu tư liệu ${historyEras[active].year}`}>ĐỐI CHIẾU TƯ LIỆU ↗</button></div><div className="history-fact-detail"><p>{historyEras[active].caption||historyEras[active].tag}</p>{historyEras[active].secondary&&<p>{historyEras[active].secondary}</p>}</div></div>
-      <div className="history-direct-transition"><img className="atlas-machine-anchor" src="/history/atlas-machine-anchor.webp" alt="Chi tiết bánh đà trong panorama"/><img className="atlas-machine-hall" src="/images/machine-hall/hall.webp" alt=""/><button onClick={()=>goToScene(2)}>{historyBridgeLine}<span>↗</span></button></div>
-      <div className="history-controls"><span className="history-hint">CUỘN ĐỂ ĐI QUA LỊCH SỬ ↓</span><button className="history-sound" data-audio-context={audio.contextState} data-audio-rms={audio.rms} data-audio-peak={audio.peak} data-audio-era={audio.era} aria-label={audio.enabled?'Tắt âm thanh lịch sử':'Bật âm thanh lịch sử'} aria-pressed={audio.enabled} onClick={audio.toggle}><span aria-hidden="true">{audio.enabled?'◖))':'◖×'}</span><small>ÂM THANH {audio.enabled?'BẬT':'TẮT'}</small></button><div><button onClick={()=>stepEra(Math.max(0,active-1))} disabled={active===0} aria-label="Thời kỳ trước">←</button><span>{String(active+1).padStart(2,'0')} / 08</span><button onClick={()=>stepEra(Math.min(7,active+1))} disabled={active===7} aria-label="Thời kỳ tiếp theo">→</button></div></div>
+      <div className="history-direct-transition"><img className="atlas-machine-anchor" src="/history/atlas-machine-anchor.webp" alt="Chi tiết bánh đà trong panorama"/><img className="atlas-machine-hall" src="/images/machine-hall/hall.webp" alt=""/><button data-guide="history-machine-cta" onClick={()=>goToScene(2)}>{historyBridgeLine}<span>↗</span></button></div>
+      <div className="history-controls"><span className="history-hint">CUỘN ĐỂ ĐI QUA LỊCH SỬ ↓</span><button className="history-sound" data-guide="history-audio" data-audio-context={audio.contextState} data-audio-rms={audio.rms} data-audio-peak={audio.peak} data-audio-era={audio.era} aria-label={audio.enabled?'Tắt âm thanh lịch sử':'Bật âm thanh lịch sử'} aria-pressed={audio.enabled} onClick={audio.toggle}><span aria-hidden="true">{audio.enabled?'◖))':'◖×'}</span><small>ÂM THANH {audio.enabled?'BẬT':'TẮT'}</small></button><div data-guide="history-next-prev"><button onClick={()=>stepEra(Math.max(0,active-1))} disabled={active===0} aria-label="Thời kỳ trước">←</button><span>{String(active+1).padStart(2,'0')} / 08</span><button onClick={()=>stepEra(Math.min(7,active+1))} disabled={active===7} aria-label="Thời kỳ tiếp theo">→</button></div></div>
       {audio.error&&<p className="history-audio-error" role="status">{audio.error} Bấm để thử lại.</p>}
-      <div className="history-loupe-dock"><button ref={inspectButton} className="history-inspect" aria-label="Bật kính lúp xem chi tiết" aria-pressed={inspecting} title="SOI CHI TIẾT · Esc để tắt" onClick={e=>toggleInspection(e.currentTarget)}><LoupeIcon/></button><span>SOI CHI TIẾT</span></div>
+      <div className="history-loupe-dock"><button ref={inspectButton} className="history-inspect" data-guide="history-inspect" aria-label="Bật kính lúp xem chi tiết" aria-pressed={inspecting} title="SOI CHI TIẾT · Esc để tắt" onClick={e=>toggleInspection(e.currentTarget)}><LoupeIcon/></button><span>SOI CHI TIẾT</span></div>
       <div ref={lens} className="history-lens" aria-hidden="true"><i/><i/><i/><i/><span>2.15×</span></div>
     </section>
-    <dialog ref={zoom} className="history-zoom" aria-label={zoomed===null?'Ảnh lịch sử':historyEras[zoomed].title} onCancel={()=>setZoomed(null)} onClick={e=>{if(e.target===e.currentTarget)setZoomed(null)}} data-lenis-prevent>{zoomed!==null&&<><header><span className="eyebrow">{historyEras[zoomed].year} / MINH HỌA TÁI DỰNG</span><button onClick={()=>setZoomed(null)} aria-label="Đóng ảnh phóng lớn">×</button></header><div className="history-zoom-scroll" data-lenis-prevent><img src={historyImage(historyEras[zoomed].id,'zoom')} alt={historyEras[zoomed].alt}/></div><p>{historyEras[zoomed].title}</p></>}</dialog>
+    <dialog ref={zoom} className="history-zoom" aria-label={zoomed===null?'Ảnh lịch sử':historyEras[zoomed].title} onCancel={()=>setZoomed(null)} onClick={e=>{if(e.target===e.currentTarget)setZoomed(null)}} data-lenis-prevent>{zoomed!==null&&<><header><span className="eyebrow">{historyEras[zoomed].year} / MINH HỌA TÁI DỰNG</span><button onClick={()=>setZoomed(null)} aria-label="Đóng ảnh phóng lớn">×</button></header><div className="history-zoom-scroll" data-guide="history-inspect" data-lenis-prevent><img src={historyImage(historyEras[zoomed].id,'zoom')} alt={historyEras[zoomed].alt}/></div><p>{historyEras[zoomed].title}</p></>}</dialog>
   </div>
 }

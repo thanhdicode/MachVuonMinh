@@ -82,6 +82,9 @@
   const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
   const FX_LIMIT=window.innerWidth<700?64:120;
   const effects={particles:[],landingAt:-1000,shake:null,transition:null,dustIn:0,win:false};
+  // While the exhibit guide talks it holds the campaign still (holding) and may run a separate practice runner (practice).
+  const guideHold={holding:false,practice:null};
+  const guideConfig=window.MACH_GAME_CONFIG||null;
   // Cosmetic randomness is separate from obstacle and question generation.
   let fxSeed=7391;
   function fxRandom(){fxSeed=(Math.imul(fxSeed,1664525)+1013904223)>>>0;return fxSeed/4294967296}
@@ -211,15 +214,23 @@
     ['quizOverlay','endOverlay','pauseOverlay','bossPanel','bossHud'].forEach(hide);
     show('startOverlay');updateHud();draw();
   }
-  function start(){if(!assetsReady)return;hide('startOverlay');hide('endOverlay');state.mode='running';state.lastTime=performance.now();updateHud();}
+  function start(){if(!assetsReady||guideHold.holding)return;hide('startOverlay');hide('endOverlay');state.mode='running';state.lastTime=performance.now();updateHud();}
   function jump(){
+    if(guideHold.practice){practiceJump();return}
+    if(guideHold.holding)return;
     if(state.mode==='ready'){start();return}
     if(!runnerActive()||state.player.y<0)return;
     state.player.duck=false;state.player.vy=-JUMP_SPEED;state.player.y=-1;
     burst(playerBox().x+25,groundY,10,palettes[state.stage].soil,'dust');
   }
-  function duck(active){if(runnerActive()){state.player.duck=active;if(active&&state.player.y<0)state.player.vy=Math.max(state.player.vy,600)}}
+  function duck(active,cause){
+    if(guideHold.practice){practiceDuck(active,cause);return}
+    // Releasing is always honoured so a key let go during the guide never leaves a duck stuck on.
+    if(guideHold.holding){if(!active&&runnerActive())state.player.duck=false;return}
+    if(runnerActive()){state.player.duck=active;if(active&&state.player.y<0)state.player.vy=Math.max(state.player.vy,600)}
+  }
   function pause(){
+    if(guideHold.holding)return;
     if(canPause()){
       state.resumeMode=state.mode;state.mode='paused';state.player.duck=false;
       $('bossPanel').inert=true;$('quizOverlay').inert=true;show('pauseOverlay');
@@ -288,7 +299,7 @@
     });
   }
   function answerQuestion(index){
-    if(state.answered||!['quiz','boss-question'].includes(state.mode))return;
+    if(guideHold.holding||state.answered||!['quiz','boss-question'].includes(state.mode))return;
     state.answered=true;
     const q=state.activeQuestion,correct=index===q.correct;
     const isBoss=state.quizContext!=='collision';
@@ -320,7 +331,7 @@
     updateHud();
   }
   function continueAfterQuiz(){
-    if(state.mode!=='quiz'||!state.answered)return;
+    if(guideHold.holding||state.mode!=='quiz'||!state.answered)return;
     hide('quizOverlay');
     if(state.hearts<=0){end(false);return;}
     if(state.score>=STAGE_ENDS[state.stage]){startBoss();return;}
@@ -350,7 +361,7 @@
     $('bossAnswers').querySelector('button')?.focus({preventScroll:true});
   }
   function continueBoss(){
-    if(state.mode!=='boss-feedback'||!state.answered)return;
+    if(guideHold.holding||state.mode!=='boss-feedback'||!state.answered)return;
     if(state.hearts===0){end(false);return;}
     if(state.boss.hp===0){
       state.cleared[state.stage]=true;state.mode='boss-victory';
@@ -364,7 +375,7 @@
     askBossQuestion();
   }
   function advanceStage(){
-    if(state.mode!=='boss-victory'||!state.cleared[state.stage])return;
+    if(guideHold.holding||state.mode!=='boss-victory'||!state.cleared[state.stage])return;
     if(state.stage===4){end(true);return;}
     const from=state.stage;
     state.stage++;state.boss=null;state.effect=null;state.player={y:0,vy:0,duck:false};
@@ -413,6 +424,8 @@
   function frame(now){
     const dt=Math.min(Math.max(0,(now-state.lastTime)/1000),.035);
     state.lastTime=now;
+    // Held by the guide: nothing in the campaign advances, only the practice runner (if any) moves.
+    if(guideHold.holding){stepPractice(dt);draw();requestAnimationFrame(frame);return}
     if(sceneActive()){
       state.clock+=dt*1000;
       state.sceneWorld+=state.speed*dt*(state.mode==='transition'?.45:bossActive()?.35:1);
@@ -609,6 +622,7 @@
     ctx.restore();
   }
   function draw(){
+    if(guideHold.practice){drawPractice();return}
     ctx.clearRect(0,0,W,430);ctx.save();
     const shakeAge=effects.shake?state.clock-effects.shake.started:500;
     if(shakeAge<220&&!motionPreference.matches){const amount=effects.shake.strength*(1-shakeAge/220);ctx.translate(Math.sin(shakeAge*.1)*amount,Math.cos(shakeAge*.13)*amount*.4)}
@@ -626,22 +640,130 @@
     if(state.flash>0)rect(0,0,W,430,`rgba(235,92,72,${state.flash*.14})`);
   }
 
+  // ---- Exhibit guide bridge ----------------------------------------------------------------------------------------
+  // The only door the iframe guide gets into the game: hold the campaign still, run a separate practice runner and read
+  // a few plain numbers. Nothing here reads answers or edits score, hearts, stage, boss HP, questions or the deck.
+  function requestExit(){
+    if(window.parent===window)return;
+    if(guideConfig)window.parent.postMessage({type:'guide:exit',nonce:guideConfig.nonce},guideConfig.origin);
+    else window.parent.postMessage({type:'mach-minigame-close'},'*');
+  }
+  function isGuideUi(target){return !!(target&&target.closest&&target.closest('[data-mach-guide-ui]'))}
+  function isGuideControl(target){return !!(target&&target.closest&&target.closest('button,a[href],input,select,textarea,summary,[role="button"]'))}
+  function practiceNotify(type){
+    const p=guideHold.practice;
+    if(!p||!p.listener)return;
+    try{p.listener({type,kind:p.kind})}catch(error){console.warn('[guide] practice listener failed',error)}
+  }
+  function practiceJump(){
+    const p=guideHold.practice;
+    if(p.y<0)return;
+    p.duck=false;p.vy=-JUMP_SPEED;p.y=-1;p.jumped=true;practiceNotify('jumped');
+  }
+  function practiceRelease(){const p=guideHold.practice;if(p&&p.y<0&&p.vy<-320)p.vy=-320}
+  function practiceDuck(active,cause){
+    const p=guideHold.practice;
+    if(active){
+      p.duck=true;if(p.y<0)p.vy=Math.max(p.vy,600);
+      if(!p.duckAt){p.duckAt=performance.now();practiceNotify('duck-start')}
+      return;
+    }
+    p.duck=false;
+    if(!p.duckAt)return;
+    const held=performance.now()-p.duckAt;p.duckAt=0;
+    // A press that was cancelled, slid off the button or lasted a blink is not a finished duck.
+    practiceNotify(cause!=='pointercancel'&&cause!=='pointerleave'&&held>=120?'duck-end':'duck-abort');
+  }
+  function stepPractice(dt){
+    const p=guideHold.practice;
+    if(!p)return;
+    const airborne=p.y<0;
+    p.vy+=GRAVITY*dt;p.y+=p.vy*dt;
+    if(p.y>0){p.y=0;p.vy=0;if(airborne&&p.jumped){p.jumped=false;practiceNotify('landed')}}
+  }
+  function drawPractice(){
+    const p=guideHold.practice;
+    ctx.clearRect(0,0,W,430);ctx.save();
+    background();
+    const x=W*.14,ducked=p.duck&&p.y>=0,foot=groundY+p.y,stage=state.stage;
+    ellipse(x+25,groundY+4,32,6,'#172a3240');
+    if(stage<2){
+      const key=(stage===0?'adventurer':'female')+'_'+(ducked?'duck':p.y<0?'jump':'idle'),image=sprites[key];
+      if(image){const h=ducked?46:88,w=h*image.width/image.height;sprite(key,x+25-w/2,foot-h,w,h)}
+    }else{
+      const key='robot_'+['','','green','blue','red'][stage]+'_'+(p.y<0?'Jump':'Drive1'),image=sprites[key];
+      if(image){const h=ducked?40:74,w=h*image.width/image.height;sprite(key,x+25-w/2,foot-h,w,h)}
+    }
+    for(let i=1;i<=4;i++)ellipse(x-i*14,foot-17,3-i*.45,2,'#b51f2a'+['','99','66','44','22'][i]);
+    ctx.restore();
+    ctx.save();ctx.font="700 12px 'IBM Plex Mono', monospace";
+    const label='TẬP THAO TÁC',labelWidth=ctx.measureText(label).width;
+    // Low on the arena, under the ground line, so a cue docked at the top never hides it.
+    round(W/2-labelWidth/2-14,groundY+30,labelWidth+28,30,6,'#b51f2a');fill('#fffaf0');ctx.textAlign='center';ctx.fillText(label,W/2,groundY+50);ctx.restore();
+  }
+  function holdForGuide(){
+    if(guideHold.holding)return;
+    guideHold.holding=true;
+    // A duck held when the guide opened would otherwise stay on once the guide is gone.
+    state.player.duck=false;
+  }
+  function beginGuidePractice(kind,listener){
+    if(!guideHold.holding||(kind!=='jump'&&kind!=='duck'))return false;
+    endGuidePractice();
+    guideHold.practice={kind,y:0,vy:0,duck:false,jumped:false,duckAt:0,listener:typeof listener==='function'?listener:null};
+    wrap.closest('.game-panel').dataset.guidePractice=kind;
+    // The touch buttons are the controls being practised; some browsers send no pointer events to disabled buttons.
+    $('jumpButton').disabled=false;$('duckButton').disabled=false;
+    draw();
+    return true;
+  }
+  function endGuidePractice(){
+    if(!guideHold.practice)return;
+    guideHold.practice=null;
+    delete wrap.closest('.game-panel').dataset.guidePractice;
+    updateHud();
+    draw();
+  }
+  function releaseGuidePause(){
+    endGuidePractice();
+    if(!guideHold.holding)return;
+    guideHold.holding=false;
+    // The next frame measures from now, so a running game resumes without a time jump; ready, paused and quiz stay as they were.
+    state.lastTime=performance.now();
+  }
+  function guideSnapshot(){
+    const p=guideHold.practice;
+    return {
+      mode:state.mode,hearts:state.hearts,stage:state.stage,score:state.score,world:state.world,runTime:state.runTime,
+      bossHp:state.boss?state.boss.hp:null,obstacles:state.obstacles.length,decks:state.questionDecks.map(deck=>deck.length),
+      playerDuck:state.player.duck,holding:guideHold.holding,practicing:p?p.kind:null
+    };
+  }
+  Object.defineProperty(window,'__machGameBridge',{
+    value:Object.freeze({pauseForGuide:holdForGuide,beginGuidePractice,endGuidePractice,releaseGuidePause,snapshot:guideSnapshot}),
+    enumerable:false,configurable:false
+  });
+  window.addEventListener('pagehide',releaseGuidePause);
+
   $('startButton').addEventListener('click',start);
-  $('restartButton').addEventListener('click',()=>{reset();start()});
+  $('restartButton').addEventListener('click',()=>{if(guideHold.holding)return;reset();start()});
   $('pauseButton').addEventListener('click',pause);
   $('resumeButton').addEventListener('click',pause);
   $('continueButton').addEventListener('click',continueAfterQuiz);
-  $('fightButton').addEventListener('click',()=>{if(state.mode==='boss-intro')askBossQuestion()});
+  $('fightButton').addEventListener('click',()=>{if(!guideHold.holding&&state.mode==='boss-intro')askBossQuestion()});
   $('bossContinueButton').addEventListener('click',continueBoss);
   $('nextStageButton').addEventListener('click',advanceStage);
   $('jumpButton').addEventListener('pointerdown',e=>{e.preventDefault();jump()});
-  const releaseJump=()=>{if(runnerActive()&&state.player.vy<-320)state.player.vy=-320};
+  const releaseJump=()=>{if(guideHold.practice){practiceRelease();return}if(runnerActive()&&state.player.vy<-320)state.player.vy=-320};
   ['pointerup','pointercancel','pointerleave'].forEach(type=>$('jumpButton').addEventListener(type,releaseJump));
   const duckButton=$('duckButton');
   duckButton.addEventListener('pointerdown',e=>{e.preventDefault();duck(true)});
-  ['pointerup','pointercancel','pointerleave'].forEach(type=>duckButton.addEventListener(type,()=>duck(false)));
+  ['pointerup','pointercancel','pointerleave'].forEach(type=>duckButton.addEventListener(type,e=>duck(false,e.type)));
   window.addEventListener('keydown',e=>{
-    if(e.code==='Escape'&&window.parent!==window){e.preventDefault();window.parent.postMessage({type:'mach-minigame-close'},'*');return;}
+    if(e.code==='Escape'&&window.parent!==window){e.preventDefault();requestExit();return;}
+    // Keys aimed at the guide's own buttons keep their native behaviour (Space/Enter activate them). During a jump/duck practice the
+    // card itself holds focus, so its bare surface lets the practised keys through; everything else stays with the guide.
+    if(isGuideUi(e.target)&&!(guideHold.practice&&!isGuideControl(e.target)&&['Space','ArrowUp','ArrowDown'].includes(e.code)))return;
     if(['Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();
     if(e.repeat&&e.code!=='ArrowDown')return;
     if(e.code==='Space'||e.code==='ArrowUp')jump();
@@ -651,8 +773,8 @@
     else if(state.mode==='quiz'&&state.answered&&e.code==='Enter'){e.preventDefault();continueAfterQuiz();}
     else if(state.mode==='boss-feedback'&&e.code==='Enter'){e.preventDefault();continueBoss();}
   });
-  window.addEventListener('keyup',e=>{if(e.code==='ArrowDown')duck(false);if(['Space','ArrowUp'].includes(e.code))releaseJump()});
-  document.addEventListener('visibilitychange',()=>{if(document.hidden&&canPause())pause()});
+  window.addEventListener('keyup',e=>{if(e.code==='ArrowDown')duck(false,'key');if(['Space','ArrowUp'].includes(e.code))releaseJump()});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&canPause()&&!guideHold.holding)pause()});
   window.addEventListener('resize',resize);
   new ResizeObserver(resize).observe(wrap);
   reset();resize();requestAnimationFrame(frame);

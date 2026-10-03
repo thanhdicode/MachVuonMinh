@@ -1,0 +1,330 @@
+/* Cú Mạch shell: welcome, dock, menu, cue. Driver popover styles live in guideDriver.css (lazy).
+   Layout contract for every card (welcome, cue, Driver popover): the text body scrolls, the footer buttons stay pinned, and the card
+   itself scrolls as a last resort, so large text or short screens never push the "Bỏ qua hướng dẫn" button out of reach.
+   Widths are in em of the card font so text-only zoom widens the card instead of squeezing the text column. */
+:root {
+  --guide-paper: #f3e8d0;
+  --guide-ink: #171512;
+  --guide-red: #b51f2a;
+  --guide-brass: #b48b43;
+  --guide-muted: #5a5143;
+}
+.mach-guide-root {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+  font: 400 16px/1.45 'Be Vietnam Pro', sans-serif;
+  color: var(--guide-ink);
+}
+.mach-guide-root > * { pointer-events: auto; }
+
+.mach-owl { position: relative; display: block; flex: none; width: var(--owl, 96px); height: var(--owl, 96px); }
+.mach-owl__inner { position: absolute; inset: 0; display: block; }
+.mach-owl__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; user-select: none; }
+.mach-owl[data-failed] .mach-owl__img--front { visibility: hidden; }
+/* The host cell, not the inline --owl size, decides how big the owl is, so a pose can never overflow its column onto the text. */
+.mach-guide__owl > .mach-owl { width: 100%; height: 100%; }
+:is(.mach-guide-cue, .mach-guide-welcome) > .mach-owl { grid-area: owl; align-self: start; width: var(--guide-owl); height: var(--guide-owl); }
+
+.mach-guide-welcome,
+.mach-guide-cue,
+.mach-guide-menu {
+  box-sizing: border-box;
+  background: var(--guide-paper);
+  border: 1px solid var(--guide-ink);
+  border-top: 3px solid var(--guide-red);
+  border-radius: 2px;
+  box-shadow: 0 18px 40px rgb(23 21 18 / 26%);
+  color: var(--guide-ink);
+  font: 400 16px/1.45 'Be Vietnam Pro', sans-serif;
+}
+
+/* Cue and welcome share one grid; the *__main wrapper is transparent so each part sits in a named area. */
+:is(.mach-guide-cue, .mach-guide-welcome) {
+  --guide-owl: 64px;
+  --guide-max: calc(100dvh - 120px);
+  --guide-pinned: 9.5em;
+  display: grid;
+  grid-template-columns: calc(var(--guide-owl) + 10px) minmax(0, 1fr) auto;
+  grid-template-areas: 'owl counter counter' 'owl title title' 'owl text text' 'owl actions actions' 'owl extras extras';
+  /* Only the text row gives way when max-height bites, so the buttons (Skip included) are never cut off. */
+  grid-template-rows: auto auto minmax(3em, 1fr) auto auto;
+  align-content: start;
+  max-height: var(--guide-max);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: 12px;
+}
+:is(.mach-guide-cue__main, .mach-guide-welcome__main) { display: contents; }
+
+.mach-guide-welcome {
+  --guide-owl: 96px;
+  --guide-top: max(92px, 18vh);
+  --guide-max: calc(100dvh - var(--guide-top) - 16px);
+  --guide-pinned: 17em;
+  position: fixed;
+  left: max(16px, 6vw);
+  top: var(--guide-top);
+  z-index: 4;
+  width: min(28.75em, calc(100vw - 32px));
+  padding: 16px;
+  animation: mach-guide-in 260ms ease-out both;
+}
+.mach-guide-cue {
+  position: fixed;
+  left: max(14px, 3vw);
+  bottom: calc(56px + env(safe-area-inset-bottom));
+  z-index: 3;
+  width: min(25em, calc(100vw - 28px));
+}
+.mach-guide-cue[data-anchor='top-left'] { top: 76px; bottom: auto; }
+.mach-guide-cue[data-anchor='top-right'] { top: 76px; bottom: auto; left: auto; right: max(14px, 3vw); }
+.mach-guide-cue[data-anchor='bottom-right'] { left: auto; right: max(14px, 3vw); bottom: calc(122px + env(safe-area-inset-bottom)); }
+.mach-guide-cue[data-host='dialog'] {
+  --guide-max: calc(100dvh - 24px);
+  position: sticky;
+  left: auto;
+  bottom: 12px;
+  margin: 18px 0 0;
+  width: 100%;
+  z-index: 2;
+}
+.history-zoom > .mach-guide-cue[data-host='dialog'],
+.map-dialog > .mach-guide-cue[data-host='dialog'] {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  margin: 0;
+  transform: translateX(-50%);
+  width: min(28.75em, calc(100% - 24px));
+  /* Viewport units, not %: a percentage max-height inside the grid is cyclic and collapses the text row to three lines. */
+  --guide-max: calc(100dvh - 28px);
+}
+/* Practice cue: header row (title + counter) and wider card, so it stays short and off the sliders, sockets and tokens being practised. */
+.mach-guide-cue[data-kind='practice'] {
+  width: min(37.5em, calc(100vw - 28px));
+  grid-template-areas: 'owl title counter' 'owl text text' 'owl actions actions' 'owl extras extras';
+  grid-template-rows: auto minmax(3em, 1fr) auto auto;
+  --guide-pinned: 8.5em;
+}
+.mach-guide-cue[data-kind='practice'][data-host='dialog'] { width: 100%; }
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__counter {
+  grid-area: counter;
+  margin: 0 0 6px;
+  font: 500 12px/1.2 'IBM Plex Mono', monospace;
+  letter-spacing: 0.06em;
+  color: var(--guide-red);
+}
+.mach-guide-cue[data-kind='practice'] .mach-guide-cue__counter { margin: 4px 0 0 12px; white-space: nowrap; }
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__title {
+  grid-area: title;
+  margin: 0 0 4px;
+  font: 700 16px/1.3 'Be Vietnam Pro', sans-serif;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+}
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__text {
+  grid-area: text;
+  min-height: 0;
+  max-height: max(3.6em, calc(var(--guide-max) - var(--guide-pinned)));
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  font: 400 14px/1.45 'Be Vietnam Pro', sans-serif;
+  overflow-wrap: break-word;
+}
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__hint { display: block; margin-top: 6px; font: 400 12px/1.4 'IBM Plex Mono', monospace; color: var(--guide-muted); }
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__hint[data-signaled] { color: #1f6b3b; }
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__summary { display: grid; gap: 4px; margin-top: 10px; font: 400 13px/1.45 'Be Vietnam Pro', sans-serif; }
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__actions { grid-area: actions; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+:is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__extras { grid-area: extras; display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 6px; }
+.mach-guide-welcome .mach-guide-welcome__choices { flex-direction: column; align-items: stretch; }
+
+.mach-guide__btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--guide-ink);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--guide-ink);
+  font: 500 12px/1.2 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  text-align: center;
+}
+.mach-guide__btn:hover { background: rgb(23 21 18 / 8%); }
+.mach-guide__btn:disabled { opacity: 0.5; cursor: default; }
+.mach-guide__btn--primary { border-color: var(--guide-red); background: var(--guide-red); color: #fff; }
+.mach-guide__btn--primary:hover { background: #8f1620; }
+.mach-guide__btn--quiet { min-height: 32px; padding: 0 4px; border-color: transparent; text-decoration: underline; text-underline-offset: 3px; }
+.mach-guide__btn--skip { border-style: dashed; }
+.mach-guide__btn:focus-visible,
+.mach-guide-menu__item:focus-visible,
+.mach-guide-dock__button:focus-visible { outline: 2px solid var(--guide-brass); outline-offset: 2px; }
+
+.mach-guide-dock {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(52px + env(safe-area-inset-bottom));
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+.mach-guide-dock__button {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--guide-ink);
+  border-radius: 50%;
+  background: var(--guide-paper);
+  box-shadow: 0 6px 18px rgb(23 21 18 / 24%);
+  cursor: pointer;
+}
+.mach-guide-dock__button img { width: 40px; height: 40px; object-fit: contain; }
+.mach-guide-menu {
+  width: min(21.25em, calc(100vw - 28px));
+  max-height: min(72dvh, 580px);
+  overflow-y: auto;
+  padding: 14px;
+  overscroll-behavior: contain;
+}
+.mach-guide-menu > .mach-guide-cue__counter { margin: 0 0 4px; font: 500 12px/1.2 'IBM Plex Mono', monospace; letter-spacing: 0.06em; color: var(--guide-red); }
+.mach-guide-menu__heading { margin: 14px 0 4px; font: 500 11px/1 'IBM Plex Mono', monospace; letter-spacing: 0.08em; color: #5a5143; }
+.mach-guide-menu__modules { margin: 0; padding: 0; list-style: none; }
+.mach-guide-menu__item {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 4px;
+  border-bottom: 1px solid rgb(23 21 18 / 14%);
+  font: 500 14px/1.3 'Be Vietnam Pro', sans-serif;
+  cursor: pointer;
+}
+.mach-guide-menu__item:hover { background: rgb(23 21 18 / 7%); }
+.mach-guide-menu__item small { grid-column: 2; font: 400 12px/1.3 'IBM Plex Mono', monospace; color: #5a5143; }
+.mach-guide-menu__item--primary { color: var(--guide-red); }
+.mach-guide-menu__item--quiet { margin-top: 6px; border-bottom: 0; color: #5a5143; }
+.mach-guide-menu__index { font: 500 11px/1 'IBM Plex Mono', monospace; color: var(--guide-red); }
+.mach-guide-menu > .mach-guide-menu__item:not(.mach-guide-menu__item--quiet) { grid-template-columns: 1fr; }
+
+.guide-proxy { position: fixed; z-index: 1; pointer-events: none; background: transparent; }
+/* DOM stand-ins for WebGL objects, only mounted in their own scene: they track the object's screen region. */
+.guide-proxy--plough { left: 50%; right: 0; top: 24%; bottom: 14%; }
+.guide-proxy--data { left: 24%; right: 24%; top: 30%; bottom: 28%; }
+.guide-proxy--sockets { left: 31%; right: 31%; top: 16%; bottom: 30%; }
+.guide-proxy--core { left: 50%; top: 50%; width: min(52vw, 56vh); height: min(52vw, 56vh); transform: translate(-50%, -50%); }
+@media (max-width: 700px) {
+  .guide-proxy--plough { left: 8%; right: 0; top: 34%; bottom: 22%; }
+  .guide-proxy--data { left: 6%; right: 6%; top: 36%; bottom: 30%; }
+  .guide-proxy--sockets { left: 4%; right: 4%; top: 20%; bottom: 40%; }
+  .guide-proxy--core { width: 86vw; height: 86vw; max-height: 44vh; }
+}
+.mach-guide-target { outline: 2px solid var(--guide-red, #b51f2a); outline-offset: 4px; }
+body.guide-scroll-locked { overscroll-behavior: none; }
+
+@keyframes mach-guide-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .mach-guide-welcome { animation: none; } }
+
+/* Touch / phone sizing: 44px targets, 16px reading text. Phones in landscape count too (coarse pointer). */
+@media (max-width: 700px), (pointer: coarse) {
+  .mach-guide__btn { min-height: 44px; min-width: 44px; }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__title { font-size: 16px; }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__text { font-size: 16px; }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__hint { font-size: 14px; }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__summary { font-size: 16px; }
+  .mach-guide-menu__item { font-size: 16px; min-height: 48px; }
+  .mach-guide-menu__item small { font-size: 13px; }
+}
+
+/* Phone sheets: full-width bottom sheet; the practice cue goes to the top because the controls being practised sit in the lower half. */
+@media (max-width: 700px) {
+  :is(.mach-guide-cue, .mach-guide-welcome),
+  .mach-guide-cue[data-kind='practice'] {
+    --guide-owl: 44px;
+    --guide-pinned: 12.5em;
+    grid-template-areas: 'owl title counter' 'text text text' 'actions actions actions' 'extras extras extras';
+    grid-template-rows: auto minmax(3em, 1fr) auto auto;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__counter { margin: 4px 0 0 10px; white-space: nowrap; }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__title { align-self: center; margin: 0; }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__text { margin-top: 6px; }
+  .mach-guide-welcome {
+    --guide-owl: 56px;
+    --guide-max: calc(100dvh - 88px);
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: auto;
+    --guide-pinned: 17.5em;
+    padding: 12px;
+    grid-template-areas: 'owl counter counter' 'owl title title' 'text text text' 'actions actions actions' 'extras extras extras';
+    grid-template-rows: auto auto minmax(3em, 1fr) auto auto;
+  }
+  .mach-guide-welcome .mach-guide-cue__counter { margin: 4px 0 2px; }
+  .mach-guide-welcome .mach-guide-cue__title { align-self: start; margin: 0; }
+  .mach-guide-cue {
+    --guide-max: calc(100dvh - 88px);
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: auto;
+  }
+  .mach-guide-cue[data-kind='practice'] {
+    --guide-max: clamp(230px, 46dvh, 340px);
+    --guide-pinned: 11.5em;
+    top: calc(8px + env(safe-area-inset-top));
+    bottom: auto;
+    width: auto;
+  }
+  .mach-guide-cue[data-host='dialog'] {
+    --guide-max: calc(100dvh - 24px);
+    position: sticky;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: 12px;
+    margin: 14px 0 0;
+    width: 100%;
+  }
+  .history-zoom > .mach-guide-cue[data-host='dialog'],
+  .map-dialog > .mach-guide-cue[data-host='dialog'] {
+    position: absolute;
+    left: 50%;
+    top: auto;
+    right: auto;
+    bottom: 10px;
+    margin: 0;
+    width: calc(100% - 16px);
+  }
+  .mach-guide-dock { bottom: calc(60px + env(safe-area-inset-bottom)); }
+}
+
+/* Short screens (phones in landscape, 200% zoom on a laptop): tighter offsets, more room for the card. */
+@media (max-height: 520px) {
+  .mach-guide-welcome { --guide-top: 60px; --guide-max: calc(100dvh - 76px); }
+  .mach-guide-cue { --guide-max: calc(100dvh - 76px); bottom: calc(12px + env(safe-area-inset-bottom)); }
+  .mach-guide-cue[data-anchor='top-left'],
+  .mach-guide-cue[data-anchor='top-right'] { top: 60px; }
+  .mach-guide-cue[data-anchor='bottom-right'] { bottom: calc(76px + env(safe-area-inset-bottom)); }
+}

@@ -1,0 +1,156 @@
+{
+ "name": "02-readiness-deadline",
+ "at": "2026-10-03T13:13:41.797Z",
+ "passed": 15,
+ "failed": 0,
+ "results": [
+  {
+   "id": "2.1.deadline-no-welcome",
+   "label": "thread hidden: past the 5 s deadline no welcome has been forced",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "inserts": 0,
+    "progress": "none"
+   }
+  },
+  {
+   "id": "2.2.late-ready-no-welcome",
+   "label": "when the thread finally becomes ready (8 s observed) the welcome still does not appear",
+   "ok": true,
+   "evidence": {
+    "welcome": 0
+   }
+  },
+  {
+   "id": "2.3.intro-still-works",
+   "label": "the intro still works: the thread handle is interactive before any guide choice",
+   "ok": true,
+   "evidence": "handle enabled + pointer-events"
+  },
+  {
+   "id": "2.4.menu-start",
+   "label": "the owl menu offers \"Bắt đầu hướng dẫn\"",
+   "ok": true,
+   "evidence": [
+    "Bắt đầu hướng dẫn",
+    "Hướng dẫn phần đang xemMở đầu và",
+    "Xem lại từ đầu",
+    "01Mở đầu và điều hướng6 bước",
+    "02Atlas lịch sử8 bước",
+    "03Công cụ, máy móc và dữ liệu5 b",
+    "04Phòng biện chứng15 bước",
+    "05Việt Nam và bằng chứng11 bước",
+    "06Buồng chính sách11 bước",
+    "07Kết thúc triển lãm4 bước",
+    "08Minigame10 bước",
+    "Ẩn cú trong phiên này"
+   ]
+  },
+  {
+   "id": "2.4.welcome-on-demand",
+   "label": "choosing it shows the welcome on demand",
+   "ok": true,
+   "evidence": {
+    "welcome": 1
+   }
+  },
+  {
+   "id": "2.4.guide-opens",
+   "label": "the guide runs after the late start (I02 practice cue, progress in-progress)",
+   "ok": true,
+   "evidence": {
+    "step": "I02",
+    "cue": "practice",
+    "title": "Mở triển lãm"
+   }
+  },
+  {
+   "id": "2.5.practice-signalled",
+   "label": "unlocking the intro through the real control signals the practice step",
+   "ok": true,
+   "evidence": {
+    "cue": "practice"
+   }
+  },
+  {
+   "id": "2.6.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "2.7.font-state",
+   "label": "fonts held: document.fonts.status=loading, not-yet-loaded faces=8",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "2.8.deadline-no-welcome",
+   "label": "fonts held: past the 5 s deadline no welcome has been forced",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "inserts": 0,
+    "progress": "none"
+   }
+  },
+  {
+   "id": "2.9.late-fonts-no-welcome",
+   "label": "when the fonts finally arrive (8 s observed) the welcome still does not appear",
+   "ok": true,
+   "evidence": {
+    "welcome": 0
+   }
+  },
+  {
+   "id": "2.10.intro-interactive",
+   "label": "the intro stays interactive while fonts were late (handle enabled)",
+   "ok": true,
+   "evidence": "handle enabled"
+  },
+  {
+   "id": "2.11.menu-start",
+   "label": "the owl menu offers \"Bắt đầu hướng dẫn\"",
+   "ok": true,
+   "evidence": [
+    "Bắt đầu hướng dẫn",
+    "Hướng dẫn phần đang xemMở đầu và",
+    "Xem lại từ đầu",
+    "01Mở đầu và điều hướng6 bước",
+    "02Atlas lịch sử8 bước",
+    "03Công cụ, máy móc và dữ liệu5 b",
+    "04Phòng biện chứng15 bước",
+    "05Việt Nam và bằng chứng11 bước",
+    "06Buồng chính sách11 bước",
+    "07Kết thúc triển lãm4 bước",
+    "08Minigame10 bước",
+    "Ẩn cú trong phiên này"
+   ]
+  },
+  {
+   "id": "2.11.welcome-on-demand",
+   "label": "choosing it shows the welcome on demand",
+   "ok": true,
+   "evidence": {
+    "welcome": 1
+   }
+  },
+  {
+   "id": "2.11.guide-opens",
+   "label": "the guide runs after the late start (I02 practice cue, progress in-progress)",
+   "ok": true,
+   "evidence": {
+    "step": "I02",
+    "cue": "practice",
+    "title": "Mở triển lãm"
+   }
+  },
+  {
+   "id": "2.12.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  }
+ ]
+}

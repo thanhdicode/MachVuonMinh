@@ -1,0 +1,234 @@
+{
+ "name": "01-first-visit",
+ "at": "2026-10-03T13:11:06.426Z",
+ "passed": 23,
+ "failed": 0,
+ "results": [
+  {
+   "id": "1.1.ready-gate",
+   "label": "welcome appears only after fonts are loaded and the intro thread is visible (state captured on insertion)",
+   "ok": true,
+   "evidence": {
+    "t": 2422,
+    "fonts": "loaded",
+    "handleVisible": true,
+    "unlocked": false,
+    "shownAfterMs": 112
+   }
+  },
+  {
+   "id": "1.2.choices",
+   "label": "welcome offers the three journeys plus the text button Bỏ qua hướng dẫn",
+   "ok": true,
+   "evidence": [
+    "Dẫn tôi khám phá",
+    "Hướng dẫn nhanh",
+    "Tự khám phá",
+    "Bỏ qua hướng dẫn"
+   ]
+  },
+  {
+   "id": "1.3.buttons-usable",
+   "label": "every welcome button is enabled and inside the viewport",
+   "ok": true,
+   "evidence": [
+    "full:316x36",
+    "quick:316x36",
+    "explore:316x36",
+    "skip-guide:149x36"
+   ]
+  },
+  {
+   "id": "1.4.no-timer-start",
+   "label": "no timer starts the tour while the welcome waits (14 s observed)",
+   "ok": true,
+   "evidence": {
+    "leaked": false,
+    "welcome": 1,
+    "progress": "none"
+   }
+  },
+  {
+   "id": "1.5.explore-persists-dismissed",
+   "label": "Tự khám phá persists status dismissed, no tour, no overlay",
+   "ok": true,
+   "evidence": {
+    "status": "dismissed",
+    "step": null,
+    "body": "locked"
+   }
+  },
+  {
+   "id": "1.6.no-greeting",
+   "label": "after reload there is no welcome (never greets twice)",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "inserts": 0,
+    "progress": "dismissed"
+   }
+  },
+  {
+   "id": "1.6.dock",
+   "label": "the owl button is still on screen after reload",
+   "ok": true,
+   "evidence": {
+    "dock": 1
+   }
+  },
+  {
+   "id": "1.6.status-kept",
+   "label": "dismissed survives the reload",
+   "ok": true,
+   "evidence": "dismissed"
+  },
+  {
+   "id": "1.7.owl-menu",
+   "label": "after reload the owl button opens the menu (replay entries, 8 modules, hide)",
+   "ok": true,
+   "evidence": {
+    "modules": 8,
+    "items": [
+     "Hướng dẫn phần đang xemMở đầu và điều hư",
+     "Xem lại từ đầu",
+     "01Mở đầu và điều hướng6 bước",
+     "02Atlas lịch sử8 bước",
+     "03Công cụ, máy móc và dữ liệu5 bước",
+     "04Phòng biện chứng15 bước",
+     "05Việt Nam và bằng chứng11 bước",
+     "06Buồng chính sách11 bước",
+     "07Kết thúc triển lãm4 bước",
+     "08Minigame10 bước",
+     "Ẩn cú trong phiên này"
+    ]
+   }
+  },
+  {
+   "id": "1.8.owl-starts-tour",
+   "label": "the owl menu starts the guide after dismissal (first real step I02)",
+   "ok": true,
+   "evidence": {
+    "step": "I02",
+    "title": "Mở triển lãm",
+    "cue": "practice"
+   }
+  },
+  {
+   "id": "1.9.console-clean",
+   "label": "no console errors / page errors (aborted navigations excluded)",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "1.10.skip-text-button",
+   "label": "the welcome has a visible text button Bỏ qua hướng dẫn",
+   "ok": true,
+   "evidence": "Bỏ qua hướng dẫn"
+  },
+  {
+   "id": "1.11.skip-persists-dismissed",
+   "label": "Bỏ qua hướng dẫn at the welcome persists status dismissed (not skipped, nothing completed)",
+   "ok": true,
+   "evidence": {
+    "status": "dismissed",
+    "lastExit": null,
+    "done": []
+   }
+  },
+  {
+   "id": "1.12.no-greeting",
+   "label": "after reload there is no welcome (never greets twice)",
+   "ok": true,
+   "evidence": {
+    "welcome": 0,
+    "inserts": 0,
+    "progress": "dismissed"
+   }
+  },
+  {
+   "id": "1.12.dock",
+   "label": "the owl button is still on screen after reload",
+   "ok": true,
+   "evidence": {
+    "dock": 1
+   }
+  },
+  {
+   "id": "1.13.owl-after-skip",
+   "label": "the owl menu opens after Bỏ qua + reload",
+   "ok": true,
+   "evidence": "dismissed"
+  },
+  {
+   "id": "1.14.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "1.15.quick-steps",
+   "label": "Hướng dẫn nhanh visits exactly I02–I06 (I01 is the welcome) and nothing from other modules",
+   "ok": true,
+   "evidence": [
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06"
+   ]
+  },
+  {
+   "id": "1.16.partial-notice",
+   "label": "the quick route ends with the partial notice (not the \"whole module complete\" copy)",
+   "ok": true,
+   "evidence": {
+    "kind": "route-complete",
+    "text": "Mình đã đi hết các phần bạn chọn. Những bước bạn bỏ qua vẫn có thể mở lại từ hình cú.Đã đọc: Mở đầu và điều hướng"
+   }
+  },
+  {
+   "id": "1.17.quick-progress",
+   "label": "quick progress marks only the intro steps completed; 7 other modules untouched",
+   "ok": true,
+   "evidence": {
+    "status": "completed",
+    "done": [
+     "I01",
+     "I02",
+     "I03",
+     "I04",
+     "I05",
+     "I06"
+    ],
+    "modules": [
+     "intro"
+    ]
+   }
+  },
+  {
+   "id": "1.18.offers-more",
+   "label": "the partial notice offers to continue with the whole tour",
+   "ok": true,
+   "evidence": [
+    "explore-more",
+    "dismiss"
+   ]
+  },
+  {
+   "id": "1.19.clean-exit",
+   "label": "no driver overlay/popover, no scroll lock after the quick route",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "body": ""
+   }
+  },
+  {
+   "id": "1.20.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  }
+ ]
+}

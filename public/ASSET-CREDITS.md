@@ -58,4 +58,8 @@ Kenney: **Platformer Characters 1**, **Robot Pack**, **New Platformer Pack**, CC
 
 Bảy tư thế Cú Mạch đeo kính và khăn đỏ được tạo riêng cho dự án bằng công cụ imagegen ngày03/10/2026, từ concept và ảnh cú gốc do dự án tạo. Không dùng pixel từ Pinterest, ảnh bảo tàng tham khảo hoặc stock bên ngoài. Đây là minh họa tạo bằng AI, không phải ảnh tư liệu hay nhân vật của bên thứ ba.
 
-Các ảnh nền trong được mã hóa WebP, giữ bản PNG gốc và prompt trong hồ sơ dự án. Bộ ảnh gồm chào/nghỉ, chỉ trái, chỉ phải, xem kỹ, mời thử, xác nhận, tạm biệt và bản nhỏ cho nút gọi hướng dẫn. Danh sách file và checksum: [Cú Mạch assets](/guide/owl-assets.json). Bộ ảnh đang được chuẩn bị cho tính năng hướng dẫn; việc cung cấp ảnh không có nghĩa tour đã được tích hợp vào website.
+Các ảnh nền trong được mã hóa WebP, giữ bản PNG gốc và prompt trong hồ sơ dự án. Bộ ảnh gồm chào/nghỉ, chỉ trái, chỉ phải, xem kỹ, mời thử, xác nhận, tạm biệt và bản nhỏ cho nút gọi hướng dẫn. Danh sách file và checksum: [Cú Mạch assets](/guide/owl-assets.json). Bộ ảnh được dùng trong hướng dẫn Cú Mạch của website (ảnh tĩnh; chuyển động chỉ là crossfade/nhích/gật cả ảnh).
+
+### Driver.js
+
+Hướng dẫn dùng [Driver.js](https://driverjs.com) 1.8.0 (© Kamran Ahmed, giấy phép MIT, `nilbuild/driver.js`) làm bộ spotlight/popover. Bản phân phối kèm thông báo MIT được sao chép nguyên văn vào `/vendor/driver/1.8.0/license` khi build; không tải từ CDN.

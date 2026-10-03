@@ -4,5 +4,6 @@ dist/
 .agents/
 .studio/
 docs/
-scripts/
+scripts/*
+!scripts/copy-driver-assets.mjs
 tests/

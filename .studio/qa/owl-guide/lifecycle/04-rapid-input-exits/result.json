@@ -1,0 +1,115 @@
+{
+ "name": "04-rapid-input-exits",
+ "at": "2026-10-03T13:44:27.024Z",
+ "passed": 10,
+ "failed": 0,
+ "results": [
+  {
+   "id": "4.50.no-revival",
+   "label": "H07 (history source drawer): 5 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.50.dialog-closed",
+   "label": "H07 (history source drawer): Skip pressed the moment the guide opened its dialog still closes that dialog",
+   "ok": true,
+   "evidence": {
+    "hit": {
+     "t": 19772,
+     "cueInside": false
+    },
+    "dialogs": [],
+    "body": ""
+   }
+  },
+  {
+   "id": "4.50.progress",
+   "label": "H07 (history source drawer): skipped, nothing completed beyond the earlier steps",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "done": [
+     "H01",
+     "H02",
+     "H03",
+     "H04",
+     "H05",
+     "H06"
+    ]
+   }
+  },
+  {
+   "id": "4.50.focus",
+   "label": "H07 (history source drawer): focus on the owl",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.50.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "4.51.no-revival",
+   "label": "V10 (vietnam source drawer): 5 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.51.dialog-closed",
+   "label": "V10 (vietnam source drawer): Skip pressed the moment the guide opened its dialog still closes that dialog",
+   "ok": true,
+   "evidence": {
+    "hit": {
+     "t": 10574,
+     "cueInside": false
+    },
+    "dialogs": [],
+    "body": ""
+   }
+  },
+  {
+   "id": "4.51.progress",
+   "label": "V10 (vietnam source drawer): skipped, nothing completed beyond the earlier steps",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "done": [
+     "V01",
+     "V02",
+     "V03",
+     "V04",
+     "V05",
+     "V06",
+     "V07",
+     "V08",
+     "V09"
+    ]
+   }
+  },
+  {
+   "id": "4.51.focus",
+   "label": "V10 (vietnam source drawer): focus on the owl",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.51.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  }
+ ]
+}

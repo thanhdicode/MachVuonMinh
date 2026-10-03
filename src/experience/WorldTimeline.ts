@@ -5,12 +5,24 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { stops, timeline, useWorld } from './WorldState'
 import { historyStep, historyProgressForTravel } from './historyGeometry'
 import { machineState, journeyProgress, journeyPosition, type JourneyRange } from './machineState'
+import { canResumeScroll, createScrollLeases } from '../onboarding/guideSession'
+import type { ScrollOwner } from '../onboarding/guideSession'
 gsap.registerPlugin(ScrollTrigger)
 gsap.ticker.lagSmoothing(0)
 let lenis: Lenis | undefined
+// Scroll is locked while any owner (tour, game, dialog) holds a lease; it resumes only when none does and the intro is unlocked.
+const scrollLeases = createScrollLeases(locked => {
+  document.body.classList.toggle('guide-scroll-locked', locked)
+  if(locked){lenis?.stop();timeline.velocity=0}
+  else if(canResumeScroll({unlocked:useWorld.getState().unlocked,leasesLocked:false}))lenis?.start()
+})
+export const acquireScrollLease=(owner:ScrollOwner)=>scrollLeases.acquire(owner)
+export const scrollLeaseCounts=()=>scrollLeases.counts()
+let legacyGameLease:(()=>void)|undefined
+// Kept for callers that still use the boolean API; it maps onto the game owner.
 export function setTimelineSuspended(suspended:boolean) {
-  if(suspended){lenis?.stop();timeline.velocity=0}
-  else if(useWorld.getState().unlocked)lenis?.start()
+  if(suspended){legacyGameLease??=scrollLeases.acquire('game')}
+  else {legacyGameLease?.();legacyGameLease=undefined}
 }
 function journeyRange(): JourneyRange {
   const atlas = document.querySelector<HTMLElement>('.history-insertion')
@@ -26,6 +38,10 @@ export function scrollToPosition(y: number, immediate = useWorld.getState().redu
 export function goToHistory() {
   if (!useWorld.getState().unlocked) useWorld.getState().set({unlocked:true})
   requestAnimationFrame(() => scrollToPosition(journeyRange().atlasStart))
+}
+export function goToHistoryEnd() {
+  if (!useWorld.getState().unlocked) useWorld.getState().set({unlocked:true})
+  requestAnimationFrame(() => { const range = journeyRange(); scrollToPosition(range.atlasStart + Math.max(0, range.atlasLength - innerHeight)) })
 }
 export function goToScene(index: number) {
   if (!Number.isInteger(index) || index < 0 || index >= stops.length - 1) return
@@ -66,7 +82,7 @@ export function startTimeline() {
   const unsubscribe = useWorld.subscribe((state, previous) => {
     if (state.unlocked !== previous.unlocked) {
       if (!state.unlocked) lenis?.stop()
-      else requestAnimationFrame(() => { lenis?.resize(); lenis?.start(); ScrollTrigger.refresh() })
+      else requestAnimationFrame(() => { lenis?.resize(); if(!scrollLeases.isLocked())lenis?.start(); ScrollTrigger.refresh() })
     }
     if (state.reduced !== previous.reduced && lenis) {
       lenis.options.smoothWheel = !state.reduced
@@ -77,7 +93,7 @@ export function startTimeline() {
       })
     }
   })
-  if (!useWorld.getState().unlocked) lenis.stop()
+    if (!useWorld.getState().unlocked || scrollLeases.isLocked()) lenis.stop()
   const keepEntryAtTop=()=>{
     if(!useWorld.getState().unlocked&&window.scrollY!==0){
       window.scrollTo({top:0,behavior:'instant'})

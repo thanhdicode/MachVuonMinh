@@ -1,0 +1,14 @@
+/* Parent-side additions to the minigame dialog toolbar: the always-available Skip and the written how-to-play fallback. */
+.mini-game-toolbar{flex-wrap:wrap}
+.mini-game-toolbar>.mini-game-actions{margin-left:auto;flex-wrap:wrap;justify-content:flex-end;gap:8px 20px}
+.mini-game-toolbar .mini-game-skip{min-height:44px;max-width:none;padding:0 4px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;text-align:left;line-height:1.4;border-bottom:1px solid #171512}
+.mini-game-toolbar .mini-game-skip:focus-visible{outline:2px solid #b51f2a;outline-offset:4px}
+.mini-game-howto{flex:1 0 100%;max-height:34dvh;overflow:auto;margin:0;padding:8px 12px 10px;border:1px solid #b48b43;border-left:4px solid #b51f2a;background:#fffaf0;color:#171512;font:400 14px/1.55 'Be Vietnam Pro',sans-serif}
+.mini-game-howto summary{min-height:44px;display:flex;align-items:center;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.04em;color:#b51f2a;cursor:pointer;text-transform:uppercase}
+.mini-game-howto p{margin:0 0 6px}
+.mini-game-howto ol{margin:0;padding-left:20px}
+.mini-game-howto li{margin:0 0 6px}
+@media(max-width:700px){
+  .mini-game-toolbar .mini-game-skip{font-size:1rem;max-width:none;text-transform:none;letter-spacing:0}
+  .mini-game-howto{font-size:1rem}
+}

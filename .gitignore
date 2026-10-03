@@ -13,3 +13,5 @@ dist/
 .studio/qa/**/*.jpeg
 .studio/qa/**/*.webp
 .studio/qa/**/*.log
+public/vendor/driver/
+.hoplite/

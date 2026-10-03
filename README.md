@@ -2,6 +2,46 @@
 
 Triển lãm tương tác về lực lượng sản xuất mới và yêu cầu thích ứng của quan hệ sản xuất ở Việt Nam. Xây bằng React, TypeScript, Vite và một cảnh Three.js/WebGL.
 
+## Hướng dẫn Cú Mạch (Driver.js 1.8.0)
+
+Cú Mạch dẫn người mới qua toàn bộ triển lãm: 8 phần, **70 bước**, theo thứ tự `I01–I06 → T01 → H01–H08 → T02–T05 → L01–L15 → V01–V11 → P01–P11 → F01–F04 → G01–G10`. Lời dẫn chuẩn nằm ở `docs/superpowers/specs/2026-10-03-owl-guide-copy.json`; bản chạy là `src/onboarding/guideCopy.json` (test so khớp từng byte, vì `docs/` không được upload lên Vercel). Driver.js được pin đúng `1.8.0`; không dùng wrapper React, CDN hay thư viện animation khác.
+
+### Chạy, gọi và ẩn cú
+
+- `npm ci`, rồi `npm run dev` (hoặc `npm run build`, `npm test`). Các script `predev`, `prebuild`, `pretest` chạy `scripts/copy-driver-assets.mjs`: kiểm bản pin `1.8.0` (MIT) và chép `driver.js.iife.js`, `driver.css`, `license` vào `public/vendor/driver/1.8.0/` kèm `manifest.json` (thư mục sinh ra, đã gitignore). Hướng dẫn trong game chạy Driver riêng trong iframe từ các file này.
+- **Lần đầu** (chưa có tiến độ): khi màn kéo sợi đỏ và font sẵn sàng (hạn tổng 5 giây) cú chào một lần với ba lựa chọn **Dẫn tôi khám phá**, **Hướng dẫn nhanh** (chỉ `I01–I06`), **Tự khám phá**, cùng nút chữ **Bỏ qua hướng dẫn**. Tự khám phá và Bỏ qua lưu `dismissed`; reload không chào lại. Không có bước nào tự chạy theo timer.
+- **Gọi lại**: nút cú góc dưới phải (tên truy cập **Mở hướng dẫn của Cú Mạch**) hoặc Mục lục ☰ → **Cú Mạch / Hướng dẫn & xem lại**. Menu có: Tiếp tục bước dang dở, Hướng dẫn phần đang xem, Xem lại từ đầu, danh sách 8 phần, **Ẩn cú trong phiên này**. Trong game có nút **Cú Mạch / Cách chơi** ngay trong iframe.
+- **Thoát**: **Bỏ qua hướng dẫn** (nút chữ, không xác nhận; lưu `skipped`, có thể tiếp tục), **Tạm dừng hướng dẫn**, ×/Esc (giữ `in-progress` để tiếp tục đúng ID), **Bỏ qua bước này** / **Bỏ qua phần này**. Bỏ qua không bao giờ ghi hoàn thành.
+- Lab và Buồng chính sách kết thúc với **Giữ các thiết lập vừa thử** hoặc **Khôi phục thiết lập trước hướng dẫn** (mặc định khôi phục; âm thanh, chuyển động và trạng thái mở khóa không bao giờ bị hoàn tác).
+- **Reset tiến độ khi phát triển**: `localStorage.removeItem('mach-vuon-minh:guide:v2')` (và `…:v1` nếu có) rồi tải lại. Trạng thái nằm trong key `mach-vuon-minh:guide:v2` (`schemaVersion: 2`); lưu ID bước, không lưu số thứ tự hay hình học. Storage bị chặn/hỏng vẫn chạy được trong phiên.
+
+### Cấu trúc `src/onboarding/`
+
+| Phần | File |
+|---|---|
+| Hợp đồng, ID, tiến độ, phiên | `guideTypes.ts`, `guideIds.ts`, `guideProgress.ts` (schema v2 + migration v1), `guideSession.ts` (scroll lease, run token, snapshot demo) |
+| Catalog 70 bước | `guideCatalog.ts` + `guideCopy.json`; kiểm đủ 70 ID duy nhất khi khởi tạo |
+| Điều phối | `guideController.ts` (máy trạng thái: preparing/presenting/practice/modal/handoff/paused), `guideTargets.ts` (chờ target thật sự hiện, ổn định 2 frame), `guideAdapters.ts` (recipe điều hướng/thực hành từng bước) |
+| Giao diện | `GuideProvider.tsx`, `OwlMascot.tsx`, `GuideDock.tsx`, `GuideWelcome.tsx`, `GuideCue.tsx`, `GuidePopover.tsx`, `guide.css`; `guideDriver.ts` + `guideDriver.css` (tải lười cùng Driver) |
+| Game trong iframe | `game-guide.js`, `gameGuideProtocol.ts`, `gameGuideLink.ts`, `guideGame.css`; phía cha ở `src/minigame/` |
+
+Mục tiêu (`data-guide`) là thuộc tính có nghĩa gắn vào UI thật; cảnh WebGL dùng proxy DOM (`.guide-proxy*`) đúng vùng vật thể, chỉ gắn khi đúng cảnh. Navigation dùng `WorldTimeline`/Lenis hiện có; khóa cuộn có chủ sở hữu (`tour`, `game`, `dialog`) nên đóng hướng dẫn không mở khóa của game hoặc dialog.
+
+### Kiểm thử
+
+- `npm test` (`node --test "tests/*.test.mjs"`): 119 test gồm các test gốc của dự án và test mới cho tiến độ/migration, lease cuộn, huỷ bất đồng bộ, teardown khi cleanup lỗi, controller (thử lại/bỏ qua từ cue tạm dừng, bỏ qua không bật lại redirect, bỏ qua trong game, bàn giao game từ tuyến replay), catalog, targets, vendor Driver và hướng dẫn game (giao thức, phím tập nhảy/cúi, tách khỏi chiến dịch).
+- Trình duyệt thật: `scripts/owl-guide-qa/` dùng puppeteer-core và Chrome, **không** là phụ thuộc của dự án. Cài ngoài repo rồi trỏ biến môi trường, mở `npm run dev` ở cửa sổ khác:
+
+  ```sh
+  npm i --prefix /tmp/qa-tools puppeteer-core
+  export PUPPETEER_CORE=/tmp/qa-tools/node_modules/puppeteer-core/lib/esm/puppeteer/puppeteer-core.js CHROME_PATH=/đường/dẫn/chrome
+  node scripts/owl-guide-qa/matrix-walk.mjs --module lab --width 360 --height 640 --touch   # một lượt: đi hết các bước của phần Lab
+  scripts/owl-guide-qa/run-matrix.sh 3                                                      # cả ma trận (7 phần × 4 cỡ màn hình, giảm chuyển động, zoom 200%, game, a11y)
+  node scripts/owl-guide-qa/coverage.mjs                                                    # gộp kết quả thành COVERAGE.md
+  ```
+
+  Mỗi walker thao tác thật trên từng bước, ghi `result.json` và ảnh vào `.studio/qa/owl-guide/`; `scenarios/` (01–05, 09), `a11y.mjs`, `resize.mjs`, `states.mjs`, `pointer-thread.mjs`, `game-walk.mjs` kiểm vòng đời, truy cập, qua mốc 899/900, kéo sợi bằng con trỏ và game. Kết quả, lỗi đã sửa và phần chưa kiểm chứng: `.studio/qa/owl-guide/REVIEW.md`; độ phủ 70 ID: `.studio/qa/owl-guide/COVERAGE.md`.
+
 ## Mini game cuối bài thuyết trình
 
 Tại cảnh **08 — Kết luận**, chọn **CHƠI MINIGAME** để mở “Hành trình sản xuất”. Nút **QUAY LẠI BÀI THUYẾT TRÌNH** hoặc phím **Esc** đưa người chơi về đúng vị trí đã mở game.
