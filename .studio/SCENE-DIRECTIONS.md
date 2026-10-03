@@ -1,5 +1,25 @@
 # Selected directions, before implementation
 
+## Scene 02 — The Line-Shaft Hall, 2026-10-03
+
+The user's replacement directive supersedes the prior cutaway infographic. Compare three implementations of the specified hall: (1) fully modelled real-time factory, (2) museum cutaway depth layers with a raw real-time power mechanism, (3) an entirely archival panorama. Choose 2: the flywheel, shared overhead shaft and leather belts remain physically connected and move with scroll, while detailed generated period machines, architecture and worker collage avoid primitive factory props. Direction 1 exceeds the available modelling quality; direction 3 loses tangible mechanical motion. The hall fills the frame; two small curator captions replace giant headlines and all pictogram humans / system-arrow diagrams are removed. Atlas print becomes workshop atmosphere. The physical hall stays visible through the earned thesis and cools into Automation.
+
+## History Atlas specification — 2026-10-03
+
+The user's approved continuous museum horizon supersedes the earlier lower caption band. The recorded alternatives remain continuous cut-paper atlas, technical engraving scroll, and archival contact sheet; the atlas best preserves the material variety and red-thread continuity in ART-DIRECTION.md. Implement the supplied direction with one 680vw world, eight overlapping compositions, inline annotations at 1440px+, one unboxed curator column at 900–1439px, and a vertical paper strip below 900px or with reduced motion. Keep existing reconstructions and source records. The final annotation stays in viewport coordinates so native scrolling cannot push exit copy off-screen. No later scene was redesigned in this Atlas work.
+
+## Scene 02 replacement — 2026-10-03
+
+Compare (1) a museum engineering cutaway that expands from one drive into linked work, (2) an archival factory panorama, and (3) an industrial poster made entirely of diagram nodes. Choose 1 against ART-DIRECTION.md and the user's explicit direction: the belt physically transmits power, separate tool/conveyor functions establish scale, and workers with task/cadence links explain organization. Direction 2 risks generic factory scenery; direction 3 loses the material transition. Preserve warm atlas paper/collage briefly, shift to cast steel/graphite, and flatten the same assembly into a system diagram only after coordination is visible. Supersedes the earlier monumental flywheel direction.
+
+## History Bridge — 2026-10-02
+
+Polish directions from the user's six references: (1) retain floating annotations everywhere, (2) use a print-style lower caption band on regular desktop/laptop and reserved side space on ultrawide, (3) hide paragraphs in a click popover. Choose 2: the collage remains dominant, while paragraphs never mask the artwork. Direction 1 caused overlap when `object-fit:contain` centered images on narrower screens; direction 3 hides the explanation. Simplify abstract Vietnamese into concrete tools, factories and workers. The user's confirmed mini magnifier button explicitly toggles the circular lens; passive hover does nothing. Keep captions and pictures moving together so adjacent eras cannot drift into each other; retain depth in the map/archive layers. Verification on 2026-10-03 covers all visible neighboring caption/image pairs at six desktop sizes.
+
+Compare (1) a continuous cut-paper museum atlas, (2) a technical engraving scroll, and (3) an archival photo contact sheet. Choose 1, as requested: overlapping reconstructed Vietnamese production objects, annotations above/below, faint sourced geography and one thin red connector. The engraving loses material variety; the contact sheet becomes rectangular panels. The shared warm paper, ink, oxide and brass match ART-DIRECTION.md. Generated illustrations are explicitly reconstructions, never documentary photographs.
+
+One pinned DOM/SVG/GSAP track sits after the plough and before the machine. Eight eras share a continuous red path; its local motifs change from furrow to rail, power, conveyor, logistics and data. Desktop gets an optional exact-point lens; mobile and reduced motion get a vertical/static atlas. Existing later chapters keep their scene indices and content. Verify real wheel input, keyboard stepping, responsive resize, image zoom, source drawer and the five requested 1440×900 frames.
+
 The shared idea is an engineering specimen becoming a living social system. Compare every scene against ART-DIRECTION.md: the thread must explain the object, with physical depth and no narrative panels.
 
 | Scene | Alternatives considered | Chosen direction and meaningful motion |
@@ -60,3 +80,7 @@ Research: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-
 Compare: (1) more detail on primitive figures, (2) photo cutouts, (3) lightweight rigged models with authored materials and poses. Choose 3: natural body proportions, recognizable clothing, hands and skeletal movement, with a shared restrained palette. Retain the approved original drone. Use PBR mud, shallow water and varied rice plants for the field. For the factory compare a map-dominant split, a small inset car, and a large production assembly with the atlas available on demand. Choose the assembly: the user must recognize the vehicle and operator before opening geographic context.
 
 The imported car is an illustrative Ferrari model, not a VinFast vehicle; state this beside it and in the source drawer. Keep attribution and licenses in public/ASSET-CREDITS.md. Do not imply the licensed asset is an actual model used in the cited evidence.
+
+## History mural correction — 2026-10-03
+
+The user's replacement brief settles the visual direction. Compare: (1) separate archive/map compositions, (2) a tiled museum-card wall, (3) one continuous sepia mural with transparent cutouts and disciplined annotation zones. Choose 3 against ART-DIRECTION: it preserves the red thread as a straight progress rail, gives each historical object a precise orthogonal leader and keeps the mural readable across viewport sizes. Directions 1 and 2 conflict with the new brief. Four generated background segments are composited into one file; no visible tiles, map watermark or circle doodles. Wide text uses a 12-column grid; compact screens use an unboxed gradient curator dock and mobile alternates vertical annotations. Existing original foreground images stay. Final digital imagery dims toward a zooming industrial detail and the existing hall, with only the supplied bridge sentence. No later chapter redesign. Forty viewport captures, interaction checks and human-confirmed audio are recorded in `.studio/qa/history-mural/REVIEW.md`.

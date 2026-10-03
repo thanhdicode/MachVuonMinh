@@ -8,6 +8,7 @@ import { labState } from './model'
 import { brushedMetal, castGrain, createSoilGeometry, bandGeometry, bandDetails, enamel, agedSteel, brass } from './surfaceDetail'
 import { EvidenceObjects } from './EvidenceObjects'
 import { DataField } from './DataField'
+import { MachineRenderer } from './MachineRenderer'
 
 const RED = '#B51F2A', IVORY = '#F3E8D0'
 export const backgrounds = ['#f0e9da', '#d6c5a6', '#191b1c', '#deded3', '#21151a', '#201e1b', '#efe9dc', '#201e1b', '#eee7d8']
@@ -19,7 +20,7 @@ const point = new THREE.Vector3(), target = new THREE.Vector3(), color = new THR
 function CameraRig() {
   const { camera, scene, size, gl, invalidate, setDpr } = useThree()
   const smooth = useRef(0)
-  useEffect(()=>setDpr(size.width<700?1:Math.min(devicePixelRatio,1.5)),[size.width,setDpr])
+  useEffect(()=>setDpr(size.width<768?1:Math.min(devicePixelRatio,1.5)),[size.width,setDpr])
   useEffect(() => { const refresh = () => invalidate(); window.addEventListener('scroll',refresh); const unsub = useWorld.subscribe(refresh); return()=>{window.removeEventListener('scroll',refresh);unsub()} },[invalidate])
   useFrame((_, delta) => {
     const state = useWorld.getState(), transition = THREE.MathUtils.smoothstep(timeline.local, .72, 1)
@@ -35,6 +36,8 @@ function CameraRig() {
     if (!state.reduced) { point.x += timeline.pointer[0] * .12; point.y += timeline.pointer[1] * .08 }
     camera.position.copy(point); camera.lookAt(target)
     color.set(backgrounds[timeline.scene]).lerp(nextColor.set(backgrounds[Math.min(8, timeline.scene + 1)]), transition)
+    if(state.machine)color.set('#151614')
+    if(timeline.scene===3 && timeline.local<.2) color.set('#151614').lerp(nextColor.set(backgrounds[3]),THREE.MathUtils.smoothstep(timeline.local,0,.2))
     scene.background = color
     if (scene.fog instanceof THREE.Fog) scene.fog.color.copy(color)
     gl.setClearColor(color)
@@ -64,7 +67,7 @@ function ThreadSegment({ index }: { index: number }) {
   }, [index])
   useFrame(({ clock }, delta) => {
     if (!group.current) return
-    group.current.visible = ![1,3,4,6].includes(index) && (index !== 0 || unlocked) && (timeline.scene === index || (timeline.scene + 1 === index && timeline.local > .72))
+    group.current.visible = ![1,2,3,4,6].includes(index) && (index !== 0 || unlocked) && (timeline.scene === index || (timeline.scene + 1 === index && timeline.local > .72))
     if (!group.current.visible || !endpoint.current) return
     const state = useWorld.getState()
     const t = state.reduced || state.paused ? .22 : (clock.elapsedTime * .075) % .8
@@ -174,37 +177,6 @@ function Agrarian() {
   </group>
 }
 
-function Gear({ radius=2.7, small=false }: { radius?:number;small?:boolean }) {
-  const shape = useMemo(()=>{
-    const shape = new THREE.Shape(), teeth=small?18:32
-    for(let i=0;i<teeth*4;i++){const angle=i/(teeth*4)*Math.PI*2;const r=radius*(i%4===1||i%4===2?1:.91);const x=Math.cos(angle)*r,y=Math.sin(angle)*r;if(i===0)shape.moveTo(x,y);else shape.lineTo(x,y)}
-    shape.closePath();const hole=new THREE.Path();hole.absarc(0,0,radius*.49,0,Math.PI*2,true);shape.holes.push(hole);return shape
-  },[radius,small])
-  return <group>
-    <mesh position-z={-.25}><extrudeGeometry args={[shape,{depth:.5,curveSegments:72,bevelEnabled:true,bevelSegments:3,bevelSize:.045,bevelThickness:.055,steps:1}]} /><meshStandardMaterial color={small?'#8a8270':'#777e79'} metalness={.88} roughness={.58} roughnessMap={brushedMetal} bumpMap={brushedMetal} bumpScale={.012}/></mesh>
-    <group position-z={.315}><RadialMarks radius={radius*.82} count={small?48:96}/></group>
-    {[.52,.74,.87].map(r=><mesh key={r} position-z={.313}><torusGeometry args={[radius*r,.013,8,96]}/><meshStandardMaterial color="#b2b6a7" metalness={.8} roughness={.44}/></mesh>)}
-    {Array.from({length:small?6:12},(_,i)=>{const a=i/(small?6:12)*Math.PI*2;return <group key={i} position={[Math.cos(a)*radius*.65,Math.sin(a)*radius*.65,.3]}><mesh rotation-x={Math.PI/2}><cylinderGeometry args={[.07,.07,.065,6]}/><meshStandardMaterial color="#a7aaa0" metalness={.94} roughness={.28}/></mesh><mesh position-z={-.03}><torusGeometry args={[.095,.015,6,14]}/><meshStandardMaterial color="#222627" metalness={.7} roughness={.4}/></mesh></group>})}
-  </group>
-}
-
-function Machine() {
-  const wheel=useRef<THREE.Group>(null),secondary=useRef<THREE.Group>(null)
-  const assembly=useRef<THREE.Group>(null),dither=useMemo(()=>({value:0}),[])
-  useEffect(()=>{assembly.current?.traverse(object=>{if(object instanceof THREE.Mesh && object.material instanceof THREE.MeshStandardMaterial){object.material.onBeforeCompile=shader=>{shader.uniforms.uDither=dither;shader.fragmentShader='uniform float uDither;\n'+shader.fragmentShader;shader.fragmentShader=shader.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\n vec2 cell = mod(gl_FragCoord.xy, 4.0); float threshold = (mod(cell.x, 2.0) * 8.0 + mod(cell.y, 2.0) * 4.0 + floor(cell.x / 2.0) * 2.0 + floor(cell.y / 2.0)) / 16.0; if (uDither > threshold) discard;')};object.material.needsUpdate=true}})},[dither])
-  useFrame(()=>{dither.value=timeline.scene===2?THREE.MathUtils.smoothstep(timeline.local,.83,1):0})
-  useFrame((_,delta)=>{const s=useWorld.getState();if(timeline.scene!==2||s.reduced||s.paused)return;const speed=delta*(.07+Math.min(Math.abs(timeline.velocity)*.002,.15));if(wheel.current)wheel.current.rotation.z-=speed;if(secondary.current)secondary.current.rotation.z+=speed*1.9})
-  return <group ref={assembly} position={[2.35,.05,0]} rotation={[.1,-.38,.14]}>
-    <group ref={wheel}><Gear/></group>
-    <group ref={secondary} position={[2.65,-2.25,-.65]}><Gear radius={1.35} small/></group>
-    <mesh position={[0,0,-.65]}><torusGeometry args={[1.42,.18,18,64]}/><meshStandardMaterial color="#101416" metalness={.7} roughness={.28}/></mesh>
-    <mesh position={[0,0,-1.5]}><torusGeometry args={[1.5,.23,18,64]}/><meshStandardMaterial color="#595e5e" metalness={.9} roughness={.23}/></mesh>
-    <mesh position={[0,0,-2.2]}><torusGeometry args={[1.52,.19,18,64]}/><meshStandardMaterial color="#292f32" metalness={.9} roughness={.3}/></mesh>
-    <mesh position={[0,-3,-1]}><boxGeometry args={[6.8,.23,3.3]}/><meshStandardMaterial color="#272c2d" metalness={.85} roughness={.4}/></mesh>
-    {[-1,1].map(x=><mesh key={x} position={[x*2.4,-2.5,-1.3]} rotation-z={x*.25}><boxGeometry args={[.38,1.2,.75]}/><meshStandardMaterial color="#484d4b" metalness={.9} roughness={.4}/></mesh>)}
-  </group>
-}
-
 function Joint({ radius=.36 }: {radius?:number}) { return <group rotation-x={Math.PI/2}>
   <mesh><cylinderGeometry args={[radius,radius,.55,48]}/><meshStandardMaterial color="#505853" metalness={.88} roughness={.55} roughnessMap={brushedMetal}/></mesh>
   <mesh position-y={.3}><cylinderGeometry args={[radius*.66,radius*.66,.07,48]}/><meshStandardMaterial color={RED} metalness={.5} roughness={.48}/></mesh>
@@ -303,7 +275,7 @@ function World() {
     <IntroCord/>
     <SceneGroup index={0}><Intro /></SceneGroup>
     <SceneGroup index={1}><Agrarian /></SceneGroup>
-    <SceneGroup index={2}><Machine /></SceneGroup>
+    <MachineRenderer/>
     <SceneGroup index={3}><RobotArm /></SceneGroup>
     <SceneGroup index={4}><DataField /></SceneGroup>
     <SceneGroup index={5}><DialecticCore /></SceneGroup>
@@ -327,11 +299,13 @@ class CanvasBoundary extends Component<{ children: ReactNode; fallback: ReactNod
 export default function WorldCanvas() {
   const [lost, setLost] = useState(false)
   const [hidden,setHidden]=useState(document.hidden)
+  const [compact,setCompact]=useState(innerWidth<768)
   useEffect(()=>{const change=()=>setHidden(document.hidden);document.addEventListener('visibilitychange',change);return()=>document.removeEventListener('visibilitychange',change)},[])
-  const reduced = useWorld(s => s.reduced), paused = useWorld(s => s.paused)
+  useEffect(()=>{const media=matchMedia('(max-width:767px)'),change=()=>setCompact(media.matches);media.addEventListener('change',change);return()=>media.removeEventListener('change',change)},[])
+  const reduced = useWorld(s => s.reduced), paused = useWorld(s => s.paused), history = useWorld(s => s.history), machine = useWorld(s => s.machine)
   useEffect(() => { const move = (e: PointerEvent) => { timeline.pointer = [e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2] }; window.addEventListener('pointermove',move); return()=>window.removeEventListener('pointermove',move) },[])
   const fallback = <div className="world-fallback" aria-label="Sơ đồ sợi đỏ thay cho không gian 3D"><svg viewBox="0 0 1000 700"><path d="M-100 650C300 650 800 50 800 350S100 650 400 200S1100 500 1200 0" fill="none" stroke="#B51F2A" strokeWidth="8"/><circle cx="620" cy="330" r="170" fill="none" stroke="#817c6c" strokeWidth="28"/></svg><span>Chế độ đồ họa nhẹ</span></div>
-  return <div className="world-canvas" aria-hidden="true"><CanvasBoundary fallback={fallback}>{lost ? fallback : <Canvas dpr={[1, innerWidth < 700 ? 1 : 1.5]} camera={{ position:[0,.25,12], fov:42, near:.1, far:45 }} gl={{ antialias:true, powerPreference:'high-performance' }} frameloop={hidden?'never':reduced || paused ? 'demand' : 'always'} fallback={fallback}><ContextWatch onLost={()=>setLost(true)}/><World /></Canvas>}</CanvasBoundary></div>
+  return <div className="world-canvas" aria-hidden="true"><CanvasBoundary fallback={fallback}>{lost ? fallback : <Canvas dpr={[1, compact ? 1 : 1.5]} camera={{ position:[0,.25,12], fov:42, near:.1, far:45 }} gl={{ antialias:true, powerPreference:'high-performance' }} frameloop={hidden || history || (machine && (reduced || compact))?'never':reduced || paused ? 'demand' : 'always'} fallback={fallback}><ContextWatch onLost={()=>setLost(true)}/><World /></Canvas>}</CanvasBoundary></div>
 }
 
 

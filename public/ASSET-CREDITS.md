@@ -36,3 +36,11 @@ License: /draco/LICENSE
 Bundled decoder files distributed with three.js.
 
 Drone, rice geometry, machines, red thread and other procedural objects are original project geometry. The drone illustrates an agricultural quadrotor; it is not an identified machine used by HTX Thâm Triều. Geographic and editorial sources are listed in the website's source drawer.
+
+## Âm thanh History Atlas
+
+Tám ambience được tổng hợp nguyên bản tại chỗ, không dùng sample hoặc bản thu bên ngoài. Nguồn tạo và quyền sử dụng trong dự án: [History Atlas audio](/audio/LICENSES.md). Đây là âm thanh minh họa, không phải bản thu tư liệu lịch sử.
+
+## Nền panorama History Atlas
+
+Panorama và chi tiết bánh đà được tạo riêng cho dự án bằng imagegen, từ bốn minh họa ghép mềm thành một ảnh nền liên tục. Đây là hình tái dựng minh họa, không phải ảnh tư liệu lịch sử. Không dùng pixel từ các ảnh bảo tàng/infographic tham khảo. Bản desktop: `/history/atlas-panorama-8192.avif` và `/history/atlas-panorama-4096.webp`; bản dọc: `/history/atlas-panorama-mobile-1024x8192.webp`; chi tiết chuyển cảnh: `/history/atlas-machine-anchor.webp`. Các cutout lịch sử và ảnh xưởng máy giữ nguồn tạo đã ghi trong dự án. Âm nền là tổng hợp nguyên bản; không có sample, lời hát hoặc bản nhạc bên ngoài.

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({ plugins: [react(), {
+export default defineConfig({ server:{watch:{ignored:['**/.studio/**']}}, plugins: [react(), {
   name: 'reload-world-timeline',
   handleHotUpdate({ file, server }) {
     // These singleton modules are captured by the mounted scroll and render loops.

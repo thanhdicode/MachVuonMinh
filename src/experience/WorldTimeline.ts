@@ -3,15 +3,32 @@ import 'lenis/dist/lenis.css'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { stops, timeline, useWorld } from './WorldState'
+import { historyStep, historyProgressForTravel } from './historyGeometry'
+import { machineState, journeyProgress, journeyPosition, type JourneyRange } from './machineState'
 gsap.registerPlugin(ScrollTrigger)
 gsap.ticker.lagSmoothing(0)
 let lenis: Lenis | undefined
+function journeyRange(): JourneyRange {
+  const atlas = document.querySelector<HTMLElement>('.history-insertion')
+  const machine = document.querySelector<HTMLElement>('.machine-insertion')
+  const atlasLength = atlas?.offsetHeight ?? 0, machineLength = machine?.offsetHeight ?? 0
+  const atlasStart = atlas?.offsetTop ?? 13 * innerHeight * stops[2]
+  return { base:Math.max(1,(document.documentElement.scrollHeight-innerHeight-atlasLength-machineLength)/.88), atlasStart, atlasLength, machineStart:machine?.offsetTop ?? atlasStart+atlasLength, machineLength }
+}
+export function scrollToPosition(y: number, immediate = useWorld.getState().reduced) {
+  lenis?.resize()
+  lenis?.scrollTo(y, {immediate, force:true})
+}
+export function goToHistory() {
+  if (!useWorld.getState().unlocked) useWorld.getState().set({unlocked:true})
+  requestAnimationFrame(() => scrollToPosition(journeyRange().atlasStart))
+}
 export function goToScene(index: number) {
   if (!Number.isInteger(index) || index < 0 || index >= stops.length - 1) return
   if(index>0&&!useWorld.getState().unlocked)useWorld.getState().set({unlocked:true})
   const progress = stops[index] + (stops[index + 1] - stops[index]) * .32
-  lenis?.resize()
-  lenis?.scrollTo(progress * (document.documentElement.scrollHeight - innerHeight), { immediate: useWorld.getState().reduced, force: true })
+  const range = journeyRange()
+  scrollToPosition(index===2 ? range.machineStart + (range.machineLength-innerHeight)*.16 : journeyPosition(progress,range))
 }
 export function startTimeline() {
   if (!useWorld.getState().unlocked) { window.scrollTo(0,0);timeline.scene=0;timeline.local=0;timeline.progress=0;useWorld.getState().set({active:0}) }
@@ -19,24 +36,42 @@ export function startTimeline() {
   lenis.on('scroll', (event: { velocity: number }) => { timeline.velocity = event.velocity; ScrollTrigger.update() })
   const update = (time: number) => lenis?.raf(time * 1000)
   gsap.ticker.add(update)
-  const trigger = ScrollTrigger.create({ start: 0, end: 'max', onUpdate: (self) => {
+  let refreshing=false, refreshFrame=0
+  const sync = (self:ScrollTrigger) => {
+    if (refreshing) return
     const unlocked=useWorld.getState().unlocked
-    const p = unlocked ? Math.min(.999999, self.progress) : 0
+    const range = journeyRange(), y = self.scroll()
+    const inHistory = unlocked && y >= range.atlasStart && y < range.machineStart
+    const inMachine = unlocked && y >= range.machineStart && y < range.machineStart+range.machineLength
+    machineState.active=inMachine
+    machineState.exit=inMachine?Math.max(0,Math.min(1,(y-(range.machineStart+range.machineLength-innerHeight))/innerHeight)):0
+    const p = unlocked ? Math.min(.999999, journeyProgress(y,range)) : 0
     const scene = stops.findIndex((stop, i) => p >= stop && p < stops[i + 1])
     timeline.progress = p; timeline.scene = Math.max(0, scene); timeline.local = (p - stops[timeline.scene]) / (stops[timeline.scene + 1] - stops[timeline.scene])
     const beat = timeline.local < .45 ? 0 : 1
-    if (useWorld.getState().active !== timeline.scene || useWorld.getState().beat !== beat) useWorld.getState().set({ active: timeline.scene, beat })
+    if (useWorld.getState().active !== timeline.scene || useWorld.getState().beat !== beat || useWorld.getState().history !== inHistory || useWorld.getState().machine !== inMachine) useWorld.getState().set({ active: timeline.scene, beat, history:inHistory, machine:inMachine })
     document.documentElement.style.setProperty('--progress', String(p))
     document.documentElement.style.setProperty('--beat', String(timeline.local))
     document.documentElement.style.setProperty('--scene-opacity', String(useWorld.getState().reduced || timeline.scene === 8 ? 1 : Math.max(0, 1 - Math.max(0,(timeline.local-.78)/.18))))
     if(!unlocked&&self.progress>0)lenis?.scrollTo(0,{immediate:true,force:true})
-  } })
+  }
+  const trigger = ScrollTrigger.create({ start: 0, end: 'max', onUpdate:sync,
+    onRefreshInit:()=>{refreshing=true},
+    onRefresh:self=>{refreshing=false;cancelAnimationFrame(refreshFrame);refreshFrame=requestAnimationFrame(()=>sync(self))},
+  })
   const unsubscribe = useWorld.subscribe((state, previous) => {
     if (state.unlocked !== previous.unlocked) {
       if (!state.unlocked) lenis?.stop()
       else requestAnimationFrame(() => { lenis?.resize(); lenis?.start(); ScrollTrigger.refresh() })
     }
-    if (state.reduced !== previous.reduced && lenis) lenis.options.smoothWheel = !state.reduced
+    if (state.reduced !== previous.reduced && lenis) {
+      lenis.options.smoothWheel = !state.reduced
+      requestAnimationFrame(() => {
+        lenis?.resize()
+        ScrollTrigger.refresh()
+        ScrollTrigger.update()
+      })
+    }
   })
   if (!useWorld.getState().unlocked) lenis.stop()
   const keepEntryAtTop=()=>{
@@ -46,17 +81,33 @@ export function startTimeline() {
     }
   }
   const resize = () => {
-    const progress = timeline.progress
-    lenis?.resize()
-    ScrollTrigger.refresh()
-    lenis?.scrollTo(progress * (document.documentElement.scrollHeight - innerHeight), { immediate: true, force: true })
-    ScrollTrigger.update()
+    const progress = timeline.progress, inHistory = useWorld.getState().history, inMachine=useWorld.getState().machine, machineProgress=machineState.progress
+    const era = Number(document.querySelector<HTMLElement>('.history-bridge')?.dataset.activeEra ?? 0)
+    requestAnimationFrame(() => {
+      lenis?.resize()
+      ScrollTrigger.refresh()
+      const range = journeyRange()
+      let position = journeyPosition(progress,range)
+      if(inMachine) {
+        if(!useWorld.getState().reduced && innerWidth>=768) position=range.machineStart+machineProgress*(range.machineLength-innerHeight)
+        else {const target=document.querySelector<HTMLElement>(`[data-static-beat="${machineState.staticBeat}"]`);if(target)position=target.getBoundingClientRect().top+window.scrollY-125}
+      }
+      if (inHistory) {
+        if (!useWorld.getState().reduced && innerWidth >= 900) position = range.atlasStart + historyProgressForTravel((era*historyStep/100+.01)*innerWidth,range.atlasLength-innerHeight)*(range.atlasLength-innerHeight)
+        else {
+          const target=document.querySelector<HTMLElement>(`[data-label-era="${era}"] .history-mobile-copy`)
+          if (target) position=target.getBoundingClientRect().top+window.scrollY-140
+        }
+      }
+      scrollToPosition(position, true)
+      ScrollTrigger.update()
+    })
   }
   window.addEventListener('resize', resize)
   window.addEventListener('scroll',keepEntryAtTop,{passive:true})
   window.addEventListener('pageshow',keepEntryAtTop)
   keepEntryAtTop()
   ScrollTrigger.refresh()
-  return () => { window.removeEventListener('resize',resize); window.removeEventListener('scroll',keepEntryAtTop); window.removeEventListener('pageshow',keepEntryAtTop); unsubscribe(); trigger.kill(); gsap.ticker.remove(update); lenis?.destroy(); lenis = undefined }
+  return () => { cancelAnimationFrame(refreshFrame); window.removeEventListener('resize',resize); window.removeEventListener('scroll',keepEntryAtTop); window.removeEventListener('pageshow',keepEntryAtTop); unsubscribe(); trigger.kill(); gsap.ticker.remove(update); lenis?.destroy(); lenis = undefined }
 }
 

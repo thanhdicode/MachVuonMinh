@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-03",
+  "tool": "Built-in image_gen.imagegen",
+  "purpose": "One continuous low-contrast History Atlas backdrop",
+  "inputs": "User reference images were studied for composition only; their pixels are not shipped.",
+  "trial": {
+    "prompt": "Use case: historical-scene. Asset type: single continuous panoramic background for a Vietnamese production-history museum mural. Primary request: create ONE exceptionally ultra-wide horizontal image, 8:1 aspect ratio, intended export 8192x1024. Eight connected historical atmospheres read sequentially left to right: pre-1858 Vietnamese agricultural village and terraced paddy/thatched craft sheds; turn-of-20th-century steam railway, coal mine and river port; 1945-54 dispersed modest repair workshops; 1955-75 mechanical industrial hall and electricity; 1975-85 interconnected national factories and logistics yards; 1986-2006 sewing/manufacturing and container cranes; rural transformer and electricity infrastructure; fiber, server hall and modern data infrastructure. All blend into one authored continuous ground and horizon, with dense modest background architecture throughout, no isolated panels or centers. One consistent eye-level panoramic perspective, overcast neutral lighting, monochrome graphite/sepia engraving and archival drawing on warm ivory paper. Subdued low contrast appropriate behind foreground cutouts, atmosphere only, no large focal people. Shared horizon at roughly55% height, factory ground filling lower third, subtle structural details across whole width. No text, no dates, no labels, no numbers, no maps or country silhouettes, no red lines, no giant symbols, no frame, no borders, no repeated tiles, no visible seams, no political portraits/logos/flags. Historically plausible Vietnam tools/buildings. Do not photograph an actual museum wall. The image itself is the unframed historical mural background.",
+    "returnedSize": [
+      2172,
+      724
+    ],
+    "used": false,
+    "reason": "The tool did not return the requested 8:1 ratio."
+  },
+  "segments": [
+    {
+      "id": 1,
+      "prompt": "Use case historical-scene. Generate an unframed ultra-wide 3:1 panoramic background segment for ONE continuous Vietnamese production-history mural, not a museum photograph. Original sepia/graphite archival engraving on warm ivory paper. Eye-level frontal panorama, shallow atmosphere, horizon exactly at50% image height, base ground at90%, overcast diffuse light, consistent small-scale architecture across the width, low contrast, no dramatic foreground figures. Textless, no maps, country silhouettes, dates, borders, red lines, flags, brand marks or political portraits. Dense connected environment, no isolated objects, no cards. Left and right edges extend shared low factory sheds/vegetation/rail or service ground for20% seamless feather overlap. Segment1 of4: left pre-1858 Vietnamese paddy village, thatched artisan sheds, waterwheel, simple loom and kiln in agricultural ground; transition continuously toward right1899-1936 steam locomotive, meter-gauge railway, coal mine timber/steel structure and old river cargo wharf. Far right low repair sheds and rail ground extend outward. All technology period plausible; no modern power pylons.",
+      "nativeSize": [
+        2172,
+        724
+      ],
+      "original": "originals/segment-01.png"
+    },
+    {
+      "id": 2,
+      "prompt": "Use case historical-scene. Generate an unframed ultra-wide 3:1 panoramic background segment for ONE continuous Vietnamese production-history mural, not a museum photograph. Original sepia/graphite archival engraving on warm ivory paper. Eye-level frontal panorama, shallow atmosphere, horizon exactly at50% image height, base ground at90%, overcast diffuse light, consistent small-scale architecture across the width, low contrast, no dramatic foreground figures. Textless, no maps, country silhouettes, dates, borders, red lines, flags, brand marks or political portraits. Dense connected environment, no isolated objects, no cards. Left and right edges extend shared low factory sheds/vegetation/rail or service ground for20% seamless feather overlap. Segment2 of4: left1945-54 dispersed modest Vietnamese machine repair workshops, lathe visible through shed, wood/metal supplies; blend toward right1955-75 industrial mechanical hall, brick plant roof rhythm, electric motor bay, light steel power infrastructure. Far left workshop/service ground; far right rows of low factory sheds. No modern high-rise or servers.",
+      "nativeSize": [
+        2172,
+        724
+      ],
+      "original": "originals/segment-02.png"
+    },
+    {
+      "id": 3,
+      "prompt": "Use case historical-scene. Generate an unframed ultra-wide 3:1 panoramic background segment for ONE continuous Vietnamese production-history mural, not a museum photograph. Original sepia/graphite archival engraving on warm ivory paper. Eye-level frontal panorama, shallow atmosphere, horizon exactly at50% image height, base ground at90%, overcast diffuse light, consistent small-scale architecture across the width, low contrast, no dramatic foreground figures. Textless, no maps, country silhouettes, dates, borders, red lines, flags, brand marks or political portraits. Dense connected environment, no isolated objects, no cards. Left and right edges extend shared low factory sheds/vegetation/rail or service ground for20% seamless feather overlap. Segment3 of4: left1975-85 connected Vietnamese factory complex, mechanical logistics yards and conveyor roofs; right1986-2006 manufacturing/sewing workshops and river container port, modest container crane structures. Same continuous industrial ground/horizon from left through right. Left low factory sheds, right port/service yard and low vegetation continue off frame.",
+      "nativeSize": [
+        2172,
+        724
+      ],
+      "original": "originals/segment-03.png"
+    },
+    {
+      "id": 4,
+      "prompt": "Use case historical-scene. Generate an unframed ultra-wide 3:1 panoramic background segment for ONE continuous Vietnamese production-history mural, not a museum photograph. Original sepia/graphite archival engraving on warm ivory paper. Eye-level frontal panorama, shallow atmosphere, horizon exactly at50% image height, base ground at90%, overcast diffuse light, consistent small-scale architecture across the width, low contrast, no dramatic foreground figures. Textless, no maps, country silhouettes, dates, borders, red lines, flags, brand marks or political portraits. Dense connected environment, no isolated objects, no cards. Left and right edges extend shared low factory sheds/vegetation/rail or service ground for20% seamless feather overlap. Segment4 of4: left rural Vietnamese electricity infrastructure, transformer, pump and power poles connecting villages to factories; blend toward right1997-2026 fiber conduits, server hall, modern data infrastructure and modern industrial hall. A specific large line-shaft machine bay with an old industrial flywheel is visible through an open factory doorway at the rightmost20%, to anchor transition to the existing next machine scene. No oversized icon, no text, no giant chip, no repeating poles as tile pattern.",
+      "nativeSize": [
+        2172,
+        724
+      ],
+      "original": "originals/segment-04.png"
+    }
+  ],
+  "composite": {
+    "cropSize": [
+      1704,
+      724
+    ],
+    "cropLeft": [
+      0,
+      234,
+      234,
+      468
+    ],
+    "overlapPixels": 341,
+    "overlapPercent": 20,
+    "stitchSize": [
+      5793,
+      724
+    ],
+    "exportSize": [
+      8192,
+      1024
+    ],
+    "note": "Lanczos upscale; native new detail is not claimed.",
+    "script": "scripts/prepare-atlas-panorama.mjs"
+  },
+  "outputs": [
+    "public/history/atlas-panorama-8192.avif",
+    "public/history/atlas-panorama-4096.webp",
+    "public/history/atlas-panorama-mobile-1024x8192.webp",
+    "public/history/atlas-machine-anchor.webp"
+  ]
+}
