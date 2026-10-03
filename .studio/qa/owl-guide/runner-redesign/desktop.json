@@ -1,0 +1,49 @@
+{
+  "name": "desktop",
+  "checks": [
+    "silent before gesture",
+    "runner and road animate",
+    "real keyboard jump",
+    "duck release",
+    "pause freezes pixels campaign and voices",
+    "native sound keyboard control",
+    "resume reuses one context",
+    "guide hold preserves campaign and recovers audio after hiding",
+    "correct collision answer keeps heart",
+    "wrong collision answer costs exactly one heart",
+    "five bosses HP questions progression and victory",
+    "restart resets campaign without extra context",
+    "hidden silences; explicit resume restores audio",
+    "missing saw and boss art stays visible; campaign unchanged",
+    "DPR cap",
+    "close disposes audio"
+  ],
+  "errors": [],
+  "metrics": {
+    "mode": "running",
+    "stage": 0,
+    "hearts": 3,
+    "score": 0.309117946666655,
+    "y": 0,
+    "duck": false,
+    "canvas": {
+      "width": 1390,
+      "height": 592,
+      "dpr": 1
+    },
+    "audio": {
+      "enabled": true,
+      "unlocked": true,
+      "contextState": "running",
+      "activeVoices": 0,
+      "loadedEffects": 10,
+      "effectFailures": 0,
+      "mode": "running",
+      "stage": 0,
+      "musicStep": 0,
+      "disposed": false
+    },
+    "contexts": 1
+  },
+  "pass": true
+}

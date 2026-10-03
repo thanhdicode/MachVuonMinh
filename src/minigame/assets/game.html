@@ -20,11 +20,13 @@
               <div class="stat"><span>QUÃNG ĐƯỜNG</span><strong id="score">0000</strong></div>
               <div class="stat"><span>TỐC ĐỘ</span><strong id="speed">1.0×</strong></div>
               <div class="stat lives-stat" data-guide="game-hearts"><span>TRÁI TIM</span><strong id="hearts" aria-label="Còn 3 trái tim">♥ ♥ ♥</strong></div>
+              <button class="icon-button sound-button" id="soundButton" type="button" aria-label="Tắt âm thanh" aria-pressed="true" title="Âm thanh">♫</button>
               <button class="icon-button" id="pauseButton" type="button" aria-label="Tạm dừng" title="Tạm dừng" data-guide="game-pause" disabled>Ⅱ</button>
                 <button class="guide-launcher" id="guideLauncher" type="button" data-guide="game-guide-replay" aria-label="Cú Mạch / Cách chơi" title="Cú Mạch / Cách chơi" hidden><img class="guide-launcher-owl" alt="" width="36" height="36" decoding="async" /><span class="guide-launcher-label" aria-hidden="true">Cú Mạch / Cách chơi</span></button>
             </div>
           </div>
           <div class="stage-progress-row"><span id="stageProgressLabel">ĐƯỜNG ĐẾN BOSS</span><div class="stage-progress-track"><div id="stageProgressFill"></div></div><span id="stageProgressText">0 / 180</span></div>
+          <ol class="stage-trail" id="stageTrail" aria-label="Năm chặng hành trình"><li class="is-current"><b>01</b><span>Gieo mầm</span></li><li><b>02</b><span>Cơ giới</span></li><li><b>03</b><span>Tự động</span></li><li><b>04</b><span>Kết nối</span></li><li><b>05</b><span>Vươn mình</span></li></ol>
 
           <div class="canvas-wrap" id="canvasWrap">
             <canvas id="gameCanvas" width="1000" height="430" aria-label="Nhân vật vượt chướng ngại qua năm giai đoạn"></canvas>
@@ -40,9 +42,9 @@
 
             <div class="overlay" id="startOverlay">
               <div class="overlay-card start-card">
-                <div class="overlay-stamp">SẴN SÀNG CHƯA?</div>
-                <h2>Mỗi bước chạy là<br />một bước phát triển.</h2>
-                <p>Vượt tổ hợp vật cản bằng nhảy và cúi. Gặp boss: trả lời đúng để đánh, sai sẽ bị phản công. Hạ boss mới đi tiếp!</p>
+                <div class="overlay-stamp">01 — GIEO MẦM HÀNH TRÌNH</div>
+                <h2>Chạy theo<br />mạch đỏ.</h2>
+                <p>Nhảy qua vật cản. Cúi né drone.<br />Vượt 5 chặng và chinh phục boss bằng kiến thức.</p>
                 <button class="primary-button" id="startButton" type="button" data-guide="game-start">BẮT ĐẦU HÀNH TRÌNH <span aria-hidden="true">↗</span></button>
                 <div class="overlay-hint">GIỮ SPACE / ↑: NHẢY XA · ↓: CÚI / HẠ NHANH · P: TẠM DỪNG</div>
               </div>
@@ -97,6 +99,8 @@
               <button class="primary-button" id="nextStageButton" type="button" data-guide="game-next-retry-help">GIAI ĐOẠN TIẾP THEO <span aria-hidden="true">↗</span></button>
             </div>
           </section>
+
+          <div class="runner-caption"><span class="overlay-stamp">MỖI BƯỚC CHẠY, MỘT BƯỚC PHÁT TRIỂN</span><p>Canh nhịp. Giữ nhảy để bay xa.<br />Trả lời đúng để giữ trái tim và vượt boss.</p><span class="caption-thread" aria-hidden="true"></span></div>
 
           <div class="game-footer">
             <div class="controls-note"><span class="key-group" data-guide="game-jump"><span class="key">SPACE</span><span class="key">↑</span> Nhảy</span> <span class="separator">/</span> <span class="key-group" data-guide="game-duck"><span class="key">↓</span> Cúi</span> <span class="separator">/</span> <span class="key-group"><span class="key">P</span> Tạm dừng</span></div>

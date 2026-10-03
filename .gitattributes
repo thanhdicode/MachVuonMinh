@@ -1,0 +1,3 @@
+# Preserve the unmodified upstream licence notices, including their original CR/blank lines.
+public/minigame/runner/licenses/pixel-platformer*.txt -text -whitespace
+public/minigame/runner/audio/LICENSE-*.txt -text -whitespace

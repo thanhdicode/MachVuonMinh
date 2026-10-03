@@ -64,7 +64,7 @@ const capture = async ({ name, width, height, touch }) => {
         panel: { left: Math.round(panelRect.left), top: Math.round(panelRect.top), right: Math.round(panelRect.right), bottom: Math.round(panelRect.bottom) },
         contained: panelRect.left >= -1 && panelRect.top >= -1 && panelRect.right <= innerWidth + 1 && panelRect.bottom <= innerHeight + 1,
         backgroundApi: typeof window.MACH_GAME_BACKGROUND?.create === 'function',
-        hudClear: identity.right <= stats.left + 1 && title.width > 20,
+        hudClear: (identity.right <= stats.left + 1 || identity.bottom <= stats.top + 1) && title.width > 20,
       }
     })
     await frame.click('#pauseButton')
@@ -75,14 +75,17 @@ const capture = async ({ name, width, height, touch }) => {
     metrics.pause = { mode: await frame.$eval('.game-panel', (panel) => panel.dataset.mode), stablePixels: first === second }
 
     if (name === 'desktop') {
-      const gallery = await frame.evaluate(() => Array.from({ length: 5 }, (_, stage) => {
+      const gallery = await frame.evaluate(async () => {
+        const images = {}
+        await Promise.all(Object.entries(window.MACH_RUNNER_ASSETS.sprites).map(([key, url]) => new Promise((resolve) => { const image = new Image(); image.onload = () => { images[key] = image; resolve() }; image.src = url })))
+        return Array.from({ length: 5 }, (_, stage) => {
         const canvas = document.createElement('canvas')
         canvas.width = 1000
         canvas.height = 430
-        const renderer = window.MACH_GAME_BACKGROUND.create()
+        const renderer = window.MACH_GAME_BACKGROUND.create(undefined, { images })
         renderer.draw(canvas.getContext('2d'), { stage, width: 1000, height: 430, groundY: 333, world: stage * 217, reduced: false })
         return canvas.toDataURL('image/png')
-      }))
+      })})
       gallery.forEach((data, stage) => writeFileSync(join(dir, `stage-${stage + 1}.png`), data.split(',')[1], 'base64'))
     }
     return { name, metrics, errors: [...errors], screenshots: [`${name}-start.png`, `${name}-running.png`] }

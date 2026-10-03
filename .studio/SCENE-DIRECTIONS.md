@@ -106,3 +106,7 @@ Compare (1) full-screen flashes and dense neon particles, (2) a restrained trail
 ## Mini game — background and smoothness, 2026-10-04
 
 Considered: (1) enlarged toy-like sprite scenery; (2) an original panoramic print landscape in paper, oxide, slate and red; (3) photographic backplates. Choose 2 against ART-DIRECTION: distinct rice terraces, brick mill, automated plant, connected city and renewable landscape; a red horizon thread connects all five. Keep the obstacle lane quiet and foreground sprites crisp. Pre-render static scenery into bounded canvas tiles, then translate two parallax layers. Rebuild only on resize/stage change, cache unchanged HUD values, and avoid backdrop blur and redrawing idle scenes. No new network art or WebGL context.
+
+## Game redesign — 2026-10-04, user-selected pixel runner
+
+Rejected: current flat geometric scenery and repeated houses. Compared monochrome Dino, a side-view pixel adventure, and voxel/isometric. User chose side-view pixel art. Use author-licensed animated sprite sheets plus original rich pixel panoramas, moving terrain, environmental motion and tactile audio. Red thread becomes the traversable route/energy trail. The UI retains paper, ink and oxide red; scenery has restrained stage-specific greens/brass/steel. Review is on codex/game-runner-redesign before any main promotion. Research and constraints: docs/superpowers/plans/2026-10-04-pixel-runner-redesign.md.

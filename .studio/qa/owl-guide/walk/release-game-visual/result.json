@@ -1,6 +1,6 @@
 {
   "url": "http://127.0.0.1:5180/",
-  "createdAt": "2026-10-03T17:49:20.253Z",
+  "createdAt": "2026-10-03T19:14:55.488Z",
   "results": [
     {
       "name": "desktop",
@@ -12,17 +12,17 @@
           "dpr": 1
         },
         "canvas": {
-          "width": 1398,
-          "height": 671,
-          "cssWidth": 1398,
-          "cssHeight": 669,
+          "width": 1390,
+          "height": 594,
+          "cssWidth": 1390,
+          "cssHeight": 592,
           "opaque": true
         },
         "panel": {
-          "left": 20,
-          "top": 14,
-          "right": 1420,
-          "bottom": 814
+          "left": 24,
+          "top": 12,
+          "right": 1416,
+          "bottom": 808
         },
         "contained": true,
         "backgroundApi": true,
@@ -48,17 +48,17 @@
           "dpr": 1
         },
         "canvas": {
-          "width": 372,
-          "height": 656,
-          "cssWidth": 372,
-          "cssHeight": 654,
+          "width": 368,
+          "height": 259,
+          "cssWidth": 368,
+          "cssHeight": 257,
           "opaque": true
         },
         "panel": {
-          "left": 8,
+          "left": 10,
           "top": 8,
-          "right": 382,
-          "bottom": 776
+          "right": 380,
+          "bottom": 772
         },
         "contained": true,
         "backgroundApi": true,

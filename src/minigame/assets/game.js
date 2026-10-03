@@ -9,10 +9,13 @@
   const STAGE_LENGTHS=[180,230,280,330,380];
   const STAGE_ENDS=STAGE_LENGTHS.map((_,i)=>STAGE_LENGTHS.slice(0,i+1).reduce((a,b)=>a+b,0));
   const sprites={};
-  const scenery = window.MACH_GAME_BACKGROUND?.create();
+  const runnerAssets=window.MACH_RUNNER_ASSETS;
+  const presentation=window.MACH_RUNNER_PRESENTATION;
+  let audio=window.MACH_GAME_AUDIO?.create({baseUrl:runnerAssets?.baseUrl});
+  const scenery = window.MACH_GAME_BACKGROUND?.create(undefined,{images:sprites});
   let assetsReady=false;
-  const spriteLoad=Promise.all(Object.entries(window.GAME_SPRITES).map(([key,url])=>new Promise((resolve,reject)=>{
-    const image=new Image();image.onload=()=>{sprites[key]=image;resolve()};image.onerror=()=>reject(new Error(`Không tải được sprite ${key}`));image.src=url;
+  const spriteLoad=Promise.all(Object.entries(runnerAssets?.sprites||window.GAME_SPRITES||{}).map(([key,url])=>new Promise((resolve)=>{
+    const image=new Image();image.onload=()=>{sprites[key]=image;resolve()};image.onerror=()=>resolve();image.src=url;
   })));
   const stageNames = [
     'Nông nghiệp truyền thống',
@@ -202,6 +205,8 @@
     $('duckButton').disabled=!runnerActive();
     $('footerNote').textContent=state.mode==='quiz'?'ĐÃ DỪNG CHẠY · TRẢ LỜI ĐỂ TIẾP TỤC':state.mode==='transition'?'ĐANG QUA CỔNG · CHUẨN BỊ CHẶNG MỚI':bossActive()?'ĐÚNG: BOSS −1 HP · SAI: BỊ PHẢN CÔNG −1 ♥':'GIỮ NHẢY XA · THẢ NHẢY THẤP · ↓ HẠ NHANH / CÚI';
     wrap.closest('.game-panel').dataset.mode=state.mode;
+    audio?.setMode(guideHold.holding?'paused':state.mode,state.stage);
+    if($('stageTrail'))[...$('stageTrail').children].forEach((item,i)=>{item.classList.toggle('is-current',i===state.stage);item.classList.toggle('is-cleared',state.cleared[i]);item.setAttribute('aria-current',i===state.stage?'step':'false')});
     if(state.boss){
       $('bossName').textContent=bosses[state.stage].name;
       $('bossHealthText').textContent=`${state.boss.hp} / ${state.boss.maxHp} HP`;
@@ -220,20 +225,21 @@
     ['quizOverlay','endOverlay','pauseOverlay','bossPanel','bossHud'].forEach(hide);
     show('startOverlay');updateHud();draw();
   }
-  function start(){if(!assetsReady||guideHold.holding)return;hide('startOverlay');hide('endOverlay');state.mode='running';state.lastTime=performance.now();updateHud();}
+  function start(){if(!assetsReady||guideHold.holding)return;audio?.unlock();hide('startOverlay');hide('endOverlay');state.mode='running';state.lastTime=performance.now();updateHud();}
   function jump(){
     if(guideHold.practice){practiceJump();return}
     if(guideHold.holding)return;
     if(state.mode==='ready'){start();return}
     if(!runnerActive()||state.player.y<0)return;
     state.player.duck=false;state.player.vy=-JUMP_SPEED;state.player.y=-1;
+    audio?.play('jump');
     burst(playerBox().x+25,groundY,10,palettes[state.stage].soil,'dust');
   }
   function duck(active,cause){
     if(guideHold.practice){practiceDuck(active,cause);return}
     // Releasing is always honoured so a key let go during the guide never leaves a duck stuck on.
     if(guideHold.holding){if(!active&&runnerActive())state.player.duck=false;return}
-    if(runnerActive()){state.player.duck=active;if(active&&state.player.y<0)state.player.vy=Math.max(state.player.vy,600)}
+    if(runnerActive()){if(active&&!state.player.duck)audio?.play('duck');state.player.duck=active;if(active&&state.player.y<0)state.player.vy=Math.max(state.player.vy,600)}
   }
   function pause(){
     if(guideHold.holding)return;
@@ -242,6 +248,7 @@
       $('bossPanel').inert=true;$('quizOverlay').inert=true;show('pauseOverlay');
       $('resumeButton').focus({preventScroll:true});
     }else if(state.mode==='paused'){
+      audio?.unlock();
       hide('pauseOverlay');state.mode=state.resumeMode;state.resumeMode=null;state.lastTime=performance.now();$('bossPanel').inert=false;$('quizOverlay').inert=false;
     }
     updateHud();
@@ -280,6 +287,7 @@
   function overlaps(a,b){return a.x+8<b.x+b.w&&a.x+a.w-8>b.x&&a.y+6<b.y+b.h&&a.y+a.h-4>b.y}
   function collision(){
     state.mode='quiz';
+    audio?.play('hit');
     animateElement($('impactBorder'),'fx-hit');
     animateElement(wrap,'fx-collision');
     $('quizStage').textContent=`GIAI ĐOẠN ${String(state.stage+1).padStart(2,'0')} / 05`;
@@ -308,6 +316,7 @@
     if(guideHold.holding||state.answered||!['quiz','boss-question'].includes(state.mode))return;
     state.answered=true;
     const q=state.activeQuestion,correct=index===q.correct;
+    audio?.unlock().then(()=>audio.play(correct?'correct':'wrong'));
     const isBoss=state.quizContext!=='collision';
     if(!correct){state.hearts=Math.max(0,state.hearts-1);state.flash=1;loseHeart();}
     [...$(isBoss?'bossAnswers':'answers').children].forEach((button,i)=>{
@@ -338,6 +347,7 @@
   }
   function continueAfterQuiz(){
     if(guideHold.holding||state.mode!=='quiz'||!state.answered)return;
+    audio?.unlock();
     hide('quizOverlay');
     if(state.hearts<=0){end(false);return;}
     if(state.score>=STAGE_ENDS[state.stage]){startBoss();return;}
@@ -347,6 +357,7 @@
   }
   function startBoss(){
     state.mode='boss-intro';state.boss={hp:3,maxHp:3,turn:'attack'};state.effect=null;
+    audio?.play('boss');
     state.player={y:0,vy:0,duck:false};state.obstacles=[];state.toastUntil=0;
     $('bossIntroTitle').textContent=`${bosses[state.stage].name} xuất hiện!`;
     $('bossIntroText').textContent=bosses[state.stage].intro;
@@ -385,6 +396,7 @@
     if(state.stage===4){end(true);return;}
     const from=state.stage;
     state.stage++;state.boss=null;state.effect=null;state.player={y:0,vy:0,duck:false};
+    audio?.play('transition');
     effects.particles=[];effects.shake=null;effects.transition={from,started:state.clock};
     state.obstacles=[];state.spawnIn=1.7;state.mode='transition';state.lastTime=performance.now();state.toastUntil=0;
     hide('bossPanel');hide('bossHud');wrap.classList.remove('boss-arena');
@@ -402,7 +414,7 @@
     $('endText').textContent=win?'Lực lượng sản xuất phát triển qua từng bước nhảy. Quan hệ sản xuất phù hợp sẽ mở đường cho bước tiến tiếp theo.':'Ôn lại nội dung và thử sức thêm một lần nữa nhé!';
     $('endScore').textContent=padded(state.score);
     show('endOverlay');updateHud();$('restartButton').focus({preventScroll:true});
-    if(win)celebrate();
+    if(win){audio?.play('win');celebrate();}
   }
   function update(dt,now){
     state.runTime+=dt;state.immunity=Math.max(0,state.immunity-dt);
@@ -415,7 +427,7 @@
     state.player.vy+=GRAVITY*dt;state.player.y+=state.player.vy*dt;
     if(state.player.y>0){
       state.player.y=0;state.player.vy=0;
-      if(airborne){effects.landingAt=state.clock;burst(playerBox().x+25,groundY,16,palettes[state.stage].soil,'dust')}
+      if(airborne){audio?.play('land');effects.landingAt=state.clock;burst(playerBox().x+25,groundY,16,palettes[state.stage].soil,'dust')}
     }
     state.spawnIn-=dt;
     if(state.spawnIn<=0)spawnObstacle();
@@ -427,12 +439,16 @@
     }
     updateHud(false);
   }
-  let lastDrawMode='';
+  let lastDrawMode='',previewClock=0;
   function frame(now){
     const dt=Math.min(Math.max(0,(now-state.lastTime)/1000),.035);
     state.lastTime=now;
+    if(document.hidden){requestAnimationFrame(frame);return;}
+    audio?.setMode(guideHold.holding?'paused':state.mode,state.stage);
+    audio?.update(dt);
     // Held by the guide: nothing in the campaign advances, only the practice runner (if any) moves.
     if(guideHold.holding){stepPractice(dt);if(guideHold.practice||lastDrawMode!=='held')draw();lastDrawMode='held';requestAnimationFrame(frame);return}
+    if(state.mode==='ready'&&!guideHold.holding)previewClock+=dt*1000;
     if(sceneActive()){
       state.clock+=dt*1000;
       state.sceneWorld+=state.speed*dt*(state.mode==='transition'?.45:bossActive()?.35:1);
@@ -442,7 +458,7 @@
     }
     if(sceneActive()&&state.flash>0)state.flash=Math.max(0,state.flash-dt*2);
     if(sceneActive())updateEffects(dt);
-    if(sceneActive()||lastDrawMode!==state.mode)draw();
+    if(sceneActive()||state.mode==='ready'||lastDrawMode!==state.mode)draw();
     lastDrawMode=state.mode;requestAnimationFrame(frame);
   }
 
@@ -452,7 +468,7 @@
   function ellipse(x,y,rx,ry,color){fill(color);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill()}
   function round(x,y,w,h,r,color){fill(color);ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
   function background(){
-    if(scenery){scenery.draw(ctx,{stage:visualStage(),width:W,height:430,groundY,world:state.sceneWorld,reduced:motionPreference.matches});return;}
+    if(scenery){scenery.draw(ctx,{stage:visualStage(),width:W,height:430,groundY,world:state.sceneWorld*W/1000,time:state.mode==='ready'?previewClock:state.clock,reduced:motionPreference.matches});return;}
     rect(0,0,W,430,'#f3e8d0');rect(0,groundY,W,97,'#b8aa8c');line(0,groundY,W,groundY,'#b51f2a',3);
   }
   function sprite(key,x,y,w,h,flip=false){
@@ -461,46 +477,64 @@
   }
   function character(){
     const b=playerBox(),foot=groundY+state.player.y,ducked=state.player.duck&&state.player.y>=0;
-    const stage=visualStage(),moving=runnerActive()||state.mode==='transition',step=Math.floor(state.sceneWorld/28)%2+1;
+    const moving=runnerActive()||state.mode==='transition';
     const hit=state.effect?.kind==='hit'&&state.clock-state.effect.started>=440&&state.clock-state.effect.started<900;
-    const person=stage===0?'adventurer':'female';
-    const pose=hit?'hurt':ducked?'duck':state.player.y<0?'jump':moving?'walk'+step:'idle';
-    ellipse(b.x+25,groundY+4,32,6,'#172a3240');
     ctx.save();
     const landing=Math.max(0,1-(state.clock-effects.landingAt)/180);
     if(landing>0&&!motionPreference.matches){ctx.translate(b.x+25,foot);ctx.scale(1+landing*.1,1-landing*.13);ctx.translate(-b.x-25,-foot)}
     if(state.immunity>0&&Math.floor(state.clock/100)%2===0)ctx.globalAlpha=.5;
-    if(stage<2){
-      const key=person+'_'+pose,image=sprites[key];
-      if(image){const h=ducked?46:88,w=h*image.width/image.height;sprite(key,b.x+25-w/2,foot-h,w,h)}
-    }else{
-      const color=['','','green','blue','red'][stage];
-      const key='robot_'+color+'_'+(hit?'Hurt':state.player.y<0?'Jump':'Drive'+step);
-      const image=sprites[key];if(image){const h=ducked?40:74,w=h*image.width/image.height;sprite(key,b.x+25-w/2,foot-h,w,h)}
-    }
+    pixelRunner(b.x+b.w/2,foot,{ducked,airborne:state.player.y<0,falling:state.player.vy>0,moving,hit});
     ctx.globalAlpha=1;
     ctx.restore();
-    // Red thread continues as the runner's energy trail.
-    for(let i=1;i<=4;i++)ellipse(b.x-i*14,foot-17,3-i*.45,2,'#b51f2a'+['','99','66','44','22'][i]);
+  }
+
+  function pixelRunner(x,foot,pose){
+    const key=pose.hit?'pixel_hit':pose.airborne?(pose.falling?'pixel_fall':'pixel_jump'):pose.moving?'pixel_run':'pixel_idle';
+    const h=pose.ducked?40:96,time=motionPreference.matches&&!pose.moving?0:state.mode==='ready'?previewClock:state.clock;
+    const animationTime=pose.moving?state.sceneWorld*1000/BASE_SPEED:pose.hit?Math.max(0,state.clock-state.effect.started-440):time;
+    rect(x-25,groundY+2,50,5,'#17151233');
+    if(!presentation?.drawFrame(ctx,sprites[key],runnerAssets?.animations[key],animationTime,pose.moving||pose.hit?20:12,x,foot,96,h)){
+      // Local pixel silhouette keeps play usable if optional image requests fail.
+      rect(x-18,foot-(pose.ducked?28:65),36,pose.ducked?18:36,'#536b63');rect(x-12,foot-(pose.ducked?28:65),24,12,'#f3e8d0');
+      rect(x-16,foot-24,12,24,'#3c4b50');rect(x+4,foot-24,12,24,'#3c4b50');
+    }
+    const scarfY=foot-(pose.ducked?20:52),wave=motionPreference.matches?0:Math.round(Math.sin(time/100)*3);
+    rect(x-14,scarfY,22,4,'#b51f2a');rect(x-31,scarfY+wave,17,4,'#b51f2a');rect(x-40,scarfY+wave+3,9,4,'#b51f2a');
+    if(pose.moving&&!pose.airborne&&!motionPreference.matches){
+      const stride=state.clock/80;for(let i=0;i<4;i++){const age=(stride+i)%4;rect(x-30-age*12,groundY-3-age*2,4-age*.6,3,'#e9d8b499')}
+    }
   }
 
   function obstacle(o){
     const b=obstacleBox(o),x=o.x,y=b.y-4;
-    const step=Math.floor(state.clock/140)%2?'b':'a';
+    ctx.imageSmoothingEnabled=false;
     if(o.kind==='air'||o.kind==='drone'){
-      ellipse(x+o.w/2,groundY+4,o.w/2,4,'#172a3225');
-      sprite('fly_'+step,x,y,o.w,o.h);return;
+      rect(x,groundY+4,o.w,3,'#17151222');
+      if(sprites.pixel_tiles)presentation?.tile(ctx,sprites.pixel_tiles,4+(Math.floor(state.clock/100)%2),7,x,y,o.w,o.h);
+      else rect(x,y,o.w,o.h,'#536b63');
+      return;
     }
     if(o.kind==='spike'){
       const warning=o.x-playerBox().x>state.speed*W/1000*.95;
       if(warning){
         round(x,groundY-7,o.w,7,2,'#b51f2a');
         fill('#b51f2a');ctx.font='700 18px Be Vietnam Pro';ctx.textAlign='center';ctx.fillText('!',x+o.w/2,groundY-19);ctx.textAlign='start';
-      }else sprite('spikes',x,groundY-o.h,o.w,o.h);
+      }else if(!presentation?.drawFrame(ctx,sprites.pixel_spikes,runnerAssets?.animations.pixel_spikes,0,20,x+o.w/2,groundY,o.w,o.h))rect(x,groundY-o.h,o.w,o.h,'#b51f2a');
       return;
     }
-    ellipse(x+o.w/2,groundY+3,o.w/2,4,'#172a3230');
-    sprite(o.kind==='saw'?'saw_'+step:state.stage<2?'block_planks':'block_strong_danger',x,y,o.w,o.h);
+    rect(x,groundY+3,o.w,4,'#17151233');
+    if(o.kind==='saw'){
+      if(!presentation?.drawFrame(ctx,sprites.pixel_saw,runnerAssets?.animations.pixel_saw,state.clock,20,x+o.w/2,groundY,o.w,o.h)){
+        rect(x,y,o.w,o.h,'#555f64');rect(x+5,y+5,o.w-10,o.h-10,'#d5cfb7');rect(x+o.w/2-5,y+o.h/2-5,10,10,'#b51f2a');
+      }
+    }
+    else {
+      const pieces=Math.max(1,Math.round(o.w/o.h)),width=o.w/pieces;
+      for(let i=0;i<pieces;i++){
+        if(state.stage>0&&sprites.pixel_industry)presentation?.tile(ctx,sprites.pixel_industry,14,3,x+i*width,groundY-o.h,width,o.h);
+        else if(!presentation?.drawFrame(ctx,sprites.pixel_crate,runnerAssets?.animations.pixel_crate,0,20,x+(i+.5)*width,groundY,width,o.h))rect(x+i*width,groundY-o.h,width,o.h,'#a37648');
+      }
+    }
   }
 
   function bossX(){return W*.78}
@@ -510,16 +544,23 @@
     const shake=impact&&!motionPreference.matches?Math.sin(t*65)*9*(1-t):0;
     const size=state.stage===0?148:165;
     ellipse(x,groundY+7,86,11,'#172a3240');
-    ctx.save();ctx.translate(shake,Math.sin(state.clock/340)*4);
+    ctx.save();ctx.imageSmoothingEnabled=false;ctx.translate(shake,motionPreference.matches?0:Math.sin(state.clock/340)*4);
     const dissolve=state.boss.hp===0?Math.max(0,Math.min(1,(state.clock-state.boss.defeatAt)/750)):0;
     ctx.globalAlpha=1-dissolve;
     const glow=ctx.createRadialGradient(x,groundY-80,10,x,groundY-80,140);
     glow.addColorStop(0,palettes[state.stage].accent+'66');glow.addColorStop(1,palettes[state.stage].accent+'00');
     ellipse(x,groundY-80,140,140,glow);
-    const step=Math.floor(state.clock/180)%2+1;
-    const key=state.stage===0?'block_idle':'robot_'+['','yellow','green','blue','red'][state.stage]+'_Drive'+step;
+    const blink=!motionPreference.matches&&state.clock%3400<320,key=blink?'pixel_boss_blink':'pixel_boss';
     if(impact&&t<.7&&!motionPreference.matches)ctx.filter='brightness(1.8)';
-    sprite(key,x-size/2,groundY-size,size,size,state.stage>0);
+    if(state.stage>0){
+      const swing=motionPreference.matches?0:Math.round(Math.sin(state.clock/230)*9);
+      rect(x-size/2-22,groundY-size/2+swing,27,30,palettes[state.stage].accent);rect(x+size/2-5,groundY-size/2-swing,27,30,palettes[state.stage].accent);
+      rect(x-size/2-14,groundY-size/2+swing+9,12,12,'#b51f2a');rect(x+size/2+3,groundY-size/2-swing+9,12,12,'#b51f2a');
+    }
+    if(!presentation?.drawFrame(ctx,sprites[key],runnerAssets?.animations[key],blink?state.clock%3400:0,12,x,groundY,size,size)){
+      rect(x-size/2,groundY-size,size,size,'#596263');rect(x-size/2+9,groundY-size+9,size-18,size-18,'#a8ac98');
+      rect(x-size*.26,groundY-size*.65,size*.15,size*.15,'#171512');rect(x+size*.11,groundY-size*.65,size*.15,size*.15,'#171512');rect(x-size*.18,groundY-size*.24,size*.36,8,'#b51f2a');
+    }
     ctx.restore();
     if(state.boss.hp===0&&dissolve<1&&!motionPreference.matches)for(let i=0;i<9;i++){const a=i*.7+state.clock/700;ellipse(x+Math.cos(a)*(60+dissolve*60),groundY-85+Math.sin(a)*(60+dissolve*60),3,3,'#b51f2a')}
   }
@@ -564,7 +605,7 @@
     ctx.save();
     for(const p of effects.particles){
       ctx.globalAlpha=Math.max(0,p.life/p.maxLife)*(p.kind==='dust'?.55:1);
-      if(p.kind==='dust')ellipse(p.x,p.y,p.size,p.size*.6,p.color);
+      if(p.kind==='dust')rect(Math.round(p.x),Math.round(p.y),Math.ceil(p.size),Math.ceil(p.size*.6),p.color);
       else if(p.kind==='fragment'){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);rect(-p.size/2,-p.size/2,p.size,p.size*1.5,p.color);ctx.restore()}
       else line(p.x,p.y,p.x-p.vx*.04,p.y-p.vy*.04,p.color,2);
     }
@@ -649,15 +690,7 @@
     ctx.clearRect(0,0,W,430);ctx.save();
     background();
     const x=W*.14,ducked=p.duck&&p.y>=0,foot=groundY+p.y,stage=state.stage;
-    ellipse(x+25,groundY+4,32,6,'#172a3240');
-    if(stage<2){
-      const key=(stage===0?'adventurer':'female')+'_'+(ducked?'duck':p.y<0?'jump':'idle'),image=sprites[key];
-      if(image){const h=ducked?46:88,w=h*image.width/image.height;sprite(key,x+25-w/2,foot-h,w,h)}
-    }else{
-      const key='robot_'+['','','green','blue','red'][stage]+'_'+(p.y<0?'Jump':'Drive1'),image=sprites[key];
-      if(image){const h=ducked?40:74,w=h*image.width/image.height;sprite(key,x+25-w/2,foot-h,w,h)}
-    }
-    for(let i=1;i<=4;i++)ellipse(x-i*14,foot-17,3-i*.45,2,'#b51f2a'+['','99','66','44','22'][i]);
+    pixelRunner(x+25,foot,{ducked,airborne:p.y<0,falling:p.vy>0,moving:false,hit:false});
     ctx.restore();
     ctx.save();ctx.font="700 12px 'IBM Plex Mono', monospace";
     const label='TẬP THAO TÁC',labelWidth=ctx.measureText(label).width;
@@ -667,6 +700,7 @@
   function holdForGuide(){
     if(guideHold.holding)return;
     guideHold.holding=true;
+    audio?.setMode('paused',state.stage);
     // A duck held when the guide opened would otherwise stay on once the guide is gone.
     state.player.duck=false;
   }
@@ -691,6 +725,7 @@
     endGuidePractice();
     if(!guideHold.holding)return;
     guideHold.holding=false;
+    if(!document.hidden&&audio?.snapshot().contextState==='suspended')audio.unlock();
     // The next frame measures from now, so a running game resumes without a time jump; ready, paused and quiz stay as they were.
     state.lastTime=performance.now();
   }
@@ -707,6 +742,13 @@
     enumerable:false,configurable:false
   });
   window.addEventListener('pagehide',releaseGuidePause);
+  window.addEventListener('pagehide',()=>audio?.dispose());
+  window.addEventListener('pageshow',event=>{if(event.persisted){audio=window.MACH_GAME_AUDIO?.create({baseUrl:runnerAssets?.baseUrl});audio?.setMode(guideHold.holding?'paused':state.mode,state.stage);soundLabel()}});
+
+  const soundButton=$('soundButton');
+  function soundLabel(){if(!soundButton)return;const enabled=audio?.snapshot().enabled||false;soundButton.setAttribute('aria-pressed',String(enabled));soundButton.setAttribute('aria-label',enabled?'Tắt âm thanh':'Bật âm thanh');soundButton.textContent=enabled?'♫':'♪';soundButton.classList.toggle('is-muted',!enabled)}
+  soundButton?.addEventListener('click',()=>{audio?.setEnabled(!audio.snapshot().enabled);audio?.unlock();soundLabel()});
+  soundLabel();
 
   $('startButton').addEventListener('click',start);
   $('restartButton').addEventListener('click',()=>{if(guideHold.holding)return;reset();start()});
@@ -727,6 +769,7 @@
     // Keys aimed at the guide's own buttons keep their native behaviour (Space/Enter activate them). During a jump/duck practice the
     // card itself holds focus, so its bare surface lets the practised keys through; everything else stays with the guide.
     if(isGuideUi(e.target)&&!(guideHold.practice&&!isGuideControl(e.target)&&['Space','ArrowUp','ArrowDown'].includes(e.code)))return;
+    if(e.target?.closest?.('button')&&!['jumpButton','duckButton'].includes(e.target.id)&&['Space','Enter'].includes(e.code))return;
     if(['Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();
     if(e.repeat&&e.code!=='ArrowDown')return;
     if(e.code==='Space'||e.code==='ArrowUp')jump();
@@ -738,9 +781,10 @@
   });
   window.addEventListener('keyup',e=>{if(e.code==='ArrowDown')duck(false,'key');if(['Space','ArrowUp'].includes(e.code))releaseJump()});
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&canPause()&&!guideHold.holding)pause()});
+  window.addEventListener('blur',()=>{releaseJump();duck(false,'blur')});
   window.addEventListener('resize',resize);
   new ResizeObserver(resize).observe(wrap);
   reset();resize();requestAnimationFrame(frame);
   $('startButton').disabled=true;
-  spriteLoad.then(()=>{assetsReady=true;$('startButton').disabled=false;draw()}).catch(()=>{$('startButton').disabled=true;document.querySelector('.start-card p').textContent='Không tải được hình ảnh. Hãy quay lại bài thuyết trình và mở game lần nữa.'});
+  spriteLoad.then(()=>{assetsReady=true;$('startButton').disabled=false;scenery?.invalidate();draw()}).catch(()=>{$('startButton').disabled=true;document.querySelector('.start-card p').textContent='Không tải được hình ảnh. Hãy quay lại bài thuyết trình và mở game lần nữa.'});
 })();

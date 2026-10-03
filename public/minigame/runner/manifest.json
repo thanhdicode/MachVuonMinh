@@ -1,0 +1,302 @@
+{
+  "date": "2026-10-04",
+  "sprites": {
+    "pixel_run": "images/hero-run.png",
+    "pixel_idle": "images/hero-idle.png",
+    "pixel_jump": "images/hero-jump.png",
+    "pixel_fall": "images/hero-fall.png",
+    "pixel_hit": "images/hero-hit.png",
+    "pixel_saw": "images/pixel_saw.png",
+    "pixel_spikes": "images/pixel_spikes.png",
+    "pixel_crate": "images/pixel_crate.png",
+    "pixel_boss": "images/pixel_boss.png",
+    "pixel_boss_blink": "images/pixel_boss_blink.png",
+    "pixel_tiles": "images/pixel_tiles.png",
+    "pixel_farm": "images/pixel_farm.png",
+    "pixel_industry": "images/pixel_industry.png",
+    "pixel_background_0": "images/stage-1.webp",
+    "pixel_background_1": "images/stage-2.webp",
+    "pixel_background_2": "images/stage-3.webp",
+    "pixel_background_3": "images/stage-4.webp",
+    "pixel_background_4": "images/stage-5.webp"
+  },
+  "animations": {
+    "pixel_run": {
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "frames": 12
+    },
+    "pixel_idle": {
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "frames": 11
+    },
+    "pixel_jump": {
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "frames": 1
+    },
+    "pixel_fall": {
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "frames": 1
+    },
+    "pixel_hit": {
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "frames": 7
+    },
+    "pixel_saw": {
+      "frameWidth": 38,
+      "frameHeight": 38,
+      "frames": 8
+    },
+    "pixel_spikes": {
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 1,
+      "crop": {
+        "x": 0,
+        "y": 9,
+        "width": 15,
+        "height": 7
+      }
+    },
+    "pixel_crate": {
+      "frameWidth": 28,
+      "frameHeight": 24,
+      "frames": 1,
+      "crop": {
+        "x": 4,
+        "y": 2,
+        "width": 20,
+        "height": 20
+      }
+    },
+    "pixel_boss": {
+      "frameWidth": 42,
+      "frameHeight": 42,
+      "frames": 1,
+      "crop": {
+        "x": 5,
+        "y": 5,
+        "width": 32,
+        "height": 32
+      }
+    },
+    "pixel_boss_blink": {
+      "frameWidth": 42,
+      "frameHeight": 42,
+      "frames": 4,
+      "crop": {
+        "x": 5,
+        "y": 5,
+        "width": 32,
+        "height": 32
+      }
+    }
+  },
+  "sources": [
+    {
+      "author": "Kenney",
+      "pack": "pixel-platformer",
+      "url": "https://kenney.nl/assets/pixel-platformer",
+      "license": "CC0",
+      "archiveSha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4"
+    },
+    {
+      "author": "Kenney",
+      "pack": "pixel-platformer-farm-expansion",
+      "url": "https://kenney.nl/assets/pixel-platformer-farm-expansion",
+      "license": "CC0",
+      "archiveSha256": "72c5ee0dda3dfa1b95ff25c74a7ff6878e58851276a7766551218cbd55da6d61"
+    },
+    {
+      "author": "Kenney",
+      "pack": "pixel-platformer-industrial-expansion",
+      "url": "https://kenney.nl/assets/pixel-platformer-industrial-expansion",
+      "license": "CC0",
+      "archiveSha256": "c46e8fee3528434d1680d50a2373c77eb33b1d5db5c7b000d495edecc854fd3e"
+    },
+    {
+      "author": "Pixel Frog",
+      "url": "https://pixelfrog-assets.itch.io/pixel-adventure-1",
+      "license": "CC0",
+      "archiveSha256": "efafdfc8ed44f2b0ade27c0246e11a2474ce3a793b4f8e16dbe7403824f6e77b"
+    }
+  ],
+  "panoramas": [
+    {
+      "stage": 0,
+      "name": "rice",
+      "sourceSha256": "d508a33ac42fae234d44101f21a57804023035a592f960d98bfd1fecc5a6961e",
+      "nativeSize": [
+        1672,
+        941
+      ],
+      "runtimeSize": [
+        1279,
+        720
+      ],
+      "bytes": 343940,
+      "path": "images/stage-1.webp",
+      "provenance": "Original built-in imagegen, prompts retained"
+    },
+    {
+      "stage": 1,
+      "name": "mill",
+      "sourceSha256": "1ee20c52e396ed8bb04bc9936c935ea3a98f1f3d1fc6d7cfc0e4719c35c690f5",
+      "nativeSize": [
+        1672,
+        941
+      ],
+      "runtimeSize": [
+        1279,
+        720
+      ],
+      "bytes": 210168,
+      "path": "images/stage-2.webp",
+      "provenance": "Original built-in imagegen, prompts retained"
+    },
+    {
+      "stage": 2,
+      "name": "automation",
+      "sourceSha256": "f1ca14be7b28c220ff95cb709b258ed60313ea347dae25318b06fc422b226ea7",
+      "nativeSize": [
+        1672,
+        941
+      ],
+      "runtimeSize": [
+        1279,
+        720
+      ],
+      "bytes": 318738,
+      "path": "images/stage-3.webp",
+      "provenance": "Original built-in imagegen, prompts retained"
+    },
+    {
+      "stage": 3,
+      "name": "digital",
+      "sourceSha256": "1b4c36d8c651dbe85aa8750158f43a5fc6c2ee9658e332d7f9309fc3afe7f3ca",
+      "nativeSize": [
+        1672,
+        941
+      ],
+      "runtimeSize": [
+        1279,
+        720
+      ],
+      "bytes": 304228,
+      "path": "images/stage-4.webp",
+      "provenance": "Original built-in imagegen, prompts retained"
+    },
+    {
+      "stage": 4,
+      "name": "future",
+      "sourceSha256": "0d4e52270ce16f45335351d90b458f1fe00d53046da25c6d9fb7e6c11ea72341",
+      "nativeSize": [
+        1672,
+        941
+      ],
+      "runtimeSize": [
+        1279,
+        720
+      ],
+      "bytes": 313422,
+      "path": "images/stage-5.webp",
+      "provenance": "Original built-in imagegen, prompts retained"
+    }
+  ],
+  "files": [
+    {
+      "path": "images/hero-fall.png",
+      "bytes": 709,
+      "sha256": "2b1323ef1f603203f3f0c7571d914b3a412bc6a889227f56b87005b720472994"
+    },
+    {
+      "path": "images/hero-hit.png",
+      "bytes": 1543,
+      "sha256": "1055d671a71efad1e4950403a5a9a5b236c2b1f0628913e921244742cd2fca69"
+    },
+    {
+      "path": "images/hero-idle.png",
+      "bytes": 1336,
+      "sha256": "8b478bc9dbb76859f5549f8a342d4a9660f529396ea71fba649f50769f83b179"
+    },
+    {
+      "path": "images/hero-jump.png",
+      "bytes": 737,
+      "sha256": "45d09d66f6593bc845463458759ee88e5a6b0e5d015e41232db838c8e51f744c"
+    },
+    {
+      "path": "images/hero-run.png",
+      "bytes": 2085,
+      "sha256": "7664599efcdb57b9b29727941e23a5033318753bae60df251f33ad5f2813df9b"
+    },
+    {
+      "path": "images/pixel_boss.png",
+      "bytes": 771,
+      "sha256": "ead0c8b11fc10119cd21943c6973cf261cb43147760f1292f53eadc150c3514a"
+    },
+    {
+      "path": "images/pixel_boss_blink.png",
+      "bytes": 1061,
+      "sha256": "c4ba5c51e198b841ae61b2cf76c9d12d080c0711368dcb0fb7b54f9baa60c8b2"
+    },
+    {
+      "path": "images/pixel_crate.png",
+      "bytes": 399,
+      "sha256": "2d0339d0c6bb02eb7b77fcb75d0d45c51dd906cbfcaff3e19e49a954b461f2ae"
+    },
+    {
+      "path": "images/pixel_farm.png",
+      "bytes": 4724,
+      "sha256": "786b530e175495563a3c60bd611fc650f3c5953c9b2d2721a11aca557ac222d5"
+    },
+    {
+      "path": "images/pixel_industry.png",
+      "bytes": 4226,
+      "sha256": "b54ba09f1564228f43921c33e2652f14e168565159d3624a1eb8b68bc633b872"
+    },
+    {
+      "path": "images/pixel_saw.png",
+      "bytes": 2405,
+      "sha256": "eaa10a06c10ade360d1f5a2dde32f6cd14898232875dedaeeb5badf9d82b78e5"
+    },
+    {
+      "path": "images/pixel_spikes.png",
+      "bytes": 165,
+      "sha256": "2ac00698d048ef4b41ccf05dd5409b57a4013ea2c5e8e75d1ceea91b341c3e6e"
+    },
+    {
+      "path": "images/pixel_tiles.png",
+      "bytes": 5913,
+      "sha256": "a3bbff36594baa36c803a67e9152a20a80f2faeb3c22ca84ac06e0a70f56553d"
+    },
+    {
+      "path": "images/stage-1.webp",
+      "bytes": 343940,
+      "sha256": "8e599cb4daba302400efa30b1134aec16aa8f15998b7a4ddecec0d3f62abc189"
+    },
+    {
+      "path": "images/stage-2.webp",
+      "bytes": 210168,
+      "sha256": "80441806185e16ecd07bda04cad488a3db5590cca4b3e19d5126c8b8eb60665a"
+    },
+    {
+      "path": "images/stage-3.webp",
+      "bytes": 318738,
+      "sha256": "ed0c6840266afe19d3bdce4cff9aca250379dfd1a593390b5f48e202593a3292"
+    },
+    {
+      "path": "images/stage-4.webp",
+      "bytes": 304228,
+      "sha256": "7dd314f62b753f607cc8fb2e43cbf0fdd75cfcb96bd8274f03f4df65c26c15a1"
+    },
+    {
+      "path": "images/stage-5.webp",
+      "bytes": 313422,
+      "sha256": "f4963ad82bd690e43782e58c8445175437eeba06f9c2c84589cfab04cc4852ea"
+    }
+  ]
+}

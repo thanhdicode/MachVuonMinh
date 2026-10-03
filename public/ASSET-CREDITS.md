@@ -52,7 +52,15 @@ Kenney: **Platformer Characters 1**, **Robot Pack**, **New Platformer Pack**, CC
 - Creator: https://kenney.nl/assets/platformer-characters ; https://kenney.nl/assets/robot-pack ; https://kenney.nl/assets/new-platformer-pack
 - GitHub distribution: https://github.com/series-ai/jam-ready-assets, revision `782e3a09566b4bb3d98fe2ed07f5a8545e6fcfd4`.
 - 49 PNG sprites are packaged locally in `/minigame/sprites/`, with the three original `LICENSE-*.txt` notices and upstream paths in `/minigame/sprites/SOURCE.json`.
-- Animation selects supplied poses; sprites are scaled/mirrored and combined with the project's original scenery, chapter palettes and red thread.
+- This earlier sprite set is retained as a legacy asset; the active pixel runner uses the assets below.
+
+### Pixel runner — 2026-10-04
+
+- [Pixel Frog — Pixel Adventure 1](https://pixelfrog-assets.itch.io/pixel-adventure-1), CC0 1.0: Virtual Guy animated sprite sheets, saw, spikes, crate, Rock Head. Runtime crops supplied frames and adds an original red scarf/attachments.
+- [Kenney — Pixel Platformer](https://kenney.nl/assets/pixel-platformer), [Farm Expansion](https://kenney.nl/assets/pixel-platformer-farm-expansion), [Industrial Expansion](https://kenney.nl/assets/pixel-platformer-industrial-expansion), CC0: terrain, crops, machinery and hazard sprites.
+- [Kenney — Impact Sounds](https://kenney.nl/assets/impact-sounds), [Interface Sounds](https://kenney.nl/assets/interface-sounds), CC0: ten effects. Original quiet music and fallback tones are synthesized locally.
+- Five landscapes are original imagegen game illustrations created for this project, with retained prompts and source PNGs. These are generated scenery, not documentary images.
+- Assets are served locally from `/minigame/runner/`; original Kenney licences, Pixel Frog rights evidence, source archive hashes and selected file hashes are bundled in `licenses/`, `manifest.json`, and `audio/manifest.json`.
 
 ## Cú Mạch — bộ ảnh cho hướng dẫn
 

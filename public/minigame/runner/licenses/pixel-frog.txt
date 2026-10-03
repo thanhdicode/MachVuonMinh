@@ -1,0 +1,17 @@
+Pixel Adventure — Pixel Frog
+
+Author page: https://pixelfrog-assets.itch.io/pixel-adventure-1
+Author: Pixel Frog
+Asset license: Creative Commons Zero v1.0 Universal (CC0 1.0)
+Checked: 2026-10-04
+
+Rights verified on the author's official itch.io page: CC0 permits reuse,
+modification and redistribution, including commercial projects, without
+mandatory attribution. This file is a provenance record, not a replacement
+for the CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/
+
+The page also states that the pack contains graphic images in PNG format and that
+animations use 20 FPS / 50 MS.
+
+Original archive: Pixel Adventure 1.zip
+SHA-256: EFAFDFC8ED44F2B0ADE27C0246E11A2474CE3A793B4F8E16DBE7403824F6E77B
