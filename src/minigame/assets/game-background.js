@@ -36,11 +36,13 @@
       ground.ctx.fillStyle = '#b51f2a'; ground.ctx.fillRect(0, 18, 1026, 3);
       ground.ctx.fillStyle = '#efd6aa';
       for (let x = 0; x < 1026; x += 171) { ground.ctx.fillRect(x, 18, 9, 3); ground.ctx.fillRect(x + 45, 75, 6, 3); }
-      for (let x = 90; x < 1536; x += 192) {
-        // Scenery sits behind and above the lane; never reuse a live hazard as road decoration.
-        if (stage === 0) { tile(props.ctx, images.pixel_farm, (x / 192 | 0) % 2 ? 9 : 10, (x / 192 | 0) % 2 ? 4 : 3, x, groundY - 70, 2); tile(props.ctx, images.pixel_farm, 8, 2, x + 35, groundY - 70, 2); }
-        else if (!industrial) tile(props.ctx, images.pixel_tiles, 4 + (x % 3), 6, x, groundY - 82, 3);
-        else { tile(props.ctx, images.pixel_industry, 7, 2, x, groundY - 90, 2); tile(props.ctx, images.pixel_industry, 14, 6, x + 50, groundY - 86, 3); }
+      // The rice panorama already contains vegetation; coarse crop/fence tiles clash with its scale.
+      if (stage !== 0) {
+        for (let x = 90; x < 1536; x += 192) {
+          // Scenery sits behind and above the lane; never reuse a live hazard as road decoration.
+          if (!industrial) tile(props.ctx, images.pixel_tiles, 4 + (x % 3), 6, x, groundY - 82, 3);
+          else { tile(props.ctx, images.pixel_industry, 7, 2, x, groundY - 90, 2); tile(props.ctx, images.pixel_industry, 14, 6, x + 50, groundY - 86, 3); }
+        }
       }
       return { panorama, props, ground };
     }

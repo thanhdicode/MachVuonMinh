@@ -19,3 +19,5 @@ Verified:
 Asset provenance/rights: `.studio/ASSET-REGISTRY.md`, public `ASSET-CREDITS.md`, `public/minigame/runner/{manifest.json,licenses/,audio/manifest.json}`. Selected images total1,516,570 bytes; ten audio clips89,757 bytes. Generated native source PNGs and prompts are retained. Full free packs are ignored scratch downloads.
 
 Preview: `http://127.0.0.1:5180/?preview=pixel-runner-20261004`; unlock the exhibition, open Cú Mạch → Minigame, then skip the tour or practise through it. This serves the current branch's production build locally. Physical-device FPS, Safari/iOS playback and human art approval are not claimed by the Chromium checks.
+
+2026-10-04 visual feedback: removed the oversized Kenney crop/fence decorations from the rice stage. Their coarse pixel scale clashed with the detailed panorama; its existing vegetation now supplies the scenery. Terrain, moving road, character, particles and game rules remain unchanged. Follow-up verification: all five background tests, production build and natural desktop/mobile visual QA passed. Main promotion remains pending user approval.
