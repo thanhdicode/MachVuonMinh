@@ -104,16 +104,17 @@ try {
     results.push(rec)
     console.log(rec.n, id, rec.presenter, rec.kind ?? '', rec.counter, rec.variant, rec.issues.length ? `ISSUES ${rec.issues.map((i) => i.slice(0, 90)).join(' | ')}` : 'ok')
     const before = (await progress())?.stepId
-    const btn = (await page.$('.driver-popover-next-btn')) ?? (await page.$('.mach-guide-cue [data-action="practice-done"]')) ?? (await page.$('.mach-guide-cue [data-action="next"]'))
+    // This walker covers the exhibit route; game-walk separately verifies the F04 handoff and all ten iframe steps.
+    const btn = (id === 'F04' ? await page.$('[data-action="skip-game"]') : null) ?? (await page.$('.driver-popover-next-btn')) ?? (await page.$('.mach-guide-cue [data-action="practice-done"]')) ?? (await page.$('.mach-guide-cue [data-action="next"]'))
     if (!btn) { results.push({ n, id, failure: 'no primary button' }); break }
     await btn.click()
     const t0 = Date.now()
-    while (Date.now() - t0 < 90000) { await wait(400); const q = await progress(); const view = await sample(null).catch(() => ({})); if ((q?.stepId !== before) || q?.status === 'completed' || ['module-complete', 'route-complete', 'keep-or-restore'].includes(view.kind)) break }
+    while (Date.now() - t0 < 90000) { await wait(400); const q = await progress(); const view = await sample(null).catch(() => ({})); if ((q?.stepId !== before) || q?.status === 'completed' || ['module-complete', 'route-complete', 'game-skipped', 'keep-or-restore'].includes(view.kind)) break }
     const after = await sample(null)
     if (after.kind === 'keep-or-restore') { await shot(`${String(n).padStart(2, '0')}-keep-or-restore`); const issues = classify({ titleOk: true, textOk: true }, after); results.push({ n, id: `${id}:keep-or-restore`, presenter: 'cue', kind: after.kind, skipVisible: after.skip, layer: after.layer, issues }); console.log(n, `${id}:keep-or-restore`, issues.length ? `ISSUES ${issues.map((i) => i.slice(0, 90)).join(' | ')}` : 'ok'); await page.click('.mach-guide-cue [data-action="restore"]'); await wait(1500) }
     n += 1
     const end = await sample(null)
-    if (end.kind === 'module-complete' || end.kind === 'route-complete' || (await progress())?.status === 'completed') {
+    if (end.kind === 'module-complete' || end.kind === 'route-complete' || end.kind === 'game-skipped' || (await progress())?.status === 'completed') {
       await wait(800); await shot('zz-end')
       const issues = classify({ titleOk: true, textOk: true }, end)
       results.push({ n, id: 'END', presenter: end.presenter, kind: end.kind, text: end.text, layer: end.layer, leftovers: end.overlays + end.popovers, body: end.body, issues })
@@ -121,10 +122,11 @@ try {
       break
     }
   }
-} catch (error) { console.log('WALK FAILED', error.message); await shot('zz-failure') }
+} catch (error) { results.push({ failure: error.message }); console.log('WALK FAILED', error.message); await shot('zz-failure') }
 const walked = results.filter((x) => !x.failure && x.id !== 'END' && !String(x.id).includes(':'))
 const summary = { steps: walked.length, withIssues: results.filter((x) => x.issues?.length).length, failures: results.filter((x) => x.failure).length }
 writeFileSync(`${dir}/result.json`, JSON.stringify({ tag, reloaded, moduleId, width, height, touch, reduced, zoom, textOnly, viewport: { w: Math.round(width / zoom), h: Math.round(height / zoom), dpr: zoom }, baseDocW, errors, summary, results }, null, 1))
 console.log('done', tag, JSON.stringify(summary), 'errors', JSON.stringify(errors.slice(0, 5)))
 await browser.close()
 if (reloaded) { console.log('RELOADED: the page was reloaded during the walk (Vite HMR full reload after a source edit); results are not trustworthy'); process.exit(3) }
+if (summary.failures || summary.withIssues || errors.length) process.exitCode = 1

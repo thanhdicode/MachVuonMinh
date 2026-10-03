@@ -18,10 +18,10 @@ test('runtime catalog maps all 70 unique ids with wiring', () => {
   assert.equal(new Set(catalog.list().map((s) => s.target)).size, 70, 'targets are meaningful and unique, not shared by position')
 })
 
-test('src copy is byte-identical to the canonical docs catalog', { skip: !existsSync('docs/superpowers/specs/2026-10-03-owl-guide-copy.json') }, () => {
-  const docs = readFileSync('docs/superpowers/specs/2026-10-03-owl-guide-copy.json')
-  const runtime = readFileSync('src/onboarding/guideCopy.json')
-  assert.ok(docs.equals(runtime), 'src/onboarding/guideCopy.json drifted from docs/superpowers/specs/2026-10-03-owl-guide-copy.json')
+test('runtime copy matches the canonical catalog across platform line endings', { skip: !existsSync('docs/superpowers/specs/2026-10-03-owl-guide-copy.json') }, () => {
+  const docs = readFileSync('docs/superpowers/specs/2026-10-03-owl-guide-copy.json', 'utf8').replace(/\r\n/g, '\n')
+  const runtime = readFileSync('src/onboarding/guideCopy.json', 'utf8').replace(/\r\n/g, '\n')
+  assert.equal(runtime, docs, 'src/onboarding/guideCopy.json drifted from docs/superpowers/specs/2026-10-03-owl-guide-copy.json')
 })
 
 test('routes follow the agreed order and module counters', () => {

@@ -126,6 +126,7 @@ export const clickSkipGuide = (page) => page.evaluate(() => {
 })
 
 export const openMenu = async (page) => {
+  await page.waitForSelector('.mach-guide-dock__button', { visible: true, timeout: 60000 })
   await page.click('.mach-guide-dock__button')
   await page.waitForSelector('.mach-guide-menu', { timeout: 30000 })
 }

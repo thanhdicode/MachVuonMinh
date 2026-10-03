@@ -147,6 +147,6 @@ export function escapeAction(context: EscapeContext): EscapeAction {
   if (context.welcomeVisible) return 'skip-welcome'
   // Nothing on the page is being practised while the guide waits or shows its written fallback, so Escape closes it wherever focus is.
   const waiting = context.phase === 'preparing' || (context.phase === 'presenting' && context.presenter === 'cue')
-  if (context.presenter === 'driver' || (context.presenter === 'cue' && (context.focusInCue || waiting))) return 'cancel'
+  if (context.presenter === 'driver' || (context.presenter === 'cue' && (context.focusInCue || waiting || context.phase === 'practice'))) return 'cancel'
   return 'ignore'
 }

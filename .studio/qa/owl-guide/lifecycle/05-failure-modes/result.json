@@ -1,16 +1,311 @@
 {
  "name": "05-failure-modes",
- "at": "2026-10-03T14:05:12.371Z",
- "passed": 3,
+ "at": "2026-10-03T17:32:00.347Z",
+ "passed": 30,
  "failed": 0,
  "results": [
+  {
+   "id": "5.A1.fallback-cue",
+   "label": "chunk blocked: the written fallback shows the step title + text with Next and Skip guide (no Driver)",
+   "ok": true,
+   "evidence": {
+    "cue": "driver-failed",
+    "text": {
+     "title": "Quan sát công cụ",
+     "body": "Ở phần Công cụ, cuộn chậm và nhìn sức người, sức kéo cùng đường cày. Sợi đỏ nối ",
+     "actions": [
+      "next",
+      "options",
+      "skip-module",
+      "pause",
+      "skip-guide"
+     ]
+    },
+    "blockedRequests": 2
+   }
+  },
+  {
+   "id": "5.A2.next",
+   "label": "Next works in the fallback (T01 → T02, T01 completed, still one cue, no popover)",
+   "ok": true,
+   "evidence": {
+    "step": "T02",
+    "hasBack": true,
+    "cues": 1
+   }
+  },
+  {
+   "id": "5.A3.back",
+   "label": "Back works in the fallback (T02 → T01)",
+   "ok": true,
+   "evidence": {
+    "step": "T01",
+    "cues": 1
+   }
+  },
+  {
+   "id": "5.A4.practice-without-driver",
+   "label": "the practice step T03 still runs (cue) when Driver cannot load",
+   "ok": true,
+   "evidence": {
+    "step": "T03",
+    "cue": "practice"
+   }
+  },
+  {
+   "id": "5.A5.skip",
+   "label": "Skip guide works in the fallback: skipped, lock released, focus on the owl, caller position restored",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "body": "",
+    "focus": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]",
+    "callerPosition": 0,
+    "scroll": [
+     15190,
+     0
+    ]
+   }
+  },
+  {
+   "id": "5.A6.console",
+   "label": "only the expected blocked-request / reported driver-load errors appear (nothing else, no uncaught exception)",
+   "ok": true,
+   "evidence": {
+    "unexpected": [],
+    "expectedSeen": 8
+   }
+  },
+  {
+   "id": "5.B1.welcome-usable",
+   "label": "owl art blocked: the welcome still shows its text and all four buttons, usable",
+   "ok": true,
+   "evidence": {
+    "welcome": {
+     "buttons": [
+      {
+       "a": "full",
+       "vis": true,
+       "w": 320
+      },
+      {
+       "a": "quick",
+       "vis": true,
+       "w": 320
+      },
+      {
+       "a": "explore",
+       "vis": true,
+       "w": 320
+      },
+      {
+       "a": "skip-guide",
+       "vis": true,
+       "w": 149
+      }
+     ],
+     "failedFlag": "true",
+     "text": "CÚ MẠCHChào bạnChào bạn, mình là Cú Mạch. Mình sẽ chỉ bạn cách mở triển lãm, tìm"
+    },
+    "blocked": 2
+   }
+  },
+  {
+   "id": "5.B2.driver-step-usable",
+   "label": "the Driver popover (I03) shows text, Next and Bỏ qua hướng dẫn without the owl art",
+   "ok": true,
+   "evidence": {
+    "title": "Đi tiếp",
+    "next": "Tiếp tục",
+    "skip": "Bỏ qua hướng dẫn"
+   }
+  },
+  {
+   "id": "5.B4.skip",
+   "label": "Skip guide still works without art",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "body": ""
+   }
+  },
+  {
+   "id": "5.B3.dock-usable",
+   "label": "the owl dock button keeps a usable hit area and its accessible name",
+   "ok": true,
+   "evidence": {
+    "w": 52,
+    "h": 52,
+    "hit": true,
+    "label": "Mở hướng dẫn của Cú Mạch"
+   }
+  },
+  {
+   "id": "5.B5.console",
+   "label": "only the blocked image requests are reported (no other error)",
+   "ok": true,
+   "evidence": {
+    "unexpected": [],
+    "seen": 24
+   }
+  },
+  {
+   "id": "5.C1.frozen-while-hidden",
+   "label": "hidden tab (22 s wall clock, longer than every 5 s/6 s deadline): the target wait does not time out; still preparing",
+   "ok": true,
+   "evidence": {
+    "sawMissing": false,
+    "cue": "preparing",
+    "kinds": [
+     "preparing"
+    ]
+   }
+  },
+  {
+   "id": "5.C2.continues-when-visible",
+   "label": "when the tab is visible again and the target shows, the wait continues and the step opens (L01 popover), never showing missing-target",
+   "ok": true,
+   "evidence": {
+    "step": "L01",
+    "popovers": 1,
+    "kinds": [
+     "preparing"
+    ]
+   }
+  },
+  {
+   "id": "5.C3.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "5.D1.missing-target-notice",
+   "label": "control (visible tab): a target that never appears gives Thử lại / Bỏ qua bước này / Đọc hướng dẫn bằng chữ plus Bỏ qua hướng dẫn, not an endless spinner",
+   "ok": true,
+   "evidence": [
+    "retry:Thử lại",
+    "skip-step:Bỏ qua bước này",
+    "read-text:Đọc hướng dẫn bằng chữ",
+    "options:Tùy chọn",
+    "skip-module:Bỏ qua phần này",
+    "pause:Tạm dừng hướng dẫn",
+    "skip-guide:Bỏ qua hướng dẫn"
+   ]
+  },
+  {
+   "id": "5.D2.retry-still-missing",
+   "label": "Thử lại with the target still missing returns to the notice (no stuck spinner)",
+   "ok": true,
+   "evidence": {
+    "cue": "missing-target",
+    "step": "L01"
+   }
+  },
+  {
+   "id": "5.D3.read-as-text",
+   "label": "Đọc hướng dẫn bằng chữ shows the step text with Next and Skip guide",
+   "ok": true,
+   "evidence": {
+    "title": "Hai nhóm thanh",
+    "text": "Lực lượng sản xuất (LLSX) gồm người lao động và tư liệu sản ",
+    "skip": true
+   }
+  },
+  {
+   "id": "5.D4.recovers",
+   "label": "once the target exists a fresh start opens the exact step",
+   "ok": true,
+   "evidence": {
+    "step": "L01",
+    "popovers": 1
+   }
+  },
+  {
+   "id": "5.D5.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "5.E1.pagehide-sync",
+   "label": "pagehide synchronously: layers gone, scroll lease released, step stays in-progress (close), nothing skipped or completed beyond the finished steps",
+   "ok": true,
+   "evidence": {
+    "sync": {
+     "popovers": 0,
+     "overlays": 0,
+     "locked": false,
+     "stored": {
+      "schemaVersion": 2,
+      "status": "in-progress",
+      "route": "lab",
+      "moduleId": "lab",
+      "stepId": "L02",
+      "completedStepIds": [
+       "L01"
+      ],
+      "completedModules": [],
+      "skippedStepIds": [],
+      "skippedModuleIds": [],
+      "lastExit": "close"
+     }
+    },
+    "step": "L02"
+   }
+  },
+  {
+   "id": "5.E2.bfcache-ui-coherent",
+   "label": "after pagehide + pageshow(persisted) there is no stale step cue and the owl menu offers \"Tiếp tục bước dang dở\"",
+   "ok": true,
+   "evidence": {
+    "cues": 0,
+    "cueKind": null,
+    "items": [
+     "Tiếp tục bước dang dởThử Công nghệ",
+     "Hướng dẫn phần đang xemMở đầu và điều hư",
+     "Xem lại từ đầu",
+     "01Mở đầu và điều hướng6 bước",
+     "02Atlas lịch sử8 bước",
+     "03Công cụ, máy móc và dữ liệu5 bước",
+     "04Phòng biện chứng15 bước",
+     "05Việt Nam và bằng chứng11 bước",
+     "06Buồng chính sách11 bước",
+     "07Kết thúc triển lãm4 bước",
+     "08Minigame10 bước",
+     "Ẩn cú trong phiên này"
+    ]
+   }
+  },
+  {
+   "id": "5.E3.reload-keeps-id",
+   "label": "after a real reload the stored progress is still in-progress at the same id, no skipped, completed only L01",
+   "ok": true,
+   "evidence": {
+    "saved": [
+     "in-progress",
+     "L02",
+     "close",
+     [],
+     [
+      "L01"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "5.E4.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
   {
    "id": "5.F1.slow-load",
    "label": "slow chunk: the guide waits with the preparing cue (Bỏ qua hướng dẫn visible), the intro/page stays usable",
    "ok": true,
    "evidence": {
     "cue": "preparing",
-    "requests": 1
+    "requests": 2
    }
   },
   {
@@ -28,6 +323,48 @@
   {
    "id": "5.F3.console-clean",
    "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "5.G1.deadline-fallback",
+   "label": "a chunk that never answers: after the deadline the written fallback (text + Next + Skip) replaces \"preparing\"; no endless wait",
+   "ok": true,
+   "evidence": {
+    "waitedMs": 7539,
+    "cue": "driver-failed",
+    "actions": [
+     "next",
+     "options",
+     "skip-module",
+     "pause",
+     "skip-guide"
+    ]
+   }
+  },
+  {
+   "id": "5.G2.recovers-when-chunk-arrives",
+   "label": "when the held chunk arrives, the next step opens as a normal Driver popover",
+   "ok": true,
+   "evidence": {
+    "step": "T02",
+    "popovers": 1
+   }
+  },
+  {
+   "id": "5.G3.clean-exit",
+   "label": "Skip guide afterwards leaves no overlay/popover/lock",
+   "ok": true,
+   "evidence": {
+    "popovers": 0,
+    "overlays": 0,
+    "body": "",
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "5.G4.console",
+   "label": "only the reported driver-load timeout is logged",
    "ok": true,
    "evidence": []
   }

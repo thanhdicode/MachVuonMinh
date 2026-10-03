@@ -53,8 +53,10 @@ export type GuideAdapters = {
   prepare(step: ResolvedGuideStep, options: { signal: AbortSignal; reason: PrepareReason }): Promise<PreparedStep>
   practice(step: ResolvedGuideStep, options: { signal: AbortSignal }): Promise<void>
   closeOwnedModal(): Promise<void> | void
+  closeOwnedModalSync(): void
   snapshotDemo(): DemoSnapshot
   restoreDemo(snapshot: DemoSnapshot): void
+  restorePosition?(snapshot: DemoSnapshot): void
   restoreFocus(): void
   watch?(step: ResolvedGuideStep, options: { signal: AbortSignal; lost(reason: GuideLostReason): void }): void
   game?: { open(stepId: string): void; cancel(mode: 'guide-only' | 'dialog-closed'): void }
@@ -182,7 +184,9 @@ export function createGuideController(deps: GuideDeps): GuideController {
   let tearing: Promise<void> | null = null
   let toastTimer: ReturnType<typeof setTimeout> | null = null
   let disposed = false
-  let gameOpen = false
+  let gameDialogOpen = false
+  let sessionOrigin: DemoSnapshot | null = null
+  let restoreSessionPosition = false
 
   let view: GuideView = {
     phase: 'idle', presenter: 'none', route: null, step: null, counter: null, nextText: catalog.buttons.next,
@@ -257,6 +261,13 @@ export function createGuideController(deps: GuideDeps): GuideController {
     attemptSync('restore-demo', () => adapters.restoreDemo(snapshot))
   }
 
+  const restoreOrigin = () => {
+    const origin = sessionOrigin
+    sessionOrigin = null
+    if (!origin || !restoreSessionPosition) return
+    attemptSync('restore-position', () => adapters.restorePosition?.(origin))
+  }
+
   const enterModule = (moduleId: GuideModule) => {
     if (DEMO_MODULES.has(moduleId) && !baselines.has(moduleId)) baselines.set(moduleId, adapters.snapshotDemo())
   }
@@ -270,6 +281,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
     const info = describe(view.route!, step)
     const kind = prepared.mode ?? step.kind
     const scrollFree = prepared.scrollFree ?? step.scrollFree
+    stepSnapshot = null
     const abort = new AbortController()
     stepAbort = abort
     run.signal.addEventListener('abort', () => abort.abort(), { once: true })
@@ -293,7 +305,6 @@ export function createGuideController(deps: GuideDeps): GuideController {
       if (!run.isCurrent()) return
       if (!prepared.element) throw new GuideError('missing-target', step.target)
       if (scrollFree) syncTourLease(false)
-      stepSnapshot = null
       set({ phase: 'presenting', presenter: 'driver', notice: null, busy: false, practiceSignaled: false, pose: step.pose, motion: step.motion, motionNonce: view.motionNonce + 1, cueHost: null, ...info })
       port.present({
         step, element: prepared.element, counterText: `${info.counter.label} · ${String(info.counter.index).padStart(2, '0')} / ${String(info.counter.total).padStart(2, '0')}`,
@@ -312,6 +323,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
   async function go(stepId: string, reason: PrepareReason, run: GuideRun) {
     const route = view.route!
     endStepLayers()
+    stepSnapshot = null
     const step = resolved(stepId)
     if (step.scene === 'game') { handoffToGame(step); return }
     syncTourLease(true)
@@ -339,7 +351,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
   // The game guide runs inside the iframe; the parent only keeps the lease-free bookkeeping.
   function handoffToGame(step: ResolvedGuideStep) {
     syncTourLease(false)
-    gameOpen = true
+    gameDialogOpen = true
     // A replay of a single module hands over as the game route, so closing the game later resumes at a step that route contains.
     const route: GuideRoute = view.route === 'full' ? 'full' : 'game'
     set({
@@ -378,7 +390,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
       if (wasGame) attemptSync('game-cancel', () => adapters.game?.cancel('guide-only'))
       await attempt('close-modal', () => adapters.closeOwnedModal())
       if (mode !== 'finish') {
-        if (hadStep && stepSnapshot && hadStep.kind === 'practice') attemptSync('restore-step', () => adapters.restoreDemo(stepSnapshot!))
+        if (stepSnapshot) attemptSync('restore-step', () => adapters.restoreDemo(stepSnapshot!))
         for (const key of [...baselines.keys()]) restoreBaseline(key)
         restoreBaseline(moduleId)
       }
@@ -396,7 +408,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
       else if (mode === 'skip-guide') { set({ phase: 'idle', step: null, route: null, counter: null, notice: { kind: 'skipped' }, pose: 'bye' as GuidePose, motion: 'none' }); showToast({ kind: 'skipped' }) }
       else if (mode === 'finish') set({ phase: 'completed', step: null, counter: null })
       else if (mode === 'replace' || mode === 'dispose') set({ step: null, route: null, counter: null })
-      gameOpen = gameOpen && wasGame
+      if (!wasGame && (mode === 'finish' || mode === 'close' || mode === 'pause' || mode === 'skip-guide')) restoreOrigin()
     })()
     try { await tearing } finally { tearing = null }
   }
@@ -464,6 +476,8 @@ export function createGuideController(deps: GuideDeps): GuideController {
       // A baseline left over from a paused run is restored, not forgotten: the next one must snapshot the reader's own state.
       for (const key of [...baselines.keys()]) restoreBaseline(key)
       afterPrompt = null
+      sessionOrigin = adapters.snapshotDemo()
+      restoreSessionPosition = route !== 'full' && route !== 'quick' && route !== 'game'
       progress.update((current) => {
         let next = beginGuide(current, route, first)
         if ((route === 'full' || route === 'quick') && !next.completedStepIds.includes(WELCOME_ID)) next = completeStep(next, WELCOME_ID)
@@ -500,7 +514,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
       const target = prevStepId(view.route, step.id)
       if (!target) return
       set({ busy: true })
-      if (step.kind === 'practice' && stepSnapshot) attemptSync('restore-step', () => adapters.restoreDemo(stepSnapshot!))
+      if (stepSnapshot) attemptSync('restore-step', () => adapters.restoreDemo(stepSnapshot!))
       await go(target, 'back', run)
     },
 
@@ -516,7 +530,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
       if (scope === 'step') {
         if (view.busy && view.notice?.kind !== 'missing-target') return
         set({ busy: true })
-        if (step.kind === 'practice' && stepSnapshot) attemptSync('restore-step', () => adapters.restoreDemo(stepSnapshot!))
+        if (stepSnapshot) attemptSync('restore-step', () => adapters.restoreDemo(stepSnapshot!))
         progress.update((current) => skipStep(current, step.id))
         await advanceFrom(step, { complete: false })
         return
@@ -578,18 +592,23 @@ export function createGuideController(deps: GuideDeps): GuideController {
     },
 
     gameEvent(event) {
-      if (disposed || (view.presenter !== 'game' && !gameOpen)) return
-      if (event.type === 'step') { progress.update((current) => moveGuide(current, event.stepId)); if (catalog.has(event.stepId)) { const game = resolved(event.stepId); set({ presenter: 'game', phase: 'modal', step: game, ...describe('full', game) }) } }
+      if (disposed) return
+      if (event.type === 'ready') { gameDialogOpen = true; return }
+      if (view.presenter !== 'game' && !gameDialogOpen) return
+      if (event.type === 'step') {
+        const route: GuideRoute = view.route === 'full' ? 'full' : 'game'
+        progress.update((current) => view.presenter === 'game' ? moveGuide(current, event.stepId) : beginGuide(current, route, event.stepId))
+        if (catalog.has(event.stepId)) { const game = resolved(event.stepId); set({ route, presenter: 'game', phase: 'modal', step: game, notice: null, ...describe(route, game) }) }
+      }
       else if (event.type === 'step-done') progress.update((current) => completeStep(current, event.stepId))
-      else if (event.type === 'finished') { gameOpen = false; progress.update((current) => finishRoute(current)); set({ phase: 'completed', presenter: 'none', step: null, notice: { kind: 'route-complete', route: 'full', partial: progress.get().skippedStepIds.length > 0 } }) }
+      else if (event.type === 'finished') { progress.update((current) => finishRoute(current)); set({ phase: 'completed', presenter: 'none', step: null, notice: { kind: 'route-complete', route: view.route ?? 'game', partial: progress.get().skippedStepIds.length > 0 } }) }
       else if (event.type === 'step-skipped') progress.update((current) => skipStep(current, event.stepId))
       else if (event.type === 'skipped' && event.scope === 'module') {
-        gameOpen = false
         progress.update((current) => ({ ...skipModule(current, 'game'), status: 'skipped', lastExit: 'skip-module' }))
         set({ phase: 'idle', presenter: 'none', step: null, notice: { kind: 'module-skipped', moduleId: 'game' } })
       } else if (event.type === 'skipped') { progress.update(skipGuide); set({ phase: 'idle', presenter: 'none', step: null, notice: { kind: 'skipped' } }); showToast({ kind: 'skipped' }) }
       else if (event.type === 'closed') {
-        if (event.mode === 'dialog-closed') gameOpen = false
+        if (event.mode === 'dialog-closed') { gameDialogOpen = false; restoreOrigin() }
         if (view.presenter === 'game') {
           progress.update(closeGuide)
           set({ phase: 'cancelled', presenter: 'none', step: view.step })
@@ -623,8 +642,15 @@ export function createGuideController(deps: GuideDeps): GuideController {
       suspend() {
         if (!view.step || view.presenter === 'game') return
         gate.cancelAll()
+        afterPrompt = null
         endStepLayers()
+        attemptSync('close-modal', () => adapters.closeOwnedModalSync())
+        if (stepSnapshot) attemptSync('restore-step', () => adapters.restoreDemo(stepSnapshot!))
+        for (const key of [...baselines.keys()]) restoreBaseline(key)
+        stepSnapshot = null
+        baselines.clear()
         syncTourLease(false)
+        restoreOrigin()
         attemptSync('persist', () => progress.update(closeGuide))
         // A page restored from the back/forward cache must show the same state as ×: no dead cue, the owl offers to continue.
         set({ phase: 'cancelled', presenter: 'none', busy: false, cueHost: null, practiceSignaled: false, notice: null, welcomeVisible: false })

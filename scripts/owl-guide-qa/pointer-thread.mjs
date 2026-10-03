@@ -1,6 +1,6 @@
 // Usage: node scripts/owl-guide-qa/pointer-thread.mjs [--width 1440] [--height 900] [--touch]
 // First visit -> quick route -> I02: the reader drags the red thread through the eyelet with a real pointer (mouse or touch).
-// Asserts the exhibit unlocks, the guide notices and moves on to I03, nothing is left behind, and the cue never sits on the handle.
+// Asserts the exhibit unlocks, manual practice confirmation advances to I03, no cue is left behind, and the handle stays clear.
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { openApp, wait, OUT } from './app.mjs'
 
@@ -40,7 +40,8 @@ try {
     await page.mouse.up()
   }
   check('the exhibit unlocks after the drag', await waitFor(() => page.evaluate(() => document.querySelector('.experience')?.classList.contains('unlocked')), 30000))
-  check('the guide moves on to I03 by itself', await waitFor(async () => (await progress())?.stepId === 'I03', 60000), JSON.stringify((await progress())?.stepId))
+  await page.click('.mach-guide-cue [data-action="practice-done"]')
+  check('manual practice confirmation advances to I03', await waitFor(async () => (await progress())?.stepId === 'I03', 30000), JSON.stringify((await progress())?.stepId))
   const state = await progress()
   check('I02 is recorded as completed, not skipped', state?.completedStepIds?.includes('I02') && !state?.skippedStepIds?.includes('I02'), JSON.stringify({ done: state?.completedStepIds, skipped: state?.skippedStepIds }))
   await wait(2500)

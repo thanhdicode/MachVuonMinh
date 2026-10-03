@@ -1,9 +1,13 @@
 import { timeline, useWorld } from '../experience/WorldState'
-import { goToHistory, goToHistoryEnd, goToScene } from '../experience/WorldTimeline'
+import { goToHistory, goToHistoryEnd, goToScene, scrollToPosition } from '../experience/WorldTimeline'
+import { historyProgressForTravel, historyStep } from '../experience/historyGeometry.ts'
+import { captureGuidePosition, openedDuringObservation, populatedSlotsChanged, restoredGuideScrollY } from './guideAdapterLogic.ts'
+import type { GuidePosition } from './guideAdapterLogic.ts'
 import { GuideError } from './guideController.ts'
 import type { GuideAdapters, GuideLostReason, PreparedStep } from './guideController.ts'
 import type { GuideRegistry } from './guideControls.ts'
 import { captureDemo, demoRestorePatch } from './guideSession.ts'
+import type { DemoSnapshot } from './guideSession.ts'
 import { findVisibleTarget, waitForTarget, waitUntil } from './guideTargets.ts'
 import type { GuideScene, GuideStepKind, ResolvedGuideStep } from './guideTypes.ts'
 
@@ -29,6 +33,7 @@ type Recipe = {
   reveal?: () => boolean
   practice?: (c: Ctx) => Promise<void>
   acted?: () => boolean
+  adoptOpened?: ModalSpec
   leaveIsAction?: boolean
 }
 
@@ -84,7 +89,7 @@ async function reveal(name: string, scope: ParentNode, where: ((element: HTMLEle
 const RECIPES: Record<string, Recipe> = {
   I02: { satisfied: () => world().unlocked, practice: (c) => waitUntil(() => world().unlocked, { signal: c.signal, timeoutMs: FOREVER }) },
   I03: { redirect: () => (world().unlocked ? null : 'I02'), leaveIsAction: true },
-  I04: { acted: () => !!document.querySelector('dialog.source-drawer[open]') },
+  I04: { acted: () => !!document.querySelector('dialog.source-drawer[open]'), adoptOpened: menuModal },
   I05: { modal: menuModal },
   I06: { before: (c) => c.env.ui.showOwl() },
   H01: {},
@@ -131,7 +136,7 @@ const RECIPES: Record<string, Recipe> = {
   V09: { after: async (c) => { await waitUntil(() => !!c.env.registry.get('vietnam'), { signal: c.signal, timeoutMs: 5000 * scale() }) } },
   V10: { after: async (c) => { await waitUntil(() => !!c.env.registry.get('vietnam'), { signal: c.signal, timeoutMs: 5000 * scale() }) }, modal: sourceModal((c) => c.env.registry.get('vietnam')?.sourceIndex() ?? 0, 'source') },
   V11: { after: async (c) => { await waitUntil(() => !!c.env.registry.get('vietnam'), { signal: c.signal, timeoutMs: 5000 * scale() }) }, modal: mapModal },
-  P01: { practice: (c) => waitUntil(() => world().slots.some((slot) => slot !== null), { signal: c.signal, timeoutMs: FOREVER }) },
+  P01: { practice: (c) => { const before = slotsKey(); return waitUntil(() => populatedSlotsChanged(before, world().slots), { signal: c.signal, timeoutMs: FOREVER }) } },
   P09: {
     practice: (c) => { const before = slotsKey(); return waitUntil(() => world().slots.every((slot) => slot !== null) && slotsKey() !== before, { signal: c.signal, timeoutMs: FOREVER }) },
   },
@@ -145,6 +150,14 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
   // `dialog` stays null while the guide is still waiting for the dialog it just asked the app to open.
   let owned: { spec: ModalSpec; dialog: HTMLDialogElement | null; closing: boolean } | null = null
   let hosted: { stepId: string; dialog: HTMLDialogElement } | null = null
+  const positions = new WeakMap<DemoSnapshot, GuidePosition>()
+  let positionRestoreGeneration = 0
+
+  const atlasGeometry = () => {
+    const insertion = document.querySelector<HTMLElement>('.history-insertion')
+    return insertion ? { start: insertion.offsetTop, distance: Math.max(1, insertion.offsetHeight - innerHeight) } : null
+  }
+  const wideAtlas = () => !world().reduced && innerWidth >= 900
 
   async function goScene(scene: GuideScene, signal: AbortSignal) {
     if (scene === 'game') return
@@ -153,14 +166,20 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
     await waitUntil(calm(), { signal, timeoutMs: 4000 * scale() }).catch((error) => { if (signal.aborted) throw error })
   }
 
-  async function closeOwned() {
+  function closeOwnedNow() {
     const current = owned
-    if (!current) return
+    if (!current) return null
     current.closing = true
     try { current.spec.close({ signal: new AbortController().signal, step: undefined as never, env }) } catch { /* the dialog may already be gone */ }
+    owned = null
+    return current
+  }
+
+  async function closeOwned() {
+    const current = closeOwnedNow()
+    if (!current) return
     const gone = () => (current.dialog ? !current.dialog.isConnected || !current.dialog.open : !document.querySelector(`${current.spec.dialog}[open]`))
     await waitUntil(gone, { signal: new AbortController().signal, timeoutMs: 2000 }).catch(() => undefined)
-    if (owned === current) owned = null
   }
 
   async function openModal(c: Ctx, spec: ModalSpec, where?: (el: HTMLElement) => boolean): Promise<PreparedStep> {
@@ -175,8 +194,6 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
       claim.dialog = dialog
     }
     if (!dialog) throw new GuideError('missing-target', c.step.target)
-    // The reader may have opened it (pressing the highlighted button): from here on the guide closes it when it moves on.
-    if (!owned) owned = { spec, dialog, closing: false }
     const host = dialog
     const inHost = (el: HTMLElement) => host.contains(el) && (where?.(el) ?? true)
     await reveal(c.step.target, host, inHost, c.signal)
@@ -223,9 +240,38 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
     },
 
     async closeOwnedModal() { await closeOwned() },
+    closeOwnedModalSync() { closeOwnedNow() },
 
-    snapshotDemo: () => captureDemo(world(), { scrollY: window.scrollY, era: activeEra() }),
+    snapshotDemo: () => {
+      positionRestoreGeneration += 1
+      const geometry = atlasGeometry()
+      const insideAtlas = world().history && geometry !== null
+      const snapshot = captureDemo(world(), { scrollY: window.scrollY, era: insideAtlas ? activeEra() : null })
+      positions.set(snapshot, captureGuidePosition(snapshot.scrollY, snapshot.era, insideAtlas, geometry?.start ?? 0, geometry?.distance ?? 1, wideAtlas()))
+      return snapshot
+    },
     restoreDemo: (snapshot) => world().set(demoRestorePatch(snapshot)),
+    restorePosition: (snapshot) => {
+      const position = positions.get(snapshot)
+      if (!position) { scrollToPosition(snapshot.scrollY, true); return }
+      const restore = () => {
+        const geometry = atlasGeometry()
+        const wide = wideAtlas()
+        const sameLayout = restoredGuideScrollY(position, geometry?.start ?? null, geometry?.distance ?? null, wide)
+        if (sameLayout !== null) { scrollToPosition(sameLayout, true); return }
+        if (!position.insideAtlas || position.era === null) { scrollToPosition(snapshot.scrollY, true); return }
+        if (wide && geometry) {
+          const travel = (position.era * historyStep / 100 + .01) * innerWidth
+          scrollToPosition(geometry.start + historyProgressForTravel(travel, geometry.distance) * geometry.distance, true)
+          return
+        }
+        const target = document.querySelector<HTMLElement>(`[data-label-era="${position.era}"] .history-mobile-copy`)
+        scrollToPosition(target ? target.getBoundingClientRect().top + window.scrollY - 140 : snapshot.scrollY, true)
+      }
+      const generation = ++positionRestoreGeneration
+      restore()
+      if (position.insideAtlas) requestAnimationFrame(() => { if (generation === positionRestoreGeneration) restore() })
+    },
     restoreFocus: () => env.ui.focusReturn(),
 
     watch(step, { signal, lost }) {
@@ -246,7 +292,16 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
         const dialog = hosted.dialog
         void waitUntil(() => !dialog.isConnected || !dialog.open, { signal, timeoutMs: FOREVER }).then(() => { if (!owned?.closing) fire('modal-closed') }, ignore)
       }
-      if (recipe.acted) void waitUntil(recipe.acted, { signal, timeoutMs: FOREVER }).then(() => fire('action-done'), ignore)
+      if (recipe.acted) {
+        const wasOpen = recipe.acted()
+        void waitUntil(recipe.acted, { signal, timeoutMs: FOREVER }).then(() => {
+          if (recipe.adoptOpened && openedDuringObservation(wasOpen, recipe.acted!()) && !owned) {
+            const dialog = document.querySelector<HTMLDialogElement>(`${recipe.adoptOpened.dialog}[open]`)
+            if (dialog) owned = { spec: recipe.adoptOpened, dialog, closing: false }
+          }
+          fire('action-done')
+        }, ignore)
+      }
     },
 
     game: env.game,

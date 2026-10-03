@@ -1,0 +1,86 @@
+{
+  "url": "http://127.0.0.1:5180/",
+  "createdAt": "2026-10-03T17:49:20.253Z",
+  "results": [
+    {
+      "name": "desktop",
+      "metrics": {
+        "mode": "running",
+        "viewport": {
+          "width": 1440,
+          "height": 828,
+          "dpr": 1
+        },
+        "canvas": {
+          "width": 1398,
+          "height": 671,
+          "cssWidth": 1398,
+          "cssHeight": 669,
+          "opaque": true
+        },
+        "panel": {
+          "left": 20,
+          "top": 14,
+          "right": 1420,
+          "bottom": 814
+        },
+        "contained": true,
+        "backgroundApi": true,
+        "hudClear": true,
+        "pause": {
+          "mode": "paused",
+          "stablePixels": true
+        }
+      },
+      "errors": [],
+      "screenshots": [
+        "desktop-start.png",
+        "desktop-running.png"
+      ]
+    },
+    {
+      "name": "mobile",
+      "metrics": {
+        "mode": "running",
+        "viewport": {
+          "width": 390,
+          "height": 784,
+          "dpr": 1
+        },
+        "canvas": {
+          "width": 372,
+          "height": 656,
+          "cssWidth": 372,
+          "cssHeight": 654,
+          "opaque": true
+        },
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 382,
+          "bottom": 776
+        },
+        "contained": true,
+        "backgroundApi": true,
+        "hudClear": true,
+        "pause": {
+          "mode": "paused",
+          "stablePixels": true
+        }
+      },
+      "errors": [],
+      "screenshots": [
+        "mobile-start.png",
+        "mobile-running.png"
+      ]
+    }
+  ],
+  "gallery": [
+    "stage-1.png",
+    "stage-2.png",
+    "stage-3.png",
+    "stage-4.png",
+    "stage-5.png"
+  ],
+  "pass": true
+}

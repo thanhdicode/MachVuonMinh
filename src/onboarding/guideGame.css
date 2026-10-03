@@ -8,6 +8,7 @@
 .guide-launcher:focus-visible{outline:2px solid #b51f2a;outline-offset:2px}
 .guide-launcher-owl{display:block;width:36px;height:36px;object-fit:contain;flex:none}
 .guide-launcher-label{white-space:nowrap}
+@media(max-width:800px){.guide-launcher{width:44px;padding:0}.guide-launcher-label{display:none}.stage-num{flex-shrink:0}.game-stats{gap:8px}}
 
 /* The practice runner needs the arena visible; the campaign overlays stay where they are but are hidden meanwhile. */
 .game-panel[data-guide-practice] .overlay{visibility:hidden;pointer-events:none}

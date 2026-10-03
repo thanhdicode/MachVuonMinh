@@ -1,0 +1,47 @@
+{
+ "name": "pointer-thread-390x844-touch",
+ "passed": 9,
+ "failed": 0,
+ "results": [
+  {
+   "name": "welcome shows",
+   "ok": true
+  },
+  {
+   "name": "I02 cue shows",
+   "ok": true
+  },
+  {
+   "name": "cue does not sit on the thread handle",
+   "ok": true,
+   "detail": "{\"handle\":{\"x\":136.5,\"y\":430.4375},\"cue\":{\"x\":12,\"y\":76,\"w\":366,\"h\":321.53125}}"
+  },
+  {
+   "name": "the handle is the element under the pointer (nothing overlays it)",
+   "ok": true
+  },
+  {
+   "name": "the exhibit unlocks after the drag",
+   "ok": true
+  },
+  {
+   "name": "manual practice confirmation advances to I03",
+   "ok": true,
+   "detail": "\"I03\""
+  },
+  {
+   "name": "I02 is recorded as completed, not skipped",
+   "ok": true,
+   "detail": "{\"done\":[\"I01\",\"I02\"],\"skipped\":[]}"
+  },
+  {
+   "name": "no leftover practice cue",
+   "ok": true
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "detail": "[]"
+  }
+ ]
+}

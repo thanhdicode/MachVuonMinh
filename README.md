@@ -4,7 +4,7 @@ Triển lãm tương tác về lực lượng sản xuất mới và yêu cầu 
 
 ## Hướng dẫn Cú Mạch (Driver.js 1.8.0)
 
-Cú Mạch dẫn người mới qua toàn bộ triển lãm: 8 phần, **70 bước**, theo thứ tự `I01–I06 → T01 → H01–H08 → T02–T05 → L01–L15 → V01–V11 → P01–P11 → F01–F04 → G01–G10`. Lời dẫn chuẩn nằm ở `docs/superpowers/specs/2026-10-03-owl-guide-copy.json`; bản chạy là `src/onboarding/guideCopy.json` (test so khớp từng byte, vì `docs/` không được upload lên Vercel). Driver.js được pin đúng `1.8.0`; không dùng wrapper React, CDN hay thư viện animation khác.
+Cú Mạch dẫn người mới qua toàn bộ triển lãm: 8 phần, **70 bước**, theo thứ tự `I01–I06 → T01 → H01–H08 → T02–T05 → L01–L15 → V01–V11 → P01–P11 → F01–F04 → G01–G10`. Lời dẫn chuẩn nằm ở `docs/superpowers/specs/2026-10-03-owl-guide-copy.json`; bản chạy là `src/onboarding/guideCopy.json` (test so khớp nội dung sau khi chuẩn hóa LF/CRLF, vì `docs/` không được upload lên Vercel). Driver.js được pin đúng `1.8.0`; không dùng wrapper React, CDN hay thư viện animation khác.
 
 ### Chạy, gọi và ẩn cú
 
@@ -29,7 +29,7 @@ Mục tiêu (`data-guide`) là thuộc tính có nghĩa gắn vào UI thật; c�
 
 ### Kiểm thử
 
-- `npm test` (`node --test "tests/*.test.mjs"`): 119 test gồm các test gốc của dự án và test mới cho tiến độ/migration, lease cuộn, huỷ bất đồng bộ, teardown khi cleanup lỗi, controller (thử lại/bỏ qua từ cue tạm dừng, bỏ qua không bật lại redirect, bỏ qua trong game, bàn giao game từ tuyến replay), catalog, targets, vendor Driver và hướng dẫn game (giao thức, phím tập nhảy/cúi, tách khỏi chiến dịch).
+- `npm test` (`node --test "tests/*.test.mjs"`): 142 test, gồm các test gốc và hồi quy cho tiến độ/migration, lease cuộn, huỷ bất đồng bộ, quyền sở hữu dialog, pagehide, khôi phục vị trí qua bố cục Atlas, phục hồi demo, game replay, catalog, vendor Driver, giao thức iframe và cache nền game.
 - Trình duyệt thật: `scripts/owl-guide-qa/` dùng puppeteer-core và Chrome, **không** là phụ thuộc của dự án. Cài ngoài repo rồi trỏ biến môi trường, mở `npm run dev` ở cửa sổ khác:
 
   ```sh
@@ -39,6 +39,20 @@ Mục tiêu (`data-guide`) là thuộc tính có nghĩa gắn vào UI thật; c�
   scripts/owl-guide-qa/run-matrix.sh 3                                                      # cả ma trận (7 phần × 4 cỡ màn hình, giảm chuyển động, zoom 200%, game, a11y)
   node scripts/owl-guide-qa/coverage.mjs                                                    # gộp kết quả thành COVERAGE.md
   ```
+
+  Trên Windows, runner tự tìm Chrome/Edge và nhận cả đường dẫn Windows lẫn file URL. Có thể cài công cụ QA trong thư mục bị Git bỏ qua:
+
+  ```powershell
+  npm install --prefix node_modules/.owl-guide-qa-tools puppeteer-core
+  npm run build
+  # Chạy npm run preview ở terminal riêng.
+  $env:QA_URL = 'http://127.0.0.1:4173/'
+  node scripts/owl-guide-qa/matrix-walk.mjs --module lab --width 360 --height 640 --touch --tag release-lab-mobile
+  node scripts/owl-guide-qa/regressions.mjs
+  node scripts/owl-guide-qa/coverage.mjs --prefix release-
+  ```
+
+  Walker trả mã lỗi khác 0 khi phát hiện lỗi; `--prefix release-` chỉ tổng hợp các lượt kiểm của bản hoàn thiện, giữ lịch sử chẩn đoán riêng.
 
   Mỗi walker thao tác thật trên từng bước, ghi `result.json` và ảnh vào `.studio/qa/owl-guide/`; `scenarios/` (01–05, 09), `a11y.mjs`, `resize.mjs`, `states.mjs`, `pointer-thread.mjs`, `game-walk.mjs` kiểm vòng đời, truy cập, qua mốc 899/900, kéo sợi bằng con trỏ và game. Kết quả, lỗi đã sửa và phần chưa kiểm chứng: `.studio/qa/owl-guide/REVIEW.md`; độ phủ 70 ID: `.studio/qa/owl-guide/COVERAGE.md`.
 

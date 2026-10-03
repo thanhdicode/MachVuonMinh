@@ -52,6 +52,8 @@ try {
     else {
       await record('I02', 'intro-thread')
       // 3. Paused notice.
+      const options = await page.$('.mach-guide-cue [data-action="options"], .driver-popover [data-action="options"]')
+      if (options && await options.evaluate(node => node.checkVisibility({ checkVisibilityCSS: true }))) await options.click()
       await page.click('.mach-guide-cue [data-action="pause"], .driver-popover [data-action="pause"]')
       await wanted(() => document.querySelector('.mach-guide-cue')?.dataset.kind === 'paused', 20000)
       await record('paused', null)
@@ -90,3 +92,4 @@ writeFileSync(`${dir}/result.json`, JSON.stringify({ tag, reloaded, width, heigh
 console.log('done', tag, 'errors', JSON.stringify(errors.slice(0, 4)), reloaded ? 'RELOADED' : '')
 await browser.close()
 if (reloaded) process.exit(3)
+if (errors.length || results.some(r => r.failure || r.issues?.length)) process.exitCode = 1

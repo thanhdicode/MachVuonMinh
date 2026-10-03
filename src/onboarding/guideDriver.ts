@@ -17,6 +17,7 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
   const destroy = () => {
     const current = instance
     instance = null
+    document.body.classList.remove('guide-lab-reading')
     try { current?.destroy() } finally { onPopover(null) }
   }
   return {
@@ -24,6 +25,7 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
     present(args: PresentArgs) {
       destroy()
       const reduced = args.reduced
+      document.body.classList.toggle('guide-lab-reading', args.step.id === 'L07' && matchMedia(sheetQuery).matches)
       const hooks = {
         onNextClick: () => args.handlers.next(),
         onDoneClick: () => args.handlers.next(),
@@ -37,8 +39,16 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
         skipGuide: () => args.handlers.skipGuide(),
         skipGame: () => args.handlers.skipGame(),
       }
-      const rect = args.element.getBoundingClientRect()
-      const lowerHalf = rect.top + rect.height / 2 > innerHeight / 2
+      // Static Atlas captions must sit above the phone sheet, rather than centred behind it.
+      if (matchMedia(sheetQuery).matches && args.element.closest('[data-label-era]') && args.element.classList.contains('history-mobile-copy')) {
+        args.element.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'instant' })
+        window.scrollBy({ top: -80, behavior: 'instant' })
+      }
+      const targetRect = args.element.getBoundingClientRect()
+      const lowerHalf = targetRect.top + targetRect.height / 2 > innerHeight / 2
+      const side = !matchMedia(sheetQuery).matches && targetRect.left >= 414 ? 'left'
+        : !matchMedia(sheetQuery).matches && innerWidth - targetRect.right >= 414 ? 'right'
+        : lowerHalf ? 'top' : 'bottom'
       const next = createDriver({
         animate: !reduced,
         duration: reduced ? 0 : 280,
@@ -57,7 +67,10 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
         showProgress: true,
         ...hooks,
         onPopoverRender: (popover) => {
-          if (matchMedia(sheetQuery).matches) popover.wrapper.dataset.sheet = lowerHalf ? 'top' : 'bottom'
+          if (matchMedia(sheetQuery).matches) {
+            popover.wrapper.dataset.sheet = lowerHalf ? 'top' : 'bottom'
+            popover.wrapper.appendChild(popover.progress)
+          }
           popover.closeButton.setAttribute('aria-label', 'Đóng hướng dẫn')
           const owl = document.createElement('div')
           owl.className = 'mach-guide__owl'
@@ -66,7 +79,7 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
           popover.wrapper.insertBefore(owl, popover.arrow.nextSibling)
           popover.wrapper.appendChild(extras)
           // Built here, not by React: Driver measures the popover right after this hook, so its final height must already be there.
-          const add = (label: string | null, tone: string, action: string, run: () => void) => {
+          const add = (label: string | null, tone: string, action: string, run: () => void, host = extras) => {
             if (!label) return
             const button = document.createElement('button')
             button.type = 'button'
@@ -74,11 +87,37 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
             button.dataset.action = action
             button.textContent = label
             button.addEventListener('click', run)
-            extras.append(button)
+            host.append(button)
+            return button
           }
           add(args.extras.skipGame, 'ghost', 'skip-game', actions.skipGame)
-          add(args.extras.skipModule, 'quiet', 'skip-module', actions.skipModule)
-          add(args.extras.pause, 'quiet', 'pause', actions.pause)
+          if (matchMedia(sheetQuery).matches) {
+            const options = document.createElement('div')
+            options.className = 'mach-guide-options'
+            options.id = `mach-guide-options-${args.step.id}`
+            const toggle = add('Tùy chọn', 'quiet', 'options', () => {
+              const open = options.dataset.open !== 'true'
+              if (open) options.dataset.open = 'true'
+              else delete options.dataset.open
+              toggle?.setAttribute('aria-expanded', String(open))
+            })
+            toggle?.setAttribute('aria-expanded', 'false')
+            toggle?.setAttribute('aria-controls', options.id)
+            add(args.extras.skipModule, 'quiet', 'skip-module', actions.skipModule, options)
+            add(args.extras.pause, 'quiet', 'pause', actions.pause, options)
+            extras.append(options)
+            popover.wrapper.addEventListener('keydown', (event) => {
+              if (event.key !== 'Escape' || !options.dataset.open) return
+              event.preventDefault()
+              event.stopPropagation()
+              delete options.dataset.open
+              toggle?.setAttribute('aria-expanded', 'false')
+              toggle?.focus()
+            }, true)
+          } else {
+            add(args.extras.skipModule, 'quiet', 'skip-module', actions.skipModule)
+            add(args.extras.pause, 'quiet', 'pause', actions.pause)
+          }
           add(args.extras.skipGuide, 'skip', 'skip-guide', actions.skipGuide)
           onPopover({ popover, owl, extras })
         },
@@ -91,7 +130,7 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
         popover: {
           title: escapeHtml(args.step.title),
           description: escapeHtml(args.step.say),
-          side: lowerHalf ? 'top' : 'bottom',
+          side,
           align: 'center',
           showButtons: ['next', 'previous', 'close'],
           disableButtons: args.canBack ? [] : ['previous'],

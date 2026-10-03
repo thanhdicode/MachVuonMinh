@@ -141,6 +141,8 @@
 :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__summary { display: grid; gap: 4px; margin-top: 10px; font: 400 13px/1.45 'Be Vietnam Pro', sans-serif; }
 :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__actions { grid-area: actions; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__extras { grid-area: extras; display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 6px; }
+.mach-guide-options-toggle { display: none !important; }
+.mach-guide-options { display: contents; }
 .mach-guide-welcome .mach-guide-welcome__choices { flex-direction: column; align-items: stretch; }
 
 .mach-guide__btn {
@@ -228,17 +230,20 @@
 .guide-proxy { position: fixed; z-index: 1; pointer-events: none; background: transparent; }
 /* DOM stand-ins for WebGL objects, only mounted in their own scene: they track the object's screen region. */
 .guide-proxy--plough { left: 50%; right: 0; top: 24%; bottom: 14%; }
-.guide-proxy--data { left: 24%; right: 24%; top: 30%; bottom: 28%; }
+.guide-proxy--data { left: 48%; right: 6%; top: 28%; bottom: 18%; }
 .guide-proxy--sockets { left: 31%; right: 31%; top: 16%; bottom: 30%; }
 .guide-proxy--core { left: 50%; top: 50%; width: min(52vw, 56vh); height: min(52vw, 56vh); transform: translate(-50%, -50%); }
 @media (max-width: 700px) {
-  .guide-proxy--plough { left: 8%; right: 0; top: 34%; bottom: 22%; }
-  .guide-proxy--data { left: 6%; right: 6%; top: 36%; bottom: 30%; }
+  .guide-proxy--plough { left: 8%; right: 0; top: 56%; bottom: 14%; }
+  .guide-proxy--data { left: 6%; right: 6%; top: 56%; bottom: 22%; }
   .guide-proxy--sockets { left: 4%; right: 4%; top: 20%; bottom: 40%; }
-  .guide-proxy--core { width: 86vw; height: 86vw; max-height: 44vh; }
+  .guide-proxy--core { top: 35%; width: 62vw; height: 28vh; }
 }
 .mach-guide-target { outline: 2px solid var(--guide-red, #b51f2a); outline-offset: 4px; }
 body.guide-scroll-locked { overscroll-behavior: none; }
+@media (min-width: 701px) {
+  .mach-guide-cue[data-kind='practice'][data-module='policy'] { width: min(25em, calc(100vw - 28px)); }
+}
 
 @keyframes mach-guide-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .mach-guide-welcome { animation: none; } }
@@ -248,7 +253,7 @@ body.guide-scroll-locked { overscroll-behavior: none; }
   .mach-guide__btn { min-height: 44px; min-width: 44px; }
   :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__title { font-size: 16px; }
   :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__text { font-size: 16px; }
-  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__hint { font-size: 14px; }
+  :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__hint { font-size: 16px; }
   :is(.mach-guide-cue, .mach-guide-welcome) .mach-guide-cue__summary { font-size: 16px; }
   .mach-guide-menu__item { font-size: 16px; min-height: 48px; }
   .mach-guide-menu__item small { font-size: 13px; }
@@ -290,12 +295,81 @@ body.guide-scroll-locked { overscroll-behavior: none; }
     bottom: calc(12px + env(safe-area-inset-bottom));
     width: auto;
   }
+  .mach-guide-cue[data-kind='practice'][data-module='lab'] { --guide-max: 230px; }
+  .guide-lab-practice .lab-controls {
+    top: calc(var(--policy-guide-bottom) + 12px);
+    bottom: 164px;
+    height: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .guide-lab-practice .control-heading,
+  .guide-lab-practice .lab-controls > p { display: none; }
+  .guide-lab-reading .lab-controls.relations {
+    top: calc(88px + 40dvh);
+    bottom: 164px;
+    height: auto;
+    overflow-y: auto;
+  }
+  .guide-lab-reading .relations .control-heading,
+  .guide-lab-reading .relations > p { display: none; }
+  .mach-guide-cue[data-kind='practice'][data-module='policy'] {
+    top: calc(76px + env(safe-area-inset-top));
+    --guide-max: min(clamp(230px, 46dvh, 340px), calc(100dvh - 260px));
+  }
+  .guide-policy-practice .policy-sockets {
+    position: absolute;
+    top: calc(var(--policy-guide-bottom) + 12px);
+    left: 7%;
+    right: 7%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .guide-policy-practice .policy-socket { position: relative; top: auto; left: auto; flex: 0 0 64px; }
+  .guide-policy-practice .guide-proxy--sockets {
+    top: calc(var(--policy-guide-bottom) + 12px);
+    left: 7%;
+    right: 7%;
+    bottom: auto;
+    height: 64px;
+  }
+  .guide-policy-practice .policy-instruction {
+    top: calc(var(--policy-guide-bottom) + 84px);
+    left: 7%;
+    right: 7%;
+    max-width: none;
+  }
+  .guide-policy-practice .policy-instruction small { display: none; }
+  .guide-policy-practice .policy-overlay:has(.policy-result) .policy-instruction { display: none; }
+  .guide-policy-practice .policy-result {
+    top: calc(var(--policy-guide-bottom) + 84px);
+    bottom: auto;
+    max-height: max(40px, calc(100dvh - var(--policy-guide-bottom) - 220px));
+    overflow-y: auto;
+    pointer-events: auto;
+  }
   .mach-guide-cue[data-kind='practice'] {
     --guide-max: clamp(230px, 46dvh, 340px);
     --guide-pinned: 11.5em;
-    top: calc(8px + env(safe-area-inset-top));
+    top: calc(76px + env(safe-area-inset-top));
     bottom: auto;
     width: auto;
+  }
+  .mach-guide-cue__extras { position: relative; justify-content: space-between; }
+  .mach-guide-options-toggle { display: inline-flex !important; }
+  .mach-guide-options { display: none; }
+  .mach-guide-options[data-open] {
+    position: absolute;
+    display: grid;
+    left: 0;
+    bottom: calc(100% + 8px);
+    z-index: 4;
+    max-width: 100%;
+    padding: 8px;
+    background: var(--guide-paper);
+    border: 1px solid var(--guide-ink);
+    box-shadow: 0 4px 14px rgb(23 21 18 / 20%);
   }
   .mach-guide-cue[data-host='dialog'] {
     --guide-max: calc(100dvh - 24px);
@@ -318,6 +392,10 @@ body.guide-scroll-locked { overscroll-behavior: none; }
     width: calc(100% - 16px);
   }
   .mach-guide-dock { bottom: calc(60px + env(safe-area-inset-bottom)); }
+  .mach-guide-cue:is([data-kind='skipped'], [data-kind='paused'], [data-kind='module-complete'], [data-kind='route-complete'], [data-kind='module-skipped'], [data-kind='game-skipped']) {
+    bottom: calc(122px + env(safe-area-inset-bottom));
+    --guide-max: calc(100dvh - 210px);
+  }
 }
 
 /* Short screens (phones in landscape, 200% zoom on a laptop): tighter offsets, more room for the card. */
@@ -327,4 +405,33 @@ body.guide-scroll-locked { overscroll-behavior: none; }
   .mach-guide-cue[data-anchor='top-left'],
   .mach-guide-cue[data-anchor='top-right'] { top: 60px; }
   .mach-guide-cue[data-anchor='bottom-right'] { bottom: calc(76px + env(safe-area-inset-bottom)); }
+}
+
+@media (min-width: 701px) and (max-height: 520px) {
+  .mach-guide-cue[data-kind='practice'][data-module='intro'] {
+    --guide-owl: 40px;
+    --guide-pinned: 15em;
+    --guide-max: calc(100dvh - 88px);
+    left: 12px;
+    right: auto;
+    top: 76px;
+    bottom: auto;
+    width: 240px;
+    grid-template-areas: 'owl counter counter' 'title title title' 'text text text' 'actions actions actions' 'extras extras extras';
+    grid-template-rows: auto auto minmax(3em, 1fr) auto auto;
+  }
+  .mach-guide-cue[data-module='intro'] .mach-guide-cue__counter { font-size: 10px; margin-left: 0; }
+  .mach-guide-cue[data-module='intro'] .mach-guide-options-toggle { display: inline-flex !important; }
+  .mach-guide-cue[data-module='intro'] .mach-guide-options { display: none; }
+  .mach-guide-cue[data-module='intro'] .mach-guide-cue__extras { position: relative; }
+  .mach-guide-cue[data-module='intro'] .mach-guide-options[data-open] {
+    display: grid;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    z-index: 4;
+    padding: 8px;
+    background: var(--guide-paper);
+    border: 1px solid var(--guide-ink);
+  }
 }

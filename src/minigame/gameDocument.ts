@@ -2,7 +2,8 @@ import template from './assets/game.html?raw'
 import gameStyle from './assets/game.css?inline'
 import guideStyle from '../onboarding/guideGame.css?inline'
 import gameScript from './assets/game.js?raw'
-import guideScript from '../onboarding/game-guide.js?minraw'
+import backgroundScript from './assets/game-background.js?raw'
+import guideScript from '../onboarding/game-guide.js?raw'
 import questions from './assets/questions.js?raw'
 import documentQuestions from './assets/document-questions.js?raw'
 import sprites from './assets/sprites.json'
@@ -32,6 +33,7 @@ export function buildGameDocument(config: GameChildConfig): string {
       script(questions),
       script(documentQuestions),
       script(`window.MACH_GAME_CONFIG=${scriptSafeJson(config)};`),
+      script(backgroundScript),
       script(gameScript),
       guided ? script(guideScript) : '',
     ].join(''))

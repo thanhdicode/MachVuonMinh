@@ -1,0 +1,153 @@
+{
+ "tag": "game-origin-before-fix",
+ "moduleId": "game",
+ "via": "finale",
+ "width": 1440,
+ "height": 900,
+ "touch": false,
+ "reduced": false,
+ "textScale": 1,
+ "errors": [],
+ "results": [
+  {
+   "n": -1,
+   "id": "F04:offer",
+   "presenter": "driver",
+   "next": "Mở game và xem cách chơi",
+   "progress": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "finale",
+    "moduleId": "finale",
+    "stepId": "F04",
+    "completedStepIds": [
+     "F01",
+     "F02",
+     "F03"
+    ],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   }
+  },
+  {
+   "n": -1,
+   "id": "GAME:opened",
+   "progress": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [
+     "F01",
+     "F02",
+     "F03",
+     "F04"
+    ],
+    "completedModules": [
+     "finale"
+    ],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   },
+   "parent": {
+    "dialogOpen": true,
+    "scrollY": 22332,
+    "body": "guide-scroll-locked mini-game-open",
+    "parentSkip": [
+     "Bỏ qua hướng dẫn"
+    ],
+    "focus": "BUTTON"
+   }
+  },
+  {
+   "n": 0,
+   "id": "G01",
+   "failure": "step never settled",
+   "progress": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [
+     "F01",
+     "F02",
+     "F03",
+     "F04"
+    ],
+    "completedModules": [
+     "finale"
+    ],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   }
+  },
+  {
+   "n": 10,
+   "id": "END",
+   "progress": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [
+     "F01",
+     "F02",
+     "F03",
+     "F04"
+    ],
+    "completedModules": [
+     "finale"
+    ],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   },
+   "parent": {
+    "dialogOpen": true,
+    "scrollY": 22332,
+    "body": "guide-scroll-locked mini-game-open",
+    "parentSkip": [],
+    "focus": "mini-game-frame"
+   },
+   "leftovers": 1
+  },
+  {
+   "n": 11,
+   "id": "CLOSED",
+   "parent": {
+    "dialogOpen": false,
+    "scrollY": 22332,
+    "body": "",
+    "parentSkip": [],
+    "focus": "mach-guide-dock__button"
+   },
+   "progress": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [
+     "F01",
+     "F02",
+     "F03",
+     "F04"
+    ],
+    "completedModules": [
+     "finale"
+    ],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   },
+   "failure": "finale module caller position was overwritten on dialog close"
+  }
+ ]
+}

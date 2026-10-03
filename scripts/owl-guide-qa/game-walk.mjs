@@ -15,14 +15,14 @@ const copyOf = Object.fromEntries(copy.map((s) => [s.id, s]))
 const IDS = MODULE_STEP_IDS.game
 const WIRING = { [IDS[0]]: 'game-start', G02: 'game-jump', G03: 'game-duck', G04: 'game-pause', G05: 'game-hud', G06: 'game-hearts', G07: 'game-quiz-help', G08: 'game-boss-help', G09: 'game-next-retry-help', G10: 'game-guide-replay' }
 
-const seed = via === 'f04'
-  ? { schemaVersion: 2, status: 'in-progress', route: 'finale', moduleId: 'finale', stepId: 'F04', completedStepIds: ['F01', 'F02', 'F03'], completedModules: [], skippedStepIds: [], skippedModuleIds: [], lastExit: 'close' }
+const seed = via === 'f04' || via === 'finale'
+  ? { schemaVersion: 2, status: 'in-progress', route: via === 'finale' ? 'finale' : 'full', moduleId: 'finale', stepId: 'F04', completedStepIds: ['F01', 'F02', 'F03'], completedModules: [], skippedStepIds: [], skippedModuleIds: [], lastExit: 'close' }
   : { schemaVersion: 2, status: 'dismissed', route: null, moduleId: null, stepId: null, completedStepIds: [], completedModules: [], skippedStepIds: [], skippedModuleIds: [], lastExit: null }
 const { browser, page, errors } = await openApp({ width, height, touch, reduced, storage: { 'mach-vuon-minh:guide:v2': JSON.stringify(seed) } })
 const progress = () => page.evaluate(() => JSON.parse(localStorage.getItem('mach-vuon-minh:guide:v2') || 'null'))
 const shot = (name) => page.screenshot({ path: `${dir}/${name}.png` }).catch(() => {})
 const frame = async () => { for (let i = 0; i < 120; i += 1) { const f = page.frames().find((fr) => fr !== page.mainFrame() && fr.url() === 'about:srcdoc'); if (f) return f; await wait(500) } return null }
-const parentState = () => page.evaluate(() => ({ dialogOpen: !!document.querySelector('dialog.mini-game-dialog[open]'), body: document.body.className, parentSkip: [...document.querySelectorAll('.mini-game-skip')].map((b) => b.textContent.trim()), focus: document.activeElement?.className || document.activeElement?.tagName || null }))
+const parentState = () => page.evaluate(() => ({ dialogOpen: !!document.querySelector('dialog.mini-game-dialog[open]'), scrollY: Math.round(scrollY), body: document.body.className, parentSkip: [...document.querySelectorAll('.mini-game-skip')].map((b) => b.textContent.trim()), focus: document.activeElement?.className || document.activeElement?.tagName || null }))
 
 const sampleFrame = (f, target) => f.evaluate((targetName) => {
   const box = (e) => { if (!e) return null; const b = e.getBoundingClientRect(); return { x: Math.round(b.x), y: Math.round(b.y), w: Math.round(b.width), h: Math.round(b.height) } }
@@ -55,7 +55,7 @@ const log = (...a) => console.log(...a)
 try {
   await unlockIntro(page); await wait(1500)
   await page.click('.mach-guide-dock__button'); await page.waitForSelector('.mach-guide-menu', { timeout: 20000 })
-  if (via === 'f04') {
+  if (via === 'f04' || via === 'finale') {
     await page.evaluate(() => [...document.querySelectorAll('.mach-guide-menu__item--primary')].find((b) => b.textContent.includes('Tiếp tục')).click())
     await page.waitForSelector('.driver-popover-next-btn', { timeout: 60000 })
     await wait(1500); await shot('00-F04-offer')
@@ -117,8 +117,10 @@ try {
   await page.click('.mini-game-toolbar button[aria-label^="Đóng mini game"]').catch(() => {})
   await wait(2500)
   const closed = { n: IDS.length + 1, id: 'CLOSED', parent: await parentState(), progress: await progress() }
+  if (via === 'finale' && closed.parent.scrollY > 1) closed.failure = 'finale module caller position was overwritten on dialog close'
   results.push(closed); log('CLOSED', JSON.stringify(closed.parent))
 } catch (e) { results.push({ id: 'ERROR', failure: e.message }); log('FAILED', e.message) }
 writeFileSync(`${dir}/result.json`, JSON.stringify({ tag, moduleId: 'game', via, width, height, touch, reduced, textScale: 1, errors, results }, null, 1))
 log('errors', errors.length, JSON.stringify(errors.slice(0, 4)))
 await browser.close()
+if (errors.length || results.some(r => r.failure || r.titleOk === false || r.textOk === false || r.skipVisible === false || r.skipCovered || r.popoverInViewport === false || r.practiceVerified === false || r.leftovers)) process.exitCode = 1

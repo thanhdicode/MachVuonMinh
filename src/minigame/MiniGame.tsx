@@ -13,14 +13,14 @@ const idle: SessionSnapshot = { guide: 'none', skipVisible: false, fallback: fal
 
 // Focus and scroll go back to the exhibit only once the modal is really gone: while it is open the page behind it is inert,
 // and a close that did not start from a React event is committed a little later than the next task.
-function restoreApp(memory: FocusMemory, modal: HTMLDialogElement) {
+function restoreApp(memory: FocusMemory, modal: HTMLDialogElement, restoreScroll: boolean) {
   let frames = 0
   const attempt = () => {
     if (modal.isConnected && modal.open && frames++ < 60) { window.requestAnimationFrame(attempt); return }
     // The control that opened the game may be gone (the owl menu closes on use): fall back to the owl.
     const target = memory.focus?.isConnected ? memory.focus : document.querySelector<HTMLElement>('.mach-guide-dock__button')
     target?.focus({ preventScroll: true })
-    if (Math.abs(window.scrollY - memory.scroll) > 1) window.scrollTo({ top: memory.scroll, behavior: 'instant' })
+    if (restoreScroll && Math.abs(window.scrollY - memory.scroll) > 1) window.scrollTo({ top: memory.scroll, behavior: 'instant' })
   }
   window.requestAnimationFrame(attempt)
 }
@@ -61,7 +61,8 @@ export default function MiniGame({ onClose, guide = null }: { onClose: () => voi
         frameWindow: () => frame.current?.contentWindow ?? null,
         report: (event) => latest.current.guide?.report(event),
         acquireLease: () => acquireScrollLease('game'),
-        onDialogClosed: () => restoreApp(memory, element),
+        // A handed-off tour owns its caller position. The game only restores its own natural opener.
+        onDialogClosed: () => restoreApp(memory, element, link?.startStepId == null),
         requestClose: () => { created.cancel('dialog-closed'); latest.current.onClose() },
         onChange: setView,
       })

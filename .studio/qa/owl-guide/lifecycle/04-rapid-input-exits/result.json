@@ -1,9 +1,952 @@
 {
  "name": "04-rapid-input-exits",
- "at": "2026-10-03T13:44:27.024Z",
- "passed": 10,
+ "at": "2026-10-03T17:28:16.959Z",
+ "passed": 103,
  "failed": 0,
  "results": [
+  {
+   "id": "4.1.start",
+   "label": "production module starts at T01 with one Driver popover and one overlay",
+   "ok": true,
+   "evidence": {
+    "step": "T01",
+    "popovers": 1,
+    "overlays": 1
+   }
+  },
+  {
+   "id": "4.2.hammer-next",
+   "label": "ten rapid Next clicks produce exactly one transition (T01 -> T02), T01 completed once, T03 untouched",
+   "ok": true,
+   "evidence": {
+    "step": "T02",
+    "done": [
+     "T01"
+    ],
+    "popovers": 1,
+    "overlays": 1
+   }
+  },
+  {
+   "id": "4.3.alternate-next-back",
+   "label": "Next,Back,Next,Back,… in one tick lands on T03 only (practice cue, no stale popover/overlay), T02 completed once",
+   "ok": true,
+   "evidence": {
+    "step": "T03",
+    "cue": "practice",
+    "done": [
+     "T01",
+     "T02"
+    ],
+    "popovers": 0
+   }
+  },
+  {
+   "id": "4.4.range-keyboard",
+   "label": "ArrowRight on the range changes its value and does not advance the tour",
+   "ok": true,
+   "evidence": {
+    "before": 60,
+    "mid": 63,
+    "step": "T03"
+   }
+  },
+  {
+   "id": "4.5.double-skip-step",
+   "label": "a double click on \"Bỏ qua bước này\" skips T03 once and lands on T04; T03 is skipped, not completed",
+   "ok": true,
+   "evidence": {
+    "step": "T04",
+    "skipped": [
+     "T03"
+    ],
+    "done": [
+     "T01",
+     "T02"
+    ]
+   }
+  },
+  {
+   "id": "4.6.step-rollback",
+   "label": "skipping the practice step restores the slider to the value it had before the step",
+   "ok": true,
+   "evidence": {
+    "before": 60,
+    "mid": 63,
+    "restored": 60
+   }
+  },
+  {
+   "id": "4.7.hit-test",
+   "label": "element under the Skip centre before the click: button.mach-guide__btn",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "4.7.layers",
+   "label": "Skip guide while presenting (T04): no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": "skipped"
+   }
+  },
+  {
+   "id": "4.7.lock",
+   "label": "Skip guide while presenting (T04): scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.7.scroll",
+   "label": "Skip guide while presenting (T04): module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 0,
+    "before": 15190,
+    "after": 0
+   }
+  },
+  {
+   "id": "4.7.focus",
+   "label": "Skip guide while presenting (T04): focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.7.progress",
+   "label": "Skip guide while presenting (T04): status=skipped, lastExit=skip-guide, step=T04",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "lastExit": "skip-guide",
+    "stepId": "T04"
+   }
+  },
+  {
+   "id": "4.7.completed",
+   "label": "Skip guide while presenting (T04): completed ids are exactly [\"T01\",\"T02\"] (skip/close never add completion)",
+   "ok": true,
+   "evidence": {
+    "completed": [
+     "T01",
+     "T02"
+    ],
+    "skipped": [
+     "T03"
+    ]
+   }
+  },
+  {
+   "id": "4.7.disjoint",
+   "label": "Skip guide while presenting (T04): completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 2,
+    "skipped": [
+     "T03"
+    ]
+   }
+  },
+  {
+   "id": "4.7.no-revival",
+   "label": "Skip guide while presenting: 4 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.9.no-revival",
+   "label": "Skip the instant the popover appears: 6 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.9.instant-skip",
+   "label": "Skip before Driver drew its overlay: no overlay ever appears afterwards, no popover, lock released, status skipped",
+   "ok": true,
+   "evidence": {
+    "overlayAtPopover": 0,
+    "overlays": 0,
+    "popovers": 0,
+    "body": "",
+    "status": "skipped",
+    "bodyClasses": ""
+   }
+  },
+  {
+   "id": "4.8.console-clean",
+   "label": "no console errors / page errors (Part A)",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "4.10.start",
+   "label": "lab module starts at L01 (Driver popover)",
+   "ok": true,
+   "evidence": {
+    "step": "L01"
+   }
+  },
+  {
+   "id": "4.11.layers",
+   "label": "Esc on a Driver step: no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": null
+   }
+  },
+  {
+   "id": "4.11.lock",
+   "label": "Esc on a Driver step: scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.11.scroll",
+   "label": "Esc on a Driver step: module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 0,
+    "before": 18105,
+    "after": 0
+   }
+  },
+  {
+   "id": "4.11.focus",
+   "label": "Esc on a Driver step: focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.11.progress",
+   "label": "Esc on a Driver step: status=in-progress, lastExit=close, step=L01",
+   "ok": true,
+   "evidence": {
+    "status": "in-progress",
+    "lastExit": "close",
+    "stepId": "L01"
+   }
+  },
+  {
+   "id": "4.11.disjoint",
+   "label": "Esc on a Driver step: completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 0,
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.12.esc-resumable",
+   "label": "Esc leaves the exact step resumable from the owl menu",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "4.13.resume",
+   "label": "resume re-prepares L01 (one popover, one overlay)",
+   "ok": true,
+   "evidence": {
+    "step": "L01",
+    "popovers": 1,
+    "overlays": 1
+   }
+  },
+  {
+   "id": "4.14.layers",
+   "label": "× on a Driver step: no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": null
+   }
+  },
+  {
+   "id": "4.14.lock",
+   "label": "× on a Driver step: scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.14.scroll",
+   "label": "× on a Driver step: module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 0,
+    "before": 18105,
+    "after": 0
+   }
+  },
+  {
+   "id": "4.14.focus",
+   "label": "× on a Driver step: focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.14.progress",
+   "label": "× on a Driver step: status=in-progress, lastExit=close, step=L01",
+   "ok": true,
+   "evidence": {
+    "status": "in-progress",
+    "lastExit": "close",
+    "stepId": "L01"
+   }
+  },
+  {
+   "id": "4.14.disjoint",
+   "label": "× on a Driver step: completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 0,
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.15.layers",
+   "label": "Tạm dừng hướng dẫn: no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": "paused"
+   }
+  },
+  {
+   "id": "4.15.lock",
+   "label": "Tạm dừng hướng dẫn: scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.15.scroll",
+   "label": "Tạm dừng hướng dẫn: module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 0,
+    "before": 18105,
+    "after": 0
+   }
+  },
+  {
+   "id": "4.15.focus",
+   "label": "Tạm dừng hướng dẫn: focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.15.progress",
+   "label": "Tạm dừng hướng dẫn: status=in-progress, lastExit=pause, step=L01",
+   "ok": true,
+   "evidence": {
+    "status": "in-progress",
+    "lastExit": "pause",
+    "stepId": "L01"
+   }
+  },
+  {
+   "id": "4.15.disjoint",
+   "label": "Tạm dừng hướng dẫn: completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 0,
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.16.pause-notice",
+   "label": "pausing shows the paused notice with a resume button",
+   "ok": true,
+   "evidence": {
+    "cue": "paused"
+   }
+  },
+  {
+   "id": "4.17.resume-after-pause",
+   "label": "Tiếp tục hướng dẫn re-prepares exactly L01",
+   "ok": true,
+   "evidence": {
+    "step": "L01",
+    "lastExit": null,
+    "popovers": 1
+   }
+  },
+  {
+   "id": "4.18.hit-test",
+   "label": "element under Skip (practice cue): button.mach-guide__btn",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "4.18.layers",
+   "label": "Skip guide while practising L02: no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": "skipped"
+   }
+  },
+  {
+   "id": "4.18.lock",
+   "label": "Skip guide while practising L02: scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.18.scroll",
+   "label": "Skip guide while practising L02: module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 0,
+    "before": 18105,
+    "after": 0
+   }
+  },
+  {
+   "id": "4.18.focus",
+   "label": "Skip guide while practising L02: focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.18.progress",
+   "label": "Skip guide while practising L02: status=skipped, lastExit=skip-guide, step=L02",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "lastExit": "skip-guide",
+    "stepId": "L02"
+   }
+  },
+  {
+   "id": "4.18.completed",
+   "label": "Skip guide while practising L02: completed ids are exactly [\"L01\"] (skip/close never add completion)",
+   "ok": true,
+   "evidence": {
+    "completed": [
+     "L01"
+    ],
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.18.disjoint",
+   "label": "Skip guide while practising L02: completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 1,
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.18.no-revival",
+   "label": "Skip guide in practice: 4 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.19.rollback-on-skip",
+   "label": "the slider the reader moved during the unfinished lab practice is restored when the guide is skipped",
+   "ok": true,
+   "evidence": {
+    "original": 50,
+    "changed": 54,
+    "rolled": 50
+   }
+  },
+  {
+   "id": "4.20.skip-step-records",
+   "label": "Skip step records L02 as skipped (not completed)",
+   "ok": true,
+   "evidence": {
+    "skipped": [
+     "L02"
+    ],
+    "done": [
+     "L01"
+    ]
+   }
+  },
+  {
+   "id": "4.21.replay-clears-skipped",
+   "label": "replaying and completing L02 removes it from skippedStepIds",
+   "ok": true,
+   "evidence": {
+    "skipped": [],
+    "done": [
+     "L01",
+     "L02"
+    ]
+   }
+  },
+  {
+   "id": "4.22.console-clean",
+   "label": "no console errors / page errors (Part B)",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "4.30.skip-visible-preparing",
+   "label": "while preparing, Bỏ qua hướng dẫn is on screen and enabled",
+   "ok": true,
+   "evidence": {
+    "disabled": false,
+    "inViewport": true
+   }
+  },
+  {
+   "id": "4.30.hit-test",
+   "label": "element under Skip while preparing: button.mach-guide__btn",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "4.31.skip-preparing",
+   "label": "Skip guide while preparing: status skipped / skip-guide, nothing completed, no overlay/popover/step cue, lock released",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "lastExit": "skip-guide",
+    "done": [],
+    "body": "",
+    "cue": "skipped"
+   }
+  },
+  {
+   "id": "4.32.focus-preparing",
+   "label": "focus on the owl button after skipping during preparation",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.33.no-revival",
+   "label": "Skip while preparing (late preparation): 12 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.33.scroll",
+   "label": "scrollY at exit 0->0, 12 s later 0 (a navigation already started by the guide may finish on its own)",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "4.34.unlocked-after-late-resolve",
+   "label": "after the late resolve: still skipped, scroll lock still released, no body lock",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "body": ""
+   }
+  },
+  {
+   "id": "4.35.esc-preparing",
+   "label": "Esc while preparing closes the guide (in-progress + close) and the late preparation cannot revive it",
+   "ok": true,
+   "evidence": {
+    "status": "in-progress",
+    "lastExit": "close",
+    "cue": null,
+    "focus": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+   }
+  },
+  {
+   "id": "4.35.no-revival",
+   "label": "Esc while preparing: 9 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "in-progress"
+   }
+  },
+  {
+   "id": "4.36.console-clean",
+   "label": "no console errors / page errors (Part C)",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "4.40.modal-cue",
+   "label": "H07 source drawer (history): the guide opened the dialog and its cue lives inside it",
+   "ok": true,
+   "evidence": {
+    "cueHost": "dialog",
+    "dialogs": [
+     "source-drawer"
+    ],
+    "body": "guide-scroll-locked drawer-open"
+   }
+  },
+  {
+   "id": "4.40.hit-test",
+   "label": "element under Skip inside the dialog: button.mach-guide__btn",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "4.40.layers",
+   "label": "H07 source drawer (history): Skip guide inside the dialog: no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": "skipped"
+   }
+  },
+  {
+   "id": "4.40.lock",
+   "label": "H07 source drawer (history): Skip guide inside the dialog: scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.40.scroll",
+   "label": "H07 source drawer (history): Skip guide inside the dialog: module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 0,
+    "before": 2106,
+    "after": 0
+   }
+  },
+  {
+   "id": "4.40.focus",
+   "label": "H07 source drawer (history): Skip guide inside the dialog: focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.40.progress",
+   "label": "H07 source drawer (history): Skip guide inside the dialog: status=skipped, lastExit=skip-guide, step=H07",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "lastExit": "skip-guide",
+    "stepId": "H07"
+   }
+  },
+  {
+   "id": "4.40.disjoint",
+   "label": "H07 source drawer (history): Skip guide inside the dialog: completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 6,
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.40.dialog-closed",
+   "label": "H07 source drawer (history): the dialog the guide opened is closed, drawer-open class gone",
+   "ok": true,
+   "evidence": {
+    "dialogs": [],
+    "body": ""
+   }
+  },
+  {
+   "id": "4.40.completed-kept",
+   "label": "H07 source drawer (history): earlier completed steps are kept, H07 is not completed",
+   "ok": true,
+   "evidence": {
+    "done": [
+     "H01",
+     "H02",
+     "H03",
+     "H04",
+     "H05",
+     "H06"
+    ]
+   }
+  },
+  {
+   "id": "4.40.no-revival",
+   "label": "H07 source drawer (history): 5 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.40.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "4.41.modal-cue",
+   "label": "V10 source drawer (vietnam): the guide opened the dialog and its cue lives inside it",
+   "ok": true,
+   "evidence": {
+    "cueHost": "dialog",
+    "dialogs": [
+     "source-drawer"
+    ],
+    "body": "guide-scroll-locked drawer-open"
+   }
+  },
+  {
+   "id": "4.41.hit-test",
+   "label": "element under Skip inside the dialog: button.mach-guide__btn",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "4.41.layers",
+   "label": "V10 source drawer (vietnam): Skip guide inside the dialog: no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": "skipped"
+   }
+  },
+  {
+   "id": "4.41.lock",
+   "label": "V10 source drawer (vietnam): Skip guide inside the dialog: scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.41.scroll",
+   "label": "V10 source drawer (vietnam): Skip guide inside the dialog: module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 0,
+    "before": 19907,
+    "after": 0
+   }
+  },
+  {
+   "id": "4.41.focus",
+   "label": "V10 source drawer (vietnam): Skip guide inside the dialog: focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.41.progress",
+   "label": "V10 source drawer (vietnam): Skip guide inside the dialog: status=skipped, lastExit=skip-guide, step=V10",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "lastExit": "skip-guide",
+    "stepId": "V10"
+   }
+  },
+  {
+   "id": "4.41.disjoint",
+   "label": "V10 source drawer (vietnam): Skip guide inside the dialog: completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 9,
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.41.dialog-closed",
+   "label": "V10 source drawer (vietnam): the dialog the guide opened is closed, drawer-open class gone",
+   "ok": true,
+   "evidence": {
+    "dialogs": [],
+    "body": ""
+   }
+  },
+  {
+   "id": "4.41.completed-kept",
+   "label": "V10 source drawer (vietnam): earlier completed steps are kept, V10 is not completed",
+   "ok": true,
+   "evidence": {
+    "done": [
+     "V01",
+     "V02",
+     "V03",
+     "V04",
+     "V05",
+     "V06",
+     "V07",
+     "V08",
+     "V09"
+    ]
+   }
+  },
+  {
+   "id": "4.41.no-revival",
+   "label": "V10 source drawer (vietnam): 5 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.41.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "4.42.modal-cue",
+   "label": "I05 menu drawer (intro): the guide opened the dialog and its cue lives inside it",
+   "ok": true,
+   "evidence": {
+    "cueHost": "dialog",
+    "dialogs": [
+     "source-drawer"
+    ],
+    "body": "guide-scroll-locked drawer-open"
+   }
+  },
+  {
+   "id": "4.42.hit-test",
+   "label": "element under Skip inside the dialog: button.mach-guide__btn",
+   "ok": null,
+   "evidence": "note"
+  },
+  {
+   "id": "4.42.layers",
+   "label": "I05 menu drawer (intro): Skip guide inside the dialog: no overlay / popover / step cue left",
+   "ok": true,
+   "evidence": {
+    "overlays": 0,
+    "popovers": 0,
+    "stepCues": 0,
+    "cue": "skipped"
+   }
+  },
+  {
+   "id": "4.42.lock",
+   "label": "I05 menu drawer (intro): Skip guide inside the dialog: scroll lock released",
+   "ok": true,
+   "evidence": {
+    "body": ""
+   }
+  },
+  {
+   "id": "4.42.scroll",
+   "label": "I05 menu drawer (intro): Skip guide inside the dialog: module replay returns to its caller position",
+   "ok": true,
+   "evidence": {
+    "expected": 1310,
+    "before": 1310,
+    "after": 1310
+   }
+  },
+  {
+   "id": "4.42.focus",
+   "label": "I05 menu drawer (intro): Skip guide inside the dialog: focus back on the owl button",
+   "ok": true,
+   "evidence": "button.mach-guide-dock__button[Mở hướng dẫn của Cú Mạch]"
+  },
+  {
+   "id": "4.42.progress",
+   "label": "I05 menu drawer (intro): Skip guide inside the dialog: status=skipped, lastExit=skip-guide, step=I05",
+   "ok": true,
+   "evidence": {
+    "status": "skipped",
+    "lastExit": "skip-guide",
+    "stepId": "I05"
+   }
+  },
+  {
+   "id": "4.42.disjoint",
+   "label": "I05 menu drawer (intro): Skip guide inside the dialog: completed and skipped stay disjoint",
+   "ok": true,
+   "evidence": {
+    "completed": 4,
+    "skipped": []
+   }
+  },
+  {
+   "id": "4.42.dialog-closed",
+   "label": "I05 menu drawer (intro): the dialog the guide opened is closed, drawer-open class gone",
+   "ok": true,
+   "evidence": {
+    "dialogs": [],
+    "body": ""
+   }
+  },
+  {
+   "id": "4.42.completed-kept",
+   "label": "I05 menu drawer (intro): earlier completed steps are kept, I05 is not completed",
+   "ok": true,
+   "evidence": {
+    "done": [
+     "I01",
+     "I02",
+     "I03",
+     "I04"
+    ]
+   }
+  },
+  {
+   "id": "4.42.no-revival",
+   "label": "I05 menu drawer (intro): 5 s later nothing revived (no popover/overlay/step cue was added after the exit)",
+   "ok": true,
+   "evidence": {
+    "stray": [],
+    "popovers": 0,
+    "overlays": 0,
+    "status": "skipped"
+   }
+  },
+  {
+   "id": "4.42.console-clean",
+   "label": "no console errors / page errors",
+   "ok": true,
+   "evidence": []
+  },
   {
    "id": "4.50.no-revival",
    "label": "H07 (history source drawer): 5 s later nothing revived (no popover/overlay/step cue was added after the exit)",
@@ -21,7 +964,7 @@
    "ok": true,
    "evidence": {
     "hit": {
-     "t": 19772,
+     "t": 3808,
      "cueInside": false
     },
     "dialogs": [],
@@ -73,7 +1016,7 @@
    "ok": true,
    "evidence": {
     "hit": {
-     "t": 10574,
+     "t": 6442,
      "cueInside": false
     },
     "dialogs": [],

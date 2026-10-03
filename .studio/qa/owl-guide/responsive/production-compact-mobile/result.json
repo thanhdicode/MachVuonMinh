@@ -1,0 +1,51 @@
+{
+ "tag": "production-compact-mobile",
+ "reloaded": false,
+ "moduleId": "production",
+ "width": 360,
+ "height": 640,
+ "touch": true,
+ "reduced": false,
+ "zoom": 1,
+ "textOnly": 1,
+ "viewport": {
+  "w": 360,
+  "h": 640,
+  "dpr": 1
+ },
+ "baseDocW": 360,
+ "errors": [],
+ "summary": {
+  "steps": 0,
+  "withIssues": 0,
+  "failures": 1
+ },
+ "results": [
+  {
+   "n": 0,
+   "id": "T01",
+   "failure": "no settled state",
+   "lastSeen": {
+    "presenter": null,
+    "kind": null,
+    "title": null,
+    "scrollY": 920,
+    "body": "",
+    "popovers": 0,
+    "overlays": 0
+   },
+   "progress": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "production",
+    "moduleId": "production",
+    "stepId": "T01",
+    "completedStepIds": [],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": "close"
+   }
+  }
+ ]
+}

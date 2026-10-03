@@ -1,6 +1,6 @@
 {
  "name": "01-first-visit",
- "at": "2026-10-03T13:11:06.426Z",
+ "at": "2026-10-03T16:54:38.952Z",
  "passed": 23,
  "failed": 0,
  "results": [
@@ -9,11 +9,11 @@
    "label": "welcome appears only after fonts are loaded and the intro thread is visible (state captured on insertion)",
    "ok": true,
    "evidence": {
-    "t": 2422,
+    "t": 1462,
     "fonts": "loaded",
     "handleVisible": true,
     "unlocked": false,
-    "shownAfterMs": 112
+    "shownAfterMs": 2051
    }
   },
   {
@@ -32,9 +32,9 @@
    "label": "every welcome button is enabled and inside the viewport",
    "ok": true,
    "evidence": [
-    "full:316x36",
-    "quick:316x36",
-    "explore:316x36",
+    "full:320x36",
+    "quick:320x36",
+    "explore:320x36",
     "skip-guide:149x36"
    ]
   },

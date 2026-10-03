@@ -1,0 +1,400 @@
+{
+ "tag": "verified-mobile",
+ "width": 360,
+ "height": 640,
+ "touch": true,
+ "total": 65,
+ "failed": 0,
+ "results": [
+  {
+   "group": "welcome",
+   "name": "welcome appears for a new visitor",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "welcome",
+   "name": "role=region with aria-labelledby",
+   "ok": true,
+   "detail": "role=region"
+  },
+  {
+   "group": "welcome",
+   "name": "contrast >= 4.5:1 for every text element (computed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "welcome",
+   "name": "accessible name resolves to non-empty text",
+   "ok": true,
+   "detail": "labelledby=mach-guide-welcome-title label=null -> \"Chào bạn\""
+  },
+  {
+   "group": "welcome",
+   "name": "not aria-modal (non-modal layer)",
+   "ok": true,
+   "detail": "aria-modal=null"
+  },
+  {
+   "group": "welcome",
+   "name": "touch targets >= 44x44",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "welcome",
+   "name": "focus starts on the primary choice inside the welcome",
+   "ok": true,
+   "detail": "{\"tag\":\"button\",\"cls\":\"mach-guide__btn\",\"name\":\"Dẫn tôi khám phá\",\"inPopover\":false,\"isTarget\":false,\"inCue\":false,\"inWelcome\":true,\"inMenu\":false,\"isLauncher\":false,\"inDialog\":false}"
+  },
+  {
+   "group": "welcome",
+   "name": "text button \"Bỏ qua hướng dẫn\" visible, enabled and clickable",
+   "ok": true,
+   "detail": "{\"text\":\"Bỏ qua hướng dẫn\",\"ok\":true,\"bottom\":615,\"vh\":640,\"disabled\":false}"
+  },
+  {
+   "group": "esc",
+   "name": "Esc on the welcome dismisses it (status dismissed, no tour started)",
+   "ok": true,
+   "detail": "status=dismissed gone=true"
+  },
+  {
+   "group": "focus-return",
+   "name": "focus after dismissing the welcome is on the owl button or the page (not lost in a removed node)",
+   "ok": true,
+   "detail": "{\"tag\":\"button\",\"cls\":\"mach-guide-dock__button\",\"name\":\"Mở hướng dẫn của Cú Mạch\",\"inPopover\":false,\"isTarget\":false,\"inCue\":false,\"inWelcome\":false,\"inMenu\":false,\"isLauncher\":true,\"inDialog\":false}"
+  },
+  {
+   "group": "console",
+   "name": "no console/page errors in the welcome session",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "dock",
+   "name": "launcher name is \"Mở hướng dẫn của Cú Mạch\"",
+   "ok": true,
+   "detail": "{\"name\":\"Mở hướng dẫn của Cú Mạch\",\"w\":52,\"h\":52,\"expanded\":\"false\",\"controls\":\"mach-guide-menu\"}"
+  },
+  {
+   "group": "dock",
+   "name": "launcher is at least 44x44",
+   "ok": true,
+   "detail": "{\"name\":\"Mở hướng dẫn của Cú Mạch\",\"w\":52,\"h\":52,\"expanded\":\"false\",\"controls\":\"mach-guide-menu\"}"
+  },
+  {
+   "group": "menu",
+   "name": "launcher aria-expanded=true and aria-controls resolves while open",
+   "ok": true,
+   "detail": "{\"expanded\":\"true\",\"controlsResolves\":true}"
+  },
+  {
+   "group": "menu",
+   "name": "contrast >= 4.5:1 for every text element (computed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "menu",
+   "name": "accessible name resolves to non-empty text",
+   "ok": true,
+   "detail": "labelledby=null label=Cú Mạch / Hướng dẫn & xem lại -> \"Cú Mạch / Hướng dẫn & xem lại\""
+  },
+  {
+   "group": "menu",
+   "name": "not aria-modal (non-modal layer)",
+   "ok": true,
+   "detail": "aria-modal=null"
+  },
+  {
+   "group": "menu",
+   "name": "touch targets >= 44x44",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "menu",
+   "name": "focus moves into the menu when it opens",
+   "ok": true,
+   "detail": "{\"tag\":\"button\",\"cls\":\"mach-guide-menu__item\",\"name\":\"Hướng dẫn phần đang xemMở đầu và điều hư\",\"inPopover\":false,\"isTarget\":false,\"inCue\":false,\"inWelcome\":false,\"inMenu\":true,\"isLauncher\":false,\"inDialog\":false}"
+  },
+  {
+   "group": "menu",
+   "name": "last menu item reachable (scrolls inside the menu)",
+   "ok": true,
+   "detail": "{\"last\":\"Ẩn cú trong phiên này\",\"inside\":true,\"scrollable\":true}"
+  },
+  {
+   "group": "esc",
+   "name": "Esc with the owl menu open closes the menu only (no tour, status unchanged)",
+   "ok": true,
+   "detail": "{\"menu\":false,\"popover\":false,\"active\":\"mach-guide-dock__button\"}"
+  },
+  {
+   "group": "focus-return",
+   "name": "focus returns to the owl button after the menu closes",
+   "ok": true,
+   "detail": "active=mach-guide-dock__button"
+  },
+  {
+   "group": "driver",
+   "name": "popover has role=dialog",
+   "ok": true,
+   "detail": "role=dialog"
+  },
+  {
+   "group": "driver",
+   "name": "popover aria-labelledby resolves to non-empty text",
+   "ok": true,
+   "detail": "labelledby=driver-popover-title -> \"Đi tiếp\""
+  },
+  {
+   "group": "driver",
+   "name": "popover aria-describedby resolves to non-empty text",
+   "ok": true,
+   "detail": "describedby=driver-popover-description -> \"Cuộn xuống để xem phần tiếp theo. Dùng c\""
+  },
+  {
+   "group": "driver",
+   "name": "contrast >= 4.5:1 for every text element (computed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "driver",
+   "name": "not aria-modal (non-modal layer)",
+   "ok": true,
+   "detail": "aria-modal=null"
+  },
+  {
+   "group": "driver",
+   "name": "touch targets >= 44x44",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "driver",
+   "name": "close (x) button has a Vietnamese accessible name",
+   "ok": true,
+   "detail": "name=\"Đóng hướng dẫn\" (Driver default is \"Close\")"
+  },
+  {
+   "group": "driver",
+   "name": "focus is inside the popover on a Driver step",
+   "ok": true,
+   "detail": "{\"tag\":\"button\",\"cls\":\"driver-popover-close-btn\",\"name\":\"Đóng hướng dẫn\",\"inPopover\":true,\"isTarget\":false,\"inCue\":false,\"inWelcome\":false,\"inMenu\":false,\"isLauncher\":false,\"inDialog\":false}"
+  },
+  {
+   "group": "driver",
+   "name": "Tab cycles inside the popover and its highlighted target (never reaches the page behind)",
+   "ok": true,
+   "detail": "cycle=button:Quay lại > button:Tiếp tục > button:Tùy chọn > button:Bỏ qua hướng dẫn > button:CUỘN ĐỂ THEO SỢI ĐỎ ↓ > button:Đóng hướng dẫn > button:Quay lại > button:Tiếp tục > button:Tùy chọn > button:Bỏ qua hướng dẫn > button:CUỘN ĐỂ THEO SỢI ĐỎ ↓ > button:Đóng hướng dẫn"
+  },
+  {
+   "group": "driver",
+   "name": "Shift+Tab also stays inside the popover",
+   "ok": true,
+   "detail": "[true,true,true]"
+  },
+  {
+   "group": "esc",
+   "name": "Esc on a Driver step closes the popover and keeps the tour resumable (paused/in-progress)",
+   "ok": true,
+   "detail": "{\"popover\":false,\"overlay\":false,\"cue\":null,\"body\":\"\",\"status\":\"in-progress\",\"step\":\"I03\"}"
+  },
+  {
+   "group": "focus-return",
+   "name": "focus after Esc pause is on a guide control (resume button or owl button), not lost on <body>",
+   "ok": true,
+   "detail": "{\"tag\":\"button\",\"cls\":\"mach-guide-dock__button\",\"name\":\"Mở hướng dẫn của Cú Mạch\",\"inPopover\":false,\"isTarget\":false,\"inCue\":false,\"inWelcome\":false,\"inMenu\":false,\"isLauncher\":true,\"inDialog\":false}"
+  },
+  {
+   "group": "cue-paused",
+   "name": "contrast >= 4.5:1 for every text element (computed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "cue-paused",
+   "name": "accessible name resolves to non-empty text",
+   "ok": true,
+   "detail": "labelledby=mach-guide-cue-title label=null -> \"Đi tiếp\""
+  },
+  {
+   "group": "cue-paused",
+   "name": "not aria-modal (non-modal layer)",
+   "ok": true,
+   "detail": "aria-modal=null"
+  },
+  {
+   "group": "cue-paused",
+   "name": "touch targets >= 44x44",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "cue-paused",
+   "name": "cue is role=region with aria-labelledby",
+   "ok": true,
+   "detail": "role=region"
+  },
+  {
+   "group": "skip",
+   "name": "text button \"Bỏ qua hướng dẫn\" is on the Driver popover after resume",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "skip",
+   "name": "Skip ends the guide at once (status skipped, no popover/overlay)",
+   "ok": true,
+   "detail": "status=skipped"
+  },
+  {
+   "group": "focus-return",
+   "name": "focus returns to the owl button after Skip",
+   "ok": true,
+   "detail": "{\"tag\":\"button\",\"cls\":\"mach-guide-dock__button\",\"name\":\"Mở hướng dẫn của Cú Mạch\",\"inPopover\":false,\"isTarget\":false,\"inCue\":false,\"inWelcome\":false,\"inMenu\":false,\"isLauncher\":true,\"inDialog\":false}"
+  },
+  {
+   "group": "modal-cue",
+   "name": "cue lives inside the open native dialog",
+   "ok": true,
+   "detail": "{\"inDialog\":true,\"dialogOpen\":true,\"focusIn\":true}"
+  },
+  {
+   "group": "modal-cue",
+   "name": "cue is role=region with aria-labelledby and not aria-modal",
+   "ok": true,
+   "detail": "role=region modal=null"
+  },
+  {
+   "group": "modal-cue",
+   "name": "contrast >= 4.5:1 for every text element (computed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "modal-cue",
+   "name": "accessible name resolves to non-empty text",
+   "ok": true,
+   "detail": "labelledby=mach-guide-cue-title label=null -> \"Âm thanh và chuyển động\""
+  },
+  {
+   "group": "modal-cue",
+   "name": "not aria-modal (non-modal layer)",
+   "ok": true,
+   "detail": "aria-modal=null"
+  },
+  {
+   "group": "modal-cue",
+   "name": "touch targets >= 44x44",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "modal-cue",
+   "name": "focus stays inside the dialog (native dialog manages it)",
+   "ok": true,
+   "detail": "{\"inDialog\":true,\"dialogOpen\":true,\"focusIn\":true}"
+  },
+  {
+   "group": "esc",
+   "name": "Esc inside a guide-opened native dialog closes that dialog (its own Esc), without leaving the page locked",
+   "ok": true,
+   "detail": "{\"dialogOpen\":false,\"cueInDialog\":false,\"drawerLock\":false,\"presenter\":\"driver\"}"
+  },
+  {
+   "group": "console",
+   "name": "no console/page errors in the tour session",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "practice-cue",
+   "name": "practice cue appears (P01)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "practice-cue",
+   "name": "cue is role=region with aria-labelledby",
+   "ok": true,
+   "detail": "role=region labelledby=mach-guide-cue-title"
+  },
+  {
+   "group": "practice-cue",
+   "name": "contrast >= 4.5:1 for every text element (computed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "practice-cue",
+   "name": "accessible name resolves to non-empty text",
+   "ok": true,
+   "detail": "labelledby=mach-guide-cue-title label=null -> \"Chọn ba đòn bẩy\""
+  },
+  {
+   "group": "practice-cue",
+   "name": "not aria-modal (non-modal layer)",
+   "ok": true,
+   "detail": "aria-modal=null"
+  },
+  {
+   "group": "practice-cue",
+   "name": "touch targets >= 44x44",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "esc",
+   "name": "Esc with focus on the practised control cancels the practice",
+   "ok": true,
+   "detail": "focus before={\"tag\":\"body\",\"cls\":\"guide-scroll-locked\",\"name\":\"Chế độ đồ họa nhẹm.MẠCHVƯƠN MÌNH07 / 08☰\",\"inPopover\":false,\"isTarget\":false,\"inCue\":false,\"inWelcome\":false,\"inMenu\":false,\"isLauncher\":false,\"inDialog\":false} practiceCueStillShown=false"
+  },
+  {
+   "group": "esc",
+   "name": "Esc with focus inside the practice cue pauses the tour (resumable)",
+   "ok": true,
+   "detail": "status=in-progress"
+  },
+  {
+   "group": "esc",
+   "name": "the owl menu offers to resume the exact step after Esc",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "console",
+   "name": "no console/page errors in the practice session",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "group": "reduced-motion",
+   "name": "welcome: no running animations/transitions on the guide layer",
+   "ok": true,
+   "detail": "{\"running\":[],\"css\":[],\"owl\":[\"none|1\"]}"
+  },
+  {
+   "group": "reduced-motion",
+   "name": "Driver step: no running animations/transitions on the guide layer",
+   "ok": true,
+   "detail": "{\"running\":[],\"css\":[],\"owl\":[\"none|1\"]}"
+  },
+  {
+   "group": "reduced-motion",
+   "name": "Driver runs without its fade (animate:false): body has no driver-fade class",
+   "ok": true,
+   "detail": "{\"body\":\"driver-active driver-simple\",\"popoverAnimation\":\"none\"}"
+  },
+  {
+   "group": "console",
+   "name": "no console/page errors in the reduced-motion session",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

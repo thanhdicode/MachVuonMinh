@@ -1,0 +1,275 @@
+{
+ "name": "09-game",
+ "at": "2026-10-03T17:46:55.570Z",
+ "passed": 26,
+ "failed": 0,
+ "results": [
+  {
+   "id": "9A.1",
+   "label": "F04 offers the game and the written decline",
+   "ok": true,
+   "evidence": {
+    "next": "Mở game và xem cách chơi",
+    "skip": "Bỏ qua phần game"
+   }
+  },
+  {
+   "id": "9A.2",
+   "label": "declining never opens the game",
+   "ok": true,
+   "evidence": {
+    "body": "",
+    "dialog": false,
+    "focus": "mach-guide-dock__button"
+   }
+  },
+  {
+   "id": "9A.3",
+   "label": "persistence follows the agreed decision",
+   "ok": true,
+   "evidence": {
+    "schemaVersion": 2,
+    "status": "skipped",
+    "route": "full",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [
+     "I01",
+     "F01",
+     "F02",
+     "F03",
+     "F04"
+    ],
+    "completedModules": [
+     "finale"
+    ],
+    "skippedStepIds": [
+     "G01",
+     "G02",
+     "G03",
+     "G04",
+     "G05",
+     "G06",
+     "G07",
+     "G08",
+     "G09",
+     "G10"
+    ],
+    "skippedModuleIds": [
+     "game"
+    ],
+    "lastExit": "skip-module"
+   }
+  },
+  {
+   "id": "9A.4",
+   "label": "every game step is skipped, none completed",
+   "ok": true,
+   "evidence": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10"
+   ]
+  },
+  {
+   "id": "9A.5",
+   "label": "no scroll lock is left behind",
+   "ok": true,
+   "evidence": {
+    "body": "",
+    "dialog": false,
+    "focus": "mach-guide-dock__button"
+   }
+  },
+  {
+   "id": "9A.6",
+   "label": "the offered \"show me how to play\" opens the game and starts the guide at its first step",
+   "ok": true,
+   "evidence": "Sẵn sàng chơi"
+  },
+  {
+   "id": "9A.7",
+   "label": "no console or page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "9B.1",
+   "label": "the game guide starts at its first step",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "9B.2",
+   "label": "the toolbar offers a text Skip while the guide runs",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "9B.3",
+   "label": "Skip inside the game ends only the guide: dialog, lock and game stay",
+   "ok": true,
+   "evidence": {
+    "after": {
+     "body": "guide-scroll-locked mini-game-open",
+     "dialog": true,
+     "focus": "mini-game-frame"
+    },
+    "mode": "ready"
+   }
+  },
+  {
+   "id": "9B.4",
+   "label": "the guide layers are gone from the iframe",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "9B.5",
+   "label": "the toolbar Skip is gone and focus stayed inside the game dialog",
+   "ok": true,
+   "evidence": {
+    "body": "guide-scroll-locked mini-game-open",
+    "dialog": true,
+    "focus": "mini-game-frame"
+   }
+  },
+  {
+   "id": "9B.6",
+   "label": "progress records a skipped guide, not a completed one",
+   "ok": true,
+   "evidence": {
+    "schemaVersion": 2,
+    "status": "skipped",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": "skip-guide"
+   }
+  },
+  {
+   "id": "9B.7",
+   "label": "closing the game releases the lock and returns focus to the owl",
+   "ok": true,
+   "evidence": {
+    "body": "",
+    "dialog": false,
+    "focus": "mach-guide-dock__button"
+   }
+  },
+  {
+   "id": "9B.8",
+   "label": "no console or page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "9C.1",
+   "label": "the first Esc closes the guide only",
+   "ok": true,
+   "evidence": {
+    "body": "guide-scroll-locked mini-game-open",
+    "dialog": true,
+    "focus": "mini-game-frame"
+   }
+  },
+  {
+   "id": "9C.2",
+   "label": "the second Esc closes the game and gives the page back",
+   "ok": true,
+   "evidence": {
+    "body": "",
+    "dialog": false,
+    "focus": "mach-guide-dock__button"
+   }
+  },
+  {
+   "id": "9C.3",
+   "label": "focus returns to the owl",
+   "ok": true,
+   "evidence": {
+    "body": "",
+    "dialog": false,
+    "focus": "mach-guide-dock__button"
+   }
+  },
+  {
+   "id": "9C.4",
+   "label": "no console or page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "9D.1",
+   "label": "closing mid-guide removes the dialog and every lock",
+   "ok": true,
+   "evidence": {
+    "body": "",
+    "dialog": false,
+    "focus": "mach-guide-dock__button"
+   }
+  },
+  {
+   "id": "9D.2",
+   "label": "the exact step is kept for resuming",
+   "ok": true,
+   "evidence": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": "close"
+   }
+  },
+  {
+   "id": "9D.3",
+   "label": "no overlay or dialog is left on the page",
+   "ok": true,
+   "evidence": 0
+  },
+  {
+   "id": "9D.4",
+   "label": "no console or page errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "9E.1",
+   "label": "a Skip pressed before the child is ready means the guide never starts afterwards",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "9E.2",
+   "label": "the game stays open and playable",
+   "ok": true,
+   "evidence": {
+    "body": "guide-scroll-locked mini-game-open",
+    "dialog": true,
+    "focus": "mini-game-frame"
+   }
+  },
+  {
+   "id": "9E.3",
+   "label": "no console or page errors",
+   "ok": true,
+   "evidence": []
+  }
+ ]
+}

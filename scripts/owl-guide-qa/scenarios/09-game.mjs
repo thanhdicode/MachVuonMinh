@@ -17,7 +17,7 @@ const allowed = [/ERR_ABORTED/]
 const openMini = async (page, startFromMenu) => { await openMenu(page); await clickMenu(page, startFromMenu) }
 
 async function start(options) {
-  const session = await openPage(options)
+  const session = await openPage({ storage: { [KEY]: seedProgress({ status: 'dismissed' }) }, ...options })
   await unlockIntro(session.page)
   await wait(1500)
   return session

@@ -106,6 +106,7 @@
 .mach-guide .driver-popover-close-btn:hover { opacity: 1; color: var(--guide-red); }
 .mach-guide .driver-popover-arrow { display: none; }
 .mach-guide .mach-guide__extras {
+  position: relative;
   grid-area: extras;
   display: flex;
   flex-wrap: wrap;
@@ -126,10 +127,11 @@
 
 @media (max-width: 700px) {
   .driver-popover.mach-guide {
-    --guide-max: min(66dvh, calc(100dvh - 24px));
-    --guide-pinned: 13em;
+    --guide-max: min(40dvh, calc(100dvh - 24px));
+    --guide-pinned: 14em;
     grid-template-columns: 56px minmax(0, 1fr);
-    grid-template-areas: 'owl title' 'desc desc' 'footer footer' 'extras extras';
+    grid-template-areas: 'owl counter' 'owl title' 'desc desc' 'footer footer' 'extras extras';
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
     column-gap: 10px;
     padding: 12px 12px calc(10px + env(safe-area-inset-bottom));
   }
@@ -140,10 +142,13 @@
     top: auto !important;
     bottom: calc(12px + env(safe-area-inset-bottom)) !important;
   }
-  .driver-popover.mach-guide[data-sheet='top'] { top: 64px !important; bottom: auto !important; --guide-max: min(66dvh, calc(100dvh - 76px)); }
+  .driver-popover.mach-guide[data-sheet='top'] { top: 76px !important; bottom: auto !important; --guide-max: min(40dvh, calc(100dvh - 88px)); }
   .mach-guide .mach-guide__owl { width: 56px; height: 56px; }
   .mach-guide .driver-popover-title { align-self: center; margin: 0 44px 0 0; }
   .mach-guide .driver-popover-description { margin-top: 8px; }
+  .mach-guide .driver-popover-progress-text { grid-area: counter; font-size: 10px; margin-right: 30px; }
+  .mach-guide .driver-popover-footer { margin-top: 8px; padding-top: 0; border: 0; }
+  .mach-guide .mach-guide__extras { margin-top: 6px; }
   .mach-guide .driver-popover-footer-btn,
   .mach-guide .mach-guide__btn { padding: 0 10px; letter-spacing: 0.02em; }
   .mach-guide .mach-guide__btn--quiet { padding: 0 2px; }

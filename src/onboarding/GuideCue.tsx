@@ -72,9 +72,12 @@ export function GuideCue({ view, controller, catalog, currentModule, onOwlFailed
   const { buttons, systemCopy, motionTokens } = catalog
   const primary = useRef<HTMLButtonElement>(null)
   const root = useRef<HTMLElement>(null)
+  const optionsTrigger = useRef<HTMLButtonElement>(null)
+  const [optionsOpen, setOptionsOpen] = useState(false)
   const [anchor, setAnchor] = useState<Anchor>('bottom-left')
   const notice = view.notice
   const step = view.step
+  useEffect(() => setOptionsOpen(false), [step?.id, view.phase, notice?.kind])
   const decision = notice?.kind === 'missing-target' || notice?.kind === 'keep-or-restore' || notice?.kind === 'scene-changed'
   useEffect(() => { if (decision) primary.current?.focus({ preventScroll: true }) }, [decision, notice?.kind])
   useLayoutEffect(() => {
@@ -85,6 +88,30 @@ export function GuideCue({ view, controller, catalog, currentModule, onOwlFailed
     window.addEventListener('resize', place)
     return () => window.removeEventListener('resize', place)
   }, [step?.id, view.phase, notice?.kind, view.cueHost, view.practiceSignaled, step?.target])
+
+  // Keep the real practice controls below the measured phone instruction.
+  useLayoutEffect(() => {
+    const node = root.current
+    if (!node || view.phase !== 'practice' || !['policy', 'lab'].includes(step?.moduleId ?? '') || view.cueHost) return
+    const body = document.body
+    const className = `guide-${step?.moduleId}-practice`
+    const previous = body.style.getPropertyValue('--policy-guide-bottom')
+    const measure = () => {
+      body.classList.add(className)
+      body.style.setProperty('--policy-guide-bottom', `${node.getBoundingClientRect().bottom}px`)
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(node)
+    window.addEventListener('resize', measure)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', measure)
+      body.classList.remove(className)
+      if (previous) body.style.setProperty('--policy-guide-bottom', previous)
+      else body.style.removeProperty('--policy-guide-bottom')
+    }
+  }, [step?.id, step?.moduleId, view.phase, view.cueHost])
 
   // A sticky cue at the bottom of a scrolling drawer can land on the target on short phones: scroll just enough to clear it.
   useLayoutEffect(() => {
@@ -188,7 +215,9 @@ export function GuideCue({ view, controller, catalog, currentModule, onOwlFailed
   const ending = !!notice && ['skipped', 'module-skipped', 'module-complete', 'route-complete', 'game-skipped', 'game-failed'].includes(notice.kind)
   const showSteps = !!step && !ending && (!notice || notice.kind === 'driver-failed' || notice.kind === 'missing-target')
   const body = (
-    <section ref={root} className="mach-guide-cue" role="region" aria-labelledby="mach-guide-cue-title" aria-live="polite" data-kind={kind} data-host={view.cueHost ? 'dialog' : 'page'} data-anchor={anchor} data-guide-cue>
+    <section ref={root} className="mach-guide-cue" role="region" aria-labelledby="mach-guide-cue-title" aria-live="polite" data-kind={kind} data-module={step?.moduleId} data-host={view.cueHost ? 'dialog' : 'page'} data-anchor={anchor} data-guide-cue onKeyDownCapture={(event) => {
+      if (event.key === 'Escape' && optionsOpen) { event.preventDefault(); event.stopPropagation(); setOptionsOpen(false); optionsTrigger.current?.focus() }
+    }}>
       <OwlMascot pose={view.pose} motion={view.motion} nonce={view.motionNonce} tokens={motionTokens} still={still} size={64} onFailed={onOwlFailed} />
       <div className="mach-guide-cue__main">
         {counter && showSteps && <p className="mach-guide-cue__counter">{counter}</p>}
@@ -196,8 +225,13 @@ export function GuideCue({ view, controller, catalog, currentModule, onOwlFailed
         <div className="mach-guide-cue__text">{text}</div>
         <div className="mach-guide-cue__actions">{actions}</div>
         <div className="mach-guide-cue__extras">
-          {showSteps && view.canSkipModule && quiet(buttons.skipModule, 'skip-module', () => void controller.skip('module'))}
-          {showSteps && quiet(buttons.pause, 'pause', () => void controller.pause())}
+          {showSteps && <>
+            <button ref={optionsTrigger} type="button" className="mach-guide__btn mach-guide__btn--quiet mach-guide-options-toggle" data-action="options" aria-expanded={optionsOpen} aria-controls="mach-guide-cue-options" onClick={() => setOptionsOpen(!optionsOpen)}>Tùy chọn</button>
+            <div id="mach-guide-cue-options" className="mach-guide-options" data-open={optionsOpen || undefined}>
+              {view.canSkipModule && quiet(buttons.skipModule, 'skip-module', () => void controller.skip('module'))}
+              {quiet(buttons.pause, 'pause', () => void controller.pause())}
+            </div>
+          </>}
           {!ending && skipGuide}
         </div>
       </div>

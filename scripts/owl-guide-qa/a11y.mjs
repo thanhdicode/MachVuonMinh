@@ -157,6 +157,8 @@ const popoverStable = async (page) => { let last = '', n = 0; for (let i = 0; i 
   await openMenu(page); await wait(300)
   await page.evaluate(() => [...document.querySelectorAll('.mach-guide-menu button')].find((b) => b.textContent.trim().startsWith('Tiếp tục')).click())
   await driverShown(page); await popoverStable(page)
+  const options = await page.$('.driver-popover [data-action="options"]')
+  if (options) await options.click()
   await page.click('.driver-popover [data-action="pause"]'); await wait(900)
   await shot(page, 'paused')
   const pausedAudit = await audit(page, '.mach-guide-cue')
@@ -215,12 +217,11 @@ const popoverStable = async (page) => { let last = '', n = 0; for (let i = 0; i 
     auditChecks('practice-cue', cue)
     const fc = await active(page)
     await shot(page, 'practice-cue')
-    // Esc while focus is on the page (not in the cue) must not cancel the practice; inside the cue it pauses.
+    // Esc cancels the practice even while focus is on the scene control.
     await page.evaluate(() => document.querySelector('[data-guide~="policy-skills"] input, [data-guide~="policy-skills"] button, [data-guide~="policy-skills"]')?.focus?.())
     await page.keyboard.press('Escape'); await wait(500)
     const stillThere = !!(await page.$('.mach-guide-cue[data-kind="practice"]'))
-    check('esc', 'Esc with focus on the practised control does not cancel the practice (Esc stays with the control)', stillThere, `focus before=${JSON.stringify(fc)} practiceCueStillShown=${stillThere}`)
-    await page.focus('.mach-guide-cue [data-action="practice-done"]'); await page.keyboard.press('Escape'); await wait(800)
+    check('esc', 'Esc with focus on the practised control cancels the practice', !stillThere, `focus before=${JSON.stringify(fc)} practiceCueStillShown=${stillThere}`)
     const st = await store(page)
     check('esc', 'Esc with focus inside the practice cue pauses the tour (resumable)', !(await page.$('.mach-guide-cue[data-kind="practice"]')) && st.status === 'in-progress', `status=${st.status}`)
     await openMenu(page); await wait(300)

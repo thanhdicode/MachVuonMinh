@@ -69,8 +69,8 @@ test('Escape closes the guide while it prepares or shows the written fallback, w
   assert.equal(escapeAction({ ...idle, presenter: 'cue', phase: 'presenting' }), 'cancel')
 })
 
-test('Escape in a practice cue is left to the page unless focus is inside the cue', () => {
-  assert.equal(escapeAction({ ...idle, presenter: 'cue', phase: 'practice', focusInCue: false }), 'ignore')
+test('Escape closes an active practice guide even while focus stays on its control', () => {
+  assert.equal(escapeAction({ ...idle, presenter: 'cue', phase: 'practice', focusInCue: false }), 'cancel')
   assert.equal(escapeAction({ ...idle, presenter: 'cue', phase: 'practice', focusInCue: true }), 'cancel')
   assert.equal(escapeAction({ ...idle, presenter: 'cue', phase: 'modal', focusInCue: false }), 'ignore')
 })

@@ -47,6 +47,7 @@ if (wantCase('A')) {
   const { browser, page, errors } = await openPage({ ...dismissed, before: async (p) => { hits = await route(p, [{ match: /guideDriver|driver__js|driver\.js\/dist|\/driver\.css/, action: 'abort' }]) } })
   await guarded(report, browser, async () => {
     await unlockIntro(page)
+    const callerPosition = await page.evaluate(() => Math.round(scrollY))
     await startModule(page, 'Công cụ, máy móc')
     await waitFor(page, () => document.querySelector('.mach-guide-cue')?.dataset.kind === 'driver-failed', null, 120000)
     let s = await probe(page)
@@ -77,7 +78,7 @@ if (wantCase('A')) {
     await page.evaluate(() => document.querySelector('.mach-guide-cue [data-action="skip-guide"]').click())
     await waitGone(page)
     s = await probe(page)
-    report.check('5.A5.skip', 'Skip guide works in the fallback: skipped, lock released, focus on the owl, scroll unchanged', s.progress?.status === 'skipped' && !s.body.includes('guide-scroll-locked') && s.focus.includes('mach-guide-dock__button') && Math.abs(s.scrollY - scrollBefore) <= 1 && s.popovers === 0 && s.overlays === 0, { status: s.progress?.status, body: s.body, focus: s.focus, scroll: [scrollBefore, s.scrollY] })
+    report.check('5.A5.skip', 'Skip guide works in the fallback: skipped, lock released, focus on the owl, caller position restored', s.progress?.status === 'skipped' && !s.body.includes('guide-scroll-locked') && s.focus.includes('mach-guide-dock__button') && Math.abs(s.scrollY - callerPosition) <= 1 && s.popovers === 0 && s.overlays === 0, { status: s.progress?.status, body: s.body, focus: s.focus, callerPosition, scroll: [scrollBefore, s.scrollY] })
     const allow = [/ERR_ABORTED/, /ERR_FAILED/, /Failed to load resource/, /guideDriver|driver__js|driver\.js|driver\.css/, /\[guide\] driver-load/, /Failed to fetch dynamically imported module/]
     const unexpected = unexpectedErrors(errors, allow)
     report.check('5.A6.console', 'only the expected blocked-request / reported driver-load errors appear (nothing else, no uncaught exception)', unexpected.length === 0 && !errors.some((message) => message.startsWith('pageerror')), { unexpected: unexpected.slice(0, 4), expectedSeen: errors.length })

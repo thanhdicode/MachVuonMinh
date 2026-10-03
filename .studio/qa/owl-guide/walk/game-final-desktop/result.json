@@ -1,0 +1,420 @@
+{
+ "tag": "game-final-desktop",
+ "moduleId": "game",
+ "via": "module",
+ "width": 1440,
+ "height": 900,
+ "touch": false,
+ "reduced": false,
+ "textScale": 1,
+ "errors": [],
+ "results": [
+  {
+   "n": -1,
+   "id": "GAME:opened",
+   "progress": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   },
+   "parent": {
+    "dialogOpen": true,
+    "body": "guide-scroll-locked mini-game-open",
+    "parentSkip": [
+     "Bỏ qua hướng dẫn"
+    ],
+    "focus": "BUTTON"
+   }
+  },
+  {
+   "n": 0,
+   "id": "G01",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Sẵn sàng chơi",
+   "counter": "GAME · 01 / 10",
+   "owl": "owl-neutral.webp",
+   "next": "Tiếp tục",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 633,
+    "y": 485,
+    "w": 174,
+    "h": 40
+   },
+   "popBox": {
+    "x": 540,
+    "y": 190,
+    "w": 363,
+    "h": 276
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 1,
+   "id": "G02",
+   "presenter": "cue",
+   "kind": null,
+   "title": "Tập nhảy",
+   "counter": "GAME · 02 / 10",
+   "owl": "owl-practice.webp",
+   "next": "Đã thử, tiếp tục",
+   "note": "Bạn thử thao tác nhé. Khi đã quan sát xong, bấm Đã thử, tiếp tục.",
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 41,
+    "y": 781,
+    "w": 88,
+    "h": 20
+   },
+   "popBox": {
+    "x": 1060,
+    "y": 85,
+    "w": 363,
+    "h": 454
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0,
+   "practiceVerified": true
+  },
+  {
+   "n": 2,
+   "id": "G03",
+   "presenter": "cue",
+   "kind": null,
+   "title": "Tập cúi",
+   "counter": "GAME · 03 / 10",
+   "owl": "owl-practice.webp",
+   "next": "Đã thử, tiếp tục",
+   "note": "Bạn thử thao tác nhé. Khi đã quan sát xong, bấm Đã thử, tiếp tục.",
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 150,
+    "y": 781,
+    "w": 39,
+    "h": 20
+   },
+   "popBox": {
+    "x": 1060,
+    "y": 85,
+    "w": 363,
+    "h": 431
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0,
+   "practiceVerified": true
+  },
+  {
+   "n": 3,
+   "id": "G04",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Dừng và chơi tiếp",
+   "counter": "GAME · 04 / 10",
+   "owl": "owl-point-right.webp",
+   "next": "Tiếp tục",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 1132,
+    "y": 27,
+    "w": 34,
+    "h": 34
+   },
+   "popBox": {
+    "x": 969,
+    "y": 80,
+    "w": 363,
+    "h": 276
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 4,
+   "id": "G05",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Đọc đường chạy",
+   "counter": "GAME · 05 / 10",
+   "owl": "owl-neutral.webp",
+   "next": "Tiếp tục",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": null,
+   "targetBox": null,
+   "popBox": {
+    "x": 540,
+    "y": 117,
+    "w": 363,
+    "h": 276
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 5,
+   "id": "G06",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Giữ trái tim",
+   "counter": "GAME · 06 / 10",
+   "owl": "owl-neutral.webp",
+   "next": "Tiếp tục",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 1066,
+    "y": 30,
+    "w": 41,
+    "h": 29
+   },
+   "popBox": {
+    "x": 907,
+    "y": 78,
+    "w": 363,
+    "h": 276
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 6,
+   "id": "G07",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Trả lời câu hỏi",
+   "counter": "GAME · 07 / 10",
+   "owl": "owl-point-right.webp",
+   "next": "Tiếp tục",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": null,
+   "targetBox": null,
+   "popBox": {
+    "x": 540,
+    "y": 200,
+    "w": 363,
+    "h": 429
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 7,
+   "id": "G08",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Đối mặt boss",
+   "counter": "GAME · 08 / 10",
+   "owl": "owl-point-right.webp",
+   "next": "Tiếp tục",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": null,
+   "targetBox": null,
+   "popBox": {
+    "x": 540,
+    "y": 152,
+    "w": 363,
+    "h": 524
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 8,
+   "id": "G09",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Sang chặng hoặc chơi lại",
+   "counter": "GAME · 09 / 10",
+   "owl": "owl-point-right.webp",
+   "next": "Tiếp tục",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": null,
+   "targetBox": null,
+   "popBox": {
+    "x": 540,
+    "y": 199,
+    "w": 363,
+    "h": 430
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 9,
+   "id": "G10",
+   "presenter": "driver",
+   "kind": null,
+   "title": "Gọi cú trong game",
+   "counter": "GAME · 10 / 10",
+   "owl": "owl-neutral.webp",
+   "next": "Xong phần này",
+   "note": null,
+   "titleOk": true,
+   "textOk": true,
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 1191,
+    "y": 22,
+    "w": 208,
+    "h": 44
+   },
+   "popBox": {
+    "x": 1066,
+    "y": 85,
+    "w": 363,
+    "h": 345
+   },
+   "cueBox": null,
+   "leftovers": false,
+   "mode": "ready",
+   "errors": 0
+  },
+  {
+   "n": 10,
+   "id": "END",
+   "progress": {
+    "schemaVersion": 2,
+    "status": "completed",
+    "route": "game",
+    "moduleId": null,
+    "stepId": null,
+    "completedStepIds": [
+     "G01",
+     "G02",
+     "G03",
+     "G04",
+     "G05",
+     "G06",
+     "G07",
+     "G08",
+     "G09",
+     "G10"
+    ],
+    "completedModules": [
+     "game"
+    ],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   },
+   "parent": {
+    "dialogOpen": true,
+    "body": "guide-scroll-locked mini-game-open",
+    "parentSkip": [],
+    "focus": "mini-game-frame"
+   },
+   "leftovers": 0
+  },
+  {
+   "n": 11,
+   "id": "CLOSED",
+   "parent": {
+    "dialogOpen": false,
+    "body": "",
+    "parentSkip": [],
+    "focus": "mach-guide-dock__button"
+   },
+   "progress": {
+    "schemaVersion": 2,
+    "status": "completed",
+    "route": "game",
+    "moduleId": null,
+    "stepId": null,
+    "completedStepIds": [
+     "G01",
+     "G02",
+     "G03",
+     "G04",
+     "G05",
+     "G06",
+     "G07",
+     "G08",
+     "G09",
+     "G10"
+    ],
+    "completedModules": [
+     "game"
+    ],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   }
+  }
+ ]
+}

@@ -125,11 +125,12 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
   useEffect(()=>{
     const key=(event:KeyboardEvent)=>{
       if (!useWorld.getState().history || document.querySelector('dialog[open]') || /INPUT|TEXTAREA|SELECT/.test((event.target as HTMLElement)?.tagName)) return
-      if (event.key==='Escape' && inspecting) {setInspecting(false);inspectButton.current?.focus({preventScroll:true})}
+      if (document.querySelector('.driver-overlay,.mach-guide-options[data-open]')) return
+      if (event.key==='Escape' && inspecting) {event.preventDefault();event.stopPropagation();setInspecting(false);inspectButton.current?.focus({preventScroll:true});return}
       if (tween.current && (event.key==='ArrowRight' || event.key==='ArrowLeft')) {event.preventDefault();stepEra(Math.max(0,Math.min(7,active+(event.key==='ArrowRight'?1:-1))))}
     }
-    window.addEventListener('keydown',key)
-    return ()=>window.removeEventListener('keydown',key)
+    window.addEventListener('keydown',key,true)
+    return ()=>window.removeEventListener('keydown',key,true)
   },[active,inspecting])
 
   const magnify=(event:ReactPointerEvent<HTMLButtonElement>)=>{

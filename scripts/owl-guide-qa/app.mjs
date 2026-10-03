@@ -1,8 +1,9 @@
 import { launch } from './browser.mjs'
-export const wait = (ms) => new Promise((r) => setTimeout(r, ms))
+import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+export const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 export const ROOT = fileURLToPath(new URL('../..', import.meta.url))
-export const OUT = `${ROOT}.studio/qa/owl-guide`
+export const OUT = join(ROOT, '.studio', 'qa', 'owl-guide')
 export async function openApp({ width = 1440, height = 900, touch = false, reduced = false, scale = 1, timeoutScale = 8, url = process.env.QA_URL || 'http://127.0.0.1:5173/', storage = {}, textScale = 1, blockVendor = false, fresh = true } = {}) {
   const session = await launch({ width, height, touch, scale })
   const { page } = session

@@ -37,6 +37,7 @@ async function startModule(page, title) {
   await dismissNotice(page)
   await page.evaluate(() => { if (!document.querySelector('.mach-guide-menu')) document.querySelector('.mach-guide-dock__button')?.click() })
   await page.waitForSelector('.mach-guide-menu', { timeout: 30000 })
+  await page.evaluate(() => { window.__qaGuideOrigin = Math.round(scrollY) })
   await clickMenu(page, title)
   await waitSettled(page)
 }
@@ -45,6 +46,7 @@ async function resumeFromMenu(page) {
   await dismissNotice(page)
   await page.evaluate(() => { if (!document.querySelector('.mach-guide-menu')) document.querySelector('.mach-guide-dock__button')?.click() })
   await page.waitForSelector('.mach-guide-menu', { timeout: 30000 })
+  await page.evaluate(() => { window.__qaGuideOrigin = Math.round(scrollY) })
   await clickMenu(page, 'Tiếp tục bước dang dở')
   await waitSettled(page)
 }
@@ -66,7 +68,11 @@ async function assertExit(page, id, label, spec) {
   const stepCues = await page.evaluate((notices) => Array.from(document.querySelectorAll('.mach-guide-cue')).filter((cue) => !notices.includes(cue.dataset.kind)).length, NOTICE)
   report.check(`${id}.layers`, `${label}: no overlay / popover / step cue left`, s.overlays === 0 && s.popovers === 0 && stepCues === 0, { overlays: s.overlays, popovers: s.popovers, stepCues, cue: s.cueKind })
   report.check(`${id}.lock`, `${label}: scroll lock released`, spec.lock ? s.body.includes('guide-scroll-locked') : !s.body.includes('guide-scroll-locked'), { body: s.body })
-  if (spec.scrollBefore !== undefined) report.check(`${id}.scroll`, `${label}: the exit did not move the page`, Math.abs(s.scrollY - spec.scrollBefore) <= 1, { before: spec.scrollBefore, after: s.scrollY })
+  if (spec.scrollBefore !== undefined) {
+    const origin = await page.evaluate(() => window.__qaGuideOrigin)
+    const expected = ['full', 'quick', 'game'].includes(s.progress?.route) ? spec.scrollBefore : origin ?? spec.scrollBefore
+    report.check(`${id}.scroll`, `${label}: module replay returns to its caller position`, Math.abs(s.scrollY - expected) <= 1, { expected, before: spec.scrollBefore, after: s.scrollY })
+  }
   report.check(`${id}.focus`, `${label}: focus back on the owl button`, s.focus.includes('mach-guide-dock__button'), s.focus)
   const p = s.progress
   report.check(`${id}.progress`, `${label}: status=${spec.status}, lastExit=${spec.lastExit}${spec.stepId ? ', step=' + spec.stepId : ''}`, p?.status === spec.status && p?.lastExit === spec.lastExit && (!spec.stepId || p?.stepId === spec.stepId), { status: p?.status, lastExit: p?.lastExit, stepId: p?.stepId })
@@ -209,9 +215,12 @@ if (wantPart('B')) {
     const top = await realClick(page, '.mach-guide-cue .mach-guide__btn--skip')
     report.note('4.18.hit-test', `element under Skip (practice cue): ${top}`)
     s = await assertExit(page, '4.18', 'Skip guide while practising L02', { scrollBefore, status: 'skipped', lastExit: 'skip-guide', stepId: 'L02', completed: ['L01'] })
-    const rolled = await page.$eval(input, (el) => Number(el.value))
-    report.check('4.19.rollback-on-skip', 'the slider the reader moved during the unfinished lab practice is restored when the guide is skipped', rolled === original, { original, changed, rolled })
     await noRevival(page, '4.18', 'Skip guide in practice', t0, 4000)
+    await startModule(page, 'Phòng biện chứng')
+    const rolled = await page.$eval(input, (el) => Number(el.value))
+    await page.evaluate(() => document.querySelector('.driver-popover .mach-guide__btn--skip')?.click())
+    await waitGone(page)
+    report.check('4.19.rollback-on-skip', 'the slider the reader moved during the unfinished lab practice is restored when the guide is skipped', rolled === original, { original, changed, rolled })
     await report.shot(page, '4.18-after-skip-practice')
     // B5: replay completes a previously skipped step and removes it from skipped.
     await startModule(page, 'Phòng biện chứng')

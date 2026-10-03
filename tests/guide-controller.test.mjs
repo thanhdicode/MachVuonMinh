@@ -22,6 +22,7 @@ function harness(options = {}) {
   const failures = new Map()
   const practice = new Map()
   const game = []
+  const positions = []
   const reasons = []
   const watchers = []
   let driverActive = false
@@ -50,15 +51,17 @@ function harness(options = {}) {
       return wait.promise
     },
     async closeOwnedModal() { log.push('closeModal'); if (options.closeThrows) throw new Error('modal failed') },
-    snapshotDemo: () => captureDemo(state.demo),
+    closeOwnedModalSync() { log.push('closeModalSync'); if (options.closeSyncThrows) throw new Error('modal sync failed') },
+    snapshotDemo: () => captureDemo(state.demo, options.position),
     restoreDemo(snapshot) { log.push('restoreDemo'); state.demo = demoRestorePatch(snapshot) },
+    restorePosition(snapshot) { positions.push({ scrollY: snapshot.scrollY, era: snapshot.era }) },
     restoreFocus() { log.push('focus') },
     watch(step, { lost }) { watchers.push(lost) },
     game: { open: (id) => game.push(`open:${id}`), cancel: (mode) => game.push(`cancel:${mode}`) },
   }
   const controller = createGuideController({ catalog, progress, leases, adapters, port, report: (error, where) => reports.push(where) })
   return {
-    controller, progress, leases, log, lockLog, reports, state, holds, failures, practice, game, presented, store, reasons,
+    controller, progress, leases, log, lockLog, reports, state, holds, failures, practice, game, positions, presented, store, reasons,
     lose: (reason) => watchers.at(-1)(reason),
     view: () => controller.getView(),
     count: (entry) => log.filter((line) => line === entry).length,
@@ -403,14 +406,71 @@ test('a new start while a guide runs tears the old one down and restores its dem
 test('pagehide suspends layers synchronously and keeps the id resumable without skipped or completed marks', async () => {
   const h = harness()
   await h.controller.start('lab', 'L04')
+  h.state.demo.forces[0] = 9
   h.controller.suspend()
   assert.equal(h.leases.isLocked(), false)
   assert.ok(h.log.includes('destroy'))
+  assert.ok(h.log.includes('closeModalSync'))
+  assert.deepEqual(h.state.demo.forces, [50, 50, 50, 50, 50])
   const saved = h.progress.get()
   assert.equal(saved.stepId, 'L04')
   assert.equal(saved.status, 'in-progress')
   assert.deepEqual(saved.skippedStepIds, [])
   assert.deepEqual(saved.completedStepIds, [])
+})
+
+test('pagehide releases and persists even when synchronous cleanup throws', async () => {
+  const h = harness({ closeSyncThrows: true, destroyThrows: true })
+  await h.controller.start('lab', 'L04')
+  h.state.demo.forces[1] = 7
+  h.controller.suspend()
+  assert.equal(h.leases.isLocked(), false)
+  assert.equal(h.progress.get().lastExit, 'close')
+  assert.deepEqual(h.state.demo.forces, [50, 50, 50, 50, 50])
+  assert.ok(h.reports.includes('driver') && h.reports.includes('close-modal'))
+})
+
+test('single-module replay restores its caller position but the full tour keeps its final position', async () => {
+  const module = harness({ position: { scrollY: 732, era: 4 } })
+  await module.controller.start('history', 'H08')
+  await module.controller.next()
+  assert.deepEqual(module.positions, [{ scrollY: 732, era: 4 }])
+
+  const full = harness({ position: { scrollY: 211, era: 1 } })
+  await full.controller.start('full', 'F04')
+  await full.controller.skipGame()
+  assert.deepEqual(full.positions, [])
+})
+
+test('single-module pause and cancel restore the caller position', async () => {
+  for (const exit of ['pause', 'cancel']) {
+    const h = harness({ position: { scrollY: 410, era: 2 } })
+    await h.controller.start('history', 'H01')
+    await h.controller[exit]()
+    assert.deepEqual(h.positions, [{ scrollY: 410, era: 2 }])
+  }
+})
+
+test('single-module guide skip and final module skip restore the caller position', async () => {
+  const guide = harness({ position: { scrollY: 515, era: 3 } })
+  await guide.controller.start('history', 'H01')
+  await guide.controller.skip('guide')
+  assert.deepEqual(guide.positions, [{ scrollY: 515, era: 3 }])
+
+  const module = harness({ position: { scrollY: 616, era: 5 } })
+  await module.controller.start('history', 'H08')
+  await module.controller.skip('module')
+  assert.deepEqual(module.positions, [{ scrollY: 616, era: 5 }])
+})
+
+test('suspend restores the module origin before resume can capture a replacement', async () => {
+  const h = harness({ position: { scrollY: 840, era: 6 } })
+  await h.controller.start('history', 'H03')
+  h.controller.suspend()
+  assert.deepEqual(h.positions, [{ scrollY: 840, era: 6 }])
+  await h.controller.resume()
+  await h.controller.cancel()
+  assert.deepEqual(h.positions, [{ scrollY: 840, era: 6 }, { scrollY: 840, era: 6 }])
 })
 
 test('finishing the quick route marks only the intro and reports a partial tour', async () => {
@@ -493,6 +553,78 @@ test('skips inside the game guide are saved, so finishing it reads as partial', 
   assert.deepEqual(saved.skippedStepIds, ['G02', 'G03'])
   assert.equal(saved.status, 'completed')
   assert.deepEqual(h.view().notice, { kind: 'route-complete', route: 'full', partial: true })
+})
+
+test('a finished game can replay skipped steps until the dialog closes', async () => {
+  const h = harness()
+  await h.controller.start('full', 'F04')
+  await h.controller.playGame()
+  h.controller.gameEvent({ type: 'step-skipped', stepId: 'G02' })
+  h.controller.gameEvent({ type: 'finished' })
+  h.controller.gameEvent({ type: 'step', stepId: 'G02' })
+  h.controller.gameEvent({ type: 'step-done', stepId: 'G02' })
+  assert.ok(h.progress.get().completedStepIds.includes('G02'))
+  assert.ok(!h.progress.get().skippedStepIds.includes('G02'))
+  h.controller.gameEvent({ type: 'closed', mode: 'dialog-closed' })
+  h.controller.gameEvent({ type: 'step', stepId: 'G03' })
+  assert.notEqual(h.progress.get().stepId, 'G03')
+})
+
+test('a module-skipped game can replay while its dialog remains open', async () => {
+  const h = harness()
+  await h.controller.start('full', 'F04')
+  await h.controller.playGame()
+  h.controller.gameEvent({ type: 'skipped', scope: 'module' })
+  h.controller.gameEvent({ type: 'step', stepId: 'G01' })
+  assert.equal(h.view().presenter, 'game')
+  assert.equal(h.view().step.id, 'G01')
+  assert.equal(h.progress.get().status, 'in-progress')
+})
+
+test('a guide opened from the game owl records progress without a parent tour', () => {
+  const h = harness()
+  h.controller.gameEvent({ type: 'ready' })
+  h.controller.gameEvent({ type: 'step', stepId: 'G01' })
+  assert.equal(h.progress.get().route, 'game')
+  assert.equal(h.progress.get().status, 'in-progress')
+  h.controller.gameEvent({ type: 'step-done', stepId: 'G01' })
+  assert.ok(h.progress.get().completedStepIds.includes('G01'))
+  h.controller.gameEvent({ type: 'step', stepId: 'G02' })
+  h.controller.gameEvent({ type: 'closed', mode: 'dialog-closed' })
+  assert.deepEqual(resumeTarget(h.progress.get()), { route: 'game', stepId: 'G02', moduleId: 'game' })
+  h.controller.gameEvent({ type: 'step', stepId: 'G03' })
+  assert.equal(h.progress.get().stepId, 'G02')
+})
+
+test('game exits keep the module origin until the dialog actually closes', async () => {
+  const exits = [
+    { type: 'finished' },
+    { type: 'skipped', scope: 'module' },
+    { type: 'skipped', scope: 'guide' },
+    { type: 'failed', reason: 'load' },
+  ]
+  for (const event of exits) {
+    const h = harness({ position: { scrollY: 925, era: 7 } })
+    await h.controller.start('finale', 'F04')
+    await h.controller.playGame()
+    h.controller.gameEvent(event)
+    assert.deepEqual(h.positions, [], `${event.type} must not restore behind an open game dialog`)
+    h.controller.gameEvent({ type: 'closed', mode: 'dialog-closed' })
+    assert.deepEqual(h.positions, [{ scrollY: 925, era: 7 }], `${event.type} restores when the dialog closes`)
+  }
+})
+
+test('parent-side game exits also defer position restore until dialog close', async () => {
+  for (const exit of ['skip', 'cancel', 'pause']) {
+    const h = harness({ position: { scrollY: 975, era: 7 } })
+    await h.controller.start('finale', 'F04')
+    await h.controller.playGame()
+    if (exit === 'skip') await h.controller.skip('guide')
+    else await h.controller[exit]()
+    assert.deepEqual(h.positions, [], `${exit} must not restore behind the game dialog`)
+    h.controller.gameEvent({ type: 'closed', mode: 'dialog-closed' })
+    assert.deepEqual(h.positions, [{ scrollY: 975, era: 7 }])
+  }
 })
 
 test('"skip this part" inside the game records the whole game as skipped', async () => {

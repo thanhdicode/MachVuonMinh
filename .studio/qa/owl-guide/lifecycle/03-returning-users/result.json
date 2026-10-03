@@ -1,6 +1,6 @@
 {
  "name": "03-returning-users",
- "at": "2026-10-03T13:22:00.506Z",
+ "at": "2026-10-03T17:23:57.382Z",
  "passed": 57,
  "failed": 0,
  "results": [
@@ -511,7 +511,7 @@
   },
   {
    "id": "3.13.calls",
-   "label": "guide touched storage 14 times (all swallowed)",
+   "label": "guide touched storage 12 times (all swallowed)",
    "ok": null,
    "evidence": "note"
   },

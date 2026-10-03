@@ -1,0 +1,136 @@
+{
+ "name": "release-regressions",
+ "at": "2026-10-03T17:54:06.325Z",
+ "passed": 14,
+ "failed": 0,
+ "results": [
+  {
+   "id": "game.owl-start",
+   "label": "game owl starts a persisted game route",
+   "ok": true,
+   "evidence": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   }
+  },
+  {
+   "id": "game.completion",
+   "label": "a real Next records G01 completion",
+   "ok": true,
+   "evidence": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G02",
+    "completedStepIds": [
+     "G01"
+    ],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   }
+  },
+  {
+   "id": "game.skip-keeps-dialog",
+   "label": "Skip keeps the game playable",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "game.replay",
+   "label": "replay returns to in-progress and preserves earned completion",
+   "ok": true,
+   "evidence": {
+    "schemaVersion": 2,
+    "status": "in-progress",
+    "route": "game",
+    "moduleId": "game",
+    "stepId": "G01",
+    "completedStepIds": [
+     "G01"
+    ],
+    "completedModules": [],
+    "skippedStepIds": [],
+    "skippedModuleIds": [],
+    "lastExit": null
+   }
+  },
+  {
+   "id": "game.close",
+   "label": "dialog closure leaves the replay resumable and releases the game lock",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "game.console",
+   "label": "no game console errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "escape.options",
+   "label": "first Escape closes options while keeping the guide step",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "escape.guide",
+   "label": "second Escape closes the guide",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "escape.console",
+   "label": "no options console errors",
+   "ok": true,
+   "evidence": []
+  },
+  {
+   "id": "lens.active",
+   "label": "lens remains active when its scene guide opens",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "lens.escape-order",
+   "label": "Escape closes the higher guide before the lens",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "lens.escape",
+   "label": "next Escape closes the lens",
+   "ok": true,
+   "evidence": null
+  },
+  {
+   "id": "origin.atlas-relayout",
+   "label": "module replay restores the caller Atlas era across rail/static relayout",
+   "ok": true,
+   "evidence": {
+    "beforeEra": "3",
+    "after": {
+     "era": "3",
+     "layout": "vertical",
+     "y": -2440
+    }
+   }
+  },
+  {
+   "id": "origin.console",
+   "label": "no Atlas console errors",
+   "ok": true,
+   "evidence": []
+  }
+ ]
+}

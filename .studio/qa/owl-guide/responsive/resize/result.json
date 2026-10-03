@@ -1,0 +1,559 @@
+{
+ "height": 800,
+ "total": 69,
+ "failed": 0,
+ "checks": [
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "settled after resize",
+   "ok": true,
+   "detail": "stable"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "same step id kept",
+   "ok": true,
+   "detail": "H02 -> H02; title \"Chọn một mốc\""
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "layout flag matches width",
+   "ok": true,
+   "detail": "data-layout=vertical at 899px"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "target is the visible node of this layout",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"history-mobile-copy\",\"guide\":\"history-era-nav history-next-prev history-caption\",\"shown\":true,\"era\":\"1\"}"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "static target belongs to the right era section",
+   "ok": true,
+   "detail": "era 1"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "copy variant matches layout",
+   "ok": true,
+   "detail": "static variant Vuốt xuống đến mốc 1899–1936 để xem đường sắt, mỏ …"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "popover inside viewport",
+   "ok": true,
+   "detail": "{\"x\":265,\"y\":519,\"w\":380,\"h\":268}"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "popover not on its target",
+   "ok": true,
+   "detail": "overlap 0px2 target {\"x\":40,\"y\":302,\"w\":829,\"h\":195}"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "single popover/overlay (no leftovers)",
+   "ok": true,
+   "detail": "popovers 1 overlays 1 stages 1"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "history still on screen",
+   "ok": true,
+   "detail": "bridge {\"x\":0,\"y\":-721,\"w\":899,\"h\":7019} scrollY 2159 -> 2593"
+  },
+  {
+   "case": "900to899-H02",
+   "step": "H02",
+   "width": 899,
+   "check": "no new console errors",
+   "ok": true,
+   "detail": "none"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "settled after resize",
+   "ok": true,
+   "detail": "stable"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "same step id kept",
+   "ok": true,
+   "detail": "H03 -> H03; title \"Mốc trước và sau\""
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "layout flag matches width",
+   "ok": true,
+   "detail": "data-layout=horizontal at 900px"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "target is the visible node of this layout",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"driver-active-element\",\"guide\":\"history-next-prev\",\"shown\":true,\"era\":null}"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "target is arrows (wide) / era copy (narrow)",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"driver-active-element\",\"guide\":\"history-next-prev\",\"shown\":true,\"era\":null}"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "copy variant matches layout",
+   "ok": true,
+   "detail": "base variant Bấm mũi tên sang phải một lần để xem mốc sau. Mũi …"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "popover inside viewport",
+   "ok": true,
+   "detail": "{\"x\":520,\"y\":178,\"w\":380,\"h\":291}"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "popover not on its target",
+   "ok": true,
+   "detail": "overlap 0px2 target {\"x\":710,\"y\":112,\"w\":154,\"h\":44}"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "single popover/overlay (no leftovers)",
+   "ok": true,
+   "detail": "popovers 1 overlays 1 stages 1"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "history still on screen",
+   "ok": true,
+   "detail": "bridge {\"x\":0,\"y\":0,\"w\":900,\"h\":800} scrollY 2593 -> 2529"
+  },
+  {
+   "case": "899to900-H03",
+   "step": "H03",
+   "width": 900,
+   "check": "no new console errors",
+   "ok": true,
+   "detail": "none"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "settled after resize",
+   "ok": true,
+   "detail": "stable"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "same step id kept",
+   "ok": true,
+   "detail": "H03 -> H03; title \"Mốc trước và sau\""
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "layout flag matches width",
+   "ok": true,
+   "detail": "data-layout=vertical at 899px"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "target is the visible node of this layout",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"history-mobile-copy\",\"guide\":\"history-era-nav history-next-prev history-caption\",\"shown\":true,\"era\":\"1\"}"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "target is arrows (wide) / era copy (narrow)",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"history-mobile-copy\",\"guide\":\"history-era-nav history-next-prev history-caption\",\"shown\":true,\"era\":\"1\"}"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "copy variant matches layout",
+   "ok": true,
+   "detail": "static variant Vuốt xuống để xem mốc tiếp theo; vuốt lên để quay …"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "popover inside viewport",
+   "ok": true,
+   "detail": "{\"x\":265,\"y\":357,\"w\":380,\"h\":268}"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "popover not on its target",
+   "ok": true,
+   "detail": "overlap 0px2 target {\"x\":40,\"y\":140,\"w\":829,\"h\":195}"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "single popover/overlay (no leftovers)",
+   "ok": true,
+   "detail": "popovers 1 overlays 1 stages 1"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "history still on screen",
+   "ok": true,
+   "detail": "bridge {\"x\":0,\"y\":-883,\"w\":899,\"h\":7019} scrollY 2529 -> 2755"
+  },
+  {
+   "case": "900to899-H03-again",
+   "step": "H03",
+   "width": 899,
+   "check": "no new console errors",
+   "ok": true,
+   "detail": "none"
+  },
+  {
+   "case": "900-flow",
+   "step": "H04",
+   "width": 899,
+   "check": "Next still works after crossings",
+   "ok": true,
+   "detail": "Đọc chú thích"
+  },
+  {
+   "case": "900-flow",
+   "step": "-",
+   "width": 899,
+   "check": "console clean for the whole session",
+   "ok": true,
+   "detail": "none"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "settled after resize",
+   "ok": true,
+   "detail": "stable"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "same step id kept",
+   "ok": true,
+   "detail": "H02 -> H02; title \"Chọn một mốc\""
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "layout flag matches width",
+   "ok": true,
+   "detail": "data-layout=horizontal at 900px"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "target is the visible node of this layout",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"history-progress-rail\",\"guide\":\"history-era-nav\",\"shown\":true,\"era\":null}"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "copy variant matches layout",
+   "ok": true,
+   "detail": "base variant Bấm mốc 1899–1936 để xem đường sắt, mỏ và cảng. Kh…"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "popover inside viewport",
+   "ok": true,
+   "detail": "{\"x\":520,\"y\":359,\"w\":380,\"h\":291}"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "popover not on its target",
+   "ok": true,
+   "detail": "overlap 0px2 target {\"x\":-657,\"y\":672,\"w\":6120,\"h\":30}"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "single popover/overlay (no leftovers)",
+   "ok": true,
+   "detail": "popovers 1 overlays 1 stages 1"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "history still on screen",
+   "ok": true,
+   "detail": "bridge {\"x\":0,\"y\":0,\"w\":900,\"h\":800} scrollY 2593 -> 2529"
+  },
+  {
+   "case": "899to900-H02",
+   "step": "H02",
+   "width": 900,
+   "check": "no new console errors",
+   "ok": true,
+   "detail": "none"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "settled after resize",
+   "ok": true,
+   "detail": "stable"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "same step id kept",
+   "ok": true,
+   "detail": "H03 -> H03; title \"Mốc trước và sau\""
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "layout flag matches width",
+   "ok": true,
+   "detail": "data-layout=vertical at 899px"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "target is the visible node of this layout",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"history-mobile-copy\",\"guide\":\"history-era-nav history-next-prev history-caption\",\"shown\":true,\"era\":\"1\"}"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "target is arrows (wide) / era copy (narrow)",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"history-mobile-copy\",\"guide\":\"history-era-nav history-next-prev history-caption\",\"shown\":true,\"era\":\"1\"}"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "copy variant matches layout",
+   "ok": true,
+   "detail": "static variant Vuốt xuống để xem mốc tiếp theo; vuốt lên để quay …"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "popover inside viewport",
+   "ok": true,
+   "detail": "{\"x\":265,\"y\":357,\"w\":380,\"h\":268}"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "popover not on its target",
+   "ok": true,
+   "detail": "overlap 0px2 target {\"x\":40,\"y\":140,\"w\":829,\"h\":195}"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "single popover/overlay (no leftovers)",
+   "ok": true,
+   "detail": "popovers 1 overlays 1 stages 1"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "history still on screen",
+   "ok": true,
+   "detail": "bridge {\"x\":0,\"y\":-883,\"w\":899,\"h\":7019} scrollY 2529 -> 2755"
+  },
+  {
+   "case": "900to899-H03",
+   "step": "H03",
+   "width": 899,
+   "check": "no new console errors",
+   "ok": true,
+   "detail": "none"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "settled after resize",
+   "ok": true,
+   "detail": "stable"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "same step id kept",
+   "ok": true,
+   "detail": "H03 -> H03; title \"Mốc trước và sau\""
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "layout flag matches width",
+   "ok": true,
+   "detail": "data-layout=horizontal at 900px"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "target is the visible node of this layout",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"driver-active-element\",\"guide\":\"history-next-prev\",\"shown\":true,\"era\":null}"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "target is arrows (wide) / era copy (narrow)",
+   "ok": true,
+   "detail": "{\"tag\":\"div\",\"cls\":\"driver-active-element\",\"guide\":\"history-next-prev\",\"shown\":true,\"era\":null}"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "copy variant matches layout",
+   "ok": true,
+   "detail": "base variant Bấm mũi tên sang phải một lần để xem mốc sau. Mũi …"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "popover inside viewport",
+   "ok": true,
+   "detail": "{\"x\":520,\"y\":178,\"w\":380,\"h\":291}"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "popover not on its target",
+   "ok": true,
+   "detail": "overlap 0px2 target {\"x\":710,\"y\":112,\"w\":154,\"h\":44}"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "single popover/overlay (no leftovers)",
+   "ok": true,
+   "detail": "popovers 1 overlays 1 stages 1"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "history still on screen",
+   "ok": true,
+   "detail": "bridge {\"x\":0,\"y\":0,\"w\":900,\"h\":800} scrollY 2755 -> 2529"
+  },
+  {
+   "case": "899to900-H03-again",
+   "step": "H03",
+   "width": 900,
+   "check": "no new console errors",
+   "ok": true,
+   "detail": "none"
+  },
+  {
+   "case": "899-flow",
+   "step": "H04",
+   "width": 900,
+   "check": "Next still works after crossings",
+   "ok": true,
+   "detail": "Đọc chú thích"
+  },
+  {
+   "case": "899-flow",
+   "step": "-",
+   "width": 900,
+   "check": "console clean for the whole session",
+   "ok": true,
+   "detail": "none"
+  }
+ ]
+}

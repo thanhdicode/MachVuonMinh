@@ -3,13 +3,13 @@
 
   const $ = (id) => document.getElementById(id);
   const canvas = $('gameCanvas');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: false });
   const wrap = $('canvasWrap');
   const BASE_SPEED=320, MAX_SPEED=760, GRAVITY=2100, JUMP_SPEED=760;
   const STAGE_LENGTHS=[180,230,280,330,380];
   const STAGE_ENDS=STAGE_LENGTHS.map((_,i)=>STAGE_LENGTHS.slice(0,i+1).reduce((a,b)=>a+b,0));
   const sprites={};
-  const sceneryLayer=document.createElement('canvas'),sceneryCtx=sceneryLayer.getContext('2d');
+  const scenery = window.MACH_GAME_BACKGROUND?.create();
   let assetsReady=false;
   const spriteLoad=Promise.all(Object.entries(window.GAME_SPRITES).map(([key,url])=>new Promise((resolve,reject)=>{
     const image=new Image();image.onload=()=>{sprites[key]=image;resolve()};image.onerror=()=>reject(new Error(`Không tải được sprite ${key}`));image.src=url;
@@ -145,12 +145,14 @@
   function resize(){
     const rect=wrap.getBoundingClientRect();
     const cssW=rect.width, cssH=rect.height;
+    if(cssW<=0||cssH<=0)return;
     dpr=Math.min(window.devicePixelRatio||1,cssW<700?1:1.5);
+    if(canvas.width===Math.round(cssW*dpr)&&canvas.height===Math.round(cssH*dpr))return;
     canvas.width=Math.round(cssW*dpr);
     canvas.height=Math.round(cssH*dpr);
     scale=cssH/430;
     W=cssW/scale;
-    sceneryLayer.width=Math.ceil(W);sceneryLayer.height=430;
+    scenery?.invalidate();
     ctx.setTransform(dpr*scale,0,0,dpr*scale,0,0);
     draw();
   }
@@ -177,7 +179,11 @@
   function canPause(){return sceneActive()}
   function bossActive(){return bossModes.includes(state.mode)||(state.mode==='paused'&&bossModes.includes(state.resumeMode))}
   function buttonLabel(id,text){$(id).firstChild.textContent=text+' '}
-  function updateHud(){
+  let lastHudUpdate=-Infinity;
+  function updateHud(force=true){
+    const now=performance.now();
+    if(!force&&now-lastHudUpdate<100)return;
+    lastHudUpdate=now;
     $('stageNumber').textContent=`${String(state.stage+1).padStart(2,'0')} / 05`;
     $('stageName').textContent=stageNames[state.stage];
     $('score').textContent=padded(state.score);
@@ -419,13 +425,14 @@
       const box=playerBox();
       for(const o of state.obstacles){if(overlaps(box,obstacleBox(o))){collision();break;}}
     }
-    updateHud();
+    updateHud(false);
   }
+  let lastDrawMode='';
   function frame(now){
     const dt=Math.min(Math.max(0,(now-state.lastTime)/1000),.035);
     state.lastTime=now;
     // Held by the guide: nothing in the campaign advances, only the practice runner (if any) moves.
-    if(guideHold.holding){stepPractice(dt);draw();requestAnimationFrame(frame);return}
+    if(guideHold.holding){stepPractice(dt);if(guideHold.practice||lastDrawMode!=='held')draw();lastDrawMode='held';requestAnimationFrame(frame);return}
     if(sceneActive()){
       state.clock+=dt*1000;
       state.sceneWorld+=state.speed*dt*(state.mode==='transition'?.45:bossActive()?.35:1);
@@ -435,7 +442,8 @@
     }
     if(sceneActive()&&state.flash>0)state.flash=Math.max(0,state.flash-dt*2);
     if(sceneActive())updateEffects(dt);
-    draw();requestAnimationFrame(frame);
+    if(sceneActive()||lastDrawMode!==state.mode)draw();
+    lastDrawMode=state.mode;requestAnimationFrame(frame);
   }
 
   function fill(color){ctx.fillStyle=color}
@@ -444,54 +452,9 @@
   function ellipse(x,y,rx,ry,color){fill(color);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill()}
   function round(x,y,w,h,r,color){fill(color);ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
   function background(){
-    const stage=visualStage(),p=palettes[stage];
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);fill(p.sky);ctx.fillRect(0,0,canvas.width,canvas.height);ctx.restore();
-    const sky=ctx.createLinearGradient(0,0,0,430);sky.addColorStop(0,p.sky);sky.addColorStop(1,'#f7efdd');rect(0,0,W,430,sky);
-    ellipse(W*.8,85,43,43,p.sun);ellipse(W*.8,85,61,61,p.sun+'22');
-    const off=state.sceneWorld*.16;
-    ctx.save();ctx.globalAlpha=.4;
-    for(let i=-1;i<4;i++)sprite('background_clouds',i*600-(off*.2%600),-20,600,400);
-    ctx.restore();
-    if(stage===0){
-      const background='background_color_trees';
-      sceneryCtx.clearRect(0,0,sceneryLayer.width,430);
-      if(sprites[background])for(let i=-1;i<=Math.ceil(W/560);i++){
-        const x=i*560-(off*.5%560);
-        sceneryCtx.save();
-        if(i%2){sceneryCtx.translate(x+561,-14);sceneryCtx.scale(-1,1);sceneryCtx.drawImage(sprites[background],0,0,561,350)}
-        else sceneryCtx.drawImage(sprites[background],x,-14,561,350);
-        sceneryCtx.restore();
-      }
-      ctx.save();ctx.globalCompositeOperation='multiply';ctx.drawImage(sceneryLayer,0,0);
-      ctx.restore();
-      // Warm furrows preserve the agriculture chapter's subject.
-      for(let i=0;i<W;i+=110){const x=i-(off%110);line(x,316,x+68,294,'#c5a55e',3)}
-    }else{
-      ctx.save();ctx.globalAlpha=.24;
-      for(let i=-1;i<=Math.ceil(W/600);i++)sprite('background_color_hills',i*600-(off*.25%600),-60,600,400);
-      ctx.restore();
-      for(let layer=0;layer<2;layer++){
-        const interval=layer?155:220,drift=off*(layer?.75:.25);
-        for(let i=-1;i<Math.ceil(W/interval)+1;i++){
-          const x=i*interval-(drift%interval),h=85+((i+20)*37)%85;
-          const shade=layer?p.mid:p.back;
-          round(x,groundY-h,interval-25,h,4,shade);
-          rect(x+8,groundY-h+8,interval-41,5,p.ground+'55');
-          if(stage<=2){rect(x+15,groundY-h-30,15,30,shade);ellipse(x+22,groundY-h-40,16,6,'#fffaf077')}
-          for(let col=0;col<4;col++)for(let row=0;row<Math.floor(h/23)-1;row++)round(x+14+col*27,groundY-h+24+row*22,13,8,2,stage>=3?'#c4eef8':'#f5dfad');
-          if(stage>=3){line(x+50,groundY-h,x+50,groundY-h-25,p.ground,3);ellipse(x+50,groundY-h-26,4,4,'#b51f2a')}
-        }
-      }
-    }
-    const tile=stage===0?'terrain_grass_block':'terrain_stone_block';
-    const tileSize=64,groundOff=state.sceneWorld%tileSize;
-    rect(0,groundY,W,97,p.soil);
-    for(let x=-tileSize;x<W+tileSize;x+=tileSize){sprite(tile+'_top',x-groundOff,groundY,tileSize,tileSize);sprite(tile+'_center',x-groundOff,groundY+tileSize,tileSize,tileSize)}
-    line(0,groundY+5,W,groundY+5,'#b51f2a',3);
-    if(stage===0)for(let x=0;x<W+220;x+=220){const xx=x-state.sceneWorld*.8%220;sprite('bush',xx,groundY-35,58,35);sprite('grass',xx+105,groundY-21,28,21)}
-    if(stage>=3){ctx.save();ctx.globalAlpha=.15;for(let y=groundY+20;y<430;y+=22)line(0,y,W,y,'#b51f2a',1);ctx.restore()}
+    if(scenery){scenery.draw(ctx,{stage:visualStage(),width:W,height:430,groundY,world:state.sceneWorld,reduced:motionPreference.matches});return;}
+    rect(0,0,W,430,'#f3e8d0');rect(0,groundY,W,97,'#b8aa8c');line(0,groundY,W,groundY,'#b51f2a',3);
   }
-
   function sprite(key,x,y,w,h,flip=false){
     const image=sprites[key];if(!image)return;
     ctx.save();if(flip){ctx.translate(x+w,y);ctx.scale(-1,1);ctx.drawImage(image,0,0,w,h)}else ctx.drawImage(image,x,y,w,h);ctx.restore();
