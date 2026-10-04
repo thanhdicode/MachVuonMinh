@@ -1,0 +1,41 @@
+{
+  "records": [
+    {
+      "label": "start",
+      "scrollY": 2184,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": 451.1846923828125,
+      "visibleLeft": 452.1875123828125,
+      "clip": "inset(0px 0px 0px 1.00282px)",
+      "transform": "matrix(1, 0, 0, 1, -1.0028, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    },
+    {
+      "label": "forward",
+      "scrollY": 2424,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": 211.18670654296875,
+      "visibleLeft": 452.1877065429687,
+      "clip": "inset(0px 0px 0px 241.001px)",
+      "transform": "matrix(1, 0, 0, 1, -241.001, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    }
+  ],
+  "checks": [
+    {
+      "name": "native wheel pans the artwork",
+      "pass": true
+    },
+    {
+      "name": "visible artwork edge pans instead of sticking to a vertical crop",
+      "pass": false
+    }
+  ],
+  "errors": []
+}

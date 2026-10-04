@@ -61,8 +61,6 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
       const distance=()=>world.scrollWidth-el.clientWidth
       const animation=gsap.to(world,{x:()=>-distance(),ease:'none',scrollTrigger:{id:'history-bridge',trigger:el,start:'top top',end:()=>`+=${distance()}`,pin:true,scrub:.85,invalidateOnRefresh:true,anticipatePin:1,refreshPriority:1},onUpdate:function(this:gsap.core.Tween){
         updateLeader()
-        const travel=this.progress()*distance()
-        if(innerWidth<1440)el.querySelectorAll<HTMLElement>('.history-figure').forEach((figure,i)=>figure.style.setProperty('--art-clip',`${Math.max(0,travel-i*step/100*innerWidth)}px`))
         const p=Math.max(0,Math.min(1,(this.progress()-.91)/.09))
         el.style.setProperty('--atlas-handoff',String(p));el.dataset.handoff=p>.05?'true':'false';el.dataset.bridgeReady=p>.75?'true':'false'
         if(p>.05&&lens.current)lens.current.style.opacity='0'

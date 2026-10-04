@@ -1,0 +1,125 @@
+{
+  "records": [
+    {
+      "label": "start",
+      "scrollY": 2184,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": 451.1846923828125,
+      "visibleLeft": 451.1846923828125,
+      "clip": "inset(0px)",
+      "transform": "matrix(1, 0, 0, 1, -1.0028, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    },
+    {
+      "label": "forward",
+      "scrollY": 2424,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": 211.18670654296875,
+      "visibleLeft": 211.18670654296875,
+      "clip": "inset(0px)",
+      "transform": "matrix(1, 0, 0, 1, -241.001, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    },
+    {
+      "label": "reverse",
+      "scrollY": 2184,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": 451.1846923828125,
+      "visibleLeft": 451.1846923828125,
+      "clip": "inset(0px)",
+      "transform": "matrix(1, 0, 0, 1, -1.0028, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    },
+    {
+      "label": "1024-768",
+      "scrollY": 1997,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": 148.15444946289062,
+      "visibleLeft": 148.15444946289062,
+      "clip": "inset(0px)",
+      "transform": "matrix(1, 0, 0, 1, -200.002, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    },
+    {
+      "label": "1366-768",
+      "scrollY": 1997,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": 264.43719482421875,
+      "visibleLeft": 264.43719482421875,
+      "clip": "inset(0px)",
+      "transform": "matrix(1, 0, 0, 1, -200, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    },
+    {
+      "label": "1440-900",
+      "scrollY": 2306,
+      "layout": "horizontal",
+      "era": "0",
+      "figureLeft": -99.20011901855469,
+      "visibleLeft": 0,
+      "clip": "inset(0px)",
+      "transform": "matrix(1, 0, 0, 1, -199.997, 0)",
+      "overflow": 0,
+      "canvas": 1,
+      "caption": "NHỊP SẢN XUẤT CỦA LÀNG"
+    }
+  ],
+  "checks": [
+    {
+      "name": "native wheel pans the artwork",
+      "pass": true
+    },
+    {
+      "name": "visible artwork edge pans instead of sticking to a vertical crop",
+      "pass": true
+    },
+    {
+      "name": "reverse scroll restores the original artwork position",
+      "pass": true
+    },
+    {
+      "name": "1024px has no artificial figure crop",
+      "pass": true
+    },
+    {
+      "name": "1024px retains one canvas and no overflow",
+      "pass": true
+    },
+    {
+      "name": "1366px has no artificial figure crop",
+      "pass": true
+    },
+    {
+      "name": "1366px retains one canvas and no overflow",
+      "pass": true
+    },
+    {
+      "name": "1440px has no artificial figure crop",
+      "pass": true
+    },
+    {
+      "name": "1440px retains one canvas and no overflow",
+      "pass": true
+    },
+    {
+      "name": "no browser errors",
+      "pass": true
+    }
+  ],
+  "errors": []
+}
