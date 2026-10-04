@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { useWorld, tick, timeline } from "./WorldState";
+import { crossesEyelet } from "./introInteraction";
 import { startTimeline, goToScene } from "./WorldTimeline";
 import { sceneCopy } from "../data/copy";
 import { LabControls } from "./LabControls";
@@ -28,7 +29,13 @@ export function Experience() {
 }
 function ExperienceBody() {
   const state = useWorld(),
-    dragStart = useRef<{ x: number; y: number } | null>(null);
+    eyeletTarget = useRef<HTMLSpanElement>(null),
+    dragStart = useRef<{
+      pointerId: number;
+      start: { x: number; y: number };
+      previous: { x: number; y: number };
+      distance: number;
+    } | null>(null);
   const [drawer, setDrawer] = useState<"menu" | "source" | "history" | null>(
       null,
     ),
@@ -71,6 +78,22 @@ function ExperienceBody() {
       state.set({ unlocked: true });
       tick(420);
     }
+  };
+  const resetThreadDrag = (handle: HTMLButtonElement) => {
+    dragStart.current = null;
+    timeline.dragging = false;
+    handle.style.left = "";
+    handle.style.top = "";
+  };
+  const moveThreadDrag = (pointerId: number, x: number, y: number) => {
+    const drag = dragStart.current;
+    if (!drag || drag.pointerId !== pointerId) return false;
+    const point = { x, y }, bounds = eyeletTarget.current?.getBoundingClientRect();
+    const crossed = bounds ? crossesEyelet(drag.previous, point, bounds) : false;
+    drag.distance = Math.max(drag.distance, Math.hypot(x - drag.start.x, y - drag.start.y));
+    drag.previous = point;
+    timeline.endpoint = [(x / innerWidth) * 2 - 1, 1 - (y / innerHeight) * 2];
+    return crossed;
   };
   return (
     <main
@@ -128,6 +151,7 @@ function ExperienceBody() {
           </p>
           {!state.unlocked && (
             <span
+              ref={eyeletTarget}
               className="eyelet-target"
               role="img"
               aria-label="Vòng kim loại — đích kéo sợi đỏ"
@@ -145,7 +169,10 @@ function ExperienceBody() {
                 data-guide="intro-thread"
                 aria-label="Kéo sợi đỏ qua vòng. Hoặc nhấn Enter để tiếp tục."
                 onPointerDown={(e) => {
-                  dragStart.current = { x: e.clientX, y: e.clientY };
+                  if (!e.isPrimary || e.button !== 0 || dragStart.current) return;
+                  e.preventDefault();
+                  const point = { x: e.clientX, y: e.clientY };
+                  dragStart.current = { pointerId: e.pointerId, start: point, previous: point, distance: 0 };
                   e.currentTarget.setPointerCapture(e.pointerId);
                   timeline.dragging = true;
                   timeline.endpoint = [
@@ -154,36 +181,27 @@ function ExperienceBody() {
                   ];
                 }}
                 onPointerMove={(e) => {
-                  if (!dragStart.current) return;
-                  timeline.endpoint = [
-                    (e.clientX / innerWidth) * 2 - 1,
-                    1 - (e.clientY / innerHeight) * 2,
-                  ];
+                  if (dragStart.current?.pointerId !== e.pointerId) return;
+                  if (moveThreadDrag(e.pointerId, e.clientX, e.clientY)) {
+                    resetThreadDrag(e.currentTarget);
+                    unlock();
+                    return;
+                  }
                   e.currentTarget.style.left = e.clientX + "px";
                   e.currentTarget.style.top = e.clientY + "px";
                 }}
                 onPointerCancel={(e) => {
-                  dragStart.current = null;
-                  timeline.dragging = false;
-                  e.currentTarget.style.left = "";
-                  e.currentTarget.style.top = "";
+                  if (dragStart.current?.pointerId === e.pointerId) resetThreadDrag(e.currentTarget);
+                }}
+                onLostPointerCapture={(e) => {
+                  if (dragStart.current?.pointerId === e.pointerId) resetThreadDrag(e.currentTarget);
                 }}
                 onPointerUp={(e) => {
-                  const start = dragStart.current;
-                  if (
-                    start &&
-                    (Math.hypot(e.clientX - start.x, e.clientY - start.y) <
-                      12 ||
-                      (e.clientX > innerWidth * 0.4 &&
-                        e.clientX < innerWidth * 0.7 &&
-                        e.clientY > innerHeight * 0.25 &&
-                        e.clientY < innerHeight * 0.65))
-                  )
-                    unlock();
-                  dragStart.current = null;
-                  timeline.dragging = false;
-                  e.currentTarget.style.left = "";
-                  e.currentTarget.style.top = "";
+                  const drag = dragStart.current;
+                  if (!drag || drag.pointerId !== e.pointerId) return;
+                  const crossed = moveThreadDrag(e.pointerId, e.clientX, e.clientY);
+                  if (crossed || drag.distance < 12) unlock();
+                  resetThreadDrag(e.currentTarget);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {

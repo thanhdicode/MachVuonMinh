@@ -27,7 +27,8 @@ try {
   const hit = await page.evaluate(({ x, y }) => document.elementFromPoint(x, y)?.closest('.thread-handle') !== null, handle)
   check('the handle is the element under the pointer (nothing overlays it)', hit)
 
-  const end = { x: width * 0.55, y: height * 0.45 }
+  // Cross the opening and release beyond it: the old release-only hit box failed here.
+  const end = { x: width * 0.8, y: height * 0.45 }
   if (touch) {
     await page.touchscreen.touchStart(handle.x, handle.y)
     for (let i = 1; i <= 12; i += 1) { await page.touchscreen.touchMove(handle.x + (end.x - handle.x) * i / 12, handle.y + (end.y - handle.y) * i / 12); await wait(40) }

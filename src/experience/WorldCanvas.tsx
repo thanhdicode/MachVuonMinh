@@ -23,6 +23,12 @@ function CameraRig() {
   const smooth = useRef(0)
   useEffect(()=>setDpr(size.width<768?1:Math.min(devicePixelRatio,1.5)),[size.width,setDpr])
   useEffect(() => { const refresh = () => invalidate(); window.addEventListener('scroll',refresh); const unsub = useWorld.subscribe(refresh); return()=>{window.removeEventListener('scroll',refresh);unsub()} },[invalidate])
+  useEffect(() => {
+    const refreshDrag = () => { if (timeline.scene === 0 && !useWorld.getState().unlocked) invalidate() }
+    const events = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel', 'lostpointercapture'] as const
+    events.forEach(event => window.addEventListener(event, refreshDrag))
+    return () => events.forEach(event => window.removeEventListener(event, refreshDrag))
+  }, [invalidate])
   useFrame((_, delta) => {
     const state = useWorld.getState(), transition = THREE.MathUtils.smoothstep(timeline.local, .72, 1)
     const progress = Math.min(8, timeline.scene + transition) / 8
@@ -87,7 +93,9 @@ function IntroCord() {
   useFrame((_,delta)=>{if(!mesh.current)return;mesh.current.visible=timeline.scene===0&&!useWorld.getState().unlocked;if(!mesh.current.visible)return
     const mobile=size.width<700
     const ndc=timeline.dragging?new THREE.Vector2(...timeline.endpoint):new THREE.Vector2(mobile?-.3:-.2,mobile?-.02:-.18)
-    ray.setFromCamera(ndc,camera);ray.ray.intersectPlane(plane,target);easing.damp3(endpoint,target,.055,delta)
+    ray.setFromCamera(ndc,camera);ray.ray.intersectPlane(plane,target)
+    if(useWorld.getState().reduced||useWorld.getState().paused)endpoint.copy(target)
+    else easing.damp3(endpoint,target,.055,delta)
     const key=endpoint.toArray().map(n=>n.toFixed(3)).join(',');if(key===last.current)return;last.current=key
     const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(-10,-3,1),new THREE.Vector3(-5,-2.3,0),new THREE.Vector3(endpoint.x-1.5,endpoint.y-.45,.05),endpoint.clone()])
     mesh.current.geometry.dispose();mesh.current.geometry=new THREE.TubeGeometry(curve,64,.038,8,false)
