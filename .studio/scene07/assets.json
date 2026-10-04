@@ -1,0 +1,38 @@
+[
+  {
+    "id": "worker",
+    "source": ".studio/scene07/originals/worker.png",
+    "output": "public/images/scene07/worker.webp",
+    "native": [
+      1024,
+      1536
+    ],
+    "alpha": true,
+    "bytes": 166438,
+    "sha256": "4b1fbb4503f39ac0b441dfa5771071afb37584f59bb759f7c570292774cd6190"
+  },
+  {
+    "id": "owner",
+    "source": ".studio/scene07/originals/owner.png",
+    "output": "public/images/scene07/owner.webp",
+    "native": [
+      1024,
+      1536
+    ],
+    "alpha": true,
+    "bytes": 164782,
+    "sha256": "a79f68802b56b4b9bcf5215e26777aed343e5d923d29005916407635a99dccaa"
+  },
+  {
+    "id": "engineer",
+    "source": ".studio/scene07/originals/engineer.png",
+    "output": "public/images/scene07/engineer.webp",
+    "native": [
+      1024,
+      1536
+    ],
+    "alpha": true,
+    "bytes": 113920,
+    "sha256": "c035377fc0352eedd874a9b1ca0e56a15fc70a4dfcf2251a6a89de9e457c29d0"
+  }
+]

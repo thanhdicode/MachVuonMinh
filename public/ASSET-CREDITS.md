@@ -72,3 +72,7 @@ Các ảnh nền trong được mã hóa WebP, giữ bản PNG gốc và prompt 
 ### Driver.js
 
 Hướng dẫn dùng [Driver.js](https://driverjs.com) 1.8.0 (© Kamran Ahmed, giấy phép MIT, `nilbuild/driver.js`) làm bộ spotlight/popover. Bản phân phối kèm thông báo MIT được sao chép nguyên văn vào `/vendor/driver/1.8.0/license` khi build; không tải từ CDN.
+
+## Scene 07 — Ba đời sống / Một hệ thống
+
+Ba chân dung là nhân vật tổng hợp, được tạo bằng image_gen cho dự án; không phải ảnh tư liệu hoặc người thật được định danh. Value Flow và các vật thể tương tác là hình học gốc của dự án; âm thanh được tổng hợp bằng Tone.js, không dùng bản ghi hoặc nhạc có sẵn. Bản gốc, prompt và mã kiểm tra lưu trong .studio/scene07; hồ sơ sử dụng tại ASSET_LICENSES.md. Ảnh tham khảo do người dùng cung cấp không được đưa vào tài sản xuất bản.

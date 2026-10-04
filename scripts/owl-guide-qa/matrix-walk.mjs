@@ -13,7 +13,7 @@ const tag = arg('tag', `${moduleId}-${width}x${height}${touch ? '-touch' : ''}${
 const dir = `${OUT}/responsive/${tag}`; mkdirSync(dir, { recursive: true })
 const copy = JSON.parse(readFileSync(`${ROOT}src/onboarding/guideCopy.json`, 'utf8')).steps
 const copyOf = Object.fromEntries(copy.map((s) => [s.id, s]))
-const TITLES = { intro: 'Mở đầu và điều hướng', history: 'Atlas lịch sử', production: 'Công cụ, máy móc và dữ liệu', lab: 'Phòng biện chứng', vietnam: 'Việt Nam và bằng chứng', policy: 'Buồng chính sách', finale: 'Kết thúc triển lãm', game: 'Minigame' }
+const TITLES = { intro: 'Mở đầu và điều hướng', history: 'Atlas lịch sử', production: 'Công cụ, máy móc và dữ liệu', lab: 'Phòng biện chứng', vietnam: 'Việt Nam và bằng chứng', policy: 'Ba đời sống — một hệ thống', finale: 'Kết thúc triển lãm', game: 'Minigame' }
 const { browser, page, errors } = await openApp({ width: Math.round(width / zoom), height: Math.round(height / zoom), scale: zoom, touch, reduced, storage: { 'mach-vuon-minh:guide:v2': JSON.stringify({ schemaVersion: 2, status: 'dismissed', route: null, moduleId: null, stepId: null, completedStepIds: [], completedModules: [], skippedStepIds: [], skippedModuleIds: [], lastExit: null }) } })
 await page.evaluate(() => { window.__qaMarker = true })
 const wiring = Object.fromEntries([...readFileSync(`${ROOT}src/onboarding/guideCatalog.ts`, 'utf8').matchAll(/^\s{2}(\w+): w\(([^,]+), '([a-z0-9-]+)'/gm)].map((m) => [m[1], m[3]]))
@@ -67,9 +67,9 @@ const act = {
   V06: async () => { await page.click('[data-guide="relation-ownership"]').catch(() => {}) },
   V07: async () => { await page.click('[data-guide="relation-organization"]').catch(() => {}) },
   V08: async () => { await page.click('[data-guide="relation-distribution"]').catch(() => {}) },
-  P01: async () => { await page.click('[data-guide="policy-skills"]').catch(() => {}) },
-  P09: async () => { await page.click('[data-guide="policy-data-rights"]').catch(() => {}); await page.click('[data-guide="policy-sandbox"]').catch(() => {}) },
-  P11: async () => { await page.click('.policy-socket.filled').catch(() => {}) },
+  P01: async () => { await page.click('[data-guide~="policy-instruction"]').catch(() => {}) },
+  P09: async () => { await page.click('[data-guide~="policy-sockets"]').catch(() => {}) },
+  P11: async () => { await page.click('[data-guide~="policy-retry"]').catch(() => {}) },
 }
 for (const id of ['L02', 'L03', 'L04', 'L05', 'L06', 'L08', 'L09', 'L10']) { const name = { L02: 'technology', L03: 'data', L04: 'skills', L05: 'infrastructure', L06: 'automation', L08: 'ownership', L09: 'organization', L10: 'distribution' }[id]; act[id] = async () => { await page.focus(`[data-guide="lab-${name}"] input`).catch(() => {}); await page.keyboard.press('ArrowRight'); await page.keyboard.press('ArrowRight') } }
 

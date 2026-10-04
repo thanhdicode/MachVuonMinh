@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { captureGuidePosition, openedDuringObservation, populatedSlotsChanged, restoredGuideScrollY } from '../src/onboarding/guideAdapterLogic.ts'
+import { captureGuidePosition, openedDuringObservation, restoredGuideScrollY } from '../src/onboarding/guideAdapterLogic.ts'
+import {flowState,captureFlowInputs,restoreFlowInputs,updateFlow} from '../src/experience/scene07State.ts'
 
-test('P01 requires a changed slot layout with at least one populated slot', () => {
-  const before = JSON.stringify([1, null, null])
-  assert.equal(populatedSlotsChanged(before, [1, null, null]), false)
-  assert.equal(populatedSlotsChanged(before, [1, 2, null]), true)
-  assert.equal(populatedSlotsChanged(JSON.stringify([null, null, null]), [null, null, null]), false)
+test('Scene07 worker and splitter practice change their inputs and cancelled practice restores the baseline', () => {
+  const before=captureFlowInputs()
+  updateFlow({work:before.work===1?0:1});assert.notEqual(flowState.work,before.work)
+  updateFlow({split:before.split===1?0:1});assert.notEqual(flowState.split,before.split)
+  restoreFlowInputs(before);assert.deepEqual(captureFlowInputs(),before)
 })
 
 test('modal ownership is claimed only for an opening observed during the guide step', () => {

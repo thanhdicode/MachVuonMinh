@@ -12,7 +12,7 @@ import { sceneCopy } from "../data/copy";
 import { LabControls } from "./LabControls";
 import { VietnamEvidence } from "./VietnamEvidence";
 import { SourceDrawer } from "./SourceDrawer";
-import { PolicyChamber } from "./PolicyChamber";
+import { Scene07Chapter } from "./Scene07Chapter";
 import { HistoryBridge } from "./HistoryBridge";
 import { MachineChapter } from "./MachineChapter";
 import { GuideProvider } from "../onboarding/GuideProvider";
@@ -227,7 +227,7 @@ function ExperienceBody() {
           )}
         </section>
       )}
-      {!state.history && state.active !== 2 && sceneCopy[state.active] && (
+      {!state.history && ![2,7].includes(state.active) && sceneCopy[state.active] && (
         <section
           className={`scene-copy copy-${state.active}`}
           key={state.active}
@@ -326,7 +326,6 @@ function ExperienceBody() {
       )}
       {state.active === 5 && <LabControls />}
       {state.active === 6 && <VietnamEvidence openSource={openSource} />}
-      {state.active === 7 && <PolicyChamber />}
       {state.active === 8 && (
         <div className="final-actions">
           {state.beat === 1 && (
@@ -375,7 +374,9 @@ function ExperienceBody() {
       <div className="journey-before" aria-hidden="true" />
       <HistoryBridge openSource={openHistorySource} />
       <MachineChapter />
-      <div className="journey-after" aria-hidden="true" />
+      <div className="journey-flow-before" aria-hidden="true" />
+      <Scene07Chapter />
+      <div className="journey-flow-after" aria-hidden="true" />
     </main>
   );
 }

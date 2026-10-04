@@ -1,7 +1,8 @@
 import { timeline, useWorld } from '../experience/WorldState'
-import { goToHistory, goToHistoryEnd, goToScene, scrollToPosition } from '../experience/WorldTimeline'
+import { goToFlowBeat, goToHistory, goToHistoryEnd, goToScene, scrollToPosition } from '../experience/WorldTimeline'
+import { flowState,captureFlowInputs,restoreFlowInputs } from '../experience/scene07State.ts'
 import { historyProgressForTravel, historyStep } from '../experience/historyGeometry.ts'
-import { captureGuidePosition, openedDuringObservation, populatedSlotsChanged, restoredGuideScrollY } from './guideAdapterLogic.ts'
+import { captureGuidePosition, openedDuringObservation, restoredGuideScrollY } from './guideAdapterLogic.ts'
 import type { GuidePosition } from './guideAdapterLogic.ts'
 import { GuideError } from './guideController.ts'
 import type { GuideAdapters, GuideLostReason, PreparedStep } from './guideController.ts'
@@ -49,7 +50,6 @@ const eraOf = (element: HTMLElement) => Number(element.dataset.railEra ?? elemen
 const forEra = (index: number) => (element: HTMLElement) => eraOf(element) === index
 const forActiveEra = (element: HTMLElement) => Number.isNaN(eraOf(element)) || eraOf(element) === activeEra()
 const lensAvailable = () => matchMedia('(min-width:900px) and (prefers-reduced-motion:no-preference) and (hover:hover) and (pointer:fine)').matches
-const slotsKey = () => JSON.stringify(world().slots)
 
 function once(type: string, test: (event: Event) => boolean, signal: AbortSignal): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -74,6 +74,14 @@ const ensureCase = (index: number) => async (c: Ctx) => {
   await waitUntil(() => !!c.env.registry.get('vietnam'), { signal: c.signal, timeoutMs: 5000 * scale() })
 }
 const sliderPractice = (name: string): Recipe => ({ practice: changeIn(name) })
+const ensureFlowBeat = (beat: number) => async (c: Ctx) => {
+  goToFlowBeat(beat)
+  await waitUntil(() => flowState.beat === beat, { signal: c.signal, timeoutMs: 5000 * scale() })
+}
+const flowPractice = (field: 'work' | 'split') => (c: Ctx) => {
+  const before = flowState[field]
+  return waitUntil(() => flowState[field] !== before, { signal: c.signal, timeoutMs: FOREVER })
+}
 
 // Phones and reduced motion keep some targets below the fold (a drawer's settings, the era 1 block of the static Atlas). Where the
 // layout scrolls freely the guide goes to the target; the horizontal Atlas never does this, its off-screen captions are stale on purpose.
@@ -136,12 +144,17 @@ const RECIPES: Record<string, Recipe> = {
   V09: { after: async (c) => { await waitUntil(() => !!c.env.registry.get('vietnam'), { signal: c.signal, timeoutMs: 5000 * scale() }) } },
   V10: { after: async (c) => { await waitUntil(() => !!c.env.registry.get('vietnam'), { signal: c.signal, timeoutMs: 5000 * scale() }) }, modal: sourceModal((c) => c.env.registry.get('vietnam')?.sourceIndex() ?? 0, 'source') },
   V11: { after: async (c) => { await waitUntil(() => !!c.env.registry.get('vietnam'), { signal: c.signal, timeoutMs: 5000 * scale() }) }, modal: mapModal },
-  P01: { practice: (c) => { const before = slotsKey(); return waitUntil(() => populatedSlotsChanged(before, world().slots), { signal: c.signal, timeoutMs: FOREVER }) } },
-  P09: {
-    practice: (c) => { const before = slotsKey(); return waitUntil(() => world().slots.every((slot) => slot !== null) && slotsKey() !== before, { signal: c.signal, timeoutMs: FOREVER }) },
-  },
-  P10: { redirect: () => (world().slots.every((slot) => slot !== null) ? null : 'P09') },
-  P11: { practice: (c) => { const before = slotsKey(); return waitUntil(() => slotsKey() !== before, { signal: c.signal, timeoutMs: FOREVER }) } },
+  P01: { after: ensureFlowBeat(1), practice: flowPractice('work') },
+  P02: { after: ensureFlowBeat(1) },
+  P03: { after: ensureFlowBeat(2) },
+  P04: { after: ensureFlowBeat(2) },
+  P05: { after: ensureFlowBeat(2) },
+  P06: { after: ensureFlowBeat(3) },
+  P07: { after: ensureFlowBeat(3) },
+  P08: { after: ensureFlowBeat(3) },
+  P09: { after: ensureFlowBeat(3), practice: flowPractice('split') },
+  P10: { after: ensureFlowBeat(4) },
+  P11: { after: ensureFlowBeat(1), practice: flowPractice('work') },
   F03: { modal: sourceModal(() => 0, 'source') },
   F04: { acted: () => document.body.classList.contains('mini-game-open') },
 }
@@ -151,6 +164,7 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
   let owned: { spec: ModalSpec; dialog: HTMLDialogElement | null; closing: boolean } | null = null
   let hosted: { stepId: string; dialog: HTMLDialogElement } | null = null
   const positions = new WeakMap<DemoSnapshot, GuidePosition>()
+  const flowSnapshots = new WeakMap<DemoSnapshot, ReturnType<typeof captureFlowInputs>>()
   let positionRestoreGeneration = 0
 
   const atlasGeometry = () => {
@@ -247,10 +261,11 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
       const geometry = atlasGeometry()
       const insideAtlas = world().history && geometry !== null
       const snapshot = captureDemo(world(), { scrollY: window.scrollY, era: insideAtlas ? activeEra() : null })
+      flowSnapshots.set(snapshot,captureFlowInputs())
       positions.set(snapshot, captureGuidePosition(snapshot.scrollY, snapshot.era, insideAtlas, geometry?.start ?? 0, geometry?.distance ?? 1, wideAtlas()))
       return snapshot
     },
-    restoreDemo: (snapshot) => world().set(demoRestorePatch(snapshot)),
+    restoreDemo: (snapshot) => {world().set(demoRestorePatch(snapshot));const inputs=flowSnapshots.get(snapshot);if(inputs)restoreFlowInputs(inputs)},
     restorePosition: (snapshot) => {
       const position = positions.get(snapshot)
       if (!position) { scrollToPosition(snapshot.scrollY, true); return }

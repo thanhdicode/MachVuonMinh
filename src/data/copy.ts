@@ -1,4 +1,4 @@
-export const chapters = ['Khởi mạch', 'Công cụ', 'Cơ giới hóa', 'Tự động hóa', 'Dữ liệu', 'Phòng biện chứng', 'Việt Nam', 'Buồng chính sách', 'Tiếp tục vận động']
+export const chapters = ['Khởi mạch', 'Công cụ', 'Cơ giới hóa', 'Tự động hóa', 'Dữ liệu', 'Phòng biện chứng', 'Việt Nam', 'Ba đời sống — một hệ thống', 'Tiếp tục vận động']
 export const sceneCopy: Record<number, { code: string; title: string; body: string; note: string }> = {
   1: { code: '01 / CÔNG CỤ', title: 'Công cụ giới hạn\nnăng lực.', body: 'Sức người, sức kéo và kinh nghiệm định hình một nền sản xuất nhỏ, phân tán.', note: 'SỢI ĐỎ / ĐƯỜNG CÀY' },
   2: { code: '02 / CƠ GIỚI HÓA', title: 'Máy móc mở rộng quy mô.\nTổ chức phải đổi theo.', body: 'Lao động tập trung. Chuyên môn hóa tăng. Sản xuất mang tính xã hội hóa cao hơn.', note: 'SỢI ĐỎ / DÂY TRUYỀN ĐỘNG' },

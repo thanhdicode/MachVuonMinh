@@ -1,0 +1,97 @@
+{
+  "report": [
+    {
+      "name": "worker physical drag changes human role",
+      "pass": true
+    },
+    {
+      "name": "worker keyboard Home restores thao tác",
+      "pass": true
+    },
+    {
+      "name": "worker keyboard End gives giám sát",
+      "pass": true
+    },
+    {
+      "name": "Tone context running and sound ON after user gesture",
+      "pass": true
+    },
+    {
+      "name": "real audio output nonzero",
+      "pass": true
+    },
+    {
+      "name": "pause silences scene output",
+      "pass": true
+    },
+    {
+      "name": "resume restores scene output",
+      "pass": true
+    },
+    {
+      "name": "glass key PRIVATE",
+      "pass": true
+    },
+    {
+      "name": "glass key SHARED",
+      "pass": true
+    },
+    {
+      "name": "glass key CONTROLLED ACCESS",
+      "pass": true
+    },
+    {
+      "name": "splitter routes value qualitatively",
+      "pass": true
+    },
+    {
+      "name": "finale preserves three human portraits",
+      "pass": true
+    },
+    {
+      "name": "reverse hides QHSX reveal",
+      "pass": true
+    },
+    {
+      "name": "mute silences output",
+      "pass": true
+    },
+    {
+      "name": "native exit reaches synthesis",
+      "pass": true
+    },
+    {
+      "name": "native menu direct entry reaches Scene07",
+      "pass": true
+    },
+    {
+      "name": "mobile no pin",
+      "pass": true
+    },
+    {
+      "name": "mobile retains Scene07 after resize",
+      "pass": true
+    },
+    {
+      "name": "mobile tap changes glass key",
+      "pass": true
+    },
+    {
+      "name": "desktop pin returns after resize",
+      "pass": true
+    },
+    {
+      "name": "reduced motion uses vertical unpinned story",
+      "pass": true
+    },
+    {
+      "name": "one WebGL canvas and no overflow",
+      "pass": true
+    },
+    {
+      "name": "no browser errors",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

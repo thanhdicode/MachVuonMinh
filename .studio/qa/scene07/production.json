@@ -1,0 +1,49 @@
+{
+  "report": [
+    {
+      "name": "production Scene07 uses one canvas",
+      "pass": true
+    },
+    {
+      "name": "production lazy Tone chunk runs and emits output",
+      "pass": true
+    },
+    {
+      "name": "production has no browser errors",
+      "pass": true
+    },
+    {
+      "name": "context loss was exercised",
+      "pass": true
+    },
+    {
+      "name": "context-loss SVG and physical gesture remain usable",
+      "pass": true
+    },
+    {
+      "name": "fallback keyboard changes worker consequence",
+      "pass": true
+    },
+    {
+      "name": "missing portrait was exercised",
+      "pass": true
+    },
+    {
+      "name": "missing assets retain readable story and input",
+      "pass": true
+    },
+    {
+      "name": "missing assets retain working gesture",
+      "pass": true
+    },
+    {
+      "name": "only simulated missing-asset errors occur",
+      "pass": true
+    }
+  ],
+  "errors": [
+    "console.error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console.error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console.error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}

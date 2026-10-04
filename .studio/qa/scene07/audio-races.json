@@ -1,0 +1,41 @@
+{
+  "report": [
+    {
+      "name": "lazy Tone chunk held before initialization",
+      "pass": true
+    },
+    {
+      "name": "pending start does not claim SOUND ON",
+      "pass": true
+    },
+    {
+      "name": "deferred activation while paused emits no stale cue",
+      "pass": true
+    },
+    {
+      "name": "resume produces real output",
+      "pass": true
+    },
+    {
+      "name": "browser tab genuinely becomes hidden",
+      "pass": true
+    },
+    {
+      "name": "hidden tab output is zero",
+      "pass": true
+    },
+    {
+      "name": "visible tab resumes enabled sound",
+      "pass": true
+    },
+    {
+      "name": "leaving Scene07 silences enabled engine",
+      "pass": true
+    },
+    {
+      "name": "no activation or scheduling error",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

@@ -4,8 +4,9 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { stops, timeline, useWorld } from './WorldState'
 import { historyStep, historyProgressForTravel } from './historyGeometry'
-import { machineState, journeyProgress, journeyPosition, type JourneyRange } from './machineState'
+import { machineState } from './machineState'
 import { canResumeScroll, createScrollLeases } from '../onboarding/guideSession'
+import { flowState, flowJourneyProgress, flowJourneyPosition, type FlowJourneyRange } from './scene07State'
 import type { ScrollOwner } from '../onboarding/guideSession'
 gsap.registerPlugin(ScrollTrigger)
 gsap.ticker.lagSmoothing(0)
@@ -24,12 +25,14 @@ export function setTimelineSuspended(suspended:boolean) {
   if(suspended){legacyGameLease??=scrollLeases.acquire('game')}
   else {legacyGameLease?.();legacyGameLease=undefined}
 }
-function journeyRange(): JourneyRange {
+function journeyRange(): FlowJourneyRange {
   const atlas = document.querySelector<HTMLElement>('.history-insertion')
   const machine = document.querySelector<HTMLElement>('.machine-insertion')
   const atlasLength = atlas?.offsetHeight ?? 0, machineLength = machine?.offsetHeight ?? 0
   const atlasStart = atlas?.offsetTop ?? 13 * innerHeight * stops[2]
-  return { base:Math.max(1,(document.documentElement.scrollHeight-innerHeight-atlasLength-machineLength)/.88), atlasStart, atlasLength, machineStart:machine?.offsetTop ?? atlasStart+atlasLength, machineLength }
+  const flow=document.querySelector<HTMLElement>('.flow-insertion'),flowLength=flow?.offsetHeight??0
+  const base=Math.max(1,(document.documentElement.scrollHeight-innerHeight-atlasLength-machineLength-flowLength)/.78)
+  return { base, atlasStart, atlasLength, machineStart:machine?.offsetTop ?? atlasStart+atlasLength, machineLength, flowStart:flow?.offsetTop??base*.7+atlasLength+machineLength,flowLength }
 }
 export function scrollToPosition(y: number, immediate = useWorld.getState().reduced) {
   lenis?.resize()
@@ -48,7 +51,13 @@ export function goToScene(index: number) {
   if(index>0&&!useWorld.getState().unlocked)useWorld.getState().set({unlocked:true})
   const progress = stops[index] + (stops[index + 1] - stops[index]) * .32
   const range = journeyRange()
-  scrollToPosition(index===2 ? range.machineStart + (range.machineLength-innerHeight)*.16 : journeyPosition(progress,range))
+  scrollToPosition(index===2 ? range.machineStart + (range.machineLength-innerHeight)*.16 : flowJourneyPosition(progress,range))
+}
+export function goToFlowBeat(beat:number){
+  const r=journeyRange(),p=[.06,.23,.49,.73,.96][Math.max(0,Math.min(4,beat))]
+  const section=document.querySelector<HTMLElement>(`.flow-static-act[data-flow-act="${beat}"]`)
+  scrollToPosition(flowState.static&&section?section.getBoundingClientRect().top+scrollY-100:r.flowStart+p*(r.flowLength-innerHeight),true)
+  ScrollTrigger.update()
 }
 export function startTimeline() {
   if (!useWorld.getState().unlocked) { window.scrollTo(0,0);timeline.scene=0;timeline.local=0;timeline.progress=0;useWorld.getState().set({active:0}) }
@@ -65,7 +74,8 @@ export function startTimeline() {
     const inMachine = unlocked && y >= range.machineStart && y < range.machineStart+range.machineLength
     machineState.active=inMachine
     machineState.exit=inMachine?Math.max(0,Math.min(1,(y-(range.machineStart+range.machineLength-innerHeight))/innerHeight)):0
-    const p = unlocked ? Math.min(.999999, journeyProgress(y,range)) : 0
+    flowState.exit=Math.max(0,Math.min(1,(y-(range.flowStart+range.flowLength-innerHeight))/innerHeight))
+    const p = unlocked ? Math.min(.999999, flowJourneyProgress(y,range)) : 0
     const scene = stops.findIndex((stop, i) => p >= stop && p < stops[i + 1])
     timeline.progress = p; timeline.scene = Math.max(0, scene); timeline.local = (p - stops[timeline.scene]) / (stops[timeline.scene + 1] - stops[timeline.scene])
     const beat = timeline.local < .45 ? 0 : 1
@@ -101,13 +111,17 @@ export function startTimeline() {
     }
   }
   const resize = () => {
-    const progress = timeline.progress, inHistory = useWorld.getState().history, inMachine=useWorld.getState().machine, machineProgress=machineState.progress
+    const progress = timeline.progress, inHistory = useWorld.getState().history, inMachine=useWorld.getState().machine, machineProgress=machineState.progress, inFlow=useWorld.getState().active===7, flowProgress=flowState.progress, flowBeat=flowState.beat
     const era = Number(document.querySelector<HTMLElement>('.history-bridge')?.dataset.activeEra ?? 0)
     requestAnimationFrame(() => {
       lenis?.resize()
       ScrollTrigger.refresh()
       const range = journeyRange()
-      let position = journeyPosition(progress,range)
+      let position = flowJourneyPosition(progress,range)
+      if(inFlow){
+        const act=document.querySelector<HTMLElement>(`.flow-static-act[data-flow-act="${flowBeat}"]`)
+        position=(useWorld.getState().reduced||innerWidth<768)&&act?act.getBoundingClientRect().top+scrollY-100:range.flowStart+flowProgress*(range.flowLength-innerHeight)
+      }
       if(inMachine) {
         if(!useWorld.getState().reduced && innerWidth>=768) position=range.machineStart+machineProgress*(range.machineLength-innerHeight)
         else {const target=document.querySelector<HTMLElement>(`[data-static-beat="${machineState.staticBeat}"]`);if(target)position=target.getBoundingClientRect().top+window.scrollY-125}

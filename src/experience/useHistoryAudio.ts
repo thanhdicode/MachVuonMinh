@@ -239,7 +239,12 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
     else {engineRef.current.silence();silenceMechanical();meterUntilRef.current=performance.now()+SILENCE_FADE_SECONDS*1000}
   }, [activeEra, inHistory, inMachine, paused])
 
-  useEffect(()=>{if(sound!==enabledRef.current)toggle()},[sound,toggle])
+  useEffect(()=>{
+    // Other exhibits can enable the shared preference without starting this
+    // engine. Global mute still disables a previously enabled history engine.
+    if(!inHistory&&!inMachine){if(!sound&&enabledRef.current)toggle();return}
+    if(sound!==enabledRef.current)toggle()
+  },[sound,toggle,inHistory,inMachine])
   useEffect(()=>{
     const timer=setInterval(()=>{
       const analyser=analyserRef.current,samples=meterSamplesRef.current,context=contextRef.current
