@@ -41,7 +41,7 @@ function harness(options = {}) {
       reasons.push(reason)
       if (failures.has(step.id)) return Promise.reject(failures.get(step.id))
       const wait = holds.get(step.id)
-      const result = { element: { id: step.target }, cueHost: step.kind === 'modal' ? { id: 'dialog' } : null }
+      const result = { element: { id: options.target?.(step) ?? step.target }, cueHost: step.kind === 'modal' ? { id: 'dialog' } : null }
       return wait ? wait.promise.then(() => result) : Promise.resolve(result)
     },
     practice(step, { signal }) {
@@ -673,4 +673,108 @@ test('pagehide leaves a coherent, resumable state: no dead cue, late signals and
   assert.equal(h.view().step.id, 'L02')
   assert.equal(h.view().phase, 'practice')
   assert.equal(h.leases.isLocked(), true)
+})
+
+test('a full relayout requested during preparation runs once after presentation settles', async () => {
+  const h = harness()
+  const held = h.hold('L01')
+  const starting = h.controller.start('lab')
+  await settle()
+  h.controller.relayout(false)
+  h.controller.relayout(false)
+  held.resolve()
+  await starting
+  await settle()
+  assert.equal(h.count('prepare:L01'), 2, 'busy width changes coalesce into one fresh target lookup')
+  assert.deepEqual(h.reasons.filter((reason) => reason === 'enter' || reason === 'relayout'), ['enter', 'relayout'])
+  assert.equal(h.presented.filter((entry) => entry.step.id === 'L01').length, 2)
+})
+
+test('a reduced-motion change resolves and presents the current target again', async () => {
+  let target = 'desktop-target'
+  const h = harness({ target: () => target })
+  await h.controller.start('lab')
+  assert.equal(h.presented.at(-1).element.id, 'desktop-target')
+  target = 'static-target'
+  h.controller.setMotion({ reduced: true, paused: false })
+  await settle()
+  assert.equal(h.count('prepare:L01'), 2)
+  assert.equal(h.reasons.at(-1), 'relayout')
+  assert.equal(h.presented.at(-1).element.id, 'static-target')
+  assert.equal(h.presented.at(-1).reduced, true)
+})
+
+test('a paused-only motion change refreshes without resolving the target again', async () => {
+  const h = harness()
+  await h.controller.start('lab')
+  h.controller.setMotion({ reduced: false, paused: true })
+  assert.equal(h.count('prepare:L01'), 1)
+  assert.equal(h.count('refresh'), 1)
+  assert.equal(h.view().paused, true)
+})
+
+test('cancelling a busy step discards its queued full relayout', async () => {
+  const h = harness()
+  const held = h.hold('L01')
+  const starting = h.controller.start('lab')
+  await settle()
+  h.controller.relayout(false)
+  await h.controller.cancel()
+  held.resolve()
+  await starting
+  await settle()
+  assert.equal(h.count('prepare:L01'), 1)
+  assert.equal(h.presented.length, 0)
+  assert.equal(h.view().phase, 'cancelled')
+})
+
+test('a layout change during reprepare resolves the latest target after that reprepare', async () => {
+  let target = 'normal-target'
+  const h = harness({ target: () => target })
+  await h.controller.start('lab')
+  const held = h.hold('L01')
+  target = 'static-target'
+  h.controller.setMotion({ reduced: true, paused: false })
+  await settle()
+  target = 'normal-target'
+  h.controller.setMotion({ reduced: false, paused: false })
+  held.resolve()
+  await settle()
+  await settle()
+  assert.equal(h.count('prepare:L01'), 3)
+  assert.equal(h.presented.at(-1).element.id, 'normal-target')
+  assert.equal(h.presented.at(-1).reduced, false)
+})
+
+test('motion relayout keeps a completed practice and its original restore baseline', async () => {
+  const h = harness()
+  await h.controller.start('lab', 'L02')
+  h.state.demo.forces[0] = 75
+  h.practice.get('L02').resolve()
+  await settle()
+  assert.equal(h.view().practiceSignaled, true)
+  h.controller.setMotion({ reduced: true, paused: false })
+  await settle()
+  assert.equal(h.view().phase, 'practice')
+  assert.equal(h.view().practiceSignaled, true)
+  await h.controller.skip('step')
+  assert.equal(h.state.demo.forces[0], 50)
+})
+
+test('failed practice relayout and retry retain the original rollback baseline', async () => {
+  const h = harness()
+  await h.controller.start('lab', 'L02')
+  h.state.demo.forces[0] = 75
+  h.practice.get('L02').resolve()
+  await settle()
+  h.failures.set('L02', new GuideError('missing-target'))
+  h.controller.setMotion({ reduced: true, paused: false })
+  await settle()
+  assert.equal(h.view().notice?.kind, 'missing-target')
+  assert.equal(h.view().practiceSignaled, true)
+  h.failures.delete('L02')
+  await h.controller.retry()
+  assert.equal(h.view().practiceSignaled, true)
+  await h.controller.skip('step')
+  assert.equal(h.state.demo.forces[0], 50)
 })

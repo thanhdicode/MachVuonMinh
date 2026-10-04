@@ -1,6 +1,6 @@
 import { timeline, useWorld } from '../experience/WorldState'
 import { goToFlowBeat, goToHistory, goToHistoryEnd, goToScene, scrollToPosition } from '../experience/WorldTimeline'
-import { flowState,captureFlowInputs,restoreFlowInputs } from '../experience/scene07State.ts'
+import { flowState,captureFlowInputs,restoreFlowInputs,updateFlow } from '../experience/scene07State.ts'
 import { historyProgressForTravel, historyStep } from '../experience/historyGeometry.ts'
 import { captureGuidePosition, openedDuringObservation, restoredGuideScrollY } from './guideAdapterLogic.ts'
 import type { GuidePosition } from './guideAdapterLogic.ts'
@@ -101,8 +101,12 @@ const RECIPES: Record<string, Recipe> = {
   I05: { modal: menuModal },
   I06: { before: (c) => c.env.ui.showOwl() },
   H01: {},
-  // The horizontal Atlas only shows the node of the era being read, so its rail is the target; the static layout points at the era 1 section.
-  H02: { where: (element) => element.classList.contains('history-progress-rail') || (element.classList.contains('history-mobile-copy') && forEra(1)(element)), scrollFree: () => historyStatic(), reveal: historyStatic },
+  H02: { after: () => {
+    if(historyStatic())return
+    const insertion=document.querySelector<HTMLElement>('.history-insertion')
+    // Place era02 at60vw while era01 is still active; the user can then select the actual node.
+    if(insertion)scrollToPosition(insertion.offsetTop+(historyStep/100-.12)*innerWidth,true)
+  }, where: forEra(1), scrollFree: () => historyStatic(), reveal: historyStatic },
   H03: { where: forActiveEra, scrollFree: () => historyStatic(), reveal: historyStatic },
   H04: { where: forActiveEra, reveal: historyStatic },
   H06: {
@@ -149,9 +153,9 @@ const RECIPES: Record<string, Recipe> = {
   P03: { after: ensureFlowBeat(2) },
   P04: { after: ensureFlowBeat(2) },
   P05: { after: ensureFlowBeat(2) },
-  P06: { after: ensureFlowBeat(3) },
-  P07: { after: ensureFlowBeat(3) },
-  P08: { after: ensureFlowBeat(3) },
+  P06: { after: async(c)=>{await ensureFlowBeat(3)(c);updateFlow({split:.17})} },
+  P07: { after: async(c)=>{await ensureFlowBeat(3)(c);updateFlow({split:.5})} },
+  P08: { after: async(c)=>{await ensureFlowBeat(3)(c);updateFlow({split:.83})} },
   P09: { after: ensureFlowBeat(3), practice: flowPractice('split') },
   P10: { after: ensureFlowBeat(4) },
   P11: { after: ensureFlowBeat(1), practice: flowPractice('work') },
@@ -239,6 +243,15 @@ export function createGuideAdapters(env: GuideAdapterEnv): GuideAdapters {
       if (owned && !(recipe.modal && recipe.modal.kind === owned.spec.kind)) await closeOwned()
       if (recipe.satisfied?.()) return { element: null, satisfied: true }
       await recipe.before?.(c)
+      // A motion/width change reaches the store before GSAP finishes replacing the Atlas layout.
+      if(step.scene==='history'){
+        let stable=0
+        await waitUntil(()=>{
+          const expectedStatic=world().reduced||innerWidth<900
+          stable=historyStatic()===expectedStatic?stable+1:0
+          return stable>=3
+        },{signal,timeoutMs:5000*scale()})
+      }
       await goScene(recipe.scene ?? step.scene, signal)
       await recipe.after?.(c)
       if (recipe.modal) return openModal(c, recipe.modal, recipe.where)

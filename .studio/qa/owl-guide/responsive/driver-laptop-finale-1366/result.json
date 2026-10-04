@@ -1,0 +1,680 @@
+{
+ "tag": "driver-laptop-finale-1366",
+ "reloaded": false,
+ "moduleId": "finale",
+ "width": 1366,
+ "height": 768,
+ "touch": false,
+ "reduced": false,
+ "zoom": 1,
+ "textOnly": 1,
+ "viewport": {
+  "w": 1366,
+  "h": 768,
+  "dpr": 1
+ },
+ "baseDocW": 1366,
+ "errors": [],
+ "summary": {
+  "steps": 4,
+  "withIssues": 0,
+  "failures": 0
+ },
+ "results": [
+  {
+   "n": 0,
+   "id": "F01",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Nhìn lại câu chuyện",
+   "counter": "KẾT · 01 / 04",
+   "owl": "neutral",
+   "next": "Tiếp tục",
+   "scrollY": 23836,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 96,
+    "y": 177,
+    "w": 669,
+    "h": 310
+   },
+   "targetInfo": {
+    "tag": "section",
+    "guide": "finale-thesis",
+    "cls": "scene-copy",
+    "shown": true
+   },
+   "popBox": {
+    "x": 787,
+    "y": 154,
+    "w": 380,
+    "h": 355
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 787,
+     "y": 154,
+     "w": 380,
+     "h": 355
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 351,
+    "clientH": 351,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua phần này",
+      "w": 125,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 804,
+      "y": 173,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 804,
+      "y": 173,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 1,
+   "id": "F02",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Quay lại phần thử",
+   "counter": "KẾT · 02 / 04",
+   "owl": "point-left",
+   "next": "Tiếp tục",
+   "scrollY": 23836,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 96,
+    "y": 621,
+    "w": 113,
+    "h": 39
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "finale-lab",
+    "cls": "driver-active-element",
+    "shown": true
+   },
+   "popBox": {
+    "x": 231,
+    "y": 477,
+    "w": 380,
+    "h": 291
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 231,
+     "y": 477,
+     "w": 380,
+     "h": 291
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 287,
+    "clientH": 287,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 248,
+      "y": 496,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 248,
+      "y": 496,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[finale-source] 249,621 101x39"
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 2,
+   "id": "F03",
+   "presenter": "cue",
+   "kind": "modal",
+   "host": "dialog",
+   "anchor": "top-right",
+   "title": "Đọc nguồn sau khi xem",
+   "counter": "KẾT · 03 / 04",
+   "owl": "inspect",
+   "next": "Tiếp tục",
+   "scrollY": 23836,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": null,
+   "overlapArea": null,
+   "targetBox": null,
+   "targetInfo": null,
+   "popBox": null,
+   "cueBox": {
+    "x": 830,
+    "y": 534,
+    "w": 492,
+    "h": 222
+   },
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 830,
+     "y": 534,
+     "w": 492,
+     "h": 222
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "sticky",
+    "scrollH": 218,
+    "clientH": 218,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Quay lại",
+      "w": 87,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tiếp tục",
+      "w": 87,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 149,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 843,
+      "y": 549,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 843,
+      "y": 549,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [
+    "button[] 830,625 38x38",
+    "button[] 878,625 38x38",
+    "button[] 926,625 38x38",
+    "button[] 974,625 38x38",
+    "button[] 1022,625 38x38",
+    "button[] 1070,625 38x38"
+   ],
+   "targets": [
+    {
+     "x": 249,
+     "y": 621,
+     "w": 101,
+     "h": 39,
+     "tag": "button"
+    },
+    {
+     "x": 830,
+     "y": 154,
+     "w": 492,
+     "h": 156,
+     "tag": "dl"
+    }
+   ],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "cueTargetOverlap": 0,
+   "issues": []
+  },
+  {
+   "n": 3,
+   "id": "F04",
+   "presenter": "driver",
+   "kind": null,
+   "host": null,
+   "anchor": null,
+   "title": "Mở phần ôn tập",
+   "counter": "KẾT · 04 / 04",
+   "owl": "point-right",
+   "next": "Mở game và xem cách chơi",
+   "scrollY": 23836,
+   "titleOk": true,
+   "textOk": true,
+   "variant": "base",
+   "skipVisible": true,
+   "skipCovered": null,
+   "popoverInViewport": true,
+   "overlapArea": 0,
+   "targetBox": {
+    "x": 1090,
+    "y": 38,
+    "w": 87,
+    "h": 23
+   },
+   "targetInfo": {
+    "tag": "button",
+    "guide": "finale-game",
+    "cls": "nav-game-trigger",
+    "shown": true
+   },
+   "popBox": {
+    "x": 688,
+    "y": 0,
+    "w": 380,
+    "h": 381
+   },
+   "cueBox": null,
+   "layer": {
+    "kind": "driver",
+    "box": {
+     "x": 688,
+     "y": 0,
+     "w": 380,
+     "h": 381
+    },
+    "overflowY": "auto",
+    "maxHeight": "744px",
+    "position": "fixed",
+    "scrollH": 377,
+    "clientH": 377,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      17
+     ],
+     "body": [
+      15
+     ],
+     "hint": [],
+     "counter": [
+      12
+     ],
+     "buttons": [
+      20,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Đóng hướng dẫn",
+      "w": 36,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Quay lại",
+      "w": 91,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Mở game và xem cách chơi",
+      "w": 214,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua phần game",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua phần này",
+      "w": 125,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Tạm dừng hướng dẫn",
+      "w": 148,
+      "h": 40,
+      "clickable": true
+     },
+     {
+      "label": "Bỏ qua hướng dẫn",
+      "w": 153,
+      "h": 40,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 705,
+      "y": 19,
+      "w": 96,
+      "h": 96
+     },
+     "img": {
+      "x": 705,
+      "y": 19,
+      "w": 96,
+      "h": 96
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "historyLayout": "horizontal",
+   "activeEra": "1",
+   "covered": [],
+   "vp": {
+    "w": 1366,
+    "h": 768
+   },
+   "leftovers": false,
+   "errors": 0,
+   "issues": []
+  },
+  {
+   "n": 4,
+   "id": "END",
+   "presenter": "cue",
+   "kind": "game-skipped",
+   "text": "Tuyến triển lãm đã kết thúc. Phần minigame mình chưa hướng dẫn; bạn có thể xem cách chơi bất cứ lúc nào.Đã đọc: Kết thúc triển lãmĐã bỏ qua: Minigame",
+   "layer": {
+    "kind": "cue",
+    "box": {
+     "x": 41,
+     "y": 495,
+     "w": 400,
+     "h": 217
+    },
+    "overflowY": "auto",
+    "maxHeight": "648px",
+    "position": "fixed",
+    "scrollH": 213,
+    "clientH": 213,
+    "scrollable": [],
+    "clipped": false,
+    "fonts": {
+     "title": [
+      16
+     ],
+     "body": [
+      14
+     ],
+     "hint": [
+      13
+     ],
+     "counter": [],
+     "buttons": [
+      12,
+      12
+     ]
+    },
+    "buttons": [
+     {
+      "label": "Xem hướng dẫn cách chơi",
+      "w": 203,
+      "h": 36,
+      "clickable": true
+     },
+     {
+      "label": "Để sau",
+      "w": 56,
+      "h": 36,
+      "clickable": true
+     }
+    ],
+    "escapes": [],
+    "owl": {
+     "box": {
+      "x": 54,
+      "y": 510,
+      "w": 64,
+      "h": 64
+     },
+     "img": {
+      "x": 54,
+      "y": 510,
+      "w": 64,
+      "h": 64
+     },
+     "natural": [
+      256,
+      256
+     ],
+     "flipped": false
+    },
+    "anim": []
+   },
+   "leftovers": 0,
+   "body": "",
+   "issues": []
+  }
+ ]
+}

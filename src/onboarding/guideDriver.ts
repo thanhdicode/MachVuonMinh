@@ -14,7 +14,10 @@ export type PopoverHosts = { popover: PopoverDOM; owl: HTMLElement; extras: HTML
 // Thin, replaceable wrapper over the official factory: one Driver per step, always destroyed explicitly.
 export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => void, labels: { back: string }): DriverRuntime {
   let instance: Driver | null = null
+  let layoutFrame = 0
   const destroy = () => {
+    cancelAnimationFrame(layoutFrame)
+    layoutFrame = 0
     const current = instance
     instance = null
     document.body.classList.remove('guide-lab-reading')
@@ -46,7 +49,8 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
       }
       const targetRect = args.element.getBoundingClientRect()
       const lowerHalf = targetRect.top + targetRect.height / 2 > innerHeight / 2
-      const side = !matchMedia(sheetQuery).matches && targetRect.left >= 414 ? 'left'
+      const side = args.step.id==='H02'&&!matchMedia(sheetQuery).matches ? 'top'
+        : !matchMedia(sheetQuery).matches && targetRect.left >= 414 ? 'left'
         : !matchMedia(sheetQuery).matches && innerWidth - targetRect.right >= 414 ? 'right'
         : lowerHalf ? 'top' : 'bottom'
       const next = createDriver({
@@ -141,6 +145,24 @@ export function createDriverRuntime(onPopover: (hosts: PopoverHosts | null) => v
           ...hooks,
         },
       })
+      // The pinned mural and value-flow controls can move after native scroll events stop.
+      let previous: DOMRect | null = null
+      let lastSample = 0
+      const followTarget = (time: number) => {
+        if(instance!==next)return
+        if(time-lastSample>=32){
+          lastSample=time
+          // React can replace className when the highlighted control becomes active.
+          args.element.classList.add('driver-active-element')
+          const rect=args.element.getBoundingClientRect()
+          if(!previous||Math.abs(rect.left-previous.left)>.5||Math.abs(rect.top-previous.top)>.5||Math.abs(rect.width-previous.width)>.5||Math.abs(rect.height-previous.height)>.5){
+            next.refresh()
+            previous=rect
+          }
+        }
+        layoutFrame=requestAnimationFrame(followTarget)
+      }
+      if(args.element.closest('.history-progress-rail,.flow-stage'))layoutFrame=requestAnimationFrame(followTarget)
     },
     refresh: () => instance?.refresh(),
     destroy,

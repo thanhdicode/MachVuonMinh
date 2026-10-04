@@ -1,0 +1,194 @@
+{
+  "url": "http://127.0.0.1:5180/",
+  "viewport": {
+    "width": 1366,
+    "height": 768
+  },
+  "passed": 13,
+  "failed": 0,
+  "errors": [],
+  "scenarioError": null,
+  "screenshots": [
+    {
+      "name": "h02-before",
+      "file": "C:\\Users\\ADMIN\\Downloads\\MLN111_Mach_Vuon_Minh_V2_Red_Thread\\mln111_v2_red_thread\\.studio\\qa\\owl-guide\\responsive\\driver-layout-race\\h02-before.png",
+      "bytes": 889653,
+      "elapsedMs": 4284,
+      "standardError": null,
+      "fallback": false
+    },
+    {
+      "name": "h02-after",
+      "file": "C:\\Users\\ADMIN\\Downloads\\MLN111_Mach_Vuon_Minh_V2_Red_Thread\\mln111_v2_red_thread\\.studio\\qa\\owl-guide\\responsive\\driver-layout-race\\h02-after.png",
+      "bytes": 889795,
+      "elapsedMs": 3973,
+      "standardError": null,
+      "fallback": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "resume control starts stored H02",
+      "ok": true,
+      "evidence": null
+    },
+    {
+      "name": "lazy guideDriver request held",
+      "ok": true,
+      "evidence": "http://127.0.0.1:5180/src/onboarding/guideDriver.ts?t=1791119887649"
+    },
+    {
+      "name": "rapid width burst resolves exact visible era 1 button",
+      "ok": true,
+      "evidence": {
+        "tag": "button",
+        "guide": "history-era-nav",
+        "cls": "driver-active-element",
+        "shown": true
+      }
+    },
+    {
+      "name": "spotlight geometry matches settled era 1 button",
+      "ok": true,
+      "evidence": {
+        "target": {
+          "x": 797.188720703125,
+          "y": 606.109375,
+          "width": 44,
+          "height": 44
+        },
+        "viewBox": "0 0 1366 768",
+        "pathMatches": true,
+        "hole": [
+          797.188720703125,
+          598.109375,
+          44,
+          44
+        ],
+        "expectedHole": [
+          797.188720703125,
+          598.109375,
+          44,
+          44
+        ],
+        "actualPath": "M1366,0L0,0L0,768L1366,768L1366,0Z M797.188720703125,598.109375 h44 a8,8 0 0 1 8,8 v44 a8,8 0 0 1 -8,8 h-44 a8,8 0 0 1 -8,-8 v-44 a8,8 0 0 1 8,-8 z",
+        "expectedPath": "M1366,0L0,0L0,768L1366,768L1366,0Z M797.188720703125,598.109375 h44 a8,8 0 0 1 8,8 v44 a8,8 0 0 1 -8,8 h-44 a8,8 0 0 1 -8,-8 v-44 a8,8 0 0 1 8,-8 z"
+      }
+    },
+    {
+      "name": "actual era 1 click selects era 1",
+      "ok": true,
+      "evidence": {
+        "activeEra": "1",
+        "current": "step"
+      }
+    },
+    {
+      "name": "React selection keeps the highlighted node interactive",
+      "ok": true,
+      "evidence": null
+    },
+    {
+      "name": "reduced motion swaps H02 to static era 1 copy",
+      "ok": true,
+      "evidence": {
+        "tag": "div",
+        "guide": "history-era-nav history-next-prev history-caption",
+        "cls": "history-mobile-copy",
+        "shown": true
+      }
+    },
+    {
+      "name": "static spotlight geometry settles",
+      "ok": true,
+      "evidence": {
+        "target": {
+          "x": 40,
+          "y": 24.4375,
+          "width": 1296,
+          "height": 194.734375
+        },
+        "viewBox": "0 0 1366 768",
+        "pathMatches": true,
+        "hole": [
+          40,
+          16.4375,
+          1296,
+          194.734375
+        ],
+        "expectedHole": [
+          40,
+          16.4375,
+          1296,
+          194.734375
+        ],
+        "actualPath": "M1366,0L0,0L0,768L1366,768L1366,0Z M40,16.4375 h1296 a8,8 0 0 1 8,8 v194.734375 a8,8 0 0 1 -8,8 h-1296 a8,8 0 0 1 -8,-8 v-194.734375 a8,8 0 0 1 8,-8 z",
+        "expectedPath": "M1366,0L0,0L0,768L1366,768L1366,0Z M40,16.4375 h1296 a8,8 0 0 1 8,8 v194.734375 a8,8 0 0 1 -8,8 h-1296 a8,8 0 0 1 -8,-8 v-194.734375 a8,8 0 0 1 8,-8 z"
+      }
+    },
+    {
+      "name": "normal motion restores exact era 1 button",
+      "ok": true,
+      "evidence": {
+        "tag": "button",
+        "guide": "history-era-nav",
+        "cls": "driver-active-element",
+        "shown": true
+      }
+    },
+    {
+      "name": "restored spotlight geometry settles",
+      "ok": true,
+      "evidence": {
+        "target": {
+          "x": 797.188720703125,
+          "y": 606.109375,
+          "width": 44,
+          "height": 44
+        },
+        "viewBox": "0 0 1366 768",
+        "pathMatches": true,
+        "hole": [
+          797.4421997070312,
+          598.109375,
+          44,
+          44
+        ],
+        "expectedHole": [
+          797.188720703125,
+          598.109375,
+          44,
+          44
+        ],
+        "actualPath": "M1366,0L0,0L0,768L1366,768L1366,0Z M797.4421997070312,598.109375 h44 a8,8 0 0 1 8,8 v44 a8,8 0 0 1 -8,8 h-44 a8,8 0 0 1 -8,-8 v-44 a8,8 0 0 1 8,-8 z",
+        "expectedPath": "M1366,0L0,0L0,768L1366,768L1366,0Z M797.188720703125,598.109375 h44 a8,8 0 0 1 8,8 v44 a8,8 0 0 1 -8,8 h-44 a8,8 0 0 1 -8,-8 v-44 a8,8 0 0 1 8,-8 z"
+      }
+    },
+    {
+      "name": "Next advances from H02 to working H03",
+      "ok": true,
+      "evidence": {
+        "stepId": "H03",
+        "target": {
+          "tag": "div",
+          "guide": "history-next-prev",
+          "cls": "driver-active-element",
+          "shown": true
+        }
+      }
+    },
+    {
+      "name": "dismiss leaves no Driver overlays or popovers",
+      "ok": true,
+      "evidence": {
+        "overlays": 0,
+        "popovers": 0
+      }
+    },
+    {
+      "name": "browser console stays clean",
+      "ok": true,
+      "evidence": []
+    }
+  ]
+}

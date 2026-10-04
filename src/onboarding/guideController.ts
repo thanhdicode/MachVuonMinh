@@ -187,6 +187,8 @@ export function createGuideController(deps: GuideDeps): GuideController {
   let gameDialogOpen = false
   let sessionOrigin: DemoSnapshot | null = null
   let restoreSessionPosition = false
+  let pendingFullReprepare: { runId: number; stepId: string } | null = null
+  let fullReprepareInFlight = false
 
   let view: GuideView = {
     phase: 'idle', presenter: 'none', route: null, step: null, counter: null, nextText: catalog.buttons.next,
@@ -320,8 +322,31 @@ export function createGuideController(deps: GuideDeps): GuideController {
     adapters.watch?.(step, { signal: abort.signal, lost: (reason) => contextLost(reason, run) })
   }
 
+  async function runFullReprepare(run: GuideRun, stepId: string) {
+    if (fullReprepareInFlight || !run.isCurrent() || !active() || view.step?.id !== stepId) return
+    fullReprepareInFlight = true
+    pendingFullReprepare = null
+    set({ busy: true })
+    try { await go(stepId, 'relayout', run) }
+    finally {
+      fullReprepareInFlight = false
+      await flushPendingFullReprepare(run)
+    }
+  }
+
+  async function flushPendingFullReprepare(run: GuideRun) {
+    if (fullReprepareInFlight) return
+    const pending = pendingFullReprepare
+    pendingFullReprepare = null
+    if (!pending || pending.runId !== run.id || !run.isCurrent() || !active() || view.step?.id !== pending.stepId) return
+    await runFullReprepare(run, pending.stepId)
+  }
+
   async function go(stepId: string, reason: PrepareReason, run: GuideRun) {
     const route = view.route!
+    const previousPractice = (reason === 'relayout' || reason === 'retry') && view.step?.id === stepId
+      && (view.phase === 'practice' || (view.notice?.kind === 'missing-target' && stepSnapshot !== null))
+      ? { snapshot: stepSnapshot, signaled: view.practiceSignaled } : null
     endStepLayers()
     stepSnapshot = null
     const step = resolved(stepId)
@@ -339,12 +364,19 @@ export function createGuideController(deps: GuideDeps): GuideController {
       if (prepared.redirect && prepared.redirect !== stepId && catalog.has(prepared.redirect)) { await go(prepared.redirect, reason, run); return }
       if (prepared.satisfied) { await advanceFrom(step, { complete: true }); return }
       await present(step, prepared, run)
+      if (previousPractice && run.isCurrent() && view.phase === 'practice' && view.step?.id === stepId) {
+        stepSnapshot = previousPractice.snapshot
+        if (previousPractice.signaled) set({ practiceSignaled: true, pose: 'confirm', motion: 'none' })
+      }
     } catch (error) {
       if (!run.isCurrent()) return
       const kind: GuideErrorKind = error instanceof GuideError ? error.kind : 'missing-target'
       if (kind === 'cancelled') return
       if (!(error instanceof GuideError)) report(error, 'prepare')
-      set({ phase: 'preparing', presenter: 'cue', busy: false, notice: { kind: 'missing-target', reason: kind } })
+      if (previousPractice) stepSnapshot = previousPractice.snapshot
+      set({ phase: 'preparing', presenter: 'cue', busy: false, practiceSignaled: previousPractice?.signaled ?? false, notice: { kind: 'missing-target', reason: kind } })
+    } finally {
+      await flushPendingFullReprepare(run)
     }
   }
 
@@ -382,6 +414,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
     const wasGame = view.presenter === 'game'
     tearing = (async () => {
       gate.cancelAll()
+      pendingFullReprepare = null
       afterPrompt = null
       endStepLayers()
       syncTourLease(false)
@@ -619,16 +652,26 @@ export function createGuideController(deps: GuideDeps): GuideController {
     relayout(refreshOnly) {
       const step = view.step
       const run = gate.current()
-      if (!active() || !step || !run || view.busy) return
+      if (!active() || !step || !run) return
+      if (view.busy || fullReprepareInFlight) {
+        if (!refreshOnly) pendingFullReprepare = { runId: run.id, stepId: step.id }
+        return
+      }
       if (view.presenter === 'driver' && !refreshOnly) {
-        set({ busy: true })
-        void go(step.id, 'relayout', run)
+        void runFullReprepare(run, step.id)
       } else attemptSync('refresh', () => port.refresh())
     },
 
     setMotion(motion) {
+      const reducedChanged = view.reduced !== motion.reduced
       set({ reduced: motion.reduced, paused: motion.paused })
-      if (port.isActive()) attemptSync('refresh', () => port.refresh())
+      if (reducedChanged) {
+        const step = view.step
+        const run = gate.current()
+        if (!active() || !step || !run) return
+        if (view.busy || fullReprepareInFlight) pendingFullReprepare = { runId: run.id, stepId: step.id }
+        else void runFullReprepare(run, step.id)
+      } else if (port.isActive()) attemptSync('refresh', () => port.refresh())
     },
 
     openMenu() { set({ menuOpen: true, hidden: false }) },
@@ -642,6 +685,7 @@ export function createGuideController(deps: GuideDeps): GuideController {
       suspend() {
         if (!view.step || view.presenter === 'game') return
         gate.cancelAll()
+        pendingFullReprepare = null
         afterPrompt = null
         endStepLayers()
         attemptSync('close-modal', () => adapters.closeOwnedModalSync())

@@ -33,7 +33,7 @@ function pickAnchor(node: HTMLElement, target: string | null): Anchor {
   }
   const controls = Array.from(document.querySelectorAll<HTMLElement>('input,button,select,textarea,a[href]'))
     .filter((element) => !element.closest('.mach-guide-root,.driver-popover') && element.checkVisibility?.())
-    .map((element) => ({ box: element.getBoundingClientRect(), weight: 1 }))
+    .map((element) => ({ box: element.getBoundingClientRect(), weight: target==='history-inspect'&&element.classList.contains('history-image') ? .05 : 1 }))
   if (target) {
     for (const element of document.querySelectorAll<HTMLElement>(`[data-guide~="${target}"]`)) {
       if (!element.checkVisibility?.()) continue

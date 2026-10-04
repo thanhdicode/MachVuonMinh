@@ -1,4 +1,4 @@
 {
-  "I01": "lifecycle/01-first-visit: lời chào lần đầu hiện đúng một lần, không tự chạy theo timer, ba lựa chọn + Bỏ qua hướng dẫn (23/23 kiểm tra đạt); ảnh welcome.png",
-  "I02": "lifecycle/01-first-visit: thực hành bằng bàn phím; lifecycle/pointer-thread-390x844-touch: kéo thật bằng con trỏ cảm ứng rồi xác nhận hoàn tất, 9/9 kiểm tra đạt, không bị cue che tay nắm"
+  "I01": "2026-10-04 laptop audit: responsive/states-driver-laptop-1366/result.json, welcome at1366x768; owl loaded, four choices clickable, no clipping or layout issues. Prior lifecycle/01-first-visit checks first-visit-only behavior23/23.",
+  "I02": "2026-10-04 laptop audit: responsive/states-driver-laptop-1366/result.json, I02 practice plus pause/skip/menu states; no layout issues or browser errors. Prior lifecycle/pointer-thread-390x844-touch verifies a real pointer drag9/9."
 }

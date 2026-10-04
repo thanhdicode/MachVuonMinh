@@ -43,7 +43,11 @@ export const sampleLayer = (page, targetName) => page.evaluate((targetName) => {
   const targets = targetName ? [...document.querySelectorAll(`[data-guide~="${targetName}"]`)].filter(shown).map((e) => ({ ...r(e), tag: e.tagName.toLowerCase() })) : []
   const controls = layer ? [...document.querySelectorAll('input,button,select,textarea,a[href],[role="button"],[draggable="true"]')].filter((e) => !e.closest('.mach-guide-root,.driver-popover,.mach-guide-cue') && shown(e)).map((e) => ({ e, b: e.getBoundingClientRect() })).filter(({ b }) => b.width > 0 && b.height > 0) : []
   const lbox = layer?.getBoundingClientRect()
-  const covered = lbox ? controls.filter(({ b }) => Math.min(lbox.right, b.right) - Math.max(lbox.left, b.left) > 2 && Math.min(lbox.bottom, b.bottom) - Math.max(lbox.top, b.top) > 2).slice(0, 6).map(({ e, b }) => `${e.tagName.toLowerCase()}[${e.getAttribute('data-guide') || e.getAttribute('aria-label') || e.className?.toString().split(' ')[0] || ''}] ${Math.round(b.x)},${Math.round(b.y)} ${Math.round(b.width)}x${Math.round(b.height)}`) : []
+  const covered = lbox ? controls.filter(({e,b}) => {
+    // Inspection needs a reachable point in the mural; the large contain box includes transparent artwork margins.
+    if(targetName==='history-inspect'&&e.classList.contains('history-image'))return !!e.closest('.history-current')&&b.x+b.width/2>lbox.left&&b.x+b.width/2<lbox.right&&b.y+b.height/2>lbox.top&&b.y+b.height/2<lbox.bottom
+    return Math.min(lbox.right, b.right) - Math.max(lbox.left, b.left) > 2 && Math.min(lbox.bottom, b.bottom) - Math.max(lbox.top, b.top) > 2
+  }).slice(0, 6).map(({ e, b }) => `${e.tagName.toLowerCase()}[${e.getAttribute('data-guide') || e.getAttribute('aria-label') || e.className?.toString().split(' ')[0] || ''}] ${Math.round(b.x)},${Math.round(b.y)} ${Math.round(b.width)}x${Math.round(b.height)}`) : []
   const history = document.querySelector('.history-bridge')
   return {
     presenter: pop ? 'driver' : cue ? 'cue' : welcome ? 'welcome' : null, kind: cue?.dataset.kind ?? null, host: cue?.dataset.host ?? null, anchor: cue?.dataset.anchor ?? null,

@@ -35,7 +35,11 @@ if (textOnly !== 1) {
 const probeTarget = (name) => page.evaluate((name) => [...document.querySelectorAll(`[data-guide~="${name}"]`)].map((e) => { const b = e.getBoundingClientRect(); return { tag: e.tagName, cls: String(e.className).slice(0, 40), x: Math.round(b.x), y: Math.round(b.y), w: Math.round(b.width), h: Math.round(b.height), cv: e.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true }), disp: getComputedStyle(e).display, vis: getComputedStyle(e).visibility, op: getComputedStyle(e).opacity, era: e.dataset.railEra ?? e.dataset.labelEra ?? null } }), name)
 const results = []
 const progress = () => page.evaluate(() => JSON.parse(localStorage.getItem('mach-vuon-minh:guide:v2') || 'null'))
-const shot = (name) => page.screenshot({ path: `${dir}/${name}.png` }).catch(() => {})
+const shot = async (name) => {
+  const options={type:'png',timeout:8000,captureBeyondViewport:false}
+  const bytes=await page.screenshot(options).catch(()=>page.screenshot({...options,fromSurface:false}))
+  writeFileSync(`${dir}/${name}.png`,bytes)
+}
 
 const sample = (targetName) => sampleLayer(page, targetName)
 let lastSeen = null, reloaded = false
@@ -54,9 +58,10 @@ const classify = (rec, s) => classifyLayer(rec, s, { baseDocW, touch })
 const act = {
   I02: async () => { const h = await (await page.$('.thread-handle'))?.boundingBox(), e = await (await page.$('.eyelet-target'))?.boundingBox(); if (!h || !e) return; await page.mouse.move(h.x + h.width / 2, h.y + h.height / 2); await page.mouse.down(); await page.mouse.move(e.x + e.width / 2, e.y + e.height / 2, { steps: 15 }); await page.mouse.up() },
   T03: async () => { await page.focus('#automation'); await page.keyboard.press('ArrowRight') },
-  H02: async () => { await page.click('[data-rail-era="1"]').catch(() => {}) },
+  H02: async () => { await page.click('[data-rail-era="1"]'); await page.waitForFunction(()=>document.querySelector('.history-bridge')?.dataset.activeEra==='1',{timeout:15000}) },
   H03: async () => { await page.click('button[aria-label="Thời kỳ tiếp theo"]').catch(() => {}) },
   H05: async () => { await page.click('.history-sound').catch(() => {}) },
+  H06: async () => { await page.click('.history-inspect'); await page.waitForFunction(()=>document.querySelector('.history-inspect')?.getAttribute('aria-pressed')==='true'); const image=await page.$('.history-current .history-image');const box=await image.boundingBox();await page.mouse.move(Math.min(width-60,box.x+box.width*.65),box.y+box.height*.55);await wait(300);await page.keyboard.press('Escape');await page.waitForFunction(()=>document.querySelector('.history-inspect')?.getAttribute('aria-pressed')==='false') },
   L12: async () => { await page.click('[data-guide="lab-preset-fit"]').catch(() => {}) },
   L13: async () => { await page.click('[data-guide="lab-preset-ahead"]').catch(() => {}) },
   L14: async () => { await page.click('[data-guide="lab-preset-rigid"]').catch(() => {}) },
@@ -98,6 +103,11 @@ try {
       overlapArea: s.presenter === 'driver' ? overlapOf(s.pop, s.target) : null, targetBox: s.target, targetInfo: s.targetInfo, popBox: s.pop, cueBox: s.cue, layer: s.layer,
       historyLayout: s.historyLayout, activeEra: s.activeEra, covered: s.covered, targets: s.presenter === 'cue' ? s.targets : undefined, vp: { w: s.vw, h: s.vh }, leftovers: s.overlays > 1 || s.popovers > 1, errors: errors.length }
     rec.issues = classify(rec, s)
+    if(id==='H02'&&s.targetInfo?.tag!=='button'&&!reduced&&width/zoom>=900)rec.issues.push('5:history-node-target-is-not-the-era02-button')
+    if(['P07','P08'].includes(id)){
+      const destination=await page.$eval('.driver-active-element',e=>({text:e.textContent,active:e.classList.contains('active')}));rec.destination=destination
+      if(!destination.active)rec.issues.push('5:distribution-guide-points-at-an-inactive-destination')
+    }
     await shot(`${String(n).padStart(2, '0')}-${id}`)
     if (act[id]) { await act[id](); await wait(1800); const after = await sample(null); rec.signaledAfterAction = after.signaled; rec.afterBody = after.body }
     if (s.kind === 'missing-target') rec.probe = await probeTarget(wiring[id] ?? '')
