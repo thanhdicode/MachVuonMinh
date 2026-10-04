@@ -173,7 +173,10 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
 
   return <div className="history-insertion">
     <section ref={root} data-active-era={active} data-era={active} className={`history-bridge ${reduced?'history-static':''} ${paused?'history-paused':''} ${inspecting?'history-inspecting':''}`} aria-labelledby="history-title" tabIndex={0}>
-      <div className="history-heading" data-guide="history-overview"><span className="eyebrow">01 / MỘT QUÃNG NHÌN LẠI</span><h2 id="history-title">BẢN ĐỒ LỊCH SỬ <span>LỰC LƯỢNG SẢN XUẤT VIỆT NAM</span></h2></div>
+      <div className="history-copy-stack">
+        <div className="history-heading" data-guide="history-overview"><span className="eyebrow">01 / MỘT QUÃNG NHÌN LẠI</span><h2 id="history-title">BẢN ĐỒ LỊCH SỬ <span>LỰC LƯỢNG SẢN XUẤT VIỆT NAM</span></h2></div>
+        <div className="history-curator" data-guide="history-caption" key={active}><div className="history-title-block"><span className="history-year"><small>{String(active+1).padStart(2,'0')} / </small>{historyEras[active].year}</span><h3>{historyEras[active].title}</h3></div><div className="history-body"><p>{historyEras[active].body[0]}</p></div></div>
+      </div>
       <div ref={track} className="atlas-world">
         <picture className="atlas-panorama"><source media="(max-width:899px), (prefers-reduced-motion:reduce)" srcSet="/history/atlas-panorama-mobile-1024x8192.webp"/><source media="(max-width:1400px)" srcSet="/history/atlas-panorama-4096.webp"/><img src="/history/atlas-panorama-8192.avif" alt="" aria-hidden="true" decoding="async"/></picture>
         <div className="history-track">
@@ -189,7 +192,6 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
         </div>
         <div className="history-progress-rail" data-guide="history-era-nav" aria-label="Mốc lịch sử"><div className="history-rail-line"/>{historyEras.map((era,i)=><button key={era.id} data-rail-era={i} className={i===active?'history-current':''} aria-label={`Đến thời kỳ ${era.year}`} aria-current={i===active?'step':undefined} onClick={()=>stepEra(i)} style={{left:`${48+i*step}vw`,'--rail-era':i} as CSSProperties}><i/><span>{era.year}</span></button>)}</div>
       </div>
-      <div className="history-curator" data-guide="history-caption" key={active}><div className="history-title-block"><span className="history-year"><small>{String(active+1).padStart(2,'0')} / </small>{historyEras[active].year}</span><h3>{historyEras[active].title}</h3></div><div className="history-body"><p>{historyEras[active].body[0]}</p></div></div>
       <svg className="history-leader" aria-hidden="true"><path pathLength="1"/><rect width="4" height="4"/></svg>
       <div className="history-fact-rail" key={`facts-${active}`}><div>{historyEras[active].metric&&<strong className="history-metric">{historyEras[active].metric}</strong>}<button className="history-source" onClick={()=>openSource(active)} aria-label={`Đối chiếu tư liệu ${historyEras[active].year}`}>ĐỐI CHIẾU TƯ LIỆU ↗</button></div><div className="history-fact-detail"><p>{historyEras[active].caption||historyEras[active].tag}</p>{historyEras[active].secondary&&<p>{historyEras[active].secondary}</p>}</div></div>
       <div className="history-direct-transition"><img className="atlas-machine-anchor" src="/history/atlas-machine-anchor.webp" alt="Chi tiết bánh đà trong panorama"/><img className="atlas-machine-hall" src="/images/machine-hall/hall.webp" alt=""/><button data-guide="history-machine-cta" onClick={()=>goToScene(2)}>{historyBridgeLine}<span>↗</span></button></div>

@@ -1,0 +1,367 @@
+{
+  "width": 1366,
+  "height": 768,
+  "eras": [
+    {
+      "era": "0",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 222.125,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 311.578125
+        },
+        "body": {
+          "left": 54.625,
+          "top": 329.578125,
+          "right": 294.9375,
+          "bottom": 442.3125
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "1",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 208.375,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 311.578125
+        },
+        "body": {
+          "left": 54.625,
+          "top": 329.578125,
+          "right": 294.9375,
+          "bottom": 419.765625
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "2",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 208.375,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 311.578125
+        },
+        "body": {
+          "left": 54.625,
+          "top": 329.578125,
+          "right": 294.9375,
+          "bottom": 442.3125
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "3",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 208.375,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 311.578125
+        },
+        "body": {
+          "left": 54.625,
+          "top": 329.578125,
+          "right": 294.9375,
+          "bottom": 419.765625
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "4",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 208.375,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 311.578125
+        },
+        "body": {
+          "left": 54.625,
+          "top": 329.578125,
+          "right": 294.9375,
+          "bottom": 442.3125
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "5",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 208.375,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 278.59375
+        },
+        "body": {
+          "left": 54.625,
+          "top": 296.59375,
+          "right": 294.9375,
+          "bottom": 409.328125
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "6",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 208.375,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 278.59375
+        },
+        "body": {
+          "left": 54.625,
+          "top": 296.59375,
+          "right": 294.9375,
+          "bottom": 386.78125
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "7",
+      "boxes": {
+        "heading": {
+          "left": 54.625,
+          "top": 112.109375,
+          "right": 211.921875,
+          "bottom": 180.109375
+        },
+        "year": {
+          "left": 54.625,
+          "top": 201.109375,
+          "right": 208.375,
+          "bottom": 234.109375
+        },
+        "title": {
+          "left": 54.625,
+          "top": 245.609375,
+          "right": 341.421875,
+          "bottom": 278.59375
+        },
+        "body": {
+          "left": 54.625,
+          "top": 296.59375,
+          "right": 294.9375,
+          "bottom": 409.328125
+        },
+        "facts": {
+          "left": 54.625,
+          "top": 648.109375,
+          "right": 1216.375,
+          "bottom": 726.109375
+        },
+        "controls": {
+          "left": 1033.34375,
+          "top": 112.109375,
+          "right": 1311.375,
+          "bottom": 156.109375
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    }
+  ],
+  "errors": []
+}

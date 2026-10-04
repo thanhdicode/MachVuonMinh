@@ -49,3 +49,16 @@
 @media(min-width:900px) and (max-width:1439px){.history-curator>.history-title-block,.history-curator>.history-body{grid-column:1/-1}}
 @media(min-width:1700px){.history-bridge{--art-top:31vh;--art-height:52vh}}
 @media(max-width:899px),(prefers-reduced-motion:reduce){.history-direct-transition button{pointer-events:auto;opacity:1}}
+
+/* A shared flow keeps the masthead clear of dates even on short laptop windows. */
+@media(min-width:900px) and (prefers-reduced-motion:no-preference){
+ .history-copy-stack{position:absolute;top:112px;left:var(--margin);right:var(--margin);pointer-events:none}
+ .history-copy-stack .history-heading{position:relative;inset:auto;width:max-content;max-width:calc(100% - 310px)}
+ .history-copy-stack .history-curator{position:relative;inset:auto;margin-top:24px}
+ .history-controls{top:112px}
+ .history-fact-rail{top:auto;bottom:42px;min-height:78px}
+ .history-progress-rail{top:auto;bottom:110px}
+ .history-loupe-dock{bottom:118px}
+ .history-bridge{--art-height:calc(min(83vh,100svh - 148px) - var(--art-top))}
+}
+@media(min-width:1440px) and (prefers-reduced-motion:no-preference){.history-bridge{--art-top:max(36vh,316px)}}

@@ -1,0 +1,367 @@
+{
+  "width": 1280,
+  "height": 600,
+  "eras": [
+    {
+      "era": "0",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 218.6875,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 307.3125
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 325.3125,
+          "right": 276.453125,
+          "bottom": 430.859375
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "1",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 204.9375,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 307.3125
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 325.3125,
+          "right": 276.453125,
+          "bottom": 409.75
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "2",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 204.9375,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 307.3125
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 325.3125,
+          "right": 276.453125,
+          "bottom": 430.859375
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "3",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 204.9375,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 307.3125
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 325.3125,
+          "right": 276.453125,
+          "bottom": 409.75
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "4",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 204.9375,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 307.3125
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 325.3125,
+          "right": 276.453125,
+          "bottom": 430.859375
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "5",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 204.9375,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 276.40625
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 294.40625,
+          "right": 276.453125,
+          "bottom": 399.953125
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "6",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 204.9375,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 276.40625
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 294.40625,
+          "right": 276.453125,
+          "bottom": 378.84375
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    },
+    {
+      "era": "7",
+      "boxes": {
+        "heading": {
+          "left": 51.1875,
+          "top": 112,
+          "right": 208.484375,
+          "bottom": 180
+        },
+        "year": {
+          "left": 51.1875,
+          "top": 201,
+          "right": 204.9375,
+          "bottom": 234
+        },
+        "title": {
+          "left": 51.1875,
+          "top": 245.5,
+          "right": 319.984375,
+          "bottom": 276.40625
+        },
+        "body": {
+          "left": 51.1875,
+          "top": 294.40625,
+          "right": 276.453125,
+          "bottom": 399.953125
+        },
+        "facts": {
+          "left": 51.1875,
+          "top": 480,
+          "right": 1133.8125,
+          "bottom": 558
+        },
+        "controls": {
+          "left": 950.78125,
+          "top": 112,
+          "right": 1228.8125,
+          "bottom": 156
+        }
+      },
+      "collisions": [],
+      "artLoaded": true,
+      "artCollisions": [],
+      "overflow": 0
+    }
+  ],
+  "errors": []
+}
