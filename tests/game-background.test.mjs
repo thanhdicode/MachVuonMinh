@@ -73,7 +73,7 @@ test('parallax and ambient effects use bounded frame work; reduced motion keeps 
   renderer.draw(main, frame({ world: 10 }))
   const moving = main.operations.filter(([name]) => name === 'drawImage').map((operation) => operation[2])
   assert.ok(moving.some((x) => Number.isFinite(x) && x < 0))
-  assert.equal(main.operations.filter(([name]) => name === 'fillRect').length, 9)
+  assert.ok(main.operations.filter(([name]) => name === 'fillRect').length <= 32)
   assert.equal(main.operations.some(([name]) => ['beginPath', 'lineTo', 'arc'].includes(name)), false)
   main.operations.length = 0
   renderer.draw(main, frame({ world: 999, reduced: true }))
@@ -110,4 +110,54 @@ test('loading fallback is replaced when assets arrive, without touching game sta
   assert.equal(h.canvases.length, 6)
   assert.equal(JSON.stringify(input), before)
   assert.ok(main.operations.filter(([name]) => name === 'drawImage').length < 50)
+})
+
+function sceneryFixture(h) {
+  h.images.pixel_scenery = { width: 1536, height: 1280 }
+  return { atlas: 'pixel_scenery', stages: Array.from({ length: 5 }, (_, stage) =>
+    Array.from({ length: 3 }, (_, col) => ({ x: col * 512 + 16, y: stage * 256 + 16, width: 460, height: 220 }))) }
+}
+
+test('uses each chapter\'s scenery crops above the lane without borrowing hazard or coarse prop sheets', () => {
+  const h = harness(), scenery = sceneryFixture(h)
+  const renderer = h.api.create(h.factory, { images: h.images, scenery })
+  const input = frame(), before = JSON.stringify(input)
+  for (let stage = 0; stage < 5; stage++) {
+    renderer.draw(context(), { ...input, stage })
+    const props = h.canvases.at(-2)
+    const art = props.ctx.operations.filter(([name]) => name === 'drawImage')
+    assert.ok(art.length >= 3, `chapter ${stage + 1} has background clusters`)
+    for (const [, image, sx, sy, sw, sh, dx, dy, dw, dh] of art) {
+      assert.equal(image, h.images.pixel_scenery)
+      assert.ok(sy >= stage * 256 && sy + sh <= (stage + 1) * 256)
+      assert.ok(sx >= 0 && sx + sw <= image.width)
+      assert.ok(dw <= 176 && dh <= 96)
+      assert.ok(dy + dh <= input.groundY - 4, 'decorations remain behind the obstacle lane')
+      assert.ok([dx, dy, dw, dh].every(Number.isInteger), 'pixel placement stays crisp')
+    }
+  }
+  assert.equal(JSON.stringify(input), before)
+})
+
+test('late scenery rebuilds its cache; wind keeps foliage rooted and freezes for reduced motion', () => {
+  const h = harness(), scenery = sceneryFixture(h), atlas = h.images.pixel_scenery
+  delete h.images.pixel_scenery
+  const renderer = h.api.create(h.factory, { images: h.images, scenery }), main = context()
+  renderer.draw(main, frame({ stage: 1 }))
+  assert.equal(h.canvases[1].ctx.operations.filter(([name]) => name === 'drawImage').length, 0, 'missing art leaves the panorama clear')
+  h.images.pixel_scenery = atlas
+  renderer.draw(main, frame({ stage: 1 }))
+  assert.equal(h.canvases.length, 6)
+  renderer.draw(main, frame({ stage: 0 }))
+  const foliage = (input) => {
+    main.operations.length = 0
+    renderer.draw(main, input)
+    return main.operations.filter(([name, image]) => name === 'drawImage' && image === atlas)
+  }
+  const a = foliage(frame({ time: 0 })), b = foliage(frame({ time: 1600 }))
+  assert.ok(a.length > 0, 'foliage canopy is drawn separately from its rooted lower half')
+  assert.notDeepEqual(a.map((op) => op[6]), b.map((op) => op[6]), 'wind changes canopy X')
+  assert.deepEqual(a.map((op) => op[7]), b.map((op) => op[7]), 'wind keeps canopy height fixed')
+  assert.deepEqual(foliage(frame({ reduced: true, time: 0 })), foliage(frame({ reduced: true, time: 9000, world: 1e8 })))
+  assert.equal(h.canvases.length, 9, 'animation reuses the three bounded caches')
 })

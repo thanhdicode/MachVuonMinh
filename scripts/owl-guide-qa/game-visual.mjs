@@ -44,8 +44,7 @@ const capture = async ({ name, width, height, touch }) => {
     const frame = await openGame(page)
     await page.screenshot({ path: join(dir, `${name}-start.png`) })
     await frame.click('#startButton')
-    await wait(1200)
-    await page.screenshot({ path: join(dir, `${name}-running.png`) })
+    await wait(700)
     const metrics = await frame.evaluate(() => {
       const canvas = document.querySelector('#gameCanvas')
       const panel = document.querySelector('.game-panel')
@@ -69,6 +68,8 @@ const capture = async ({ name, width, height, touch }) => {
     })
     await frame.click('#pauseButton')
     await wait(350)
+    // Capture after freezing: PNG encoding time must not run the player into a quiz.
+    await page.screenshot({ path: join(dir, `${name}-running.png`) })
     const first = await canvasHash(frame)
     await wait(500)
     const second = await canvasHash(frame)
@@ -83,10 +84,15 @@ const capture = async ({ name, width, height, touch }) => {
         canvas.width = 1000
         canvas.height = 430
         const renderer = window.MACH_GAME_BACKGROUND.create(undefined, { images })
-        renderer.draw(canvas.getContext('2d'), { stage, width: 1000, height: 430, groundY: 333, world: stage * 217, reduced: false })
-        return canvas.toDataURL('image/png')
+        const draw = (time, reduced = false) => {
+          renderer.draw(canvas.getContext('2d'), { stage, width: 1000, height: 430, groundY: 333, world: stage * 217, time, reduced })
+          return canvas.toDataURL('image/png')
+        }
+        const data = draw(0), moving = draw(1600), still = draw(0, true), reduced = draw(1600, true)
+        return { data, animated: data !== moving, reducedStable: still === reduced }
       })})
-      gallery.forEach((data, stage) => writeFileSync(join(dir, `stage-${stage + 1}.png`), data.split(',')[1], 'base64'))
+      gallery.forEach(({ data }, stage) => writeFileSync(join(dir, `stage-${stage + 1}.png`), data.split(',')[1], 'base64'))
+      metrics.scenery = gallery.map(({ animated, reducedStable }, stage) => ({ stage, animated, reducedStable }))
     }
     return { name, metrics, errors: [...errors], screenshots: [`${name}-start.png`, `${name}-running.png`] }
   } finally {
@@ -98,14 +104,14 @@ const results = []
 for (const viewport of [
   { name: 'desktop', width: 1440, height: 900, touch: false },
   { name: 'mobile', width: 390, height: 844, touch: true },
-]) results.push(await capture(viewport))
+].filter((viewport) => !process.env.QA_DESKTOP_ONLY || viewport.name === 'desktop')) results.push(await capture(viewport))
 
 const report = {
   url: process.env.QA_URL || 'http://127.0.0.1:5173/',
   createdAt: new Date().toISOString(),
   results,
   gallery: Array.from({ length: 5 }, (_, index) => `stage-${index + 1}.png`),
-  pass: results.every(({ metrics, errors }) => metrics.mode === 'running' && metrics.contained && metrics.hudClear && metrics.canvas.opaque && metrics.backgroundApi && metrics.pause.mode === 'paused' && metrics.pause.stablePixels && errors.length === 0),
+  pass: results.every(({ metrics, errors }) => metrics.mode === 'running' && metrics.contained && metrics.hudClear && metrics.canvas.opaque && metrics.backgroundApi && metrics.pause.mode === 'paused' && metrics.pause.stablePixels && (!metrics.scenery || metrics.scenery.every((stage) => stage.animated && stage.reducedStable)) && errors.length === 0),
 }
 writeFileSync(join(dir, 'result.json'), `${JSON.stringify(report, null, 2)}\n`)
 console.log(JSON.stringify(report, null, 2))

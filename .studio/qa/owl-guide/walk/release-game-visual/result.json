@@ -1,6 +1,6 @@
 {
   "url": "http://127.0.0.1:5180/",
-  "createdAt": "2026-10-03T19:33:27.945Z",
+  "createdAt": "2026-10-04T03:49:51.957Z",
   "results": [
     {
       "name": "desktop",
@@ -30,48 +30,39 @@
         "pause": {
           "mode": "paused",
           "stablePixels": true
-        }
+        },
+        "scenery": [
+          {
+            "stage": 0,
+            "animated": true,
+            "reducedStable": true
+          },
+          {
+            "stage": 1,
+            "animated": true,
+            "reducedStable": true
+          },
+          {
+            "stage": 2,
+            "animated": true,
+            "reducedStable": true
+          },
+          {
+            "stage": 3,
+            "animated": true,
+            "reducedStable": true
+          },
+          {
+            "stage": 4,
+            "animated": true,
+            "reducedStable": true
+          }
+        ]
       },
       "errors": [],
       "screenshots": [
         "desktop-start.png",
         "desktop-running.png"
-      ]
-    },
-    {
-      "name": "mobile",
-      "metrics": {
-        "mode": "running",
-        "viewport": {
-          "width": 390,
-          "height": 784,
-          "dpr": 1
-        },
-        "canvas": {
-          "width": 368,
-          "height": 259,
-          "cssWidth": 368,
-          "cssHeight": 257,
-          "opaque": true
-        },
-        "panel": {
-          "left": 10,
-          "top": 8,
-          "right": 380,
-          "bottom": 772
-        },
-        "contained": true,
-        "backgroundApi": true,
-        "hudClear": true,
-        "pause": {
-          "mode": "paused",
-          "stablePixels": true
-        }
-      },
-      "errors": [],
-      "screenshots": [
-        "mobile-start.png",
-        "mobile-running.png"
       ]
     }
   ],

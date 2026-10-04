@@ -60,6 +60,7 @@ Kenney: **Platformer Characters 1**, **Robot Pack**, **New Platformer Pack**, CC
 - [Kenney — Pixel Platformer](https://kenney.nl/assets/pixel-platformer), [Farm Expansion](https://kenney.nl/assets/pixel-platformer-farm-expansion), [Industrial Expansion](https://kenney.nl/assets/pixel-platformer-industrial-expansion), CC0: terrain, crops, machinery and hazard sprites.
 - [Kenney — Impact Sounds](https://kenney.nl/assets/impact-sounds), [Interface Sounds](https://kenney.nl/assets/interface-sounds), CC0: ten effects. Original quiet music and fallback tones are synthesized locally.
 - Five landscapes are original imagegen game illustrations created for this project, with retained prompts and source PNGs. These are generated scenery, not documentary images.
+- Fifteen matching background decoration cutouts are also original imagegen illustrations, with native transparent atlas and prompts retained. The locally served scenery atlas supplies irrigation/harvest, mill/steel infrastructure, city planters/utilities and renewable garden details.
 - Assets are served locally from `/minigame/runner/`; original Kenney licences, Pixel Frog rights evidence, source archive hashes and selected file hashes are bundled in `licenses/`, `manifest.json`, and `audio/manifest.json`.
 
 ## Cú Mạch — bộ ảnh cho hướng dẫn

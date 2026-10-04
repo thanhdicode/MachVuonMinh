@@ -18,7 +18,8 @@
     "pixel_background_1": "images/stage-2.webp",
     "pixel_background_2": "images/stage-3.webp",
     "pixel_background_3": "images/stage-4.webp",
-    "pixel_background_4": "images/stage-5.webp"
+    "pixel_background_4": "images/stage-5.webp",
+    "pixel_scenery": "images/scenery-atlas.webp"
   },
   "animations": {
     "pixel_run": {
@@ -297,6 +298,126 @@
       "path": "images/stage-5.webp",
       "bytes": 313422,
       "sha256": "f4963ad82bd690e43782e58c8445175437eeba06f9c2c84589cfab04cc4852ea"
+    },
+    {
+      "path": "images/scenery-atlas.webp",
+      "bytes": 633528,
+      "sha256": "960c59cf8624a0e1a0ada3a446fdaee48052f9ba25d1d948ab28a78c5c319bc1"
     }
-  ]
+  ],
+  "scenery": {
+    "atlas": "pixel_scenery",
+    "width": 768,
+    "height": 640,
+    "nativeSize": [
+      1374,
+      1145
+    ],
+    "stages": [
+      [
+        {
+          "x": 9,
+          "y": 44,
+          "width": 246,
+          "height": 110
+        },
+        {
+          "x": 268,
+          "y": 11,
+          "width": 237,
+          "height": 143
+        },
+        {
+          "x": 520,
+          "y": 51,
+          "width": 238,
+          "height": 104
+        }
+      ],
+      [
+        {
+          "x": 7,
+          "y": 178,
+          "width": 260,
+          "height": 102
+        },
+        {
+          "x": 266,
+          "y": 155,
+          "width": 241,
+          "height": 125
+        },
+        {
+          "x": 519,
+          "y": 182,
+          "width": 242,
+          "height": 98
+        }
+      ],
+      [
+        {
+          "x": 6,
+          "y": 308,
+          "width": 258,
+          "height": 90
+        },
+        {
+          "x": 278,
+          "y": 288,
+          "width": 227,
+          "height": 111
+        },
+        {
+          "x": 523,
+          "y": 283,
+          "width": 238,
+          "height": 118
+        }
+      ],
+      [
+        {
+          "x": 7,
+          "y": 401,
+          "width": 256,
+          "height": 119
+        },
+        {
+          "x": 291,
+          "y": 406,
+          "width": 228,
+          "height": 114
+        },
+        {
+          "x": 518,
+          "y": 400,
+          "width": 243,
+          "height": 121
+        }
+      ],
+      [
+        {
+          "x": 7,
+          "y": 537,
+          "width": 255,
+          "height": 88
+        },
+        {
+          "x": 277,
+          "y": 529,
+          "width": 242,
+          "height": 96
+        },
+        {
+          "x": 518,
+          "y": 520,
+          "width": 241,
+          "height": 105
+        }
+      ]
+    ],
+    "provenance": "Original built-in imagegen atlas matched to the five project panoramas; alpha cleanup edit; prompts and native PNG retained",
+    "sourceSha256": "a5b2ea1e1c0b35220389b440ddc5af8b95efe6954ca43e4e8c00d9e59dc9a2af",
+    "runtimeSha256": "960c59cf8624a0e1a0ada3a446fdaee48052f9ba25d1d948ab28a78c5c319bc1",
+    "bytes": 633528
+  }
 }

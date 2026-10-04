@@ -35,7 +35,7 @@ export function buildGameDocument(config: GameChildConfig): string {
     .replace('<!-- GAME_STYLES -->', `<style>${fonts}\n${gameStyle}${guided ? `\n${guideStyle}` : ''}</style>`)
     .replace('<!-- GAME_SCRIPTS -->', () => [
       script(`window.GAME_SPRITES=${JSON.stringify(spriteUrls)};`),
-      script(`window.MACH_RUNNER_ASSETS=${scriptSafeJson({ baseUrl: runnerBaseUrl, sprites: runnerSpriteUrls, animations: runnerAssets.animations })};`),
+      script(`window.MACH_RUNNER_ASSETS=${scriptSafeJson({ baseUrl: runnerBaseUrl, sprites: runnerSpriteUrls, animations: runnerAssets.animations, scenery: runnerAssets.scenery })};`),
       script(questions),
       script(documentQuestions),
       script(`window.MACH_GAME_CONFIG=${scriptSafeJson(config)};`),
