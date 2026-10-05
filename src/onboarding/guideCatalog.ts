@@ -99,7 +99,7 @@ export const MODULE_LABELS: Readonly<Record<GuideModule, string>> = {
   production: 'CÔNG CỤ & MÁY',
   lab: 'LAB',
   vietnam: 'VIỆT NAM',
-  policy: 'BA ĐỜI SỐNG',
+  policy: 'CÔNG NGHỆ & QUAN HỆ',
   finale: 'KẾT',
   game: 'GAME',
 }
@@ -110,7 +110,7 @@ export const MODULE_TITLES: Readonly<Record<GuideModule, string>> = {
   production: 'Công cụ, máy móc và dữ liệu',
   lab: 'Phòng biện chứng',
   vietnam: 'Việt Nam và bằng chứng',
-  policy: 'Ba đời sống — một hệ thống',
+  policy: 'Công nghệ mới, quan hệ mới',
   finale: 'Kết thúc triển lãm',
   game: 'Minigame',
 }

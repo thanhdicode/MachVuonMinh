@@ -1,12 +1,17 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { flowBeat, flowReveal, flowProgress, flowJourneyProgress, flowJourneyPosition, accessResponse, splitterResponse, flowState, updateFlow, captureFlowInputs, restoreFlowInputs } from '../src/experience/scene07State.ts'
+import { flowBeat, flowProgress, flowJourneyProgress, flowJourneyPosition, accessResponse, splitterResponse, flowState, updateFlow, captureFlowInputs, restoreFlowInputs } from '../src/experience/scene07State.ts'
+import * as workshop from '../src/experience/scene07State.ts'
 
-test('human stories precede their theory reveals, including reverse scroll',()=>{
+test('workshop selection remains usable for continuous restored guide values and invalid inputs',()=>{
+  assert.equal(typeof workshop.flowOption,'function')
+  for(const [input,expected] of [[-.2,0],[0,0],[.17,0],[.34,1],[.5,1],[.66,1],[.83,2],[1,2],[3,2],[NaN,0]]){
+    assert.equal(workshop.flowOption(input),expected)
+  }
+})
+
+test('scroll reaches the five workshop beats with bounded progress',()=>{
   assert.deepEqual([0,.12,.38,.65,.88].map(flowBeat),[0,1,2,3,4])
-  for(const p of [.13,.39,.66]) assert.equal(flowReveal(p),false)
-  for(const p of [.3,.56,.8,.98]) assert.equal(flowReveal(p),true)
-  assert.equal(flowReveal(.2),false)
   assert.equal(flowProgress(-2),0);assert.equal(flowProgress(2),1)
 })
 test('replacing scene07 retains navigation and scroll roundtrips',()=>{

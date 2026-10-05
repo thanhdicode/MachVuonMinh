@@ -73,6 +73,10 @@ Các ảnh nền trong được mã hóa WebP, giữ bản PNG gốc và prompt 
 
 Hướng dẫn dùng [Driver.js](https://driverjs.com) 1.8.0 (© Kamran Ahmed, giấy phép MIT, `nilbuild/driver.js`) làm bộ spotlight/popover. Bản phân phối kèm thông báo MIT được sao chép nguyên văn vào `/vendor/driver/1.8.0/license` khi build; không tải từ CDN.
 
-## Scene 07 — Ba đời sống / Một hệ thống
+## Scene 07 — Công nghệ mới, quan hệ mới
+
+Máy gia công, cổng kiểm tra quang học AI, băng chuyền và trạm điều khiển được dựng bằng hình học gốc của dự án (05/10/2026), không dùng mô hình hoặc ảnh bên ngoài. Âm thanh tổng hợp bằng Tone.js. Nguồn nội dung ILO và Nghị quyết 57 được liên kết tại phần tương ứng trong cảnh.
+
+### Tài sản của phiên bản trước
 
 Ba chân dung là nhân vật tổng hợp, được tạo bằng image_gen cho dự án; không phải ảnh tư liệu hoặc người thật được định danh. Value Flow và các vật thể tương tác là hình học gốc của dự án; âm thanh được tổng hợp bằng Tone.js, không dùng bản ghi hoặc nhạc có sẵn. Bản gốc, prompt và mã kiểm tra lưu trong .studio/scene07; hồ sơ sử dụng tại ASSET_LICENSES.md. Ảnh tham khảo do người dùng cung cấp không được đưa vào tài sản xuất bản.
