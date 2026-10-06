@@ -10,8 +10,8 @@ Evidence: production assets allHTTP200; fresh production unlocked hero renders c
 - [x] Isolate React runtime chunk; ensure entry graph excludes Tone/Scene07AudioSynth; preload existing world module and HDR.
 - [x] Prepare intro with existing scene lights/environment, render first frame, synchronize overlay readiness; warm later groups after paint with cancellation.
 - [x] Verify local production build startup, no early audio request, one canvas, visible hero, unchanged composition and chapter navigation. Run full tests/build.
-- [ ] Push main and confirm Vercel and live assets.
+- [x] Push main and confirm Vercel and live assets.
 
 Read official Vite/Rolldown codeSplitting docs, installed Three compileAsync source. Use inline execution; no subagent needed. Do not change authored UI, motion, DPR, geometry or evidence content.
 
-Results/limits: .studio/qa/production-startup/REPORT.md. Release verification continues after push.
+Results/limits: .studio/qa/production-startup/REPORT.md. Code release9866cb3 deployed successfully; live hero, preload graph and resource responses verified on2026-10-07.

@@ -13,3 +13,8 @@ Confirmed cause of unnecessary work: the old entry statically imported React fro
 - Local analytics script404 is expected on vite preview. No world/model asset errors; no early AudioContext warnings after audio isolation.
 
 Official API references: https://vite.dev/guide/build and https://rolldown.rs/reference/OutputOptions.codeSplitting. Installed Three compileAsync implementation verified before staging warmup.
+
+## Production release — 2026-10-07
+- Code commit9866cb35aeb2af2ade0ba230a86c7237920b29e4 pushed to main. GitHub Vercel status success; deployment6ENC1Q2UyKmB6iZbfsm2CqFKMH3s.
+- Live domain HTML preloads WorldCanvas, React runtime and studio HDR; no AudioSynth preload. Fresh IAB visit: first-frame mark2702ms, WorldCanvas fetch starts1036ms, one canvas, zero AudioSynth and panorama requests, zero resource responses>=400. Single run, not a controlled benchmark.
+- Skipped welcome guide and activated intro through its real button. Ring/thread and title are visible together. Saved local production-hero.png proof. No runtime errors; existing THREE.Clock deprecation warning remains.
