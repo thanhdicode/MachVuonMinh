@@ -15,7 +15,7 @@ import { VietnamEvidence } from "./VietnamEvidence";
 import { SourceDrawer } from "./SourceDrawer";
 import { Scene07Chapter } from "./Scene07Chapter";
 import { HistoryBridge } from "./HistoryBridge";
-import { MachineChapter } from "./MachineChapter";
+import { Scene02Chapter } from "./Scene02Chapter";
 import { GuideProvider } from "../onboarding/GuideProvider";
 import { useGuideApi, useGuideControls } from "../onboarding/guideControls";
 const WorldCanvas = lazy(() => import("./WorldCanvas"));
@@ -36,7 +36,7 @@ function ExperienceBody() {
       previous: { x: number; y: number };
       distance: number;
     } | null>(null);
-  const [drawer, setDrawer] = useState<"menu" | "source" | "history" | null>(
+  const [drawer, setDrawer] = useState<"menu" | "source" | "history" | "scene02" | null>(
       null,
     ),
     [source, setSource] = useState(0);
@@ -50,6 +50,7 @@ function ExperienceBody() {
     setSource(index);
     setDrawer("history");
   };
+  const openScene02Source = (index: number) => {setSource(index);setDrawer("scene02")};
   const guideApi = useGuideApi();
   useGuideControls("app", {
     openMenu: () => setDrawer("menu"),
@@ -380,7 +381,7 @@ function ExperienceBody() {
           mode={drawer}
           index={source}
           onClose={() => setDrawer(null)}
-          onSource={drawer === "history" ? openHistorySource : openSource}
+          onSource={drawer === "history" ? openHistorySource : drawer === "scene02" || drawer === "menu" && state.active === 2 ? openScene02Source : openSource}
         />
       )}
       <footer className="exhibit-footer">
@@ -391,7 +392,7 @@ function ExperienceBody() {
       </footer>
       <div className="journey-before" aria-hidden="true" />
       <HistoryBridge openSource={openHistorySource} />
-      <MachineChapter />
+      <Scene02Chapter onSource={openScene02Source} />
       <div className="journey-flow-before" aria-hidden="true" />
       <Scene07Chapter />
       <div className="journey-flow-after" aria-hidden="true" />

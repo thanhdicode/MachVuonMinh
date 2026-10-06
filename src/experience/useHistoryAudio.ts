@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { historyAudio } from '../data/historyAudio.ts'
-import gsap from 'gsap'
-import { timeline, useWorld } from './WorldState.ts'
-import { machineState, machineRhythmGain } from './machineState.ts'
+import { useWorld } from './WorldState.ts'
 
 const AMBIENT_GAIN = .16
 const SILENCE_FADE_SECONDS = .9
@@ -146,7 +144,7 @@ export function createHistoryAudioEngine(
 }
 
 export function useHistoryAudio(activeEra: number, inHistory: boolean): { enabled: boolean; toggle: () => void; error: string | null; contextState: AudioDiagnostics['contextState']; rms: number; peak: number; era: number | null } {
-  const inMachine=useWorld(s=>s.machine), paused=useWorld(s=>s.paused), sound=useWorld(s=>s.sound)
+  const paused=useWorld(s=>s.paused), sound=useWorld(s=>s.sound)
   const [enabled, setEnabled] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [diagnostics,setDiagnostics]=useState<AudioDiagnostics>({contextState:'uninitialized',rms:0,peak:0,era:null})
@@ -158,20 +156,10 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
   const activatingRef = useRef(false)
   const outputRef=useRef<GainNode|null>(null),analyserRef=useRef<AnalyserNode|null>(null),meterSamplesRef=useRef<Float32Array<ArrayBuffer>|null>(null)
   const meterUntilRef=useRef(0)
-  const mechanicalRef=useRef<{gain:GainNode;motor:OscillatorNode;shaft:OscillatorNode;stations:{oscillator:OscillatorNode;gain:GainNode}[]}|null>(null)
-  const machineRef=useRef(inMachine)
-  machineRef.current=inMachine
   eraRef.current = activeEra
   inHistoryRef.current = inHistory
 
-  const audible = () => (inHistoryRef.current || machineRef.current) && !document.hidden && enabledRef.current && !useWorld.getState().paused
-  const silenceMechanical=()=>{
-    const context=contextRef.current,mechanical=mechanicalRef.current
-    if(!context||!mechanical)return
-    for(const gain of [mechanical.gain,...mechanical.stations.map(layer=>layer.gain)]){
-      gain.gain.cancelScheduledValues(context.currentTime);gain.gain.setTargetAtTime(0,context.currentTime,.12)
-    }
-  }
+  const audible = () => inHistoryRef.current && !document.hidden && enabledRef.current && !useWorld.getState().paused
 
   const toggle = useCallback(() => {
     if (enabledRef.current) {
@@ -179,7 +167,6 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
       setEnabled(false)
       useWorld.getState().set({sound:false})
       engineRef.current?.silence()
-      silenceMechanical()
       meterUntilRef.current=performance.now()+SILENCE_FADE_SECONDS*1000
       return
     }
@@ -194,17 +181,6 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
           contextRef.current = context
           const {output,analyser}=createAudioOutput(context)
           outputRef.current=output;analyserRef.current=analyser;meterSamplesRef.current=new Float32Array(analyser.fftSize)
-          const gain=context.createGain(), motor=context.createOscillator(), shaft=context.createOscillator()
-          gain.gain.value=0;gain.connect(output)
-          motor.frequency.value=83;shaft.frequency.value=84.8
-          motor.connect(gain);shaft.connect(gain);motor.start();shaft.start()
-          const stations=[125,166,209].map(frequency=>{
-            const oscillator=context.createOscillator(),layer=context.createGain()
-            oscillator.type='triangle';oscillator.frequency.value=frequency;layer.gain.value=0
-            oscillator.connect(layer);layer.connect(output);oscillator.start()
-            return {oscillator,gain:layer}
-          })
-          mechanicalRef.current={gain,motor,shaft,stations}
           engineRef.current = createHistoryAudioEngine(context, async url => {
             const response = await fetch(url)
             if (!response.ok) throw new Error(`Audio ${response.status}: ${url}`)
@@ -218,7 +194,7 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
         enabledRef.current = true
         setEnabled(true)
         useWorld.getState().set({sound:true})
-        if (audible()) await engineRef.current?.playEra(machineRef.current?4:eraRef.current)
+        if (audible()) await engineRef.current?.playEra(eraRef.current)
       } catch (cause) {
         enabledRef.current = false
         setEnabled(false)
@@ -235,21 +211,21 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
 
   useEffect(() => {
     if (!enabledRef.current || !engineRef.current) return
-    if (audible()) void engineRef.current.playEra(inMachine?4:activeEra)
-    else {engineRef.current.silence();silenceMechanical();meterUntilRef.current=performance.now()+SILENCE_FADE_SECONDS*1000}
-  }, [activeEra, inHistory, inMachine, paused])
+    if (audible()) void engineRef.current.playEra(activeEra)
+    else {engineRef.current.silence();meterUntilRef.current=performance.now()+SILENCE_FADE_SECONDS*1000}
+  }, [activeEra, inHistory, paused])
 
   useEffect(()=>{
     // Other exhibits can enable the shared preference without starting this
     // engine. Global mute still disables a previously enabled history engine.
-    if(!inHistory&&!inMachine){if(!sound&&enabledRef.current)toggle();return}
+    if(!inHistory){if(!sound&&enabledRef.current)toggle();return}
     if(sound!==enabledRef.current)toggle()
-  },[sound,toggle,inHistory,inMachine])
+  },[sound,toggle,inHistory])
   useEffect(()=>{
     const timer=setInterval(()=>{
       const analyser=analyserRef.current,samples=meterSamplesRef.current,context=contextRef.current
       if(!analyser||!samples||!context)return
-      const now=performance.now(),scene=inHistoryRef.current||machineRef.current
+      const now=performance.now(),scene=inHistoryRef.current
       if(!document.hidden&&scene&&(audible()||now<meterUntilRef.current)){
         const meter=readAudioMeter(analyser,samples)
         setDiagnostics(previous=>({...previous,contextState:context.state,rms:+meter.rms.toFixed(5),peak:+meter.peak.toFixed(5)}))
@@ -257,36 +233,12 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
     },100)
     return()=>clearInterval(timer)
   },[])
-  useEffect(()=>{
-    let previous=0,wasActive=false
-    const update=()=>{
-      const context=contextRef.current,mechanical=mechanicalRef.current
-      if(!context||!mechanical)return
-      const active=audible()&&machineRef.current,p=machineState.progress
-      const justActivated=active&&!wasActive
-      if(justActivated)previous=p
-      mechanical.gain.gain.setTargetAtTime(machineRhythmGain(timeline.velocity,p,active),context.currentTime,.35)
-      mechanical.shaft.frequency.setTargetAtTime(84.8+Math.min(3,Math.abs(timeline.velocity)*.12),context.currentTime,.3)
-      mechanical.stations.forEach((layer,i)=>layer.gain.gain.setTargetAtTime(active&&p>=[.28,.38,.47][i]?.0015+Math.min(.001,Math.abs(timeline.velocity)*.00006):0,context.currentTime,.4))
-      if(active&&!justActivated)for(const threshold of [.28,.38,.47])if(previous<threshold&&p>=threshold){
-        const click=context.createOscillator(),gain=context.createGain()
-        click.frequency.setValueAtTime(142,context.currentTime);click.frequency.exponentialRampToValueAtTime(74,context.currentTime+.12)
-        gain.gain.setValueAtTime(.025,context.currentTime);gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.18)
-        click.connect(gain);gain.connect(outputRef.current!);click.start();click.stop(context.currentTime+.2)
-        click.onended=()=>{click.disconnect();gain.disconnect()}
-      }
-      previous=active?p:0
-      wasActive=active
-    }
-    gsap.ticker.add(update)
-    return()=>gsap.ticker.remove(update)
-  },[])
 
   useEffect(() => {
     const visibility = () => {
       if (!engineRef.current || !enabledRef.current) return
-      if (audible()) void engineRef.current.playEra(machineRef.current?4:eraRef.current)
-      else {engineRef.current.silence();silenceMechanical();meterUntilRef.current=performance.now()+SILENCE_FADE_SECONDS*1000}
+      if (audible()) void engineRef.current.playEra(eraRef.current)
+      else {engineRef.current.silence();meterUntilRef.current=performance.now()+SILENCE_FADE_SECONDS*1000}
     }
     document.addEventListener('visibilitychange', visibility)
     return () => document.removeEventListener('visibilitychange', visibility)
@@ -295,8 +247,6 @@ export function useHistoryAudio(activeEra: number, inHistory: boolean): { enable
   useEffect(() => () => {
     enabledRef.current = false
     engineRef.current?.close()
-    mechanicalRef.current?.motor.stop();mechanicalRef.current?.shaft.stop()
-    mechanicalRef.current?.stations.forEach(layer=>layer.oscillator.stop())
     void contextRef.current?.close()
   }, [])
 

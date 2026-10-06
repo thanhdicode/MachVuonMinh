@@ -20,7 +20,7 @@ export function createValueFlow(){
   const statusMaterials=[brass.clone(),brass.clone(),brass.clone()]
   const splitMaterials=[red.clone(),red.clone(),red.clone()]
   const branchMaterials=[red.clone(),red.clone(),red.clone()]
-  const scanMaterial=new THREE.MeshBasicMaterial({color:'#b51f2a',transparent:true,opacity:.08,side:THREE.DoubleSide,depthWrite:false})
+  const scanMaterial=new THREE.MeshBasicMaterial({color:'#b51f2a',transparent:true,opacity:.08,side:THREE.DoubleSide,forceSinglePass:true,depthWrite:false})
   const amber=new THREE.MeshStandardMaterial({color:'#d39a2c',emissive:'#9b6415',emissiveIntensity:.22,metalness:.38,roughness:.3})
   const signalOff=new THREE.MeshStandardMaterial({color:'#343a38',metalness:.7,roughness:.35})
   const signalGreen=new THREE.MeshStandardMaterial({color:'#617963',emissive:'#314f35',emissiveIntensity:.12,metalness:.35,roughness:.3})

@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { stops, timeline, useWorld } from './WorldState'
 import { historyStep, historyProgressForTravel } from './historyGeometry'
-import { machineState } from './machineState'
+import { scene02State } from './scene02State'
 import { canResumeScroll, createScrollLeases } from '../onboarding/guideSession'
 import { flowState, flowJourneyProgress, flowJourneyPosition, type FlowJourneyRange } from './scene07State'
 import type { ScrollOwner } from '../onboarding/guideSession'
@@ -27,7 +27,7 @@ export function setTimelineSuspended(suspended:boolean) {
 }
 function journeyRange(): FlowJourneyRange {
   const atlas = document.querySelector<HTMLElement>('.history-insertion')
-  const machine = document.querySelector<HTMLElement>('.machine-insertion')
+  const machine = document.querySelector<HTMLElement>('.scene02-insertion')
   const atlasLength = atlas?.offsetHeight ?? 0, machineLength = machine?.offsetHeight ?? 0
   const atlasStart = atlas?.offsetTop ?? 13 * innerHeight * stops[2]
   const flow=document.querySelector<HTMLElement>('.flow-insertion'),flowLength=flow?.offsetHeight??0
@@ -51,7 +51,7 @@ export function goToScene(index: number) {
   if(index>0&&!useWorld.getState().unlocked)useWorld.getState().set({unlocked:true})
   const progress = stops[index] + (stops[index + 1] - stops[index]) * .32
   const range = journeyRange()
-  scrollToPosition(index===2 ? range.machineStart + (range.machineLength-innerHeight)*.16 : flowJourneyPosition(progress,range))
+  scrollToPosition(index===2 ? range.machineStart + (scene02State.static?0:(range.machineLength-innerHeight)*.16) : flowJourneyPosition(progress,range))
 }
 export function goToFlowBeat(beat:number){
   const r=journeyRange(),p=[.06,.23,.49,.73,.96][Math.max(0,Math.min(4,beat))]
@@ -72,8 +72,8 @@ export function startTimeline() {
     const range = journeyRange(), y = self.scroll()
     const inHistory = unlocked && y >= range.atlasStart && y < range.machineStart
     const inMachine = unlocked && y >= range.machineStart && y < range.machineStart+range.machineLength
-    machineState.active=inMachine
-    machineState.exit=inMachine?Math.max(0,Math.min(1,(y-(range.machineStart+range.machineLength-innerHeight))/innerHeight)):0
+    scene02State.active=inMachine
+    scene02State.exit=inMachine?Math.max(0,Math.min(1,(y-(range.machineStart+range.machineLength-innerHeight))/innerHeight)):0
     flowState.exit=Math.max(0,Math.min(1,(y-(range.flowStart+range.flowLength-innerHeight))/innerHeight))
     const p = unlocked ? Math.min(.999999, flowJourneyProgress(y,range)) : 0
     const scene = stops.findIndex((stop, i) => p >= stop && p < stops[i + 1])
@@ -111,7 +111,7 @@ export function startTimeline() {
     }
   }
   const resize = () => {
-    const progress = timeline.progress, inHistory = useWorld.getState().history, inMachine=useWorld.getState().machine, machineProgress=machineState.progress, inFlow=useWorld.getState().active===7, flowProgress=flowState.progress, flowBeat=flowState.beat
+    const progress = timeline.progress, inHistory = useWorld.getState().history, inMachine=useWorld.getState().machine, machineProgress=scene02State.progress, inFlow=useWorld.getState().active===7, flowProgress=flowState.progress, flowBeat=flowState.beat
     const era = Number(document.querySelector<HTMLElement>('.history-bridge')?.dataset.activeEra ?? 0)
     requestAnimationFrame(() => {
       lenis?.resize()
@@ -123,8 +123,7 @@ export function startTimeline() {
         position=(useWorld.getState().reduced||innerWidth<768)&&act?act.getBoundingClientRect().top+scrollY-100:range.flowStart+flowProgress*(range.flowLength-innerHeight)
       }
       if(inMachine) {
-        if(!useWorld.getState().reduced && innerWidth>=768) position=range.machineStart+machineProgress*(range.machineLength-innerHeight)
-        else {const target=document.querySelector<HTMLElement>(`[data-static-beat="${machineState.staticBeat}"]`);if(target)position=target.getBoundingClientRect().top+window.scrollY-125}
+        position=range.machineStart+machineProgress*Math.max(0,range.machineLength-innerHeight)
       }
       if (inHistory) {
         if (!useWorld.getState().reduced && innerWidth >= 900) position = range.atlasStart + historyProgressForTravel((era*historyStep/100+.01)*innerWidth,range.atlasLength-innerHeight)*(range.atlasLength-innerHeight)

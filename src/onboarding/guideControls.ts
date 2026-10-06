@@ -7,7 +7,7 @@ export type GuideControls = {
     openMenu(): void
     closeDrawer(): void
     openSource(index: number, mode: 'source' | 'history'): void
-    drawer(): 'menu' | 'source' | 'history' | null
+    drawer(): 'menu' | 'source' | 'history' | 'scene02' | null
     openGame(): void
   }
   history: { openZoom(index: number): void; closeZoom(): void; zoomOpen(): boolean }

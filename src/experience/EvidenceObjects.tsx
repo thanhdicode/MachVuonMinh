@@ -6,11 +6,14 @@ import { agedSteel, enamel, brass } from './surfaceDetail'
 import { DroneField } from './DroneField'
 import { ProductionCar } from './ProductionCar'
 import { PeopleModel } from './PeopleModel'
+import {usePreparedObject} from './usePreparedObject'
 
 const glass=new THREE.MeshStandardMaterial({color:'#293b39',metalness:.65,roughness:.23})
 
 
 function FactoryCell() {
+  const group=useRef<THREE.Group>(null)
+  usePreparedObject(group)
   const arms=useRef<(THREE.Group|null)[]>([])
   const time=useRef(0)
   useFrame((_,delta)=>{
@@ -19,7 +22,7 @@ function FactoryCell() {
     if(!state.paused&&!state.reduced)time.current+=Math.min(delta,.05)
     arms.current.forEach((arm,i)=>{if(arm)arm.rotation.z=(i===0?-1:1)*(1.7+Math.sin(time.current*1.5+i)*.1)})
   })
-  return <group rotation={[.32,-.3,0]}>
+  return <group ref={group} rotation={[.32,-.3,0]}>
     <mesh position-y={-.74} material={glass}><boxGeometry args={[4.4,.15,2.1]}/></mesh>
     {[-.72,.72].map(z=><mesh key={z} position={[0,-.59,z]} material={agedSteel}><boxGeometry args={[4.1,.1,.13]}/></mesh>)}
     {Array.from({length:15},(_,i)=><mesh key={i} position={[-1.96+i*.28,-.6,0]} rotation-x={Math.PI/2} material={agedSteel}><cylinderGeometry args={[.065,.065,1.3,16]}/></mesh>)}
@@ -39,6 +42,7 @@ function FactoryCell() {
 }
 
 function ValueField() {
+  const group=useRef<THREE.Group>(null)
   const cells=useRef<THREE.InstancedMesh>(null)
   useLayoutEffect(()=>{
     if(!cells.current)return
@@ -53,7 +57,8 @@ function ValueField() {
     if(cells.current.instanceColor)cells.current.instanceColor.needsUpdate=true
     cells.current.computeBoundingSphere()
   },[])
-  return <group rotation={[.3,-.55,0]}>
+  usePreparedObject(group)
+  return <group ref={group} rotation={[.3,-.55,0]}>
     <instancedMesh ref={cells} args={[undefined,undefined,100]}><boxGeometry/><meshStandardMaterial metalness={.45} roughness={.5}/></instancedMesh>
     <mesh position={[-.64535,.244,-1.225]}><boxGeometry args={[.0493,.008,.29]}/><meshStandardMaterial color="#b51f2a" metalness={.45} roughness={.5}/></mesh>
     <mesh position={[0,-.13,0]}><boxGeometry args={[3.65,.12,3.65]}/><meshStandardMaterial color="#51483c" metalness={.6} roughness={.6}/></mesh>

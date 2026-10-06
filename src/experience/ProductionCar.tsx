@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
+import {usePreparedObject} from './usePreparedObject'
 
 export function ProductionCar() {
   const {scene}=useGLTF('/models/production-car.glb','/draco/')
@@ -24,6 +25,7 @@ export function ProductionCar() {
     object.scale.setScalar(scale)
     return object
   },[scene])
+  usePreparedObject(model)
   useEffect(()=>()=>model.traverse(node=>{if(node instanceof THREE.Mesh)(node.material as THREE.Material).dispose()}),[model])
   return <primitive object={model} dispose={null}/>
 }

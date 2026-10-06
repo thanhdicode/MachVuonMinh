@@ -63,6 +63,7 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
         updateLeader()
         const p=Math.max(0,Math.min(1,(this.progress()-.91)/.09))
         el.style.setProperty('--atlas-handoff',String(p));el.dataset.handoff=p>.05?'true':'false';el.dataset.bridgeReady=p>.75?'true':'false'
+        if(p>.05)setActive(7)
         if(p>.05&&lens.current)lens.current.style.opacity='0'
       }})
       tween.current=animation
@@ -192,7 +193,7 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
       </div>
       <svg className="history-leader" aria-hidden="true"><path pathLength="1"/><rect width="4" height="4"/></svg>
       <div className="history-fact-rail" key={`facts-${active}`}><div>{historyEras[active].metric&&<strong className="history-metric">{historyEras[active].metric}</strong>}<button className="history-source" onClick={()=>openSource(active)} aria-label={`Đối chiếu tư liệu ${historyEras[active].year}`}>ĐỐI CHIẾU TƯ LIỆU ↗</button></div><div className="history-fact-detail"><p>{historyEras[active].caption||historyEras[active].tag}</p>{historyEras[active].secondary&&<p>{historyEras[active].secondary}</p>}</div></div>
-      <div className="history-direct-transition"><img className="atlas-machine-anchor" src="/history/atlas-machine-anchor.webp" alt="Chi tiết bánh đà trong panorama"/><img className="atlas-machine-hall" src="/images/machine-hall/hall.webp" alt=""/><button data-guide="history-machine-cta" onClick={()=>goToScene(2)}>{historyBridgeLine}<span>↗</span></button></div>
+      <div className="history-direct-transition"><div className="atlas-present-archive"><img className="atlas-present-art" src="/images/history/h-data-1440.webp" alt=""/></div><button data-guide="history-machine-cta" onClick={()=>goToScene(2)}>{historyBridgeLine}<span>↗</span></button><i className="atlas-present-seam" aria-hidden="true"/></div>
       <div className="history-controls"><span className="history-hint">CUỘN ĐỂ ĐI QUA LỊCH SỬ ↓</span><button className="history-sound" data-guide="history-audio" data-audio-context={audio.contextState} data-audio-rms={audio.rms} data-audio-peak={audio.peak} data-audio-era={audio.era} aria-label={audio.enabled?'Tắt âm thanh lịch sử':'Bật âm thanh lịch sử'} aria-pressed={audio.enabled} onClick={audio.toggle}><span aria-hidden="true">{audio.enabled?'◖))':'◖×'}</span><small>ÂM THANH {audio.enabled?'BẬT':'TẮT'}</small></button><div data-guide="history-next-prev"><button onClick={()=>stepEra(Math.max(0,active-1))} disabled={active===0} aria-label="Thời kỳ trước">←</button><span>{String(active+1).padStart(2,'0')} / 08</span><button onClick={()=>stepEra(Math.min(7,active+1))} disabled={active===7} aria-label="Thời kỳ tiếp theo">→</button></div></div>
       {audio.error&&<p className="history-audio-error" role="status">{audio.error} Bấm để thử lại.</p>}
       <div className="history-loupe-dock"><button ref={inspectButton} className="history-inspect" data-guide="history-inspect" aria-label="Bật kính lúp xem chi tiết" aria-pressed={inspecting} title="SOI CHI TIẾT · Esc để tắt" onClick={e=>toggleInspection(e.currentTarget)}><LoupeIcon/></button><span>SOI CHI TIẾT</span></div>

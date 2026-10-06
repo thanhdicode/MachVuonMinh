@@ -1,0 +1,11 @@
+[
+  {"id":"01-vietnam","title":"Việt Nam đang sản xuất khác đi","place":"Nhìn từ hôm nay","text":"Công nghệ, dữ liệu và kỹ năng đang mở ra những cách sản xuất mới.","source":1},
+  {"id":"02-skills","title":"Người lao động học cách làm mới","place":"Con người","text":"Đầu tư máy móc cần đi cùng đào tạo người vận hành, kiểm tra và xử lý lỗi.","source":2},
+  {"id":"03-machines","title":"Máy móc có thêm khả năng","place":"Công nghệ","text":"Cảm biến và AI có thể hỗ trợ phát hiện lỗi, dự báo bảo trì và điều chỉnh quy trình.","source":0},
+  {"id":"04-data","title":"Dữ liệu nối các công đoạn","place":"Kết nối","text":"Thông tin về nguyên liệu, đơn hàng và chất lượng giúp các khâu phối hợp với nhau.","source":1},
+  {"id":"05-production","title":"Đó là lực lượng sản xuất mới","place":"Hiểu khái niệm","text":"Người lao động và tư liệu sản xuất tạo nên lực lượng sản xuất. Khoa học và công nghệ làm thay đổi năng lực ấy.","source":1},
+  {"id":"06-ownership","title":"Ai được sử dụng nguồn lực?","place":"Sở hữu","text":"Máy móc và dữ liệu cần có quyền sở hữu, quyền sử dụng và trách nhiệm rõ ràng.","source":1},
+  {"id":"07-organization","title":"Công việc được tổ chức ra sao?","place":"Tổ chức & quản lý","text":"Cần đào tạo lại, phân công nhiệm vụ và xác định trách nhiệm khi đưa công nghệ mới vào làm việc.","source":3},
+  {"id":"08-distribution","title":"Thành quả được chia thế nào?","place":"Phân phối","text":"Khi năng suất tăng, cần xem xét tiền công, lợi ích của người lao động và nguồn lực tái đầu tư.","source":1},
+  {"id":"09-together","title":"Muốn vươn mình, cần đổi cùng nhau","place":"Điều cần thay đổi","text":"Nâng cấp công nghệ cần đi cùng thay đổi về sở hữu, tổ chức sản xuất và phân phối thành quả.","source":1}
+]

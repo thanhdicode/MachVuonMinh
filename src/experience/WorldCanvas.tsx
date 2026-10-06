@@ -1,6 +1,6 @@
 import { Component, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Environment, Lightformer } from '@react-three/drei'
+import {StudioEnvironment} from './StudioEnvironment'
 import * as THREE from 'three'
 import { easing } from 'maath'
 import { timeline, useWorld } from './WorldState'
@@ -8,7 +8,7 @@ import { labState } from './model'
 import { brushedMetal, castGrain, createSoilGeometry, bandGeometry, bandDetails, enamel, agedSteel, brass } from './surfaceDetail'
 import { EvidenceObjects } from './EvidenceObjects'
 import { DataField } from './DataField'
-import { MachineRenderer } from './MachineRenderer'
+import { HostRenderer } from './HostRenderer'
 import { Scene07Renderer } from './Scene07Renderer'
 
 const RED = '#B51F2A', IVORY = '#F3E8D0'
@@ -39,7 +39,6 @@ function CameraRig() {
       point.x += Math.sin(timeline.local * Math.PI) * .16
     }
     if (size.width < 700) { point.z += 4; point.y += 1; target.y += .6 }
-    if (timeline.scene === 2 && !state.reduced) { const throughHub = Math.sin(transition * Math.PI) * 2.35; point.x += throughHub; target.x += throughHub }
     if (!state.reduced) { point.x += timeline.pointer[0] * .12; point.y += timeline.pointer[1] * .08 }
     camera.position.copy(point); camera.lookAt(target)
     color.set(backgrounds[timeline.scene]).lerp(nextColor.set(backgrounds[Math.min(8, timeline.scene + 1)]), transition)
@@ -65,7 +64,6 @@ function ThreadSegment({ index }: { index: number }) {
     const x = centers[index]
     const points = index === 0 ? [[-9,-3.8,1],[-4,-2.6,1],[0,-1.6,1],[2.35,-.75,.8],[3.1,.45,0],[2.9,1.3,-.8],[4.2,2,-1.5],[12,3,-3],[20,2,-10]]
       : index === 1 ? [[-7,-2,4],[-1,-1.65,2],[2,-1.5,0],[3,-1.3,-3],[1,-.8,-8],[0,0,-24]]
-      : index === 2 ? [[-8,-3,3],[x-3,-2.3,1],[x+2.2,-1.5,.6],[x+2.6,1.3,.2],[x+.1,2.8,-.2],[x-2.5,1.4,0],[x-2.8,-1.5,.2],[x-1,-2.7,-2],[0,0,-24]]
       : index === 3 ? [[-8,-2,3],[-1,-2,.4],[2,-1.7,.3],[4,-.8,0],[4,1.5,-1],[1,2,-4],[0,0,-24]]
       : index === 5 ? [[-9,-3.5,1],[-4,-3.2,1],[-2.8,-2,1],[-2.5,.6,0],[-1.6,2.2,-1],[1,2.5,-1],[2.8,.5,-2],[1,-2.2,0],[-1,-1,1],[0,0,-24]]
       : index === 8 ? [[-8,-4,4],[-3,-3.6,1],[1,-3,0],[x+2,-1.8,0],[x+3,1,0],[x+1,2.6,-1],[x-2,1,0],[x-1,-1.5,1],[x+2,-.8,-1],[x+5,2,-10]]
@@ -274,17 +272,13 @@ function World() {
     <ambientLight intensity={.65} />
     <directionalLight position={[-4,8,8]} intensity={2.4} color="#fff6e7" />
     <directionalLight position={[6,2,-3]} intensity={1.45} color="#dfe7e7" />
-    <Environment resolution={128} frames={1}>
-      <Lightformer intensity={4} position={[0,5,-5]} scale={[12,6,1]} />
-      <Lightformer intensity={2} position={[-5,1,3]} rotation={[0,Math.PI/2,0]} scale={[8,3,1]} />
-      <Lightformer intensity={1.5} position={[5,-2,2]} rotation={[0,-Math.PI/2,0]} scale={[10,2,1]} />
-    </Environment>
+    <StudioEnvironment/>
     <CameraRig />
-    <group name="persistent-red-thread">{Array.from({length:9},(_,i)=><ThreadSegment key={i} index={i}/>)}</group>
+    <group name="persistent-red-thread">{Array.from({length:9},(_,i)=>i===2?null:<ThreadSegment key={i} index={i}/>)}</group>
     <IntroCord/>
     <SceneGroup index={0}><Intro /></SceneGroup>
     <SceneGroup index={1}><Agrarian /></SceneGroup>
-    <MachineRenderer/>
+    <HostRenderer/>
     <SceneGroup index={3}><RobotArm /></SceneGroup>
     <SceneGroup index={4}><DataField /></SceneGroup>
     <SceneGroup index={5}><DialecticCore /></SceneGroup>
@@ -314,7 +308,7 @@ export default function WorldCanvas({ suspended = false }: { suspended?: boolean
   const reduced = useWorld(s => s.reduced), paused = useWorld(s => s.paused), history = useWorld(s => s.history), machine = useWorld(s => s.machine), flow = useWorld(s => s.active===7)
   useEffect(() => { const move = (e: PointerEvent) => { timeline.pointer = [e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2] }; window.addEventListener('pointermove',move); return()=>window.removeEventListener('pointermove',move) },[])
   const fallback = <div className="world-fallback" aria-label="Sơ đồ sợi đỏ thay cho không gian 3D"><svg viewBox="0 0 1000 700">{flow?<><path d="M-30 550C210 550 270 360 420 400S600 610 750 450S930 490 1030 560" fill="none" stroke="#B51F2A" strokeWidth="10"/><path d="M290 500C300 670 500 650 510 530M510 530C700 670 880 670 800 490" fill="none" stroke="#B51F2A" strokeWidth="4"/></>:<><path d="M-100 650C300 650 800 50 800 350S100 650 400 200S1100 500 1200 0" fill="none" stroke="#B51F2A" strokeWidth="8"/><circle cx="620" cy="330" r="170" fill="none" stroke="#817c6c" strokeWidth="28"/></>}</svg><span>Chế độ đồ họa nhẹ</span></div>
-  return <div className="world-canvas" aria-hidden="true"><CanvasBoundary fallback={fallback}>{lost ? fallback : <Canvas dpr={[1, compact ? 1 : 1.5]} camera={{ position:[0,.25,12], fov:42, near:.1, far:45 }} gl={{ antialias:true, powerPreference:'high-performance' }} frameloop={hidden || suspended || history || (machine && (reduced || compact)) || (flow && (reduced || compact))?'never':reduced || paused ? 'demand' : 'always'} fallback={fallback}><ContextWatch onLost={()=>setLost(true)}/><World /></Canvas>}</CanvasBoundary></div>
+  return <div className="world-canvas" aria-hidden="true"><CanvasBoundary fallback={fallback}>{lost ? fallback : <Canvas dpr={[1, compact ? 1 : 1.5]} camera={{ position:[0,.25,12], fov:42, near:.1, far:45 }} gl={{ antialias:true, powerPreference:'high-performance' }} onCreated={({gl})=>{gl.debug.checkShaderErrors=import.meta.env.DEV}} frameloop={hidden || suspended || history || (machine && (reduced || compact)) || (flow && (reduced || compact))?'never':reduced || paused ? 'demand' : 'always'} fallback={fallback}><ContextWatch onLost={()=>setLost(true)}/><World /></Canvas>}</CanvasBoundary></div>
 }
 
 

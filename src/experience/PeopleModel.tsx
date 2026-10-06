@@ -5,12 +5,14 @@ import * as THREE from 'three'
 import { prepareCharacter } from './characterModel'
 import { timeline, useWorld } from './WorldState'
 import { enamel, agedSteel } from './surfaceDetail'
+import {usePreparedObject} from './usePreparedObject'
 
 export function PeopleModel({manual=false,farmer=false,sceneIndex=6}:{manual?:boolean;farmer?:boolean;sceneIndex?:number}) {
   const source=useGLTF('/models/farmer.glb')
   const holder=useRef<THREE.Group>(null),tool=useRef<THREE.Group>(null),handPosition=useMemo(()=>new THREE.Vector3(),[])
   const pose=useMemo(()=>({origin:new THREE.Vector3(),direction:new THREE.Vector3(),target:new THREE.Vector3(),rotation:new THREE.Quaternion(),parent:new THREE.Quaternion(),correction:new THREE.Quaternion()}),[])
   const model=useMemo(()=>prepareCharacter(source.scene,farmer),[source.scene,farmer])
+  usePreparedObject(model.object)
   const mixer=useMemo(()=>new THREE.AnimationMixer(model.object),[model.object]),previous=useRef<THREE.AnimationAction|null>(null)
   useEffect(()=>{
     const clip=source.animations.find(a=>a.name===(manual?'Walk':'Idle_Neutral'))

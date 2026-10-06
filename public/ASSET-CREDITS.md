@@ -43,7 +43,11 @@ Tám ambience được tổng hợp nguyên bản tại chỗ, không dùng samp
 
 ## Nền panorama History Atlas
 
-Panorama và chi tiết bánh đà được tạo riêng cho dự án bằng imagegen, từ bốn minh họa ghép mềm thành một ảnh nền liên tục. Đây là hình tái dựng minh họa, không phải ảnh tư liệu lịch sử. Không dùng pixel từ các ảnh bảo tàng/infographic tham khảo. Bản desktop: `/history/atlas-panorama-8192.avif` và `/history/atlas-panorama-4096.webp`; bản dọc: `/history/atlas-panorama-mobile-1024x8192.webp`; chi tiết chuyển cảnh: `/history/atlas-machine-anchor.webp`. Các cutout lịch sử và ảnh xưởng máy giữ nguồn tạo đã ghi trong dự án. Âm nền là tổng hợp nguyên bản; không có sample, lời hát hoặc bản nhạc bên ngoài.
+Panorama được tạo riêng cho dự án bằng imagegen, từ bốn minh họa ghép mềm thành một ảnh nền liên tục. Đây là hình tái dựng minh họa, không phải ảnh tư liệu lịch sử. Không dùng pixel từ các ảnh bảo tàng/infographic tham khảo. Bản desktop: `/history/atlas-panorama-8192.avif` và `/history/atlas-panorama-4096.webp`; bản dọc: `/history/atlas-panorama-mobile-1024x8192.webp`. Chuyển cảnh bánh đà và xưởng cũ đã được gỡ ngày 06/10/2026. Các cutout lịch sử giữ nguồn tạo đã ghi trong dự án. Âm nền là tổng hợp nguyên bản; không có sample, lời hát hoặc bản nhạc bên ngoài.
+
+## Scene 02 / Việt Nam hôm nay — V5
+
+Bốn góc máy về sản xuất, logistics, hạ tầng dữ liệu và kỹ thuật viên là media minh họa gốc được tạo bằng imagegen ngày 06/10/2026. Chuyển động camera được dựng thành 140 khung WebP và bốn vòng video không tiếng. Đây không phải tư liệu quay tại doanh nghiệp cụ thể. Không sao chép hình ảnh hoặc video doanh nghiệp. Media tạo được sử dụng theo điều khoản của dịch vụ tạo ảnh; không tuyên bố CC0, public domain hay quyền tác giả độc quyền. Prompt, bản gốc và hash được lưu trong `.studio/scene02/`. Dữ kiện thực tế có nguồn riêng trong bảng tư liệu. Âm thanh là tổng hợp nguyên bản, chỉ bật sau thao tác của người xem.
 
 ## Sprite mini game Hành trình sản xuất
 
@@ -80,3 +84,9 @@ Máy gia công, cổng kiểm tra quang học AI, băng chuyền và trạm đi�
 ### Tài sản của phiên bản trước
 
 Ba chân dung là nhân vật tổng hợp, được tạo bằng image_gen cho dự án; không phải ảnh tư liệu hoặc người thật được định danh. Value Flow và các vật thể tương tác là hình học gốc của dự án; âm thanh được tổng hợp bằng Tone.js, không dùng bản ghi hoặc nhạc có sẵn. Bản gốc, prompt và mã kiểm tra lưu trong .studio/scene07; hồ sơ sử dụng tại ASSET_LICENSES.md. Ảnh tham khảo do người dùng cung cấp không được đưa vào tài sản xuất bản.
+
+## Scene 02 — Sổ tay Việt Nam
+
+Thiết kế và chuyển động sổ tay dựa trên [Sketchbook của Meng To](https://github.com/MengTo/sketchbook), bản c1e4778, qua bản nguồn ThreeUI. Giữ ghi công tác giả. Repository được mô tả là open source nhưng chưa có tệp LICENSE tại phiên bản đã kiểm tra; không gán giấy phép MIT/CC0 cho thiết kế và trang trí gốc.
+
+Chín tranh Việt Nam được tạo bằng imagegen cho nội dung của dự án, theo bố cục cuốn sổ tham khảo. Đây là tranh minh họa khái niệm. Instrument Serif và Newsreader dùng giấy phép SIL OFL 1.1; thông báo giấy phép nằm trong /scene02-sketchbook/assets/.

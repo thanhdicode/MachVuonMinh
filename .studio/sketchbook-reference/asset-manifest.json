@@ -1,0 +1,83 @@
+[
+  {
+    "id": "01-vietnam",
+    "width": 1494,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1782961,
+    "webBytes": 314888,
+    "sha256": "acc88c448678a13a38000e9b68077fbd1eca5d368ecb5cef1ebda084fdb7bad2"
+  },
+  {
+    "id": "02-skills",
+    "width": 1495,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1743322,
+    "webBytes": 267130,
+    "sha256": "616efedd10638cd094bead56c6afd26300e4e88c99e1b8517a3821076a1061ab"
+  },
+  {
+    "id": "03-machines",
+    "width": 1495,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1654987,
+    "webBytes": 247520,
+    "sha256": "c47e9809a014badaf2a6e9705846f6fc21d31684ba2f9db1ca2ada2b051b9791"
+  },
+  {
+    "id": "04-data",
+    "width": 1495,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1814954,
+    "webBytes": 301822,
+    "sha256": "61fc7b60507a48ad3bf76b5854b6100aa09f97f74b89f663f0974baafedfe71f"
+  },
+  {
+    "id": "05-production",
+    "width": 1494,
+    "height": 1053,
+    "alpha": true,
+    "originalBytes": 1857230,
+    "webBytes": 323754,
+    "sha256": "1e1007731a66162bd68dbb83f10199d446537452bb829bea83899ac08f139c86"
+  },
+  {
+    "id": "06-ownership",
+    "width": 1494,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1828128,
+    "webBytes": 311888,
+    "sha256": "0561d84bcd899dd43cbe67ff9c3bee20f349453c18016af794dfbfa71d6997a2"
+  },
+  {
+    "id": "07-organization",
+    "width": 1494,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1709617,
+    "webBytes": 255532,
+    "sha256": "c6efabd257fe312a73c46a92ab24f54d356e097c28822ec035a0fca6dfb78909"
+  },
+  {
+    "id": "08-distribution",
+    "width": 1494,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1866315,
+    "webBytes": 324378,
+    "sha256": "7f72334ef266c145b064105479709043e7af19ef49b0f72f7e485ade0e7d2cff"
+  },
+  {
+    "id": "09-together",
+    "width": 1494,
+    "height": 1052,
+    "alpha": true,
+    "originalBytes": 1830465,
+    "webBytes": 328502,
+    "sha256": "9ab2c5471fba6d214ad7963b7185dd06562934ba5f46cb4589adf1e3620f6e77"
+  }
+]

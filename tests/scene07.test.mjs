@@ -3,6 +3,15 @@ import assert from 'node:assert/strict'
 import { flowBeat, flowProgress, flowJourneyProgress, flowJourneyPosition, accessResponse, splitterResponse, flowState, updateFlow, captureFlowInputs, restoreFlowInputs } from '../src/experience/scene07State.ts'
 import * as workshop from '../src/experience/scene07State.ts'
 
+test('opaque ready workshop owns the frame while loading and fades preserve the host',()=>{
+  assert.equal(typeof workshop.workshopOwnsFrame,'function')
+  const state={active:7},flow={static:false,renderReady:true,progress:.3,exit:0}
+  assert.equal(workshop.workshopOwnsFrame(state,flow),true)
+  for(const input of [{renderReady:false},{static:true},{progress:.02},{exit:.1}])assert.equal(workshop.workshopOwnsFrame(state,{...flow,...input}),false)
+  assert.equal(workshop.workshopOwnsFrame({active:6},flow),false)
+  assert.equal(workshop.workshopOwnsFrame({active:8},flow),false)
+})
+
 test('workshop selection remains usable for continuous restored guide values and invalid inputs',()=>{
   assert.equal(typeof workshop.flowOption,'function')
   for(const [input,expected] of [[-.2,0],[0,0],[.17,0],[.34,1],[.5,1],[.66,1],[.83,2],[1,2],[3,2],[NaN,0]]){

@@ -1,0 +1,15 @@
+{
+  "upstream": "https://github.com/MengTo/sketchbook",
+  "commit": "c1e477814c4c9e204452ebf9b298aa13629cbfc2",
+  "servedCanonical": "518737cbcbd8250813613bca7c0bd06959b91a84d905de2b0f5ec8c32a5f9fcc",
+  "authoredEngine": "7805284fe73263ca7ba472b82af862e34ada5b082037f3c81388884dffd9d8d3",
+  "derivedEngine": "7805284fe73263ca7ba472b82af862e34ada5b082037f3c81388884dffd9d8d3",
+  "equal": true,
+  "derivedDocument": "9cc77311f2b39174379393a330736ac6235d4cd31fad73589ab2aac413a61a69",
+  "changes": [
+    "content array, text, local URLs",
+    "appended host-layout styles and bridge",
+    "Vietnamese font coverage"
+  ],
+  "date": "2026-10-06"
+}

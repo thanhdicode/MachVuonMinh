@@ -52,10 +52,10 @@ export async function verifyDirectHandoff({tab,viewport,cdp,out}){
   await viewport.set({width:1440,height:900});await tab.reload();await enterMural(tab)
   const d=await tab.playwright.evaluate(()=>document.querySelector('.history-bridge').closest('.pin-spacer').getBoundingClientRect().bottom-innerHeight-1)
   await tab.cua.scroll({x:1200,y:700,scrollY:d,scrollX:0});await pause(2000)
-  const g=await tab.playwright.evaluate(()=>{const root=document.querySelector('.history-bridge'),image=root.querySelector('.atlas-machine-hall'),s=getComputedStyle(image);return {handoff:root.dataset.handoff,progress:getComputedStyle(root).getPropertyValue('--atlas-handoff'),loaded:image.naturalWidth,opacity:+s.opacity,bridge:root.querySelector('.history-direct-transition button').textContent,rewind:!!root.querySelector('.history-ending')}})
+  const g=await tab.playwright.evaluate(()=>{const root=document.querySelector('.history-bridge'),image=root.querySelector('.atlas-present-art'),s=getComputedStyle(root.querySelector('.history-direct-transition'));return {handoff:root.dataset.handoff,progress:getComputedStyle(root).getPropertyValue('--atlas-handoff'),loaded:image.naturalWidth,opacity:+s.opacity,bridge:root.querySelector('.history-direct-transition button').textContent,rewind:!!root.querySelector('.history-ending')}})
   assert.equal(g.handoff,'true');assert.ok(+g.progress>.98);assert.ok(g.loaded>0);assert.ok(g.opacity>.98);assert.equal(g.rewind,false)
   await shot(tab,cdp,`${out}/1440-900-handoff.png`);await tab.cua.scroll({x:1200,y:700,scrollY:1000,scrollX:0});await pause(1500)
-  const next=await tab.playwright.evaluate(()=>({nav:document.querySelector('.nav-end').textContent,atlasTop:document.querySelector('.history-bridge').getBoundingClientRect().top,machineTop:document.querySelector('.machine-insertion').getBoundingClientRect().top}))
+  const next=await tab.playwright.evaluate(()=>({nav:document.querySelector('.nav-end').textContent,atlasTop:document.querySelector('.history-bridge').getBoundingClientRect().top,presentTop:document.querySelector('.scene02-insertion').getBoundingClientRect().top}))
   assert.ok(next.nav.startsWith('02'));await writeFile(`${out}/handoff.json`,JSON.stringify({g,next},null,2));return {directHandoff:true,next}
 }
 export async function verifyMuralTools({tab,viewport,cdp,out}){

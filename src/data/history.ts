@@ -35,5 +35,5 @@ export const historyEras = [
     alt:'Tái dựng minh họa: hạ tầng cáp quang, tủ máy chủ, wafer bán dẫn, chip và kỹ sư vận hành mạng dữ liệu công nghiệp Việt Nam.'},
 ]
 
-export const historyBridgeLine = 'CƠ GIỚI HÓA — KHI MỘT CHIẾC MÁY TRỞ THÀNH CẢ MỘT HỆ THỐNG.'
+export const historyBridgeLine = '2026 / HIỆN TẠI — LỊCH SỬ KHÔNG DỪNG Ở ĐÂY.'
 export const historyImage = (id: string, width: number | 'archive' | 'zoom') => `/images/history/${id}-${width}.webp`

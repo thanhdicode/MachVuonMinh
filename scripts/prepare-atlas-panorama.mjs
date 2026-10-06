@@ -56,9 +56,8 @@ const verticalHeight=bandSize+(bandCount-1)*verticalStep
 const vertical=await sharp({create:{width:bandSize,height:verticalHeight,channels:4,background:{r:224,g:207,b:174,alpha:1}}}).composite(bandInputs).png().toBuffer()
 await sharp(vertical).extract({left:0,top:Math.floor((verticalHeight-8192)/2),width:1024,height:8192}).webp({quality:80,effort:6}).toFile(resolve(outputDir,'atlas-panorama-mobile-1024x8192.webp'))
 
-await sharp(inputs[3]).extract({left:1448,top:0,width:724,height:724}).resize(1024,1024,{kernel:'lanczos3'}).webp({quality:86,effort:6}).toFile(resolve(outputDir,'atlas-machine-anchor.webp'))
 
-for(const file of ['atlas-panorama-8192.avif','atlas-panorama-4096.webp','atlas-panorama-mobile-1024x8192.webp','atlas-machine-anchor.webp']){
+for(const file of ['atlas-panorama-8192.avif','atlas-panorama-4096.webp','atlas-panorama-mobile-1024x8192.webp']){
   const path=resolve(outputDir,file), metadata=await sharp(path).metadata()
   console.log(`${file}: ${metadata.width}x${metadata.height}, ${Math.round(statSync(path).size/1024)} KiB`)
 }

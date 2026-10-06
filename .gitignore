@@ -13,6 +13,14 @@ dist/
 .studio/qa/**/*.jpeg
 .studio/qa/**/*.webp
 .studio/qa/**/*.log
+.studio/qa/**/*.f16
+.studio/qa/**/*.cpuprofile
 public/vendor/driver/
 .hoplite/
 .studio/game-runner/resources/
+.studio/scene02-v5-media-archive/
+.studio/sketchbook-reference/generated/
+
+.studio/sketchbook-reference/*.log
+.studio/scene02/master.png
+.studio/qa/**/*.txt

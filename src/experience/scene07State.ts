@@ -1,6 +1,10 @@
-import { journeyProgress, journeyPosition, type JourneyRange } from './machineState.ts'
+import { journeyProgress, journeyPosition, type JourneyRange } from './journey.ts'
 
-export const flowState = { progress:0, exit:0, active:false, static:false, beat:0, work:.25, access:1, split:.5, revision:0, triangles:0, calls:0 }
+export const flowState = { progress:0, exit:0, active:false, static:false, renderReady:false, beat:0, work:.25, access:1, split:.5, revision:0, triangles:0, calls:0 }
+// The host must still draw during loading, static mode and transparent handoffs.
+export function workshopOwnsFrame(world:{active:number},flow:Pick<typeof flowState,'static'|'renderReady'|'progress'|'exit'>=flowState){
+  return world.active===7&&!flow.static&&flow.renderReady&&flow.progress>=.045&&flow.exit===0
+}
 export const flowProgress=(value:number)=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0))
 export const flowOption=(value:number)=>flowProgress(value)<.34?0:flowProgress(value)>.66?2:1
 export const flowBeat=(p:number)=>p<.12?0:p<.38?1:p<.65?2:p<.88?3:4
@@ -25,12 +29,15 @@ export const splitterResponse=(value:number)=>[
 ][flowOption(value)]
 export type FlowJourneyRange=JourneyRange&{flowStart:number;flowLength:number}
 export function flowJourneyProgress(y:number,r:FlowJourneyRange){
-  if(y<r.flowStart)return journeyProgress(y,r)
+  const presentEnd=r.machineStart+r.machineLength
+  if(y<presentEnd)return journeyProgress(y,r)
+  if(y<r.flowStart)return .30+.52*flowProgress((y-presentEnd)/Math.max(1,r.flowStart-presentEnd))
   if(y<r.flowStart+r.flowLength)return .82+.1*flowProgress((y-r.flowStart)/r.flowLength)
-  return journeyProgress(y-r.flowLength+.1*r.base,r)
+  return flowProgress(.92+(y-r.flowStart-r.flowLength)/r.base)
 }
 export function flowJourneyPosition(p:number,r:FlowJourneyRange){
-  if(p<.82)return journeyPosition(p,r)
+  if(p<.30)return journeyPosition(p,r)
+  if(p<.82)return r.machineStart+r.machineLength+(p-.30)/.52*(r.flowStart-r.machineStart-r.machineLength)
   if(p<.92)return r.flowStart+(p-.82)/.1*r.flowLength
-  return journeyPosition(p,r)+r.flowLength-.1*r.base
+  return r.flowStart+r.flowLength+(p-.92)*r.base
 }

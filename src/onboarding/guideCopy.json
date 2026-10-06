@@ -280,10 +280,10 @@
     },
     {
       "id": "H08",
-      "title": "Vào xưởng máy",
-      "say": "Bấm dòng Cơ giới hóa — khi một chiếc máy trở thành cả một hệ thống để vào xưởng. Bạn sẽ thấy lực được truyền đến nhiều máy qua trục và dây đai.",
-      "action": "Bấm CTA bánh đà.",
-      "observe": "Xưởng máy xuất hiện.",
+      "title": "Đi tiếp vào hiện tại",
+      "say": "Lịch sử đã đưa mình tới năm 2026. Bấm dòng Lịch sử không dừng ở đây để quan sát máy, dữ liệu và kỹ năng mới trong sản xuất ở Việt Nam hôm nay.",
+      "action": "Bấm dòng chuyển sang hiện tại.",
+      "observe": "Sổ tay Việt Nam mở ra sau phần lịch sử.",
       "completion": "Scene 02 sẵn sàng.",
       "pose": "point-right",
       "motion": "point"
@@ -300,10 +300,10 @@
     },
     {
       "id": "T02",
-      "title": "Theo đường truyền động",
-      "say": "Cuộn chậm qua xưởng, nhìn từ nguồn lực đến trục rồi dây đai nối các máy. Bạn chỉ cần quan sát, không cần bấm vào bánh răng.",
-      "action": "Cuộn; trên bản tĩnh đọc hình và chú thích.",
-      "observe": "Chuỗi truyền động trong cảnh hoặc hình tĩnh.",
+      "title": "Lật sổ tay Việt Nam",
+      "say": "Kéo mép giấy hoặc bấm mũi tên để lật trang. Mỗi tranh giải thích một thay đổi trong sản xuất và điều cần đổi về sở hữu, tổ chức công việc, chia thành quả.",
+      "action": "Lật một trang, kéo kính lúp để xem gần.",
+      "observe": "Tranh và lời giải thích thay đổi theo từng trang sách.",
       "completion": "Bấm Tiếp tục.",
       "pose": "neutral",
       "motion": "read"

@@ -1,0 +1,17 @@
+# Scene02 V5 verification — 2026-10-06
+
+Scope: complete replacement of the old factory, Atlas entry, existing Scene03 handoff and scoped guide/source/sound integration. Previous uncommitted Scene07 performance fixes are preserved. No deployment or push was made.
+
+- Full suite: **186 passed / 0 failed** (`tests.txt`). Production build succeeds (`build.txt`); inherited large bundle warning remains.
+- Layouts inspected at 1920×1080,1440×900,1366×768,1024×768 and390×844. No horizontal overflow; all three final question rectangles fit at1024; the dated5%caption is visible at1440. Screenshots: `1920-machine.png`, `1440-skills.png`, `1366-gap.png`, `1366-final.png`, `1024-final.png`, `390-skills.png`.
+- Real laptop DOM at.894: beat4, 8.9358vw media displacement,12decoded frames,0pending. Registration uses a fixed ivory frame and advancing red frame/bridge. Finale fades those frames into three straight leaders attached to machine/operator/product locations; last camera frame is held.
+- Chrome explicit audio click: aria-pressed=true, context=running, RMS samples0.00405,0.00209,0.00284,0.00386,0.00422,0.00153. Scoped review fixed the per-engine UI indicator,250ms cue gating, singleton remount and stale decode concurrency. No claim of subjective mix approval or a measured60fps benchmark.
+- Source drawer opens withV5.01–V5.05; source year20/04/2026, original links and generated-media disclosure inspected. WorldBank5%is explicitly a2024report finding, not a2026measurement.
+- Reduced-motion emulation: pinned stage display=none, no data-layout, four media acts plus conclusion. Mobile390: current clip playing, previous clip paused, unvisited clips have no source, no horizontal overflow. Mobile/reduced conclusion has a sticky heading.
+- Reverse seeking reopens the archival seam and restores earlier captions. Atlas handoff and entry share the same final-era `h-data-1440.webp` cutout on ivory, no earlier agrarian backdrop, old hall, wheel or shaft.
+- Guide70IDs and canonical copy remain consistent. `machine-system` alias is attached to the viewport-sized pinned stage and visible static acts, never the entire multi-screen runway.
+- Final exit QA caught the old journey mapping's assumption that the Atlas starts at.18×base. The real spacer lengths violate that assumption: the old mapping fell from.30 to.266after leaving Scene02. Mappings now anchor to actual Atlas/present/flow boundaries; roundtrips are tested with mismatched physical ranges. This changes coordinates, not later chapter content. Actual post-fix local exit: main=`experience scene-3 unlocked`, decoded=0, pending=0, one canvas inside `.world-canvas`.
+
+Media limit: original generated illustrations with authored camera motion, not documentary company footage or full moving industrial recordings. Native master and exact prompt are retained;140WebP frames total8.81MB. Two in-flight operations and twelve decoded bitmaps are enforced and tested across leave/reentry. No additional WebGL context.
+
+Capture limitation: the Chrome MCP screenshot stalled after sound activation. In-app browser native screenshots then completed the layout captures. An earlier raw CDP capture at an overridden viewport produced compositor tiling. A later Chrome capture recovered a valid `1366-archive-mask.png` with the real mask opening27.4271%–72.5729% at progress.070. The final question screenshot remains the valid native1366capture. Repeated screenshot requests can stall in this tool; do not infer a measured frame rate or subjective visual approval from capture latency.
