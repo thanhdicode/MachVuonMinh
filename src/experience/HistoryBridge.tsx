@@ -177,7 +177,7 @@ export function HistoryBridge({openSource}: {openSource:(index:number)=>void}) {
         <div className="history-curator" data-guide="history-caption" key={active}><div className="history-title-block"><span className="history-year"><small>{String(active+1).padStart(2,'0')} / </small>{historyEras[active].year}</span><h3>{historyEras[active].title}</h3></div><div className="history-body"><p>{historyEras[active].body[0]}</p></div></div>
       </div>
       <div ref={track} className="atlas-world">
-        <picture className="atlas-panorama"><source media="(max-width:899px), (prefers-reduced-motion:reduce)" srcSet="/history/atlas-panorama-mobile-1024x8192.webp"/><source media="(max-width:1400px)" srcSet="/history/atlas-panorama-4096.webp"/><img src="/history/atlas-panorama-8192.avif" alt="" aria-hidden="true" decoding="async"/></picture>
+        <picture className="atlas-panorama"><source media="(max-width:899px), (prefers-reduced-motion:reduce)" srcSet={loaded.length?"/history/atlas-panorama-mobile-1024x8192.webp":undefined}/><source media="(max-width:1400px)" srcSet={loaded.length?"/history/atlas-panorama-4096.webp":undefined}/><img src={loaded.length?"/history/atlas-panorama-8192.avif":undefined} alt="" aria-hidden="true" decoding="async"/></picture>
         <div className="history-track">
           {historyEras.map((era,i)=><article key={era.id} className={`era-stage ${i===active?'history-current':''}`} data-label-era={i} data-status={i===active?'active':'neighbor'} style={{'--era':i} as CSSProperties}>
             <span className="history-era-sentinel" aria-hidden="true"/>

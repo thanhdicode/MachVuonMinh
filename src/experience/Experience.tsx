@@ -100,9 +100,10 @@ function ExperienceBody() {
     <main
       className={`experience scene-${state.active} ${state.unlocked ? "unlocked" : ""} ${state.history ? "history-active" : ""} ${state.machine ? "machine-active" : ""}`}
     >
-      <Suspense fallback={<div className="loading-thread">Đang nối mạch…</div>}>
+      <Suspense fallback={null}>
         <WorldCanvas suspended={miniGameOpen} />
       </Suspense>
+      {!state.worldReady&&<div className="loading-thread" role="status">Đang nối mạch…</div>}
       <div className="paper-grain" />
       <header className="minimal-nav">
         <a
@@ -145,7 +146,7 @@ function ExperienceBody() {
           </button>
         </div>
       </header>
-      {state.active === 0 && (
+      {state.active === 0 && state.worldReady && (
         <section className="intro-overlay" aria-label="Kích hoạt sợi đỏ">
           <p className="eyebrow intro-label">
             TRIẾT HỌC MÁC–LÊNIN / LLSX & QHSX

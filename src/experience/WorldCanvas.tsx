@@ -98,7 +98,7 @@ function IntroCord() {
     const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(-10,-3,1),new THREE.Vector3(-5,-2.3,0),new THREE.Vector3(endpoint.x-1.5,endpoint.y-.45,.05),endpoint.clone()])
     mesh.current.geometry.dispose();mesh.current.geometry=new THREE.TubeGeometry(curve,64,.038,8,false)
   })
-  return <mesh ref={mesh}><tubeGeometry/><meshStandardMaterial color={RED} roughness={.36} metalness={.35}/></mesh>
+  return <mesh name="intro-cord" ref={mesh}><tubeGeometry/><meshStandardMaterial color={RED} roughness={.36} metalness={.35}/></mesh>
 }
 
 function RadialMarks({radius,count=64}: {radius:number;count?:number}) {
@@ -146,7 +146,7 @@ function SceneGroup({ index, children }: { index: number; children: ReactNode })
   const mobile = size.width < 700
   const mobileY=index===5?2.2:index===7?1.4:index===1?-.55:index===2?-.4:index===3?.2:index===8?-.3:.6
   const mobileScale=index===5?.62:index===7?.6:index===1?.7:index===2?.75:index===3?.72:.85
-  return <group ref={group} position={[mobile && index !== 0 ? -centers[index] * (index===3?.75:.65) : 0, mobile ? mobileY : 0, -index * 24]} scale={mobile ? mobileScale : 1}>{children}</group>
+  return <group name={`chapter-${index}`} ref={group} position={[mobile && index !== 0 ? -centers[index] * (index===3?.75:.65) : 0, mobile ? mobileY : 0, -index * 24]} scale={mobile ? mobileScale : 1}>{children}</group>
 }
 
 function Agrarian() {
@@ -297,6 +297,7 @@ function ContextWatch({ onLost }: { onLost: () => void }) {
 class CanvasBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { failed: boolean }> {
   state = { failed: false }
   static getDerivedStateFromError() { return { failed: true } }
+  componentDidCatch(){useWorld.getState().set({worldReady:true})}
   render() { return this.state.failed ? this.props.fallback : this.props.children }
 }
 export default function WorldCanvas({ suspended = false }: { suspended?: boolean }) {
