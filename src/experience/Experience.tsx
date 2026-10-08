@@ -8,7 +8,7 @@ import {
 } from "react";
 import { useWorld, tick, timeline } from "./WorldState";
 import { crossesEyelet } from "./introInteraction";
-import { startTimeline, goToScene } from "./WorldTimeline";
+import { startTimeline, goToScene, goToFinale } from "./WorldTimeline";
 import { sceneCopy } from "../data/copy";
 import { LabControls } from "./LabControls";
 import { VietnamEvidence } from "./VietnamEvidence";
@@ -16,6 +16,7 @@ import { SourceDrawer } from "./SourceDrawer";
 import { Scene07Chapter } from "./Scene07Chapter";
 import { HistoryBridge } from "./HistoryBridge";
 import { Scene02Chapter } from "./Scene02Chapter";
+import { HandFinale } from "./HandFinale";
 import { GuideProvider } from "../onboarding/GuideProvider";
 import { useGuideApi, useGuideControls } from "../onboarding/guideControls";
 const WorldCanvas = lazy(() => import("./WorldCanvas"));
@@ -98,7 +99,7 @@ function ExperienceBody() {
   };
   return (
     <main
-      className={`experience scene-${state.active} ${state.unlocked ? "unlocked" : ""} ${state.history ? "history-active" : ""} ${state.machine ? "machine-active" : ""}`}
+      className={`experience scene-${state.active} ${state.unlocked ? "unlocked" : ""} ${state.history ? "history-active" : ""} ${state.machine ? "machine-active" : ""} ${state.finale ? "finale-active" : ""}`}
     >
       <Suspense fallback={null}>
         <WorldCanvas suspended={miniGameOpen} />
@@ -348,6 +349,7 @@ function ExperienceBody() {
       {state.active === 6 && <VietnamEvidence openSource={openSource} />}
       {state.active === 8 && (
         <div className="final-actions">
+          <button className="finale-next" type="button" onClick={goToFinale}>ĐIỂM CHẠM CON NGƯỜI × CÔNG NGHỆ <span>↓</span></button>
           {state.beat === 1 && (
             <p>
               Đổi mới công cụ. Đổi mới quan hệ. Để con người cùng vươn mình.
@@ -397,6 +399,7 @@ function ExperienceBody() {
       <div className="journey-flow-before" aria-hidden="true" />
       <Scene07Chapter />
       <div className="journey-flow-after" aria-hidden="true" />
+      <HandFinale />
     </main>
   );
 }

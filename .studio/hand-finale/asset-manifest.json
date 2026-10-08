@@ -1,0 +1,46 @@
+[
+  {
+    "name": "human-hand",
+    "source": "C:/Users/ADMIN/.codex/generated_images/01a105b9-4572-7481-aa4c-c6565448039c/exec-7346de6b-425d-40ea-8167-1f477df02278.png",
+    "width": 1774,
+    "height": 887,
+    "tip": [
+      1409,
+      423.5
+    ],
+    "normalizedTip": [
+      0.794250281848929,
+      0.4774520856820744
+    ],
+    "transparentPixels": 1225465,
+    "opaquePixels": 326951,
+    "alpha": true,
+    "runtimeWidth": 1680,
+    "runtimeHeight": 840,
+    "originalBytes": 748556,
+    "runtimeBytes": 108376,
+    "sha256": "0e957d09bb6276a5cbedb0a55d7006ea76b427f354887f4e583c644c53535d4c"
+  },
+  {
+    "name": "robot-hand",
+    "source": "C:/Users/ADMIN/.codex/generated_images/01a105b9-4572-7481-aa4c-c6565448039c/exec-ff014b90-6190-4549-87fb-c020f6c71431.png",
+    "width": 1942,
+    "height": 809,
+    "tip": [
+      152,
+      281
+    ],
+    "normalizedTip": [
+      0.07826982492276004,
+      0.3473423980222497
+    ],
+    "transparentPixels": 972909,
+    "opaquePixels": 571065,
+    "alpha": true,
+    "runtimeWidth": 1680,
+    "runtimeHeight": 700,
+    "originalBytes": 1184593,
+    "runtimeBytes": 157552,
+    "sha256": "6d181cfe7e1c4d5ff488c16c6511f9106f4fc65532f89c42c103520e010265a5"
+  }
+]

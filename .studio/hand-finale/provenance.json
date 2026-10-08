@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-08",
+  "tool": "built-in image_gen.imagegen",
+  "transparent_background": true,
+  "reference": {
+    "repo": "https://github.com/TJ-Paul/wedding-invitation-parallax",
+    "commit": "a138edd96d63bca62a1a6a75c905f6eee2afad0e",
+    "license": "No LICENSE file in inspected checkout; concept reference only, no source code or image reuse",
+    "live": "https://tj-paul.github.io/wedding-invitation-parallax/"
+  },
+  "usage": "Original generated outputs under applicable generation-service terms. No CC0/public-domain/exclusive-copyright claim. No third-party reference pixels incorporated.",
+  "assets": [
+    {
+      "name": "human-hand",
+      "runtime": "public/images/finale/human-hand.webp",
+      "master": ".studio/hand-finale/generated/human-hand.png",
+      "prompt": "Create ONE separate high-resolution transparent PNG asset for a cinematic website scroll finale. Asset A — Human Hand. Photorealistic cinematic Vietnamese adult human hand and forearm extending naturally from the LEFT edge toward the center, index finger reaching horizontally toward the RIGHT, inspired by Michelangelo's Creation of Adam. Anatomically accurate hand with exactly five natural fingers: one fully visible extended index finger and the other fingers elegantly relaxed and curled underneath, natural skin texture, subtle warm highlights, dramatic Renaissance-inspired studio lighting, ultra-detailed, elegant posture. Fully isolated on actual transparent alpha, NO generated solid background and NO checkerboard pattern. No text, no other objects, no glow, no cropped fingertips. Wide horizontal composition: forearm enters at the far LEFT boundary, hand and wrist occupy the middle, the tip of the extended index finger is the rightmost point of the entire silhouette, around 90% of image width and 50% of image height, with clear transparent padding to its right. Side profile, camera level with the extended fingertip, soft warm key light from upper-left and subdued red reflected light on underside. This must pair with a silver industrial robot hand coming from the RIGHT in the next separate image; keep a neutral level camera, natural anatomy and horizontal fingertip direction. Only one hand and one forearm. Keep all fingertips intact."
+    },
+    {
+      "name": "robot-hand",
+      "runtime": "public/images/finale/robot-hand.webp",
+      "master": ".studio/hand-finale/generated/robot-hand.png",
+      "prompt": "Create ONE separate high-resolution transparent PNG asset, Asset B — Robotic Hand, for a website finale where its index fingertip touches a human index fingertip. Photorealistic futuristic industrial robotic hand and forearm extending naturally from the RIGHT edge toward the center, index finger reaching horizontally toward the LEFT. Brushed titanium and silver mechanical components, articulated joints, elegant precision engineering, subtle small dark crimson accents, cinematic studio lighting. Exactly one mechanical hand with five articulated fingers: index fully extended and pointing LEFT, other three fingers elegantly curled beneath and thumb resting separately; no extra fingers. Fully isolated on actual transparent alpha: no generated solid background and NO checkerboard pattern. No text, no logos, no other objects, no glow, no cropped fingertips. Wide horizontal composition, horizontal forearm entering far RIGHT boundary, wrist/knuckles toward the right, the rounded tip of the extended index is the leftmost part of the whole silhouette at around 10% of image width, 50% of image height. Plenty of transparent padding to the left fingertip. Side profile, camera level with fingertip, no perspective foreshortening. Match the photoreal human asset: soft warm studio key light from UPPER LEFT, subdued crimson reflected light on underside, charcoal tonal reflections but no dark background. Beautiful believable titanium surfaces with restrained micro machining detail. Keep all fingers intact. No human skin. This is a SINGLE ROBOT HAND asset only, not a combined composition."
+    }
+  ]
+}

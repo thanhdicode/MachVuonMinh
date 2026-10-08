@@ -8,6 +8,7 @@ import { scene02State } from './scene02State'
 import { canResumeScroll, createScrollLeases } from '../onboarding/guideSession'
 import { flowState, flowJourneyProgress, flowJourneyPosition, type FlowJourneyRange } from './scene07State'
 import type { ScrollOwner } from '../onboarding/guideSession'
+import {storyExtent,finaleScrollProgress,finaleScrollPosition} from './handFinaleGeometry'
 gsap.registerPlugin(ScrollTrigger)
 gsap.ticker.lagSmoothing(0)
 let lenis: Lenis | undefined
@@ -31,7 +32,8 @@ function journeyRange(): FlowJourneyRange {
   const atlasLength = atlas?.offsetHeight ?? 0, machineLength = machine?.offsetHeight ?? 0
   const atlasStart = atlas?.offsetTop ?? 13 * innerHeight * stops[2]
   const flow=document.querySelector<HTMLElement>('.flow-insertion'),flowLength=flow?.offsetHeight??0
-  const base=Math.max(1,(document.documentElement.scrollHeight-innerHeight-atlasLength-machineLength-flowLength)/.78)
+  const finaleHeight=document.querySelector<HTMLElement>('.hand-finale')?.offsetHeight??0
+  const base=Math.max(1,(storyExtent(document.documentElement.scrollHeight,innerHeight,finaleHeight)-atlasLength-machineLength-flowLength)/.78)
   return { base, atlasStart, atlasLength, machineStart:machine?.offsetTop ?? atlasStart+atlasLength, machineLength, flowStart:flow?.offsetTop??base*.7+atlasLength+machineLength,flowLength }
 }
 export function scrollToPosition(y: number, immediate = useWorld.getState().reduced) {
@@ -59,17 +61,25 @@ export function goToFlowBeat(beat:number){
   scrollToPosition(flowState.static&&section?section.getBoundingClientRect().top+scrollY-100:r.flowStart+p*(r.flowLength-innerHeight),true)
   ScrollTrigger.update()
 }
+export function goToFinale(){
+  const finale=document.querySelector<HTMLElement>('.hand-finale')
+  if(finale)scrollToPosition(finale.offsetTop)
+}
 export function startTimeline() {
   if (!useWorld.getState().unlocked) { window.scrollTo(0,0);timeline.scene=0;timeline.local=0;timeline.progress=0;useWorld.getState().set({active:0}) }
   lenis = new Lenis({ duration: .85, smoothWheel: !useWorld.getState().reduced })
   lenis.on('scroll', (event: { velocity: number }) => { timeline.velocity = event.velocity; ScrollTrigger.update() })
   const update = (time: number) => lenis?.raf(time * 1000)
   gsap.ticker.add(update)
-  let refreshing=false, refreshFrame=0
+  let refreshing=false, refreshFrame=0, resizeFrame=0
+  let finaleSnapshot:{start:number;height:number;viewport:number}|undefined
   const sync = (self:ScrollTrigger) => {
     if (refreshing) return
     const unlocked=useWorld.getState().unlocked
     const range = journeyRange(), y = self.scroll()
+    const finale=document.querySelector<HTMLElement>('.hand-finale')
+    if(finale)finaleSnapshot={start:finale.offsetTop,height:finale.offsetHeight,viewport:innerHeight}
+    const inFinale=unlocked&&!!finaleSnapshot&&y>=finaleSnapshot.start-1
     const inHistory = unlocked && y >= range.atlasStart && y < range.machineStart
     const inMachine = unlocked && y >= range.machineStart && y < range.machineStart+range.machineLength
     scene02State.active=inMachine
@@ -79,7 +89,7 @@ export function startTimeline() {
     const scene = stops.findIndex((stop, i) => p >= stop && p < stops[i + 1])
     timeline.progress = p; timeline.scene = Math.max(0, scene); timeline.local = (p - stops[timeline.scene]) / (stops[timeline.scene + 1] - stops[timeline.scene])
     const beat = timeline.local < .45 ? 0 : 1
-    if (useWorld.getState().active !== timeline.scene || useWorld.getState().beat !== beat || useWorld.getState().history !== inHistory || useWorld.getState().machine !== inMachine) useWorld.getState().set({ active: timeline.scene, beat, history:inHistory, machine:inMachine })
+    if (useWorld.getState().active !== timeline.scene || useWorld.getState().beat !== beat || useWorld.getState().history !== inHistory || useWorld.getState().machine !== inMachine || useWorld.getState().finale!==inFinale) useWorld.getState().set({ active: timeline.scene, beat, history:inHistory, machine:inMachine, finale:inFinale })
     document.documentElement.style.setProperty('--progress', String(p))
     document.documentElement.style.setProperty('--beat', String(timeline.local))
     document.documentElement.style.setProperty('--scene-opacity', String(useWorld.getState().reduced || timeline.scene === 8 ? 1 : Math.max(0, 1 - Math.max(0,(timeline.local-.78)/.18))))
@@ -96,11 +106,7 @@ export function startTimeline() {
     }
     if (state.reduced !== previous.reduced && lenis) {
       lenis.options.smoothWheel = !state.reduced
-      requestAnimationFrame(() => {
-        lenis?.resize()
-        ScrollTrigger.refresh()
-        ScrollTrigger.update()
-      })
+      resize()
     }
   })
     if (!useWorld.getState().unlocked || scrollLeases.isLocked()) lenis.stop()
@@ -112,12 +118,18 @@ export function startTimeline() {
   }
   const resize = () => {
     const progress = timeline.progress, inHistory = useWorld.getState().history, inMachine=useWorld.getState().machine, machineProgress=scene02State.progress, inFlow=useWorld.getState().active===7, flowProgress=flowState.progress, flowBeat=flowState.beat
+    const inFinale=useWorld.getState().finale,finaleProgress=finaleSnapshot?finaleScrollProgress(scrollY,finaleSnapshot.start,finaleSnapshot.height,finaleSnapshot.viewport):0
     const era = Number(document.querySelector<HTMLElement>('.history-bridge')?.dataset.activeEra ?? 0)
-    requestAnimationFrame(() => {
+    cancelAnimationFrame(resizeFrame)
+    resizeFrame=requestAnimationFrame(() => {
       lenis?.resize()
       ScrollTrigger.refresh()
       const range = journeyRange()
       let position = flowJourneyPosition(progress,range)
+      if(inFinale){
+        const finale=document.querySelector<HTMLElement>('.hand-finale')
+        if(finale)position=finaleScrollPosition(finaleProgress,finale.offsetTop,finale.offsetHeight,innerHeight)
+      }
       if(inFlow){
         const act=document.querySelector<HTMLElement>(`.flow-static-act[data-flow-act="${flowBeat}"]`)
         position=(useWorld.getState().reduced||innerWidth<768)&&act?act.getBoundingClientRect().top+scrollY-100:range.flowStart+flowProgress*(range.flowLength-innerHeight)
@@ -141,6 +153,6 @@ export function startTimeline() {
   window.addEventListener('pageshow',keepEntryAtTop)
   keepEntryAtTop()
   ScrollTrigger.refresh()
-  return () => { cancelAnimationFrame(refreshFrame); window.removeEventListener('resize',resize); window.removeEventListener('scroll',keepEntryAtTop); window.removeEventListener('pageshow',keepEntryAtTop); unsubscribe(); trigger.kill(); gsap.ticker.remove(update); lenis?.destroy(); lenis = undefined }
+  return () => { cancelAnimationFrame(refreshFrame);cancelAnimationFrame(resizeFrame);window.removeEventListener('resize',resize); window.removeEventListener('scroll',keepEntryAtTop); window.removeEventListener('pageshow',keepEntryAtTop); unsubscribe(); trigger.kill(); gsap.ticker.remove(update); lenis?.destroy(); lenis = undefined }
 }
 

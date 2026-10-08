@@ -23,4 +23,6 @@ public/vendor/driver/
 
 .studio/sketchbook-reference/*.log
 .studio/scene02/master.png
+.studio/hand-finale-reference/
+.studio/hand-finale/generated/
 .studio/qa/**/*.txt
